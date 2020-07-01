@@ -5,10 +5,9 @@
 
 ## 목차
 
-- [Coding-Convention](https://github.com/We-are-Ounce/Ounce_iOS/wiki/Ounce_Coding_Convention)
-- [Foldering(프로젝트 구조)](https://github.com/We-are-Ounce/Ounce_iOS/wiki/Ounce_Foldering)
-- [Scrum](https://github.com/We-are-Ounce/Ounce_iOS/wiki/Ounce_iOS_Scrum)
-- [Work-flow](https://github.com/We-are-Ounce/Ounce_iOS/wiki/Ounce_Workflow)
+- [Code Convention](https://github.com/We-are-Ounce/OUNCE_Android/wiki/Code-Convention)
+- [프로젝트 구조](https://github.com/We-are-Ounce/Ounce_iOS/wiki/Ounce_Foldering)
+- [안드로이드 회의](https://github.com/We-are-Ounce/Ounce_iOS/wiki/Ounce_iOS_Scrum)
 - [Library](#library)
 - [기능 구현 방법](#기능-소개)
 - [Project](#projcet)
