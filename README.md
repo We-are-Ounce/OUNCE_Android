@@ -64,8 +64,8 @@
             <br>
             <a href="https://github.com/l2hyunwoo"><I>이현우</I></a>
         </td>
-        <td width="100">안드로이드 개발</a></td>
-        <td>실제로 사용해도 소비자들이 만족하는 어플리케이션을 출시, 좋은 사람들과 앱잼 잘 치뤄나가서 평생친구 먹기</td>
+        <td width="100">역할을 적어주세요!!</a></td>
+        <td>목표를 적어주세요!!</td>
     </tr>
     <tr align="center">
         <td>
@@ -73,7 +73,10 @@
             <br>
             <a href="https://github.com/jooyae"><I>박주예</I></a>
         </td>
-        <td width="100">역할을 적어주세요!!</a></td>
-        <td>목표를 적어주세요!!</td>
+        <td width="100">안드로이드 개발</a></td>
+        <td>Ounce 개발 맡은 역할 열심히 하기, 안드로이드 개발 과정 기록하기   </td>
     </tr>
 </table>
+
+
+
