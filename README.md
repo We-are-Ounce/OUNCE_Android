@@ -6,11 +6,11 @@
 ## 목차
 
 - [Code Convention](https://github.com/We-are-Ounce/OUNCE_Android/wiki/Code-Convention)
-- [프로젝트 구조](https://github.com/We-are-Ounce/Ounce_iOS/wiki/Ounce_Foldering)
-- [안드로이드 회의](https://github.com/We-are-Ounce/Ounce_iOS/wiki/Ounce_iOS_Scrum)
+- [프로젝트 구조](https://github.com/We-are-Ounce/OUNCE_Android/wiki/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B5%AC%EC%A1%B0)
+- [안드로이드 회의](https://github.com/We-are-Ounce/OUNCE_Android/wiki/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%ED%9A%8C%EC%9D%98)
 - [Library](#library)
 - [기능 구현 방법](#기능-소개)
-- [Project](#projcet)
+- [Project](#project)
 - [팀원 소개](#팀원)
 
 
@@ -34,7 +34,7 @@
 
 
 
-### Projcet
+### Project
 
 - [Week 1](https://github.com/We-are-Ounce/OUNCE_Android/projects/1)
 - [Week 2](https://github.com/We-are-Ounce/OUNCE_Android/projects/2)
