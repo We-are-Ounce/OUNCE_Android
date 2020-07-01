@@ -64,7 +64,7 @@
             <br>
             <a href="https://github.com/l2hyunwoo"><I>이현우</I></a>
         </td>
-        <td width="100">안드로이드 개발~~세발~~</a></td>
+        <td width="100">안드로이드 개발</a></td>
         <td>실제로 사용해도 소비자들이 만족하는 어플리케이션을 출시, 좋은 사람들과 앱잼 잘 치뤄나가서 평생친구 먹기</td>
     </tr>
     <tr align="center">
