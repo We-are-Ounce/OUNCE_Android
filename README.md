@@ -37,10 +37,9 @@
 
 ### Projcet
 
-- [Week 1](https://github.com/We-are-Ounce/OUNCE_iOS/projects/1)
-- [Week 2](https://github.com/We-are-Ounce/OUNCE_iOS/projects/2)
-- [Week 3](https://github.com/We-are-Ounce/OUNCE_iOS/projects/3)
-- [Help/Bug](https://github.com/We-are-Ounce/OUNCE_iOS/projects/4)
+- [Week 1](https://github.com/We-are-Ounce/OUNCE_Android/projects/1)
+- [Week 2](https://github.com/We-are-Ounce/OUNCE_Android/projects/2)
+- [Week 3](https://github.com/We-are-Ounce/OUNCE_Android/projects/3)
 
 
 
