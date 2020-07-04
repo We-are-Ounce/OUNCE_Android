@@ -50,4 +50,10 @@ dependencies {
     //Convert Gson
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
+    //Cropper
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+
+    //TedPermission
+    implementation 'gun0912.ted:tedpermission:2.2.3'
+
 }
