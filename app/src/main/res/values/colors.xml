@@ -3,4 +3,13 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="dark">#27274e</color>
+    <color name="warm_grey">#979797</color>
+    <color name="black">#000000</color>
+    <color name="blush">#ea9e9e</color>
+    <color name="wheat">#f8da81</color>
+    <color name="greyish_brown">#3c3c3c</color>
+    <color name="white">#f0f0f0</color>
+    <color name="white_two">#f5f5f5</color>
+    <color name="battleship_grey">#676782</color>
 </resources>
