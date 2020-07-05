@@ -8,4 +8,11 @@
         <item name="colorControlNormal">@color/white_three</item>
     </style>
 
+    <style name="LoginSamllText">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">7sp</item>
+        <item name="android:textColor">@color/warm_grey</item>
+        <item name="android:fontFamily">@font/notosanskr</item>
+    </style>
+
 </resources>

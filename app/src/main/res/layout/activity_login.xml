@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,128 +7,197 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    app:layout_constraintEnd_toEndOf="parent"
     tools:context=".login.ui.LoginActivity">
 
-    <TextView
-        android:id="@+id/txt_login_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="86dp"
-        android:fontFamily="@font/notosanskr"
-        android:lineSpacingExtra="8sp"
-        android:text="아이디"
-        android:textColor="@color/dark"
-        android:textFontWeight="400"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/img_login_logo" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="28dp"
-        app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/txt_login_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="86dp"
+                android:fontFamily="@font/notosanskr"
+                android:lineSpacingExtra="8sp"
+                android:text="아이디"
+                android:textColor="@color/dark"
+                android:textFontWeight="400"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/img_login_logo" />
 
-    <EditText
-        android:id="@+id/edt_login_id"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:ems="10"
-        android:hint="아이디"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/txt_login_id" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="28dp"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="28dp" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="28dp" />
 
-    <ImageView
-        android:id="@+id/img_login_logo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="125dp"
-        android:layout_marginTop="63dp"
-        android:scaleType="fitXY"
-        android:background="@drawable/img_logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <EditText
+                android:id="@+id/edt_login_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ems="10"
+                android:hint="아이디"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/txt_login_id" />
 
-    <TextView
-        android:id="@+id/txt_login_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="비밀번호"
-        android:fontFamily="@font/notosanskr"
-        android:textFontWeight="400"
-        android:textSize="16sp"
-        android:lineSpacingExtra="8sp"
-        android:textColor="@color/dark"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/edt_login_id" />
 
-    <EditText
-        android:id="@+id/edt_login_password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:ems="10"
-        android:focusableInTouchMode="true"
-        android:inputType="textPassword"
-        android:hint="비밀번호"
-       app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/txt_login_password" />
+            <ImageView
+                android:id="@+id/img_login_logo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="125dp"
+                android:layout_marginTop="63dp"
+                android:background="@drawable/img_logo"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txt_login_fail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/notosanskr"
-        android:textFontWeight="400"
-        android:text="아이디 혹은 비밀번호가 틀렸습니다."
-        android:visibility="invisible"
-        android:textSize="12sp"
-        android:lineSpacingExtra="7sp"
-        android:textColor="@color/pinkish_tan"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/edt_login_password" />
+            <TextView
+                android:id="@+id/txt_login_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/notosanskr"
+                android:lineSpacingExtra="8sp"
+                android:text="비밀번호"
+                android:textColor="@color/dark"
+                android:textFontWeight="400"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/edt_login_id" />
+
+            <EditText
+                android:id="@+id/edt_login_password"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ems="10"
+                android:focusableInTouchMode="true"
+                android:hint="비밀번호"
+                android:inputType="textPassword"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/txt_login_password" />
+
+            <TextView
+                android:id="@+id/txt_login_fail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/notosanskr"
+                android:lineSpacingExtra="7sp"
+                android:text="아이디 혹은 비밀번호가 틀렸습니다."
+                android:textColor="@color/pinkish_tan"
+                android:textFontWeight="400"
+                android:textSize="12sp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/edt_login_password" />
+
+
+
+
+
+
 
     <Button
         android:id="@+id/btn_login_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="39dp"
-        android:fontFamily="@font/notosanskr"
-        android:textFontWeight="400"
-        android:text="로그인"
-        android:textSize="18sp"
-        android:lineSpacingExtra="18sp"
-        android:textColor="@color/white"
         android:background="@drawable/login_button"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/txt_login_fail" />
+        android:fontFamily="@font/notosanskr"
+        android:lineSpacingExtra="18sp"
+        android:text="로그인"
+        android:textColor="@color/white"
+        android:textFontWeight="400"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/txt_login_fail"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline"/>
 
     <TextView
-        android:id="@+id/txt_login_findID"
+        android:id="@+id/txt_login_find_id"
+        style="@style/LoginSamllText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
+        android:text="아이디 찾기"
+        android:textFontWeight="400"
+        app:layout_constraintEnd_toStartOf="@+id/txt_login_null"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/btn_login_btn" />
+
+    <TextView
+        android:id="@+id/txt_login_null"
+        style="@style/LoginSamllText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:text="|"
+
+        android:textFontWeight="400"
+        app:layout_constraintEnd_toStartOf="@+id/txt_login_find_password"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/txt_login_find_id"
+        app:layout_constraintTop_toTopOf="@+id/txt_login_find_id" />
+
+    <TextView
+        android:id="@+id/txt_login_find_password"
+        style="@style/LoginSamllText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="비밀번호 찾기"
+        android:textFontWeight="400"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_login_null"
+        app:layout_constraintEnd_toStartOf="@+id/txt_login_null2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/txt_login_null"
+        app:layout_constraintTop_toTopOf="@+id/txt_login_null" />
+
+    <TextView
+        android:id="@+id/txt_login_null2"
+        style="@style/LoginSamllText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:text="|"
+        android:textFontWeight="400"
+        app:layout_constraintEnd_toStartOf="@+id/txt_login_signup"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/txt_login_find_password"
+        app:layout_constraintTop_toTopOf="@+id/txt_login_find_password" />
+
+    <TextView
+        android:id="@+id/txt_login_signup"
+        style="@style/LoginSamllText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:text="회원가입"
+        android:textFontWeight="400"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_login_null2"
+        app:layout_constraintEnd_toEndOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/txt_login_null2"
+        app:layout_constraintTop_toTopOf="@+id/txt_login_null2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,20 +1,16 @@
 package com.sopt.ounce.login.ui
 
-import android.annotation.SuppressLint
+
 import android.content.Context
-import android.graphics.Color
-import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.view.isVisible
 import com.sopt.ounce.R
-import com.sopt.ounce.login.checkTextChangeListener
 import com.sopt.ounce.util.StatusObject
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.activity_login.*
@@ -30,6 +26,7 @@ class LoginActivity : AppCompatActivity() {
         //상태바 아이콘 색 변경
         StatusObject.setStatusBar(this)
 
+
         //키보드 리스너 설정
         observeKeyboard()
 
@@ -38,6 +35,16 @@ class LoginActivity : AppCompatActivity() {
         //EditText 화면 바깥 선택 시 키보드 숨기기
         layout_login_container.setOnClickListener {
             mImm.hideSoftInputFromWindow(edt_login_id.windowToken,0)
+        }
+
+        //비밀번호 누르고 소프트 키보드인 엔터를 눌렀을 때 로그인 버튼 클릭과 같은 효과
+        edt_login_password.setOnKeyListener { _, code, _ ->
+            if (code == KeyEvent.KEYCODE_ENTER){
+                checkIdPsw()
+                mImm.hideSoftInputFromWindow(edt_login_id.windowToken,0)
+            }
+
+            true
         }
 
         btn_login_btn.setOnClickListener {
@@ -58,17 +65,15 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
+    // 아이디와 패스워드 확인
     @Suppress("DEPRECATION")
     private fun checkIdPsw(){
         val id = edt_login_id.text.toString()
         val password = edt_login_password.text.toString()
-        var visible = true
-        if (id.isEmpty() || password.isEmpty()){
 
-            if (visible){
-                txt_login_fail.visibility = View.VISIBLE
-                visible = false
-            }
+        if (id.isEmpty() || password.isEmpty()){
+            txt_login_fail.visibility = View.VISIBLE
+
 
             edt_login_password.background.setColorFilter(resources.getColor(R.color.pinkish_tan),
             PorterDuff.Mode.SRC_IN)
@@ -77,6 +82,10 @@ class LoginActivity : AppCompatActivity() {
             PorterDuff.Mode.SRC_IN)
 
         }
+//        else{
+//            // start server
+//        }
+
     }
 
 
