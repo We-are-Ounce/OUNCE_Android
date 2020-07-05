@@ -56,4 +56,11 @@ dependencies {
     //TedPermission
     implementation 'gun0912.ted:tedpermission:2.2.3'
 
+    //DotIndicator
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
+
+    //MaterialSearchBar
+    implementation 'com.github.mancj:MaterialSearchBar:0.7.1'
+
+
 }
