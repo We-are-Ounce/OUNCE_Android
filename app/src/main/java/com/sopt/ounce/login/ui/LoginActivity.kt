@@ -37,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
             mImm.hideSoftInputFromWindow(edt_login_id.windowToken,0)
         }
 
+
         //비밀번호 누르고 소프트 키보드인 엔터를 눌렀을 때 로그인 버튼 클릭과 같은 효과
         edt_login_password.setOnKeyListener { _, code, _ ->
             if (code == KeyEvent.KEYCODE_ENTER){
@@ -85,6 +86,11 @@ class LoginActivity : AppCompatActivity() {
 //        else{
 //            // start server
 //        }
+
+    }
+
+
+    private fun setAlphaDraw(){
 
     }
 
