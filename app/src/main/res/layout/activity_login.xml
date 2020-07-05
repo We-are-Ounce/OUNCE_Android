@@ -48,6 +48,10 @@
                 android:ems="10"
                 android:hint="아이디"
                 android:inputType="textPersonName"
+                android:maxLength="15"
+                android:lines="1"
+                android:textSize="16sp"
+                android:lineSpacingExtra="8sp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/txt_login_id" />
@@ -87,7 +91,12 @@
                 android:ems="10"
                 android:focusableInTouchMode="true"
                 android:hint="비밀번호"
+                android:maxLength="15"
+                android:lines="1"
+                android:textSize="16sp"
+                android:lineSpacingExtra="8sp"
                 android:inputType="textPassword"
+                android:imeOptions="actionDone"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -97,7 +106,7 @@
                 android:id="@+id/txt_login_fail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/notosanskr"
                 android:lineSpacingExtra="7sp"
                 android:text="아이디 혹은 비밀번호가 틀렸습니다."
@@ -198,6 +207,30 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/txt_login_null2"
         app:layout_constraintTop_toTopOf="@+id/txt_login_null2" />
+
+    <ImageView
+        android:id="@+id/img_login_cancel_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        android:src="@drawable/ic_expand_close"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/edt_login_id" />
+
+    <ImageView
+        android:id="@+id/img_login_cancel_psw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_expand_close"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="12dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/edt_login_password" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
