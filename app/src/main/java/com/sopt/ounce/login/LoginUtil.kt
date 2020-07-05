@@ -1,4 +1,4 @@
-package com.sopt.ounce.login.ui
+package com.sopt.ounce.login
 
 import android.app.Activity
 import android.text.Editable

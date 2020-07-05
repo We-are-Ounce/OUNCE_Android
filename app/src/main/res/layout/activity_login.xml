@@ -12,7 +12,7 @@
         android:id="@+id/txt_login_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="171dp"
+        android:layout_marginTop="86dp"
         android:fontFamily="@font/notosanskr"
         android:lineSpacingExtra="8sp"
         android:text="아이디"
@@ -20,7 +20,7 @@
         android:textFontWeight="400"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/img_login_logo" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -34,9 +34,9 @@
         android:id="@+id/edt_login_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:ems="10"
         android:hint="아이디"
-
         android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -49,17 +49,85 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="28dp" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
+    <ImageView
+        android:id="@+id/img_login_logo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:focusableInTouchMode="true"
-        android:text="Name"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginHorizontal="125dp"
+        android:layout_marginTop="63dp"
+        android:scaleType="fitXY"
+        android:background="@drawable/img_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_login_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="비밀번호"
+        android:fontFamily="@font/notosanskr"
+        android:textFontWeight="400"
+        android:textSize="16sp"
+        android:lineSpacingExtra="8sp"
+        android:textColor="@color/dark"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/edt_login_id" />
+
+    <EditText
+        android:id="@+id/edt_login_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ems="10"
+        android:focusableInTouchMode="true"
+        android:inputType="textPassword"
+        android:hint="비밀번호"
+       app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/txt_login_password" />
+
+    <TextView
+        android:id="@+id/txt_login_fail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/notosanskr"
+        android:textFontWeight="400"
+        android:text="아이디 혹은 비밀번호가 틀렸습니다."
+        android:visibility="invisible"
+        android:textSize="12sp"
+        android:lineSpacingExtra="7sp"
+        android:textColor="@color/pinkish_tan"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/edt_login_password" />
+
+    <Button
+        android:id="@+id/btn_login_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="39dp"
+        android:fontFamily="@font/notosanskr"
+        android:textFontWeight="400"
+        android:text="로그인"
+        android:textSize="18sp"
+        android:lineSpacingExtra="18sp"
+        android:textColor="@color/white"
+        android:background="@drawable/login_button"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/txt_login_fail" />
+
+    <TextView
+        android:id="@+id/txt_login_findID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login_btn" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
