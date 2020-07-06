@@ -7,13 +7,12 @@ import android.graphics.PorterDuff
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
 import com.sopt.ounce.R
 import com.sopt.ounce.login.textCheckListener
-import com.sopt.ounce.signup.SignUpActivity
+import com.sopt.ounce.signup.ui.SignUpActivity
 import com.sopt.ounce.util.StatusObject
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.activity_login.*
@@ -40,49 +39,14 @@ class LoginActivity : AppCompatActivity() {
             mImm.hideSoftInputFromWindow(edt_login_id.windowToken, 0)
         }
 
-        //id 버튼 클릭 리스너
-        edt_login_id.apply {
-            // 텍스트가 감지되면 x 표시
-            textCheckListener {
-                if (it.isNullOrEmpty()) {
-                    img_login_cancel_id.visibility = View.GONE
 
-                } else {
-                    img_login_cancel_id.visibility = View.VISIBLE
-                }
-            }
-        }
-
-        //password 버튼 클릭 리스터
-        edt_login_password.apply {
-//            setOnFocusChangeListener(object : View.OnFocusChangeListener{
-//                override fun onFocusChange(p0: View?, p1: Boolean) {
-//                    if(p1){
-//                        edt_login_password.setBackgroundResource(R.drawable.custom_edit)
-//                    }
-//                    else{
-//                    }
-//                }
-//            })
-            // 텍스트가 감지되면 x 표시
-            textCheckListener {
-                if (it.isNullOrEmpty()) {
-                    img_login_cancel_psw.visibility = View.GONE
-
-                } else {
-                    img_login_cancel_psw.visibility = View.VISIBLE
-                }
-            }
-
-        }
 
         // 로그인 체크
         btn_login_btn.setOnClickListener {
             checkIdPsw()
         }
 
-        //이미지 x 버튼 클릭 리스너
-       xImageClick()
+
         
         //회원가입 클릭 시 SignUpActivity 호출
         txt_login_signup.setOnClickListener {
@@ -131,15 +95,7 @@ class LoginActivity : AppCompatActivity() {
 
         }
 
-    private fun xImageClick(){
-        img_login_cancel_id.setOnClickListener {
-            edt_login_id.text = null
-        }
 
-        img_login_cancel_psw.setOnClickListener {
-            edt_login_password.text = null
-        }
-    }
 
 
 

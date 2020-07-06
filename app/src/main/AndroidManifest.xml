@@ -13,11 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".signup.SignUpActivity" android:exported="true"></activity>
+        <activity android:name=".signup.ui.SignUpActivity" android:exported="true"></activity>
         <activity
-            android:name=".login.ui.LoginActivity"
+            android:name=".MainActivity"
             android:exported="true" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".login.ui.LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

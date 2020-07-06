@@ -40,7 +40,7 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="28dp" />
 
-            <EditText
+            <com.sopt.ounce.util.ClearEditText
                 android:id="@+id/edt_login_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/edt_login_id" />
 
-            <EditText
+            <com.sopt.ounce.util.ClearEditText
 
                 android:id="@+id/edt_login_password"
                 android:layout_width="0dp"
@@ -205,30 +205,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/txt_login_null2"
         app:layout_constraintTop_toTopOf="@+id/txt_login_null2" />
-
-    <ImageView
-        android:id="@+id/img_login_cancel_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp"
-        android:scaleType="fitXY"
-        android:visibility="gone"
-        android:src="@drawable/ic_expand_close"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/edt_login_id" />
-
-    <ImageView
-        android:id="@+id/img_login_cancel_psw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_expand_close"
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="12dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/edt_login_password" />
+    
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,15 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".signup.SignUpActivity">
+    tools:context=".signup.ui.SignUpActivity">
 
 
     <ImageView
         android:id="@+id/img_signup_back"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="19dp"
         android:layout_marginTop="23dp"
+        android:layout_marginBottom="23dp"
+        android:paddingRight="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/vp_signup"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/btn_back" />
@@ -30,7 +33,7 @@
         app:layout_constraintTop_toTopOf="@+id/img_signup_back"
         app:srcCompat="@drawable/img_logo" />
 
-    <androidx.viewpager.widget.ViewPager
+    <com.sopt.ounce.signup.module.NoSwipeViewPager
         android:id="@+id/vp_signup"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -40,15 +43,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_signup_logo" >
 
-    </androidx.viewpager.widget.ViewPager>
+    </com.sopt.ounce.signup.module.NoSwipeViewPager>
 
     <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+        android:id="@+id/dot_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:dotsSize="8dp"
         app:dotsColor="@color/white_five"
         app:dotsCornerRadius="6dp"
         app:dotsSpacing="5dp"
-        app:progressMode="true"
+        app:progressMode="false"
         app:selectedDotColor="@color/dark"
         android:layout_marginBottom="43dp"
         app:dotsWidthFactor="2.5"
