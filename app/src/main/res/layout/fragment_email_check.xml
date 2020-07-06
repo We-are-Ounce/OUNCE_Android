@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_email_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -17,6 +19,7 @@
         android:layout_marginTop="25dp"
         android:text="회원가입"
         android:textFontWeight="400"
+        app:layout_constraintVertical_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,12 +45,58 @@
 
     <TextView
         android:id="@+id/txt_email"
+        style="@style/infoTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/infoTextStyle"
+        android:layout_marginTop="32dp"
         android:text="이메일"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/txt_email_check_3" />
+
+
+    <com.sopt.ounce.util.ClearEditText
+        android:id="@+id/clearEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:inputType="text"
+        android:hint="이메일 주소"
+        android:paddingRight="18dp"
+        android:layout_marginRight="14dp"
+        android:gravity="bottom"
+        android:fontFamily="@font/notosanskr"
+        android:textFontWeight="400"
+        android:textSize="16sp"
+        android:lineSpacingExtra="8sp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_email_send"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/txt_email" />
+
+
+    <TextView
+        android:id="@+id/btn_email_send"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/auth_button_click"
+        android:fontFamily="@font/notosanskr"
+        android:lineSpacingExtra="9sp"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="13dp"
+        android:text="인증"
+        android:textColor="@color/white"
+        android:textFontWeight="400"
+        android:textSize="15sp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/clearEditText"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintTop_toTopOf="@+id/clearEditText" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="28dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
@@ -56,5 +105,28 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="28dp" />
 
+    <TextView
+        android:id="@+id/txt_email_number"
+        style="@style/infoTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="인증번호"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/clearEditText" />
+
+    <com.sopt.ounce.util.ClearEditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskr"
+        android:hint="인증번호 5자리를 입력해주세요."
+        android:lineSpacingExtra="8sp"
+        android:paddingRight="18dp"
+        android:textFontWeight="400"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
+        app:layout_constraintRight_toRightOf="@id/guideline_right"
+        app:layout_constraintTop_toBottomOf="@id/txt_email_number" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

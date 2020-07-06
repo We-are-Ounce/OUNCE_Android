@@ -7,6 +7,7 @@ import android.view.View
 import androidx.fragment.app.FragmentManager
 import com.sopt.ounce.R
 import com.sopt.ounce.signup.adapter.SignUpPagerAdapter
+import com.sopt.ounce.util.StatusObject
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignUpActivity : AppCompatActivity() {
@@ -16,6 +17,8 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
+        //상태바 아이콘 변경
+        StatusObject.setStatusBar(this)
 
         //뷰페이저 init
         initPager()

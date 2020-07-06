@@ -8,6 +8,8 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
 import com.sopt.ounce.R
@@ -53,6 +55,7 @@ class LoginActivity : AppCompatActivity() {
             var intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
+
 
     }
 
