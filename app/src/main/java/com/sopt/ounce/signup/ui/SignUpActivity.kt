@@ -1,11 +1,13 @@
 package com.sopt.ounce.signup.ui
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.core.view.size
 import androidx.fragment.app.FragmentManager
 import com.sopt.ounce.R
 import com.sopt.ounce.signup.adapter.SignUpPagerAdapter
@@ -31,6 +33,7 @@ class SignUpActivity : AppCompatActivity() {
         //기능 구현 후 조건 걸어서 클릭 못하게 하는거 필요
         btn_signup_ok.setOnClickListener {
             vp_signup.currentItem += 1
+
         }
         //좌측 상단 뒤로가기 버튼 누를시 뒤로가기
         img_signup_back.setOnClickListener {
