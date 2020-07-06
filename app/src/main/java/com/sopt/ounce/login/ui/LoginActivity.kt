@@ -2,6 +2,7 @@ package com.sopt.ounce.login.ui
 
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
 import com.sopt.ounce.R
 import com.sopt.ounce.login.textCheckListener
+import com.sopt.ounce.signup.SignUpActivity
 import com.sopt.ounce.util.StatusObject
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.activity_login.*
@@ -81,6 +83,13 @@ class LoginActivity : AppCompatActivity() {
 
         //이미지 x 버튼 클릭 리스너
        xImageClick()
+        
+        //회원가입 클릭 시 SignUpActivity 호출
+        txt_login_signup.setOnClickListener {
+            var intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
         // 키보드 안보일시 EditView 포커스 해제

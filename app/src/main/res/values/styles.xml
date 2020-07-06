@@ -15,4 +15,13 @@
         <item name="android:fontFamily">@font/notosanskr</item>
     </style>
 
+    <style name="siginButtonStyle">
+        <item name="fontFamily">@font/notosanskr</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingExtra">18sp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingVertical">13dp</item>
+        <item name="android:paddingHorizontal">73dp</item>
+    </style>
+
 </resources>

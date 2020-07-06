@@ -13,8 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".signup.SignUpActivity"></activity>
-        <activity android:name=".login.ui.SingupActivity" />
+        <activity android:name=".signup.SignUpActivity" android:exported="true"></activity>
         <activity
             android:name=".login.ui.LoginActivity"
             android:exported="true" />
