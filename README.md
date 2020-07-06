@@ -25,6 +25,7 @@
 |[Cropper](https://github.com/ArthurHub/Android-Image-Cropper)|프로필 이미지 크기 조절을 위한 Crop 기능|
 |[MaterialSearchBar](https://github.com/mancj/MaterialSearchBar)|검색창 구현 |
 |[TedPermission](https://github.com/ParkSangGwon/TedPermission)| 갤러리 이용 시 권한 설정 |
+|[RecyclerView_+ SearchView](https://github.com/l2hyunwoo/OunceCustomSearchBar)| 최근 검색어 검색창  |
 
            
 
