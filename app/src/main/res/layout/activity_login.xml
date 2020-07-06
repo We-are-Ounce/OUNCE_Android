@@ -84,21 +84,21 @@
                 app:layout_constraintTop_toBottomOf="@+id/edt_login_id" />
 
             <EditText
+
                 android:id="@+id/edt_login_password"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:ems="10"
-                android:focusableInTouchMode="true"
                 android:hint="비밀번호"
                 android:maxLength="15"
                 android:lines="1"
                 android:textSize="16sp"
-                android:lineSpacingExtra="8sp"
+                android:lineSpacingExtra="8dp"
                 android:inputType="textPassword"
                 android:imeOptions="actionDone"
+                android:includeFontPadding="false"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/txt_login_password" />
 
@@ -106,7 +106,6 @@
                 android:id="@+id/txt_login_fail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 android:fontFamily="@font/notosanskr"
                 android:lineSpacingExtra="7sp"
                 android:text="아이디 혹은 비밀번호가 틀렸습니다."
@@ -160,7 +159,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
         android:text="|"
-
         android:textFontWeight="400"
         app:layout_constraintEnd_toStartOf="@+id/txt_login_find_password"
         app:layout_constraintHorizontal_bias="0.5"

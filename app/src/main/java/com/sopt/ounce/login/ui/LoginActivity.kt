@@ -53,6 +53,15 @@ class LoginActivity : AppCompatActivity() {
 
         //password 버튼 클릭 리스터
         edt_login_password.apply {
+//            setOnFocusChangeListener(object : View.OnFocusChangeListener{
+//                override fun onFocusChange(p0: View?, p1: Boolean) {
+//                    if(p1){
+//                        edt_login_password.setBackgroundResource(R.drawable.custom_edit)
+//                    }
+//                    else{
+//                    }
+//                }
+//            })
             // 텍스트가 감지되면 x 표시
             textCheckListener {
                 if (it.isNullOrEmpty()) {
@@ -63,16 +72,6 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
 
-            // 엔터키 누르면 로그인 체크
-//            setOnKeyListener { _, code, _ ->
-//                if (code == KeyEvent.KEYCODE_) {
-//                    checkIdPsw()
-//                    mImm.hideSoftInputFromWindow(edt_login_id.windowToken, 0)
-//                }
-//                else if
-//
-//                true
-//            }
         }
 
         // 로그인 체크
