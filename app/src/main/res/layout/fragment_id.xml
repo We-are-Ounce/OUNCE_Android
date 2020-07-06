@@ -1,10 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_id_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".signup.ui.IdFragment">
 
+    <TextView
+        android:id="@+id/txt_id_null_1"
+        style="@style/textStyle_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="회원가입"
+        android:textFontWeight="400"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_id_null_2"
+        style="@style/textStyle_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="을 위한"
+        android:textFontWeight="100"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_id_null_1"
+        app:layout_constraintStart_toEndOf="@+id/txt_id_null_1" />
+
+    <TextView
+        android:id="@+id/txt_id_null_3"
+        style="@style/textStyle_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="정보를 입력해주세요."
+        android:textFontWeight="100"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/txt_id_null_1" />
+
+    <TextView
+        android:id="@+id/txt_id_title"
+        style="@style/infoTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="아이디"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/txt_id_null_3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="28dp" />
+
+    <com.sopt.ounce.util.ClearEditText
+        android:id="@+id/edt_id_input"
+        style="@style/inputTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:ems="10"
+        android:inputType="text"
+        android:lines="1"
+        android:maxLength="15"
+        android:hint="5자리 이상 입력해주세요."
+        android:paddingTop="6dp"
+        android:paddingLeft="14dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/txt_id_title" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="28dp" />
+
+    <TextView
+        android:id="@+id/txt_id_notice"
+        style="@style/pinkTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="3dp"
+        android:text="5자리 이상 입력해주세요."
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/edt_id_input" />
+
+    <ImageView
+        android:id="@+id/img_id_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/btn_back"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_id_input"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintTop_toTopOf="@+id/edt_id_input" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
