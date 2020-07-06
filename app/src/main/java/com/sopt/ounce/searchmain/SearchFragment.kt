@@ -16,10 +16,12 @@ import com.sopt.ounce.R
 import com.sopt.ounce.searchmain.viewpager.ViewPagerAdapter
 import com.sopt.ounce.searchmain.viewpager.ViewPagerTransformer
 import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.fragment_search.view.*
 
 
 class SearchFragment : Fragment() {
     lateinit var mContext: Context
+    private lateinit var v : View
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -90,11 +92,13 @@ class SearchFragment : Fragment() {
 //                )
 //            )
 //        }
-        return inflater.inflate(
+
+        v = inflater.inflate(
             R.layout.fragment_search,
             container,
             false
         )
+        return v
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -142,12 +146,15 @@ class SearchFragment : Fragment() {
         vp_search_main_viewpager.offscreenPageLimit = 3
         vp_search_main_viewpager.setPageTransformer(true, ViewPagerTransformer())
 
-        val dpValue = 30
+        val dpValue = 50
         val d = resources.displayMetrics.density
+        Log.d("checking d","$d")
         val margin = dpValue*d.toInt()
 
         vp_search_main_viewpager.setPadding(margin,0,margin,0)
         vp_search_main_viewpager.pageMargin = margin/2
+
+        di_search_main_dotsindicator.setViewPager(vp_search_main_viewpager)
     }
 
 

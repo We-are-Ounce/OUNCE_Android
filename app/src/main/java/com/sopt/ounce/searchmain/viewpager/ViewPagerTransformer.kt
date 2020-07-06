@@ -1,5 +1,6 @@
 package com.sopt.ounce.searchmain.viewpager
 
+import android.util.Log
 import android.view.View
 import androidx.viewpager.widget.ViewPager
 import kotlin.math.abs
