@@ -65,5 +65,11 @@ dependencies {
     //TedKeyboardObserver
     implementation 'gun0912.ted:tedkeyboardobserver:1.0.2'
 
+    //Transformer
+    compile 'com.eftimoff:android-viewpager-transformers:1.0.1@aar'
+
+    //CircleImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 
 }
