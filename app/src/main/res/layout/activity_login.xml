@@ -205,7 +205,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/txt_login_null2"
         app:layout_constraintTop_toTopOf="@+id/txt_login_null2" />
-    
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

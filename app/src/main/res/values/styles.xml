@@ -24,4 +24,20 @@
         <item name="android:paddingHorizontal">73dp</item>
     </style>
 
+
+    <style name="textStyle_1">
+        <item name="fontFamily">@font/notosanskr</item>
+        <item name ="android:textSize">22sp</item>
+        <item name ="android:lineSpacingExtra">11sp</item>
+        <item name ="android:textColor">@color/greyish_brown</item>
+    </style>
+
+    <style name="infoTextStyle">
+        <item name="fontFamily">@font/notosanskr</item>
+        <item name="android:fontWeight">400</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/dark</item>
+    </style>
+
 </resources>
