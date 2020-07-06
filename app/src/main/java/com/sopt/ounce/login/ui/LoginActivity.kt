@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.sopt.ounce.login.ui
 
 
@@ -46,6 +48,24 @@ class LoginActivity : AppCompatActivity() {
         // 로그인 체크
         btn_login_btn.setOnClickListener {
             checkIdPsw()
+        }
+
+        edt_login_password.textCheckListener{
+            if (it.isNullOrBlank()){
+                edt_login_password.background.setColorFilter(
+                    resources.getColor(R.color.white_three),
+                    PorterDuff.Mode.SRC_IN
+                )
+            }
+        }
+
+        edt_login_id.textCheckListener {
+            if (it.isNullOrBlank()){
+                edt_login_id.background.setColorFilter(
+                    resources.getColor(R.color.white_three),
+                    PorterDuff.Mode.SRC_IN
+                )
+            }
         }
 
 

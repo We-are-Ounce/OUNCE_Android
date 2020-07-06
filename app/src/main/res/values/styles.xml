@@ -8,15 +8,18 @@
         <item name="colorControlNormal">@color/white_three</item>
     </style>
 
-    <style name="LoginSamllText">
+    <style name="fontFamiliyandPadding">
+        <item name="android:includeFontPadding">false</item>
+        <item name="fontFamily">@font/notosanskr</item>
+    </style>
+
+    <style name="LoginSamllText" parent="fontFamiliyandPadding">
         <item name="android:textSize">12sp</item>
         <item name="android:lineSpacingExtra">7sp</item>
         <item name="android:textColor">@color/warm_grey</item>
-        <item name="android:fontFamily">@font/notosanskr</item>
     </style>
 
-    <style name="siginButtonStyle">
-        <item name="fontFamily">@font/notosanskr</item>
+    <style name="siginButtonStyle" parent="fontFamiliyandPadding">
         <item name="android:textSize">18sp</item>
         <item name="android:lineSpacingExtra">18sp</item>
         <item name="android:gravity">center_horizontal</item>
@@ -25,15 +28,13 @@
     </style>
 
 
-    <style name="textStyle_1">
-        <item name="fontFamily">@font/notosanskr</item>
+    <style name="textStyle_1" parent="fontFamiliyandPadding">
         <item name ="android:textSize">22sp</item>
         <item name ="android:lineSpacingExtra">11sp</item>
         <item name ="android:textColor">@color/greyish_brown</item>
     </style>
 
-    <style name="infoTextStyle">
-        <item name="fontFamily">@font/notosanskr</item>
+    <style name="infoTextStyle" parent="fontFamiliyandPadding">
         <item name="android:fontWeight">400</item>
         <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingExtra">8sp</item>

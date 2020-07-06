@@ -52,6 +52,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:paddingTop="7dp"
                 android:ems="10"
                 android:hint="아이디"
                 android:inputType="text"
@@ -91,12 +92,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/edt_login_id" />
 
             <com.sopt.ounce.util.ClearEditText
-
                 android:id="@+id/edt_login_password"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:ems="10"
+                android:paddingTop="7dp"
                 android:hint="비밀번호"
                 android:maxLength="15"
                 android:lines="1"
@@ -104,13 +105,13 @@
                 android:lineSpacingExtra="8dp"
                 android:inputType="textPassword"
                 android:imeOptions="actionDone"
-                android:includeFontPadding="false"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/txt_login_password" />
 
             <TextView
                 android:id="@+id/txt_login_fail"
+                android:includeFontPadding="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/notosanskr"
