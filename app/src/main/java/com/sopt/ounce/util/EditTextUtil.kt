@@ -1,4 +1,4 @@
-package com.sopt.ounce.login
+package com.sopt.ounce.util
 
 
 import android.text.Editable

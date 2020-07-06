@@ -55,22 +55,20 @@
 
 
     <com.sopt.ounce.util.ClearEditText
-        android:id="@+id/clearEditText"
+        android:id="@+id/edt_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="14dp"
-        android:fontFamily="@font/notosanskr"
-        android:gravity="bottom"
         android:hint="이메일 주소"
-        android:includeFontPadding="false"
         android:inputType="text"
         android:lineSpacingExtra="8sp"
+        android:maxLength="30"
         android:lines="1"
         android:paddingRight="18dp"
         android:paddingTop="4dp"
-        android:textFontWeight="400"
         android:textSize="16sp"
+        android:imeOptions="actionDone"
         app:layout_constraintEnd_toStartOf="@+id/btn_email_send"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
@@ -78,8 +76,9 @@
 
     <TextView
         android:id="@+id/btn_email_send"
+        style="@style/fontFamiliyandPadding"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/auth_button_click"
         android:lineSpacingExtra="9sp"
         android:text="인증"
@@ -89,9 +88,9 @@
         android:textColor="@color/white"
         android:textFontWeight="400"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@+id/clearEditText"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_email"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintTop_toTopOf="@+id/clearEditText" />
+        app:layout_constraintTop_toTopOf="@+id/edt_email" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_right"
@@ -112,13 +111,13 @@
         style="@style/infoTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="인증번호"
-        android:layout_marginTop="25dp"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/clearEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_email_failsend" />
 
     <com.sopt.ounce.util.ClearEditText
-        android:id="@+id/clearEditText2"
+        android:id="@+id/edt_email_number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="14dp"
@@ -127,6 +126,10 @@
         android:paddingTop="4dp"
         android:paddingRight="18dp"
         android:textSize="16sp"
+        android:inputType="numberPassword"
+        android:maxLength="5"
+        android:lines="1"
+        android:imeOptions="actionDone"
         app:layout_constraintEnd_toStartOf="@+id/btn_email_check"
         app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
@@ -145,9 +148,42 @@
         android:textSize="15sp"
         android:lineSpacingExtra="9sp"
         android:textColor="@color/warm_grey"
-        app:layout_constraintBottom_toBottomOf="@+id/clearEditText2"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_email_number"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintTop_toTopOf="@+id/clearEditText2" />
+        app:layout_constraintTop_toTopOf="@+id/edt_email_number" />
+
+    <TextView
+        android:id="@+id/txt_email_failsend"
+        style="@style/fontFamiliyandPadding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="2dp"
+        android:lineSpacingExtra="7sp"
+        android:text="올바른 이메일을 입력해주세요."
+        android:textColor="@color/pinkish_tan"
+        android:textFontWeight="400"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/edt_email" />
+
+    <TextView
+        android:id="@+id/txt_email_failcheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="2dp"
+        style="@style/fontFamiliyandPadding"
+        android:lineSpacingExtra="7sp"
+        android:text="인증번호가 틀렸습니다."
+        android:textColor="@color/pinkish_tan"
+        android:textFontWeight="400"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/edt_email_number" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
