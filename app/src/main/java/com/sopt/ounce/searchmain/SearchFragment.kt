@@ -12,7 +12,9 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
+import com.google.android.material.tabs.TabLayout
 import com.sopt.ounce.R
+import com.sopt.ounce.searchmain.viewpager.SearchTapAdapter
 import com.sopt.ounce.searchmain.viewpager.ViewPagerAdapter
 import com.sopt.ounce.searchmain.viewpager.ViewPagerTransformer
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -20,13 +22,10 @@ import kotlinx.android.synthetic.main.fragment_search.view.*
 
 
 class SearchFragment : Fragment() {
-    lateinit var mContext: Context
-    private lateinit var v : View
-
+    lateinit var mContext:Context
     override fun onAttach(context: Context) {
-        super.onAttach(context)
         mContext = context
-        Log.d("onAttach", "Call Success")
+        super.onAttach(context)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +73,24 @@ class SearchFragment : Fragment() {
                 }
             }
         })
+        vp_search_main_search.adapter = SearchTapAdapter(view.context,
+            childFragmentManager,
+            tab_search_main_onfocus.tabCount)
+        vp_search_main_search.addOnPageChangeListener(
+            TabLayout.TabLayoutOnPageChangeListener(tab_search_main_onfocus))
+        tab_search_main_onfocus.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                vp_search_main_search.currentItem = tab_search_main_onfocus.selectedTabPosition
+            }
+        })
+
+
     }
 
     private fun registerViewPagerAdapter(view: View) : ViewPagerAdapter{

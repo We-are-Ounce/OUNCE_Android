@@ -31,7 +31,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sv_search_main_search">
+        app:layout_constraintTop_toBottomOf="@+id/sv_search_main_search"
+        android:paddingBottom="110dp"
+        >
 
         <LinearLayout
             android:id="@+id/linlo_explain"
@@ -128,6 +130,7 @@
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp_search_main_search"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/tab_search_main_onfocus"
