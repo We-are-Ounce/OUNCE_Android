@@ -44,6 +44,8 @@
 
 ### 기능 소개
 
+- [키보드 액션과 EditText 커스텀](https://github.com/We-are-Ounce/OUNCE_Android/blob/master/document/keyboard.md)
+
 ### Project
 
 - [Week 1](https://github.com/We-are-Ounce/OUNCE_Android/projects/1)
