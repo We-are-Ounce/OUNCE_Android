@@ -14,19 +14,18 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import com.google.android.material.tabs.TabLayout
 import com.sopt.ounce.R
+import com.sopt.ounce.searchmain.recyclerview.SearchUserAdapter
+import com.sopt.ounce.searchmain.recyclerview.SearchUserData
 import com.sopt.ounce.searchmain.viewpager.SearchTapAdapter
 import com.sopt.ounce.searchmain.viewpager.ViewPagerAdapter
 import com.sopt.ounce.searchmain.viewpager.ViewPagerTransformer
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
+import kotlinx.android.synthetic.main.fragment_search_user.*
 
 
 class SearchFragment : Fragment() {
-    lateinit var mContext:Context
-    override fun onAttach(context: Context) {
-        mContext = context
-        super.onAttach(context)
-    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -91,6 +90,8 @@ class SearchFragment : Fragment() {
         })
 
 
+
+
     }
 
     private fun registerViewPagerAdapter(view: View) : ViewPagerAdapter{
@@ -132,7 +133,5 @@ class SearchFragment : Fragment() {
         )
         return viewPagerAdapter
     }
-
-
 
 }
