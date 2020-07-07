@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".record.ImageSearchActivity"></activity>
+        <activity android:name=".record.RecyclerViewAdapter"></activity>
+        <activity android:name=".record.ImageSearchActivity" />
         <activity android:name=".signup.ui.SignUpFinishActivity" />
         <activity
             android:name=".signup.ui.SignUpActivity"
