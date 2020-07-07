@@ -20,7 +20,7 @@
 
     <ImageView
         android:id="@+id/img_signup_logo"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="132dp"
         android:scaleType="fitXY"

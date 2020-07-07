@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".catregister.CatRegisterActivity"
-            android:exported="true"></activity>
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".signup.ui.SignUpFinishActivity" />
         <activity
             android:name=".signup.ui.SignUpActivity"

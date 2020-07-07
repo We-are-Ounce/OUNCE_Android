@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import com.sopt.ounce.R
 import com.sopt.ounce.util.textCheckListener
 import com.sopt.ounce.signup.ui.SignUpActivity
@@ -115,6 +116,11 @@ class LoginActivity : AppCompatActivity() {
 //        }
 
         }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        ActivityCompat.finishAffinity(this)
+    }
 
 
 

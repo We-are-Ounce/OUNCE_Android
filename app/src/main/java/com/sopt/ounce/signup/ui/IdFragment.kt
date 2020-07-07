@@ -10,11 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat
 import com.sopt.ounce.R
 import com.sopt.ounce.util.textCheckListener
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
-import kotlinx.android.synthetic.main.fragment_email_check.view.*
 import kotlinx.android.synthetic.main.fragment_id.view.*
 
 class IdFragment : Fragment() {
