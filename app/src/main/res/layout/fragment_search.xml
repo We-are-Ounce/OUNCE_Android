@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white_two"
         style="@style/MySearchViewStyle"
-        android:text="검색어를 입력하세요"
+        android:hint="검색어를 입력하세요"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
