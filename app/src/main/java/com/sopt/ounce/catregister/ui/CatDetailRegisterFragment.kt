@@ -14,6 +14,7 @@ import com.sopt.ounce.catregister.CatRegisterActivity
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.fragment_cat_detail_register.*
 import kotlinx.android.synthetic.main.fragment_cat_detail_register.view.*
+import kotlinx.android.synthetic.main.fragment_cat_profile_register.*
 import kotlinx.android.synthetic.main.fragment_cat_profile_register.view.*
 import kotlinx.android.synthetic.main.fragment_password.view.*
 
@@ -44,6 +45,10 @@ class CatDetailRegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        layout_catdetail.setOnClickListener {
+            mImm.hideSoftInputFromWindow(edt_cat_age.windowToken,0)
+        }
 
         radioGroup_detail.setOnCheckedChangeListener { _, id ->
             when (id){

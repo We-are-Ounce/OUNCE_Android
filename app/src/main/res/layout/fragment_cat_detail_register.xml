@@ -118,6 +118,8 @@
         android:text="중성화 했어요"
         android:textFontWeight="400"
         android:textSize="12sp"
+        android:button="@drawable/check_newtral"
+        android:paddingLeft="7dp"
         android:layout_marginTop="7dp"
         app:layout_constraintStart_toStartOf="@+id/radioGroup_detail"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup_detail" />
@@ -132,15 +134,19 @@
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/check_newtral" />
 
-    <EditText
+    <com.sopt.ounce.util.ClearEditText
         android:id="@+id/edt_cat_age"
         style="@style/inputTextStyle"
+        android:paddingRight="16dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="2dp"
+        android:gravity="right"
         android:ems="10"
+        android:maxLength="2"
         android:inputType="number"
+        tools:text="23"
         app:layout_constraintEnd_toStartOf="@+id/textView8"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/txt_cat_age" />
@@ -172,15 +178,19 @@
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/edt_cat_age" />
 
-    <EditText
+    <com.sopt.ounce.util.ClearEditText
         android:id="@+id/edt_cat_weight"
         style="@style/inputTextStyle"
+        android:paddingRight="16dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="2dp"
+        android:gravity="right"
+        android:lines="1"
         android:ems="10"
         android:inputType="numberDecimal"
+        tools:text="1.5"
         app:layout_constraintEnd_toStartOf="@+id/textView10"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/txt_cat_weight" />
