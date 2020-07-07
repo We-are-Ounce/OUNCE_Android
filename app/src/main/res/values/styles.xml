@@ -3,8 +3,35 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/dark</item>
+        <item name="colorControlNormal">@color/white_three</item>
+    </style>
+
+    <style name="LoginSamllText">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">7sp</item>
+        <item name="android:textColor">@color/warm_grey</item>
+        <item name="android:fontFamily">@font/notosanskr</item>
+    </style>
+
+    <style name = "MySearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <!-- Background for the search query section (e.g. EditText) -->
+<!--        <item name="queryBackground">...</item>-->
+        <!-- Background for the actions section (e.g. voice, submit) -->
+<!--        <item name="submitBackground">...</item>-->
+        <!-- Close button icon -->
+        <item name="closeIcon">@drawable/ic_close</item>
+        <!-- Search button icon -->
+        <item name="searchIcon">@drawable/ic_search</item>
+        <!-- Go/commit button icon -->
+<!--        <item name="goIcon">...</item>-->
+        <!-- Voice search button icon -->
+<!--        <item name="voiceIcon">...</item>-->
+        <!-- Commit icon shown in the query suggestion row -->
+<!--        <item name="commitIcon">...</item>-->
+        <!-- Layout for query suggestion rows -->
+<!--        <item name="suggestionRowLayout">...</item>-->
     </style>
 
 </resources>

@@ -22,6 +22,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -62,5 +66,13 @@ dependencies {
     //MaterialSearchBar
     implementation 'com.github.mancj:MaterialSearchBar:0.7.1'
 
+    //TedKeyboardObserver
+    implementation 'gun0912.ted:tedkeyboardobserver:1.0.2'
+
+    //Transformer
+    implementation 'com.eftimoff:android-viewpager-transformers:1.0.1@aar'
+
+    //CircleImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
 }

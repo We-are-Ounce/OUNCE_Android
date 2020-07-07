@@ -2,6 +2,7 @@ package com.sopt.ounce
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.sopt.ounce.searchmain.SearchFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
