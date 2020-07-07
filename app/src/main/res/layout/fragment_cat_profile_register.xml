@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_catprofile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".catregister.ui.CatProfileRegisterFragment">
@@ -45,11 +46,11 @@
 
     <TextView
         android:id="@+id/textView7"
+        style="@style/textStyle_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/textStyle_1"
-        android:textFontWeight="100"
         android:text="입력해주세요."
+        android:textFontWeight="100"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -74,11 +75,11 @@
 
     <TextView
         android:id="@+id/txt_catprofile_name"
+        style="@style/infoTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:text="이름"
-        style="@style/infoTextStyle"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/img_cat_profile" />
 
@@ -89,8 +90,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="고양이 이름을 입력해주세요."
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/txt_catprofile_name" />
@@ -112,8 +113,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="고양이에 대한 소개를 작성해주세요."
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/txt_catprofile_explain" />
