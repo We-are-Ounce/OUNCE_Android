@@ -143,12 +143,11 @@ class SearchFragment : Fragment() {
         vp_search_main_viewpager.adapter = viewPagerAdapter
         vp_search_main_viewpager.clipToPadding = false
         vp_search_main_viewpager.clipChildren = false
-        vp_search_main_viewpager.offscreenPageLimit = 3
+        vp_search_main_viewpager.offscreenPageLimit = 2
         vp_search_main_viewpager.setPageTransformer(true, ViewPagerTransformer())
 
-        val dpValue = 50
+        val dpValue = 70
         val d = resources.displayMetrics.density
-        Log.d("checking d","$d")
         val margin = dpValue*d.toInt()
 
         vp_search_main_viewpager.setPadding(margin,0,margin,0)
