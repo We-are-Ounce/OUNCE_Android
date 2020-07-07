@@ -26,6 +26,7 @@
         style="@style/textStyle_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="29dp"
         android:text="고양이의 정보"
         android:textFontWeight="400"
@@ -48,17 +49,137 @@
         style="@style/textStyle_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="입력해주세요."
         android:textFontWeight="100"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/txt_catsex_title"
+        style="@style/infoTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_marginTop="39dp"
+        android:text="성별"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <Button
+        android:id="@+id/btn_man"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:text="Button"
+        app:layout_constraintEnd_toStartOf="@+id/btn_girl"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/txt_catsex_title" />
+
+    <Button
+        android:id="@+id/btn_girl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="10dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_man"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toEndOf="@+id/btn_man"
+        app:layout_constraintTop_toTopOf="@+id/btn_man" />
+
+    <CheckBox
+        android:id="@+id/check_newtral"
+        style="@style/fontFamiliyandPadding"
+        android:textFontWeight="400"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:text="중성화 했어요"
+        android:textSize="12sp"
+        android:lineSpacingExtra="7sp"
+        app:layout_constraintStart_toStartOf="@+id/btn_man"
+        app:layout_constraintTop_toBottomOf="@+id/btn_man" />
+
+    <TextView
+        android:id="@+id/txt_cat_age"
+        style="@style/infoTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="나이"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/check_newtral" />
+
+    <EditText
+        android:id="@+id/edt_cat_age"
+        style="@style/inputTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="2dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/textView8"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/txt_cat_age" />
+
+    <TextView
+        style="@style/fontFamiliyandPadding"
+        android:textFontWeight="400"
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="155dp"
+        android:text="살"
+        android:textColor="@color/greyish_brown"
+        android:textSize="15sp"
+        android:lineSpacingExtra="9sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_cat_age"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toEndOf="@+id/edt_cat_age"
+        app:layout_constraintTop_toTopOf="@+id/edt_cat_age" />
+
+    <TextView
+        android:id="@+id/txt_cat_weight"
+        style="@style/infoTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:text="몸무게"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/edt_cat_age" />
+
+    <EditText
+        android:id="@+id/edt_cat_weight"
+        style="@style/inputTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="2dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toStartOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/txt_cat_weight" />
+
+    <TextView
+        android:fontFamily="@font/notosans"
+        android:textFontWeight="400"
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="155dp"
+        android:text="kg"
+        android:textColor="@color/greyish_brown"
+        android:textSize="15sp"
+        android:lineSpacingExtra="9sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_cat_weight"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toEndOf="@+id/edt_cat_weight"
+        app:layout_constraintTop_toTopOf="@+id/edt_cat_weight" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
