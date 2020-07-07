@@ -4,8 +4,5 @@
     android:drawable="@drawable/ic_evaluate_full"></item>
     <item android:id="@+id/totalscore_nostar"
         android:drawable="@drawable/ic_total_unselected"></item>
-    <item android:id="@+id/favor_heart"
-    android:drawable="@drawable/ic_favorite_select"></item>
-    <item android:id="@+id/favor_noheart"
-        android:drawable="@drawable/ic_favorite_unselected"></item>
+
 </layer-list>

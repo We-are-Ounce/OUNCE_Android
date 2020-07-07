@@ -34,4 +34,12 @@
 <!--        <item name="suggestionRowLayout">...</item>-->
     </style>
 
+    <!--<style xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:id="@+id/totalscore_star"
+            android:drawable="@drawable/ic_evaluate_full"></item>
+        <item android:id="@+id/totalscore_nostar"
+            android:drawable="@drawable/ic_total_unselected"></item>
+
+    </style>-->
+
 </resources>

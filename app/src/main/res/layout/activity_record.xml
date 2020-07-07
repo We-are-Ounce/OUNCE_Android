@@ -40,8 +40,8 @@
                 android:gravity="center"
                 android:text="기록하기"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"></TextView>
+                android:fontFamily="@font/notosanskr_medium"
+                android:textSize="18sp"></TextView>
         </androidx.appcompat.widget.Toolbar>
 
         <FrameLayout
@@ -57,13 +57,13 @@
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/img_product" />
 
-            <ImageButton
+              <!--<ImageButton
                 android:id="@+id/button_Gallery"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="228dp"
                 android:layout_marginTop="60dp"
-                app:srcCompat="@drawable/ic_edit" />
+                app:srcCompat="@drawable/ic_edit" />-->
         </FrameLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -75,6 +75,7 @@
         android:layout_marginTop="14dp"
         android:text="제품 회사명"
         android:textColor="@color/greyish_brown"
+        android:fontFamily="@font/notosanskr_medium"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,6 +88,7 @@
         android:layout_marginTop="4dp"
         android:text="제품 이름"
         android:textColor="@color/greyish_brown"
+        android:fontFamily="@font/notosanskr_medium"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,6 +102,8 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="4dp"
         android:text="건식"
+        android:textSize="12sp"
+        android:textColor="@color/greyish_brown"
         app:layout_constraintEnd_toStartOf="@+id/button2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,6 +116,8 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="4dp"
         android:text="사슴"
+        android:textSize="12sp"
+        android:textColor="@color/greyish_brown"
         app:layout_constraintEnd_toStartOf="@+id/button3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button"
@@ -124,6 +130,8 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="56dp"
         android:text="돼지"
+        android:textSize="12sp"
+        android:textColor="@color/greyish_brown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button2"
@@ -137,6 +145,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="285dp"
         android:text="필수 입력"
+        android:fontFamily="@font/notosanskr_medium"
         android:textColor="#a6a6a6"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -150,6 +159,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="26dp"
         android:text="총점"
+        android:fontFamily="@font/notosanskr_medium"
         android:textSize="12sp"
         android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
@@ -162,6 +172,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="26dp"
         android:text="기호도"
+        android:fontFamily="@font/notosanskr_medium"
         android:textColor="#000000"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -174,9 +185,9 @@
         android:layout_marginStart="29dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="114dp"
-        android:drawable="@drawable/ic_evaluate_full"
+        android:progress="@drawable/record_ratingstar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.233"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -198,6 +209,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="26dp"
         android:text="한 줄 평가"
+        android:fontFamily="@font/notosanskr_medium"
         android:textColor="@color/greyish_brown"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -222,6 +234,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:text="선택 입력"
+        android:fontFamily="@font/notosanskr_medium"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="519dp" />
 
