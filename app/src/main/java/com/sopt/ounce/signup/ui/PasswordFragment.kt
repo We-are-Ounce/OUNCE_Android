@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import com.sopt.ounce.R
 import kotlinx.android.synthetic.main.fragment_id.view.*
+import kotlinx.android.synthetic.main.fragment_password.view.*
 
 class PasswordFragment : Fragment() {
     private lateinit var mContext: Context
@@ -34,7 +35,7 @@ class PasswordFragment : Fragment() {
         val activity = activity as SignUpActivity
         mImm = activity.methodManagerToFragment()
 
-        v.layout_id_container.setOnClickListener {
+        v.layout_password_container.setOnClickListener {
             mImm.hideSoftInputFromWindow(v.edt_id_input.windowToken,0)
             val id = v.edt_id_input.text.toString()
 //            if (id.length > 5 ){

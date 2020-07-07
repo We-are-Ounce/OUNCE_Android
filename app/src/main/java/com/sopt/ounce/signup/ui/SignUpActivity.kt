@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_sign_up.*
 class SignUpActivity : AppCompatActivity() {
     private lateinit var mViewpagerAdapter : SignUpPagerAdapter
     private var mCheck : Boolean = false
+    private var mFinal : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
