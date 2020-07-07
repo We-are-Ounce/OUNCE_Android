@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="textPersonName"
         android:lines="1"
         android:maxLength="15"
         android:hint="5자리 이상 입력해주세요."
