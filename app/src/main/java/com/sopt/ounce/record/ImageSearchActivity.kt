@@ -16,7 +16,6 @@ class ImageSearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image_search)
 
-        //SearchView 색깔 지
         val searchIcon = sv_search.findViewById<ImageView>(R.id.search_mag_icon)
         searchIcon.setColorFilter(Color.WHITE)
 
@@ -27,8 +26,6 @@ class ImageSearchActivity : AppCompatActivity() {
 
         val textView = sv_search.findViewById<TextView>(R.id.search_src_text)
         textView.setTextColor(Color.WHITE)
-
-        //리사이클러뷰와 서치뷰 연
         rv_search.layoutManager = LinearLayoutManager(rv_search.context)
         rv_search.setHasFixedSize(true)
         getItemList()
