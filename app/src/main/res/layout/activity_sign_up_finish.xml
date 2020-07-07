@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".signup.ui.SignUpFinishActivity">
+
+    <ImageView
+        android:id="@+id/img_finish_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="69dp"
+        android:src="@drawable/img_logo_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/fontFamiliyandPadding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="127dp"
+        android:layout_marginTop="62dp"
+        android:lineSpacingExtra="11sp"
+        android:text="회원가입"
+        android:textColor="@color/greyish_brown"
+        android:textFontWeight="400"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_finish_logo" />
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/fontFamiliyandPadding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="11sp"
+        android:text="이"
+        android:textColor="@color/greyish_brown"
+        android:textFontWeight="100"
+        android:textSize="22sp"
+
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
+
+    <TextView
+        style="@style/fontFamiliyandPadding"
+        android:textFontWeight="100"
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="완료되었습니다!"
+        android:textColor="@color/greyish_brown"
+        android:textSize="22sp"
+        android:lineSpacingExtra="11sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/button"
+        style="@style/fontFamiliyandPadding"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="28dp"
+        android:layout_marginTop="265dp"
+        android:background="@drawable/auth_button_clickable"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="18sp"
+        android:paddingTop="9dp"
+        android:paddingBottom="13dp"
+        android:text="고양이 등록"
+        android:textColor="@color/greyish_brown"
+        android:textFontWeight="400"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

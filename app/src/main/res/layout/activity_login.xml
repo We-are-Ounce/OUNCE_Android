@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
     android:id="@+id/layout_login_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    app:layout_constraintEnd_toEndOf="parent"
     tools:context=".login.ui.LoginActivity">
 
 
@@ -40,14 +47,15 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="28dp" />
 
-            <EditText
+            <com.sopt.ounce.util.ClearEditText
                 android:id="@+id/edt_login_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:paddingTop="7dp"
                 android:ems="10"
                 android:hint="아이디"
-                android:inputType="textPersonName"
+                android:inputType="text"
                 android:maxLength="15"
                 android:lines="1"
                 android:textSize="16sp"
@@ -83,13 +91,13 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/edt_login_id" />
 
-            <EditText
-
+            <com.sopt.ounce.util.ClearEditText
                 android:id="@+id/edt_login_password"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:ems="10"
+                android:paddingTop="7dp"
                 android:hint="비밀번호"
                 android:maxLength="15"
                 android:lines="1"
@@ -97,13 +105,13 @@
                 android:lineSpacingExtra="8dp"
                 android:inputType="textPassword"
                 android:imeOptions="actionDone"
-                android:includeFontPadding="false"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/txt_login_password" />
 
             <TextView
                 android:id="@+id/txt_login_fail"
+                android:includeFontPadding="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/notosanskr"
@@ -206,29 +214,7 @@
         app:layout_constraintStart_toEndOf="@+id/txt_login_null2"
         app:layout_constraintTop_toTopOf="@+id/txt_login_null2" />
 
-    <ImageView
-        android:id="@+id/img_login_cancel_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp"
-        android:scaleType="fitXY"
-        android:visibility="gone"
-        android:src="@drawable/ic_expand_close"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/edt_login_id" />
-
-    <ImageView
-        android:id="@+id/img_login_cancel_psw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_expand_close"
-        android:layout_marginTop="12dp"
-        android:layout_marginRight="12dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/edt_login_password" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

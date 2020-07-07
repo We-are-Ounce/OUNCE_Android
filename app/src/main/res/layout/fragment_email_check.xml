@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_email_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".signup.ui.EmailCheckFragment">
+
+
+    <TextView
+        android:id="@+id/txt_password_null_1"
+        style="@style/textStyle_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="25dp"
+        android:text="회원가입"
+        android:textFontWeight="400"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
+    <TextView
+        android:id="@+id/txt_password_null_2"
+        style="@style/textStyle_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="을 위한"
+        android:textFontWeight="100"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_password_null_1"
+        app:layout_constraintStart_toEndOf="@+id/txt_password_null_1" />
+
+    <TextView
+        android:id="@+id/txt_password_null_3"
+        style="@style/textStyle_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="정보를 입력해주세요."
+        android:textFontWeight="100"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/txt_password_null_1" />
+
+    <TextView
+        android:id="@+id/txt_email"
+        style="@style/infoTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="이메일"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/txt_password_null_3" />
+
+
+    <com.sopt.ounce.util.ClearEditText
+        android:id="@+id/edt_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="14dp"
+        android:hint="이메일 주소"
+        android:inputType="text"
+        android:lineSpacingExtra="8sp"
+        android:maxLength="30"
+        android:lines="1"
+        android:paddingRight="18dp"
+        android:paddingTop="4dp"
+        android:textSize="16sp"
+        android:imeOptions="actionDone"
+        app:layout_constraintEnd_toStartOf="@+id/btn_email_send"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/txt_email" />
+
+    <TextView
+        android:id="@+id/btn_email_send"
+        style="@style/fontFamiliyandPadding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/auth_button_click"
+        android:lineSpacingExtra="9sp"
+        android:text="인증"
+        android:gravity="center"
+        android:paddingVertical="6dp"
+        android:paddingHorizontal="13dp"
+        android:textColor="@color/white"
+        android:textFontWeight="400"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_email"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintTop_toTopOf="@+id/edt_email" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="28dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="28dp" />
+
+    <TextView
+        android:id="@+id/txt_email_number"
+        style="@style/infoTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="인증번호"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/txt_email_failsend" />
+
+    <com.sopt.ounce.util.ClearEditText
+        android:id="@+id/edt_email_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="14dp"
+        android:hint="인증번호 5자리를 입력해주세요."
+        android:lineSpacingExtra="8sp"
+        android:paddingTop="4dp"
+        android:paddingRight="18dp"
+        android:textSize="16sp"
+        android:inputType="numberPassword"
+        android:maxLength="5"
+        android:lines="1"
+        android:imeOptions="actionDone"
+        app:layout_constraintEnd_toStartOf="@+id/btn_email_check"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@id/txt_email_number" />
+
+    <TextView
+        android:id="@+id/btn_email_check"
+        android:background="@drawable/auth_button_custom"
+        style="@style/fontFamiliyandPadding"
+        android:textFontWeight="400"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="확인"
+        android:paddingHorizontal="13dp"
+        android:paddingVertical="6dp"
+        android:textSize="15sp"
+        android:lineSpacingExtra="9sp"
+        android:textColor="@color/warm_grey"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_email_number"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintTop_toTopOf="@+id/edt_email_number" />
+
+    <TextView
+        android:id="@+id/txt_email_failsend"
+        style="@style/fontFamiliyandPadding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="2dp"
+        android:lineSpacingExtra="7sp"
+        android:text="올바른 이메일을 입력해주세요."
+        android:textColor="@color/pinkish_tan"
+        android:textFontWeight="400"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/edt_email" />
+
+    <TextView
+        android:id="@+id/txt_email_failcheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="2dp"
+        style="@style/fontFamiliyandPadding"
+        android:lineSpacingExtra="7sp"
+        android:text="인증번호가 틀렸습니다."
+        android:textColor="@color/pinkish_tan"
+        android:textFontWeight="400"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/edt_email_number" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

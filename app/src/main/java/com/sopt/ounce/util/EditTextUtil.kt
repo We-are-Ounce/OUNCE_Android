@@ -1,14 +1,14 @@
-package com.sopt.ounce.login
+package com.sopt.ounce.util
 
-import android.app.Activity
+
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
 import android.widget.EditText
 
 fun EditText.textCheckListener(textCheck : (CharSequence?) -> Unit){
     this.addTextChangedListener(object : TextWatcher{
-        override fun afterTextChanged(s: Editable?) = Unit
+        override fun afterTextChanged(s: Editable?) {
+        }
 
         override fun beforeTextChanged(s: CharSequence?,
                                        start: Int,

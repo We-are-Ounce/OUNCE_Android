@@ -8,11 +8,51 @@
         <item name="colorControlNormal">@color/white_three</item>
     </style>
 
-    <style name="LoginSamllText">
+    <style name="fontFamiliyandPadding">
+        <item name="android:includeFontPadding">false</item>
+        <item name="fontFamily">@font/notosanskr</item>
+    </style>
+
+    <style name="LoginSamllText" parent="fontFamiliyandPadding">
         <item name="android:textSize">12sp</item>
         <item name="android:lineSpacingExtra">7sp</item>
         <item name="android:textColor">@color/warm_grey</item>
-        <item name="android:fontFamily">@font/notosanskr</item>
+    </style>
+
+    <style name="siginButtonStyle" parent="fontFamiliyandPadding">
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineSpacingExtra">18sp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingVertical">13dp</item>
+        <item name="android:paddingHorizontal">73dp</item>
+    </style>
+
+
+    <style name="textStyle_1" parent="fontFamiliyandPadding">
+        <item name ="android:textSize">22sp</item>
+        <item name ="android:lineSpacingExtra">11sp</item>
+        <item name ="android:textColor">@color/greyish_brown</item>
+    </style>
+
+    <style name="infoTextStyle" parent="fontFamiliyandPadding">
+        <item name="android:fontWeight">400</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/dark</item>
+    </style>
+
+    <style name="inputTextStyle" parent="fontFamiliyandPadding">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:fontWeight">100</item>
+        <item name="android:textColor">@color/greyish_brown</item>
+    </style>
+
+    <style name="pinkTextStyle" parent="fontFamiliyandPadding">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">7sp</item>
+        <item name="android:textColor">@color/pinkish_tan</item>
+        <item name="android:fontWeight">400</item>
     </style>
 
     <style name = "MySearchViewStyle" parent="Widget.AppCompat.SearchView">
