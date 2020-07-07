@@ -17,6 +17,8 @@ class CatDetailRegisterFragment : Fragment() {
     ): View? {
         v = inflater.inflate(R.layout.fragment_cat_detail_register, container, false)
 
+
+
         return v
     }
 

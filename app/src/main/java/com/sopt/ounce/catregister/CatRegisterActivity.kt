@@ -1,8 +1,10 @@
 package com.sopt.ounce.catregister
 
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import com.sopt.ounce.R
 import com.sopt.ounce.catregister.adapter.CatViewPagerAdapter
 import com.sopt.ounce.util.StatusObject
@@ -55,14 +57,9 @@ class CatRegisterActivity : AppCompatActivity() {
         dot_catregister_indicator.dotsClickable = false
     }
 
-    private fun observeKeyboard(){
-        TedKeyboardObserver(this)
-            .listen { isShow ->
-                if (!isShow) {
-                    // do checking EditText
-                    edt_catprofile_name.clearFocus()
-                    edt_catprofile_explain.clearFocus()
-                }
-            }
-    }
+    fun setImmToFragment() : InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE)
+            as InputMethodManager
+
+
+
 }

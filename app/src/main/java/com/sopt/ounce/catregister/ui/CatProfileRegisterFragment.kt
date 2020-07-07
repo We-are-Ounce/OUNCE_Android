@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sopt.ounce.R
+import com.sopt.ounce.catregister.CatRegisterActivity
 import kotlinx.android.synthetic.main.fragment_cat_profile_register.*
 
 
@@ -35,6 +36,7 @@ class CatProfileRegisterFragment : Fragment() {
     }
 
     private fun observeKeyboard(){
+        val activity = activity as CatRegisterActivity
 
     }
 
