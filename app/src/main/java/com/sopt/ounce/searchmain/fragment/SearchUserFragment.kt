@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.sopt.ounce.R
 import com.sopt.ounce.searchmain.recyclerview.SearchUserAdapter
 import com.sopt.ounce.searchmain.recyclerview.SearchUserData
+import com.sopt.ounce.searchmain.recyclerview.SearchUserItemDecoration
 import kotlinx.android.synthetic.main.fragment_search_user.*
 
 class SearchUserFragment : Fragment() {
@@ -30,6 +31,7 @@ class SearchUserFragment : Fragment() {
         searchUserAdapter = SearchUserAdapter(view.context)
         rv_search_user_searchresult.adapter = searchUserAdapter
         loadUserResultData()
+        rv_search_user_searchresult.addItemDecoration(SearchUserItemDecoration())
     }
 
     private fun loadUserResultData(){
