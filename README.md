@@ -45,6 +45,8 @@
 ### 기능 소개
 
 - [키보드 액션과 EditText 커스텀](https://github.com/We-are-Ounce/OUNCE_Android/blob/master/document/keyboard.md)
+- [Fragment에 ViewPager 삽입](https://github.com/We-are-Ounce/OUNCE_Android/blob/master/document/ViewPagerInFragment.md)
+- [ViewPager에 화면전환효과 삽입](https://github.com/We-are-Ounce/OUNCE_Android/blob/master/document/PageTransformer.md)
 
 ### Project
 
