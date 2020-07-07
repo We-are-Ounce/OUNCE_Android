@@ -1,4 +1,4 @@
-package com.sopt.ounce.signup.module
+package com.sopt.ounce.util
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -19,7 +19,10 @@ class NoSwipeViewPager : ViewPager{
             val viewPager = ViewPager::class.java
             val scroller = viewPager.getDeclaredField("mScroller")
             scroller.isAccessible = true
-            mScroller = FixedSpeedScroller(context, DecelerateInterpolator())
+            mScroller = FixedSpeedScroller(
+                context,
+                DecelerateInterpolator()
+            )
             scroller.set(this, mScroller)
         }
         catch (ignored : Exception){}
