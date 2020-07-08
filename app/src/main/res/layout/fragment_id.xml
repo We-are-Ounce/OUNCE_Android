@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="28dp" />
+        app:layout_constraintGuide_begin="20dp" />
 
     <com.sopt.ounce.util.ClearEditText
         android:id="@+id/edt_id_input"
@@ -78,7 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="28dp" />
+        app:layout_constraintGuide_end="20dp" />
 
     <TextView
         android:id="@+id/txt_id_notice"

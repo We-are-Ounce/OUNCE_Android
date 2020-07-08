@@ -1,4 +1,4 @@
-package com.sopt.ounce.signup.module
+package com.sopt.ounce.util
 
 import android.content.Context
 

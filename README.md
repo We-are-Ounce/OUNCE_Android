@@ -1,8 +1,5 @@
 # 😸We-are-OUNCE 'Android' Developer
 
-
-
-
 ## 목차
 
 - [Code Convention](https://github.com/We-are-Ounce/OUNCE_Android/wiki/Code-Convention)
@@ -13,30 +10,43 @@
 - [Project](#project)
 - [팀원 소개](#팀원)
 
-
 ### Library
 
-| 라이브러리           | 목적                             |
-| -------------------- | -------------------------------- |
-| [Retrofit2](https://github.com/square/retrofit)           | 서버 통신                        |
-|[Gson](https://github.com/google/gson)|서버에서 받아온 Json 객체를 Gson으로 변환|
-| [Glide](https://github.com/bumptech/glide)| url을 이용한 이미지 뷰에 이미지 처리    |
-| [DotIndicator](https://github.com/tommybuonomo/dotsindicator?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=7127)         | 뷰페이저 인디케이터                   |
-|[Cropper](https://github.com/ArthurHub/Android-Image-Cropper)|프로필 이미지 크기 조절을 위한 Crop 기능|
-|[MaterialSearchBar](https://github.com/mancj/MaterialSearchBar)|검색창 구현 |
-|[TedPermission](https://github.com/ParkSangGwon/TedPermission)| 갤러리 이용 시 권한 설정 |
-|[TedKeyboardObserver](https://github.com/ParkSangGwon/TedKeyboardObserver)|키보드 show/hide 리스너|
-|[RecyclerView_+ SearchView](https://github.com/l2hyunwoo/OunceCustomSearchBar)| 최근 검색어 검색창  |
+| 라이브러리                                                                                                                         | 목적                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| [Retrofit2](https://github.com/square/retrofit)                                                                                    | 서버 통신                                 |
+| [Gson](https://github.com/google/gson)                                                                                             | 서버에서 받아온 Json 객체를 Gson으로 변환 |
+| [Glide](https://github.com/bumptech/glide)                                                                                         | url을 이용한 이미지 뷰에 이미지 처리      |
+| [DotIndicator](https://github.com/tommybuonomo/dotsindicator?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=7127) | 뷰페이저 인디케이터                       |
+| [Cropper](https://github.com/ArthurHub/Android-Image-Cropper)                                                                      | 프로필 이미지 크기 조절을 위한 Crop 기능  |
+| [MaterialSearchBar](https://github.com/mancj/MaterialSearchBar)                                                                    | 검색창 구현                               |
+| [TedPermission](https://github.com/ParkSangGwon/TedPermission)                                                                     | 갤러리 이용 시 권한 설정                  |
+| [TedKeyboardObserver](https://github.com/ParkSangGwon/TedKeyboardObserver)                                                         | 키보드 show/hide 리스너                   |
+| [RecyclerView\_+ SearchView](https://github.com/l2hyunwoo/OunceCustomSearchBar)                                                    | 최근 검색어 검색창                        |
 
-           
+### ConstraintLayout 사용처
 
+- activity_login.xml : Guideline, chain (packed) 사용
 
+- activity_sign_up.xml : 하단 버튼에 chain(packed) 사용
 
+- activity_sign_up_finish.xml : 레이아웃 사용
 
+- fragment_email_check.xml : Guideline 사용
+
+- fragment_id.xml : Guideline 사용
+
+- fragment_password.xml : Guideline 사용
+
+- fragment_search.xml : 레이아웃 사용 ( 상단 TextView에 LinearLayout 추가 )
+
+- item_searchmain_similar.xml : chain(spread) 사용 (\*하단 이미지에 LinearLayout 사용)
 
 ### 기능 소개
 
-
+- [키보드 액션과 EditText 커스텀](https://github.com/We-are-Ounce/OUNCE_Android/blob/master/document/keyboard.md)
+- [Fragment에 ViewPager 삽입](https://github.com/We-are-Ounce/OUNCE_Android/blob/master/document/ViewPagerInFragment.md)
+- [ViewPager에 화면전환효과 삽입](https://github.com/We-are-Ounce/OUNCE_Android/blob/master/document/PageTransformer.md)
 
 ### Project
 
@@ -44,9 +54,8 @@
 - [Week 2](https://github.com/We-are-Ounce/OUNCE_Android/projects/2)
 - [Week 3](https://github.com/We-are-Ounce/OUNCE_Android/projects/3)
 
-
-
 ### 팀원
+
 <table>
     <tr align="center">
         <td><B>팀원<B></td>
@@ -81,6 +90,3 @@
         <td>Ounce 개발 맡은 역할 열심히 하기, 안드로이드 개발 과정 기록하기   </td>
     </tr>
 </table>
-
-
-

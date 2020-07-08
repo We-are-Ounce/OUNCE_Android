@@ -2,12 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".signup.ui.SignUpActivity">
+    tools:context=".catregister.CatRegisterActivity">
+
     <ImageView
-        android:id="@+id/img_signup_back"
+        android:id="@+id/img_catregister_back"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="19dp"
@@ -19,7 +20,7 @@
         app:srcCompat="@drawable/btn_back" />
 
     <ImageView
-        android:id="@+id/img_signup_logo"
+        android:id="@+id/img_catregister_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="132dp"
@@ -27,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/img_signup_back"
+        app:layout_constraintTop_toTopOf="@+id/img_catregister_back"
         app:srcCompat="@drawable/img_logo" />
 
     <ScrollView
@@ -36,10 +37,10 @@
         android:layout_height="0dp"
         android:fillViewport="true"
         android:layout_marginTop="27dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_signup_ok"
+        app:layout_constraintBottom_toTopOf="@+id/btn_catregister_ok"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_signup_logo" >
+        app:layout_constraintTop_toBottomOf="@id/img_catregister_logo" >
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,7 +48,7 @@
             android:layout_height="match_parent">
 
             <com.sopt.ounce.util.NoSwipeViewPager
-                android:id="@+id/vp_signup"
+                android:id="@+id/vp_catregister"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -58,7 +59,7 @@
             </com.sopt.ounce.util.NoSwipeViewPager>
 
             <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-                android:id="@+id/dot_signup_indicator"
+                android:id="@+id/dot_catregister_indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="499dp"
@@ -70,7 +71,7 @@
                 app:dotsWidthFactor="2.5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/vp_signup"
+                app:layout_constraintTop_toTopOf="@+id/vp_catregister"
                 app:progressMode="false"
                 app:selectedDotColor="@color/dark" />
 
@@ -84,14 +85,14 @@
 
 
     <Button
-        android:id="@+id/btn_signup_cancle"
+        android:id="@+id/btn_catregister_cancle"
         style="@style/siginButtonStyle"
         android:background="@drawable/singup_btn_cancle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="취소"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_signup_ok"
+        app:layout_constraintEnd_toStartOf="@+id/btn_catregister_ok"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
@@ -99,7 +100,7 @@
 
 
     <Button
-        android:id="@+id/btn_signup_ok"
+        android:id="@+id/btn_catregister_ok"
         style="@style/siginButtonStyle"
         android:background="@drawable/singup_btn_unclick"
         android:layout_width="0dp"
@@ -108,5 +109,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_signup_cancle" />
+        app:layout_constraintStart_toEndOf="@+id/btn_catregister_cancle" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
