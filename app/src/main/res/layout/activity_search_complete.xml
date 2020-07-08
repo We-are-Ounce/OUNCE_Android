@@ -75,7 +75,7 @@
             android:id="@+id/gridView"
             android:columnWidth="150dp"
             android:horizontalSpacing="150dp"
-            android:numColumns="auto_fit"
+            android:numColumns="2"
             android:verticalSpacing="15dp"
             ></GridView>
 
