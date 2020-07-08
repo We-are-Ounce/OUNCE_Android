@@ -4,14 +4,209 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".main.ui.HomeFragment">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/img_main_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
         android:src="@drawable/img_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_main_setting"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_baseline_settings_24"
+        android:paddingTop="12dp"
+        android:paddingBottom="24dp"
+        android:paddingRight="28dp"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="61dp" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="13dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_main_logo"
+         >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="61dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_main_profile"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="176dp"
+                android:src="@drawable/img_cat"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/img_main_dropdown"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="57dp"
+                android:padding="7dp"
+                android:src="@drawable/btn_dropdown"
+                app:layout_constraintBottom_toBottomOf="@+id/txt_main_profile"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toEndOf="@+id/txt_main_profile"
+                app:layout_constraintTop_toTopOf="@+id/txt_main_profile" />
+
+            <TextView
+                style="@style/fontFamiliyandPadding"
+                android:textFontWeight="700"
+                android:id="@+id/txt_main_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:text="고양이이름"
+                android:textColor="@color/greyish_brown"
+                android:textSize="16sp"
+                android:lineSpacingExtra="20sp"
+                app:layout_constraintStart_toEndOf="@+id/img_main_profile"
+                app:layout_constraintTop_toTopOf="@+id/img_main_profile" />
+
+            <ImageView
+                android:id="@+id/img_main_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/female"
+                app:layout_constraintStart_toStartOf="@+id/txt_main_profile"
+                app:layout_constraintTop_toBottomOf="@+id/txt_main_profile" />
+
+            <TextView
+                android:id="@+id/txt_main_weight"
+                style="@style/SamllText"
+                android:textFontWeight="100"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:text="5kg"
+                app:layout_constraintBottom_toBottomOf="@+id/img_main_gender"
+                app:layout_constraintStart_toEndOf="@+id/img_main_gender"
+                app:layout_constraintTop_toTopOf="@+id/img_main_gender" />
+
+            <TextView
+                style="@style/SamllText"
+                android:textFontWeight="100"
+                android:id="@+id/txt_main_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:text="2살"
+                app:layout_constraintBottom_toBottomOf="@+id/txt_main_weight"
+                app:layout_constraintStart_toEndOf="@+id/txt_main_weight"
+                app:layout_constraintTop_toTopOf="@+id/txt_main_weight" />
+
+            <TextView
+                style="@style/SamllText"
+                android:textFontWeight="400"
+                android:textColor="@color/greyish_brown"
+                android:id="@+id/txt_main_introduce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="고양이 한줄 소개 입니다."
+                app:layout_constraintStart_toStartOf="@+id/img_main_gender"
+                app:layout_constraintTop_toBottomOf="@+id/txt_main_weight" />
+
+            <TextView
+                android:id="@+id/txt_main_follower"
+                style="@style/SamllText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_follow"
+                android:gravity="center"
+                android:lines="1"
+                android:paddingVertical="4dp"
+                android:text="팔로워 000"
+                android:textColor="@color/greyish_brown"
+                android:textFontWeight="400"
+                app:layout_constraintEnd_toStartOf="@+id/txt_main_following"
+                app:layout_constraintStart_toStartOf="@+id/txt_main_introduce"
+                app:layout_constraintTop_toBottomOf="@+id/txt_main_introduce" />
+
+            <TextView
+                android:id="@+id/txt_main_following"
+                style="@style/SamllText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="44dp"
+                android:background="@drawable/btn_follow"
+                android:paddingVertical="4dp"
+                android:gravity="center"
+                android:text="팔로잉 000"
+                android:lines="1"
+                android:textColor="@color/greyish_brown"
+                android:textFontWeight="400"
+                app:layout_constraintBottom_toBottomOf="@+id/txt_main_follower"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txt_main_follower"
+                app:layout_constraintTop_toTopOf="@+id/txt_main_follower"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/img_main_profile_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="94dp"
+                android:layout_marginTop="62dp"
+                android:src="@drawable/btn_bg_edit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/img_main_profile" />
+            <fragment
+                android:id="@+id/fragment_review"
+                android:name="com.sopt.ounce.main.ui.ReviewRecyclerFragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txt_main_follower"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
