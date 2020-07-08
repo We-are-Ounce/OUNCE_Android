@@ -1,17 +1,16 @@
 package com.sopt.ounce.searchmain.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.view.setPadding
 import com.sopt.ounce.R
-import com.sopt.ounce.searchmain.recyclerview.SearchGoodsAdapter
-import com.sopt.ounce.searchmain.recyclerview.SearchGoodsData
-import com.sopt.ounce.searchmain.recyclerview.SearchUserAdapter
-import com.sopt.ounce.searchmain.recyclerview.SearchUserData
+import com.sopt.ounce.searchmain.recyclerview.*
 import kotlinx.android.synthetic.main.fragment_search_goods.*
 import kotlinx.android.synthetic.main.item_search_main_goodssearch.*
 
@@ -34,15 +33,16 @@ class SearchGoodsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var spinnerData = listOf<String>("기호도 순", "총점 순")
-        var spinnerAdapter = ArrayAdapter<String>(view.context,
-            android.R.layout.simple_list_item_1,
+        val spinnerData = listOf<String>("기호도 순", "총점 순")
+        val spinnerAdapter = ArrayAdapter<String>(view.context,
+            R.layout.item_spinner,
             spinnerData)
         spn_search_goods_filter.adapter = spinnerAdapter
 
         searchGoodsAdapter = SearchGoodsAdapter(view.context)
         rv_search_goods_goodsresult.adapter = searchGoodsAdapter
         loadGoodsResultData()
+        rv_search_goods_goodsresult.addItemDecoration(SearchGoodsItemDecoration())
     }
 
     private fun loadGoodsResultData(){

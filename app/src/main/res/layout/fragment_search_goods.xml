@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingHorizontal="20dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".searchmain.fragment.SearchGoodsFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".searchmain.fragment.SearchGoodsFragment">
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/spn_search_goods_filter"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:textSize = "12sp"
+        android:gravity="end"
+        android:fontFamily="@font/notosanskr_regular"
+        android:backgroundTint="@color/greyish_brown"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_search_goods_goodsresult"
-        android:background="@color/black"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/spn_search_goods_filter"
-        tools:listitem="@layout/item_search_main_goodssearch" />
+            android:id="@+id/rv_search_goods_goodsresult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/spn_search_goods_filter"
+            tools:listitem="@layout/item_search_main_goodssearch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
