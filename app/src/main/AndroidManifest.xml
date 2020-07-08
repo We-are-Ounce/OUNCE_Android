@@ -25,7 +25,6 @@
             android:name=".MainActivity"
             android:exported="true" />
         <activity android:name=".record.SearchCompleteActivity"></activity>
-        <activity android:name=".record.RecyclerViewAdapter" />
         <activity
             android:name=".record.ImageSearchActivity"
             android:exported="true">
@@ -35,11 +34,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".signup.ui.SignUpFinishActivity" />
-        <activity
-            android:name=".signup.ui.SignUpActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".record.RecordActivity" />
         <activity
             android:name=".login.ui.LoginActivity"
