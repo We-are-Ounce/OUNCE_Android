@@ -27,6 +27,8 @@ import com.sopt.ounce.searchmain.viewpager.ViewPagerAdapter
 import com.sopt.ounce.searchmain.viewpager.ViewPagerTransformer
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.fragment_cat_detail_register.*
+import kotlinx.android.synthetic.main.fragment_cat_detail_register.view.*
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import kotlinx.android.synthetic.main.fragment_search_user.*
@@ -34,6 +36,13 @@ import kotlinx.android.synthetic.main.fragment_search_user.*
 
 class SearchFragment : Fragment() {
     private lateinit var mInputMethodManager: InputMethodManager
+    private lateinit var mContext: Context
+    private lateinit var mView: View
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -44,15 +53,21 @@ class SearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(
-            R.layout.fragment_search,
+        mView = inflater.inflate(R.layout.fragment_search,
             container,
             false
         )
+        observeKeyboard()
+        settingMethodManager()
+        return mView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        fm_container.setOnClickListener {
+            mInputMethodManager.hideSoftInputFromWindow(sv_search_main_search.windowToken,0)
+        }
         //메인 화면 ViewPager 어댑터 부착
         var viewPagerAdapter = registerViewPagerAdapter(view)
         vp_search_main_viewpager.adapter = viewPagerAdapter
@@ -163,4 +178,20 @@ class SearchFragment : Fragment() {
         return viewPagerAdapter
     }
 
+    private fun observeKeyboard(){
+        activity?.let{
+            TedKeyboardObserver(it)
+                .listen { isShow ->
+                    if (!isShow){
+                        mView.sv_search_main_search.clearFocus()
+                    }
+
+                }
+        }
+    }
+
+    private fun settingMethodManager(){
+        val activity = activity as TestActivity
+        mInputMethodManager = activity.setImmToFragment()
+    }
 }
