@@ -22,7 +22,8 @@
             android:exported="true"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".MainActivity"
+            android:theme="@style/mainTheme"
+            android:name=".main.MainActivity"
             android:exported="true" />
         <activity
             android:name=".login.ui.LoginActivity"
