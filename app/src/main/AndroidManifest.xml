@@ -13,8 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".record.RecyclerViewAdapter"></activity>
+        <activity android:name=".record.SearchCompleteActivity"></activity>
+        <activity android:name=".record.RecyclerViewAdapter" />
         <activity
             android:name=".record.ImageSearchActivity"
             android:exported="true">
@@ -24,7 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".signup.ui.SignUpFinishActivity" />
         <activity
             android:name=".signup.ui.SignUpActivity"
@@ -34,9 +33,7 @@
         <activity
             android:name=".login.ui.LoginActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize">
-
-        </activity>
+            android:windowSoftInputMode="adjustResize"></activity>
     </application>
 
 </manifest>
