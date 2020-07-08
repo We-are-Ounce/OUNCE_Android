@@ -4,14 +4,20 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.AutoCompleteTextView
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import com.google.android.material.tabs.TabLayout
 import com.sopt.ounce.R
 import com.sopt.ounce.searchmain.recyclerview.SearchUserAdapter
@@ -19,13 +25,15 @@ import com.sopt.ounce.searchmain.recyclerview.SearchUserData
 import com.sopt.ounce.searchmain.viewpager.SearchTapAdapter
 import com.sopt.ounce.searchmain.viewpager.ViewPagerAdapter
 import com.sopt.ounce.searchmain.viewpager.ViewPagerTransformer
+import gun0912.tedkeyboardobserver.TedKeyboardObserver
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import kotlinx.android.synthetic.main.fragment_search_user.*
 
 
 class SearchFragment : Fragment() {
-
+    private lateinit var mInputMethodManager: InputMethodManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -62,6 +70,25 @@ class SearchFragment : Fragment() {
 
         //ViewPager와 DotsIndicator 연동
         di_search_main_dotsindicator.setViewPager(vp_search_main_viewpager)
+        sv_search_main_search.findViewById<AutoCompleteTextView>(R.id.search_src_text).
+        setTextColor(resources.getColor(R.color.greyish_brown))
+        sv_search_main_search.findViewById<AutoCompleteTextView>(R.id.search_src_text).
+        setHintTextColor(resources.getColor(R.color.pinkish_gray))
+        val textSize = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            4F,
+            view.context.resources.displayMetrics)
+        sv_search_main_search.findViewById<AutoCompleteTextView>(R.id.search_src_text).setTextSize(textSize)
+        sv_search_main_search.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true;
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
+        })
 
         //검색 창에 포커스 했을 때 화면 변화
         sv_search_main_search.setOnQueryTextFocusChangeListener(object : View.OnFocusChangeListener{
