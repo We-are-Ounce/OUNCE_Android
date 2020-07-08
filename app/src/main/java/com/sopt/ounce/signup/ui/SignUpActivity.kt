@@ -4,17 +4,11 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MotionEvent
-import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.core.view.size
-import androidx.fragment.app.FragmentManager
 import com.sopt.ounce.R
 import com.sopt.ounce.signup.adapter.SignUpPagerAdapter
 import com.sopt.ounce.signup.data.UserInfoObject
 import com.sopt.ounce.util.StatusObject
-import gun0912.tedkeyboardobserver.TedKeyboardObserver
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignUpActivity : AppCompatActivity() {
@@ -46,7 +40,7 @@ class SignUpActivity : AppCompatActivity() {
             }
 
         }
-        //좌측 상단 뒤로가기 버튼 누를시 뒤로가기
+        //좌측 상단 뒤로가기 버튼 누를 시 뒤로가기
         img_signup_back.setOnClickListener {
             if(vp_signup.currentItem != 0){
                 vp_signup.currentItem -= 1
@@ -68,8 +62,8 @@ class SignUpActivity : AppCompatActivity() {
         mViewpagerAdapter = SignUpPagerAdapter(supportFragmentManager)
         vp_signup.adapter = mViewpagerAdapter
 
-        dot_indicator.setViewPager(vp_signup)
-        dot_indicator.dotsClickable = false
+        dot_signup_indicator.setViewPager(vp_signup)
+        dot_signup_indicator.dotsClickable = false
 
     }
 

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_catdetail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".catregister.ui.CatDetailRegisterFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="20dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        style="@style/textStyle_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="29dp"
+        android:text="고양이의 정보"
+        android:textFontWeight="400"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        style="@style/textStyle_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="를"
+        android:textFontWeight="100"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView7"
+        style="@style/textStyle_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="입력해주세요."
+        android:textFontWeight="100"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/txt_catsex_title"
+        style="@style/infoTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="39dp"
+        android:text="성별"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup_detail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/txt_catsex_title" >
+
+        <RadioButton
+            android:id="@+id/radiobutton_man"
+            style="@style/fontFamiliyandPadding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_gender_drawable"
+            android:button="@null"
+            android:gravity="center"
+            android:paddingVertical="9dp"
+            android:text="남"
+            android:textColor="@color/greyish_brown"
+            android:textFontWeight="400"
+            android:textSize="15sp" />
+
+        <RadioButton
+            android:id="@+id/radiobutton_woman"
+            style="@style/fontFamiliyandPadding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_gender_drawable"
+            android:button="@null"
+            android:gravity="center"
+            android:paddingVertical="9dp"
+            android:text="여"
+            android:textColor="@color/greyish_brown"
+            android:textFontWeight="400"
+            android:textSize="15sp" />
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/check_newtral"
+        style="@style/fontFamiliyandPadding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="7sp"
+        android:text="중성화 했어요"
+        android:textFontWeight="400"
+        android:textSize="12sp"
+        android:button="@drawable/check_newtral"
+        android:paddingLeft="7dp"
+        android:layout_marginTop="7dp"
+        app:layout_constraintStart_toStartOf="@+id/radioGroup_detail"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup_detail" />
+
+    <TextView
+        android:id="@+id/txt_cat_age"
+        style="@style/infoTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="나이"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/check_newtral" />
+
+    <com.sopt.ounce.util.ClearEditText
+        android:id="@+id/edt_cat_age"
+        style="@style/inputTextStyle"
+        android:paddingRight="16dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="2dp"
+        android:gravity="right"
+        android:ems="10"
+        android:maxLength="2"
+        android:inputType="number"
+        tools:text="23"
+        app:layout_constraintEnd_toStartOf="@+id/textView8"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/txt_cat_age" />
+
+    <TextView
+        style="@style/fontFamiliyandPadding"
+        android:textFontWeight="400"
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="155dp"
+        android:text="살"
+        android:textColor="@color/greyish_brown"
+        android:textSize="15sp"
+        android:lineSpacingExtra="9sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_cat_age"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toEndOf="@+id/edt_cat_age"
+        app:layout_constraintTop_toTopOf="@+id/edt_cat_age" />
+
+    <TextView
+        android:id="@+id/txt_cat_weight"
+        style="@style/infoTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:text="몸무게"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/edt_cat_age" />
+
+    <com.sopt.ounce.util.ClearEditText
+        android:id="@+id/edt_cat_weight"
+        style="@style/inputTextStyle"
+        android:paddingRight="16dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="2dp"
+        android:gravity="right"
+        android:lines="1"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        tools:text="1.5"
+        app:layout_constraintEnd_toStartOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/txt_cat_weight" />
+
+    <TextView
+        android:fontFamily="@font/notosans"
+        android:textFontWeight="400"
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="155dp"
+        android:text="kg"
+        android:textColor="@color/greyish_brown"
+        android:textSize="15sp"
+        android:lineSpacingExtra="9sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edt_cat_weight"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toEndOf="@+id/edt_cat_weight"
+        app:layout_constraintTop_toTopOf="@+id/edt_cat_weight" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
