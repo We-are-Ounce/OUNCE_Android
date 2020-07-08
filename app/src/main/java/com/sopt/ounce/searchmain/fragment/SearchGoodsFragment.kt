@@ -8,10 +8,16 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.sopt.ounce.R
+import com.sopt.ounce.searchmain.recyclerview.SearchGoodsAdapter
+import com.sopt.ounce.searchmain.recyclerview.SearchGoodsData
+import com.sopt.ounce.searchmain.recyclerview.SearchUserAdapter
+import com.sopt.ounce.searchmain.recyclerview.SearchUserData
 import kotlinx.android.synthetic.main.fragment_search_goods.*
 import kotlinx.android.synthetic.main.item_search_main_goodssearch.*
 
 class SearchGoodsFragment : Fragment() {
+    lateinit var searchGoodsAdapter: SearchGoodsAdapter
+    var mGoodsData = mutableListOf<SearchGoodsData>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,22 +33,63 @@ class SearchGoodsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         var spinnerData = listOf<String>("기호도 순", "총점 순")
         var spinnerAdapter = ArrayAdapter<String>(view.context,
             android.R.layout.simple_list_item_1,
             spinnerData)
-
         spn_search_goods_filter.adapter = spinnerAdapter
-        spn_search_goods_filter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                tv_result.text = "Nothing Selected"
-            }
 
-            override fun onItemSelected(p0: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                tv_result.text = spinnerData.get(position)
-            }
+        searchGoodsAdapter = SearchGoodsAdapter(view.context)
+        rv_search_goods_goodsresult.adapter = searchGoodsAdapter
+        loadGoodsResultData()
+    }
 
+    private fun loadGoodsResultData(){
+        mGoodsData.apply {
+            add(
+                SearchGoodsData(
+                    img_search_goods_goodsimage = R.drawable.img_card_cat,
+                    tv_search_goods_company = "냐옹이 컴퍼니",
+                    tv_search_goods_name = "내추럴발란스 연어",
+                    tv_search_goods_review = "맛있게 먹네요^^",
+                    tv_search_goods_staramount = "4.8",
+                    tv_search_goods_heartamount = "3.2"
+                )
+            )
+            add(
+                SearchGoodsData(
+                    img_search_goods_goodsimage = R.drawable.img_card_cat,
+                    tv_search_goods_company = "냐옹이 컴퍼니",
+                    tv_search_goods_name = "내추럴발란스 광",
+                    tv_search_goods_review = "맛있게 먹네요^^",
+                    tv_search_goods_staramount = "3.5",
+                    tv_search_goods_heartamount = "3.0"
+                )
+            )
+            add(
+                SearchGoodsData(
+                    img_search_goods_goodsimage = R.drawable.img_card_cat,
+                    tv_search_goods_company = "냐옹이 컴퍼니",
+                    tv_search_goods_name = "내추럴발란스 소고기",
+                    tv_search_goods_review = "죤내 맛있게 먹네요^^",
+                    tv_search_goods_staramount = "5.0",
+                    tv_search_goods_heartamount = "1.6"
+                )
+            )
+            add(
+                SearchGoodsData(
+                    img_search_goods_goodsimage = R.drawable.img_card_cat,
+                    tv_search_goods_company = "냐옹이 컴퍼니",
+                    tv_search_goods_name = "내추럴발란스 돼지고기",
+                    tv_search_goods_review = "맛있게 먹네요^^",
+                    tv_search_goods_staramount = "1",
+                    tv_search_goods_heartamount = "2.4"
+                )
+            )
         }
+        searchGoodsAdapter.datas = mGoodsData
+        searchGoodsAdapter.notifyDataSetChanged()
     }
 
-    }
+}

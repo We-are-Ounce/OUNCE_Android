@@ -45,11 +45,13 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //메인 화면 ViewPager 어댑터 부착
         var viewPagerAdapter = registerViewPagerAdapter(view)
         vp_search_main_viewpager.adapter = viewPagerAdapter
         vp_search_main_viewpager.clipToPadding = false
         vp_search_main_viewpager.clipChildren = false
         vp_search_main_viewpager.offscreenPageLimit = 2
+        //메인 화면 PageTransFormer 부착
         vp_search_main_viewpager.setPageTransformer(true, ViewPagerTransformer())
         val DpValue = 70
         val DisplayDensity = resources.displayMetrics.density
@@ -58,8 +60,10 @@ class SearchFragment : Fragment() {
         vp_search_main_viewpager.setPadding(margin,0,margin,0)
         vp_search_main_viewpager.pageMargin = margin/2
 
+        //ViewPager와 DotsIndicator 연동
         di_search_main_dotsindicator.setViewPager(vp_search_main_viewpager)
 
+        //검색 창에 포커스 했을 때 화면 변화
         sv_search_main_search.setOnQueryTextFocusChangeListener(object : View.OnFocusChangeListener{
             override fun onFocusChange(view: View?, hasFocus: Boolean) {
                 if(hasFocus){
@@ -72,6 +76,8 @@ class SearchFragment : Fragment() {
                 }
             }
         })
+
+        //검색 창 하단 ViewPager와 TabLayout 연동
         vp_search_main_search.adapter = SearchTapAdapter(view.context,
             childFragmentManager,
             tab_search_main_onfocus.tabCount)
@@ -88,10 +94,6 @@ class SearchFragment : Fragment() {
                 vp_search_main_search.currentItem = tab_search_main_onfocus.selectedTabPosition
             }
         })
-
-
-
-
     }
 
     private fun registerViewPagerAdapter(view: View) : ViewPagerAdapter{
