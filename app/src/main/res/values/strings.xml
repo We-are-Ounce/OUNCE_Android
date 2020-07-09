@@ -2,4 +2,10 @@
     <string name="app_name">OUNCE</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_hint">검색어를 입력하세요</string>
+
+    <string-array name="main_review_array">
+        <item>날짜 순</item>
+        <item>총점 순</item>
+        <item>기호도 순</item>
+    </string-array>
 </resources>

@@ -40,11 +40,17 @@
 
     <Spinner
         android:id="@+id/spinner_main"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="106dp"
         android:layout_marginEnd="9dp"
+        android:entries="@array/main_review_array"
+        android:paddingLeft="4dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="8dp"
         app:layout_constraintBottom_toBottomOf="@id/txt_main_reviewcount"
         app:layout_constraintEnd_toStartOf="@+id/img_main_filter"
+        app:layout_constraintStart_toEndOf="@+id/txt_main_reviewcount"
         app:layout_constraintTop_toTopOf="@id/txt_main_reviewcount" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -64,6 +70,7 @@
         android:layout_marginTop="6dp"
         android:layout_marginEnd="28dp"
         android:src="@drawable/btn_bg_fitter"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner_main"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
