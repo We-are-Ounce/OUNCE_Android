@@ -76,12 +76,13 @@ class SearchFragment : Fragment() {
         vp_search_main_viewpager.offscreenPageLimit = 2
         //메인 화면 PageTransFormer 부착
         vp_search_main_viewpager.setPageTransformer(true, ViewPagerTransformer())
-        val DpValue = 70
+        val DpValue = 80
         val DisplayDensity = resources.displayMetrics.density
         val margin = DpValue * DisplayDensity.toInt()
 
         vp_search_main_viewpager.setPadding(margin,0,margin,0)
-        vp_search_main_viewpager.pageMargin = margin/2
+        vp_search_main_viewpager.pageMargin = margin/32
+
 
         //ViewPager와 DotsIndicator 연동
         di_search_main_dotsindicator.setViewPager(vp_search_main_viewpager)
@@ -112,10 +113,10 @@ class SearchFragment : Fragment() {
                     clayout_search_main_notfocus.visibility = View.GONE
                     clayout_search_main_focus.visibility = View.VISIBLE
                 }
-                else{
-                    clayout_search_main_notfocus.visibility = View.VISIBLE
-                    clayout_search_main_focus.visibility = View.GONE
-                }
+//                else{
+//                    clayout_search_main_notfocus.visibility = View.VISIBLE
+//                    clayout_search_main_focus.visibility = View.GONE
+//                }
             }
         })
 
