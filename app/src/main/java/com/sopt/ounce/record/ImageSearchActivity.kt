@@ -11,6 +11,8 @@ import kotlinx.android.synthetic.main.activity_image_search.*
 
 class ImageSearchActivity : AppCompatActivity() {
     private lateinit var adapter: RecyclerViewAdapter
+    lateinit var mItemAdapter: ItemAdapter
+    var mGoodsData = mutableListOf<ItemData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +32,10 @@ class ImageSearchActivity : AppCompatActivity() {
         rv_record_search.setHasFixedSize(true)
         rv_record_search.addItemDecoration(RecordItemDecoration())
         getItemList()
+
+        mItemAdapter = ItemAdapter(this)
+        rv_record_item.adapter = mItemAdapter
+        getGoodsList()
     }
 
     private fun getItemList() {
@@ -47,5 +53,54 @@ class ImageSearchActivity : AppCompatActivity() {
         listItem.add("oasfap")
         adapter = RecyclerViewAdapter(listItem)
         rv_record_search.adapter = adapter
+    }
+
+    private fun getGoodsList(){
+        mGoodsData.apply {
+            add(
+                ItemData(
+                    cardview_image = R.drawable.img_card_cat,
+                    cardview_item =  "고양이",
+                    cardview_itemname = "고양이 사료"
+                )
+            )
+            add(
+                ItemData(
+                    cardview_image = R.drawable.img_card_cat,
+                    cardview_item =  "고양이",
+                    cardview_itemname = "고양이 사료"
+                )
+            )
+            add(
+                ItemData(
+                    cardview_image = R.drawable.img_card_cat,
+                    cardview_item =  "고양이",
+                    cardview_itemname = "고양이 사료"
+                )
+            )
+            add(
+                ItemData(
+                    cardview_image = R.drawable.img_card_cat,
+                    cardview_item =  "고양이",
+                    cardview_itemname = "고양이 사료"
+                )
+            )
+            add(
+                ItemData(
+                    cardview_image = R.drawable.img_card_cat,
+                    cardview_item =  "고양이",
+                    cardview_itemname = "고양이 사료"
+                )
+            )
+            add(
+                ItemData(
+                    cardview_image = R.drawable.img_card_cat,
+                    cardview_item =  "고양이",
+                    cardview_itemname = "고양이 사료"
+                )
+            )
+        }
+        mItemAdapter.datas = mGoodsData
+        mItemAdapter.notifyDataSetChanged()
     }
 }

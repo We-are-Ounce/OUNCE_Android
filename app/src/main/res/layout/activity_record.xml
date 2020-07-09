@@ -141,14 +141,12 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="285dp"
-        android:text="필수 입력"
         android:fontFamily="@font/notosanskr_medium"
+        android:text="필수 입력"
         android:textColor="#a6a6a6"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
@@ -156,12 +154,12 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="26dp"
-        android:text="총점"
         android:fontFamily="@font/notosanskr_medium"
-        android:textSize="12sp"
+        android:text="총점"
         android:textColor="#000000"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -169,13 +167,12 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
         android:layout_marginTop="26dp"
-        android:text="기호도"
         android:fontFamily="@font/notosanskr_medium"
+        android:text="기호도"
         android:textColor="#000000"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <RatingBar
@@ -207,13 +204,12 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
         android:layout_marginTop="26dp"
-        android:text="한 줄 평가"
         android:fontFamily="@font/notosanskr_medium"
+        android:text="한 줄 평가"
         android:textColor="@color/greyish_brown"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <EditText

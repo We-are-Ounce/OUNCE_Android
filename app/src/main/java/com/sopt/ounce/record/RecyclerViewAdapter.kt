@@ -17,12 +17,16 @@ import kotlinx.android.synthetic.main.record_search.view.*
 class RecyclerViewAdapter(private var arrayList: ArrayList<String>):
     RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     var filterList = ArrayList<String>()
-    lateinit var mContext: Context
-
-    class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     init{
         filterList = arrayList
     }
+
+    lateinit var mContext: Context
+
+    class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val itemListView =
@@ -38,7 +42,7 @@ class RecyclerViewAdapter(private var arrayList: ArrayList<String>):
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.tv_search.text = filterList[position]
-        holder.itemView.tv_search.setTextColor(Color.WHITE)
+        holder.itemView.tv_search.setTextColor(Color.BLACK)
         holder.itemView.item_search.setBackgroundColor(Color.TRANSPARENT)
 
         holder.itemView.setOnClickListener{
