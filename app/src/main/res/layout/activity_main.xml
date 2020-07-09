@@ -8,11 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".main.MainActivity">
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_main_content"
@@ -32,7 +27,7 @@
             </fragment>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+
 
 
         <com.google.android.material.bottomappbar.BottomAppBar

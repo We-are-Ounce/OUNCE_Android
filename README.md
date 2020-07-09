@@ -23,7 +23,7 @@
 | [TedPermission](https://github.com/ParkSangGwon/TedPermission)                                                                     | 갤러리 이용 시 권한 설정                  |
 | [TedKeyboardObserver](https://github.com/ParkSangGwon/TedKeyboardObserver)                                                         | 키보드 show/hide 리스너                   |
 | [RecyclerView\_+ SearchView](https://github.com/l2hyunwoo/OunceCustomSearchBar)                                                    | 최근 검색어 검색창                        |
-
+|[Sticky ScrollView](https://github.com/amarjain07/StickyScrollView)|메인 뷰 헤더 Sticky 스크롤 구현|
 ### ConstraintLayout 사용처
 
 - activity_login.xml : Guideline, chain (packed) 사용

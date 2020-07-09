@@ -11,5 +11,4 @@
     android:lineSpacingExtra="7sp"
     android:textColor="@color/greyish_brown"
     android:ellipsize="marquee"
-    android:backgroundTint="@color/greyish_brown"
     />
