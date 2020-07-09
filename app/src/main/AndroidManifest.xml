@@ -13,14 +13,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".catregister.CatRegisterActivity"
+        <activity android:name=".record.ui.RecordModifyActivity"></activity>
+        <activity
+            android:name=".catregister.CatRegisterActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".signup.ui.SignUpFinishActivity" />
-        <activity android:name=".searchmain.TestActivity"
-            android:exported="true">
-
-        </activity>
+        <activity
+            android:name=".searchmain.TestActivity"
+            android:exported="true"></activity>
         <activity
             android:name=".signup.ui.SignUpActivity"
             android:exported="true"
@@ -28,9 +29,9 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
-        <activity android:name=".record.SearchCompleteActivity"></activity>
+        <activity android:name=".record.ui.SearchCompleteActivity" />
         <activity
-            android:name=".record.ImageSearchActivity"
+            android:name=".record.ui.ImageSearchActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,11 +39,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".record.RecordActivity" />
+        <activity android:name=".record.ui.RecordActivity" />
         <activity
             android:name=".login.ui.LoginActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

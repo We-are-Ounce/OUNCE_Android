@@ -15,7 +15,7 @@ class RecordItemDecoration: RecyclerView.ItemDecoration() {
         super.getItemOffsets(outRect, view, parent, state)
         outRect.left = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
-            26F,
+            22F,
             view.context.resources.displayMetrics
         ).toInt()
     }

@@ -6,9 +6,12 @@
     android:layout_width = "fill_parent"
     android:layout_height = "wrap_content"
     >
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".record.ui.RecordModifyActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarLayout"
@@ -17,76 +20,80 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"/>
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/record_toolbar"
-            android:layout_width="match_parent"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/record_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:fadingEdge="horizontal"
+        android:gravity="center|center_horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appbarLayout">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageButton
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:fadingEdge="horizontal"
-            android:gravity="center|center_horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:background="#FFFFFF"
-                    android:src="@drawable/ic_back"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/notosanskr_medium"
-                    android:layout_centerInParent="true"
-                    android:text="기록하기"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"/>
-            </RelativeLayout>
-
-        </androidx.appcompat.widget.Toolbar>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
             android:background="#FFFFFF"
-            android:backgroundTint="#FFFFFF">
+            android:src="@drawable/ic_close" />
 
-            <ImageView
-                android:id="@+id/image_Preview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/img_product" />
+        <TextView
+            android:id="@+id/txt_myrecord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="283dp"
+            android:fontFamily="@font/notosanskr_medium"
+            android:gravity="center|center_horizontal"
+            android:text="나의 기록"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
-              <!--<ImageButton
-                android:id="@+id/button_Gallery"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="228dp"
-                android:layout_marginTop="60dp"
-                app:srcCompat="@drawable/ic_edit" />-->
-        </FrameLayout>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ></Spinner>
+    </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
 
-    </com.google.android.material.appbar.AppBarLayout>
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/record_toolbar">>
+
+        <ImageView
+            android:id="@+id/image_Preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/img_product" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskr_medium"
         android:layout_marginTop="14dp"
         android:text="제품 회사명"
         android:textColor="@color/greyish_brown"
-        android:fontFamily="@font/notosanskr_medium"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appbarLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" />
 
     <TextView
         android:id="@+id/textView2"
@@ -123,8 +130,8 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="4dp"
         android:text="사슴"
-        android:textSize="12sp"
         android:textColor="@color/greyish_brown"
+        android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/button3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button"
@@ -143,6 +150,20 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button2"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="9sp"
+        android:textColor="@color/warm_grey"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        tools:layout_editor_absoluteX="178dp"
+        tools:text="2020.00.00" />
+
 
     <TextView
         android:id="@+id/textView3"
@@ -340,13 +361,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
         android:background="@color/wheat"
-        android:text="저장"
+        android:text="수정 완료"
         android:fontFamily="@font/notosanskr_medium"
         app:layout_constraintTop_toBottomOf="@+id/memo_edt" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-
+</ScrollView>
 
 

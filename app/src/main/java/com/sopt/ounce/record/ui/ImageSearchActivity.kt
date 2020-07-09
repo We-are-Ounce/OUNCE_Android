@@ -1,4 +1,4 @@
-package com.sopt.ounce.record
+package com.sopt.ounce.record.ui
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.ounce.R
+import com.sopt.ounce.record.ItemData
+import com.sopt.ounce.record.RecordItemDecoration
+import com.sopt.ounce.record.adapter.ItemAdapter
+import com.sopt.ounce.record.adapter.RecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_image_search.*
 
 class ImageSearchActivity : AppCompatActivity() {
@@ -19,15 +23,15 @@ class ImageSearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_image_search)
 
         val searchIcon = sv_record_search.findViewById<ImageView>(R.id.search_mag_icon)
-        searchIcon.setColorFilter(Color.WHITE)
+        searchIcon.setColorFilter(Color.BLACK)
 
 
         val cancelIcon = sv_record_search.findViewById<ImageView>(R.id.search_close_btn)
-        cancelIcon.setColorFilter(Color.WHITE)
+        cancelIcon.setColorFilter(Color.GRAY)
 
-
+9
         val textView = sv_record_search.findViewById<TextView>(R.id.search_src_text)
-        textView.setTextColor(Color.WHITE)
+        textView.setTextColor(Color.DKGRAY)
         rv_record_search.layoutManager = LinearLayoutManager(rv_record_search.context)
         rv_record_search.setHasFixedSize(true)
         rv_record_search.addItemDecoration(RecordItemDecoration())
@@ -60,47 +64,63 @@ class ImageSearchActivity : AppCompatActivity() {
             add(
                 ItemData(
                     cardview_image = R.drawable.img_card_cat,
-                    cardview_item =  "고양이",
-                    cardview_itemname = "고양이 사료"
+                    cardview_item = "내추럴 발란스",
+                    cardview_itemname = "제품 이름 "
                 )
             )
             add(
                 ItemData(
                     cardview_image = R.drawable.img_card_cat,
-                    cardview_item =  "고양이",
-                    cardview_itemname = "고양이 사료"
+                    cardview_item = "내추럴 발란스",
+                    cardview_itemname = "제품 이름"
                 )
             )
             add(
                 ItemData(
                     cardview_image = R.drawable.img_card_cat,
-                    cardview_item =  "고양이",
-                    cardview_itemname = "고양이 사료"
+                    cardview_item = "내추럴 발란스",
+                    cardview_itemname = "제품 이름"
                 )
             )
             add(
                 ItemData(
                     cardview_image = R.drawable.img_card_cat,
-                    cardview_item =  "고양이",
-                    cardview_itemname = "고양이 사료"
+                    cardview_item = "내추럴 발란스",
+                    cardview_itemname = "제품 이름"
                 )
             )
             add(
                 ItemData(
                     cardview_image = R.drawable.img_card_cat,
-                    cardview_item =  "고양이",
-                    cardview_itemname = "고양이 사료"
+                    cardview_item = "내추럴 발란스",
+                    cardview_itemname = "제품 이름"
                 )
             )
             add(
                 ItemData(
                     cardview_image = R.drawable.img_card_cat,
-                    cardview_item =  "고양이",
-                    cardview_itemname = "고양이 사료"
+                    cardview_item = "내추럴 발란스",
+                    cardview_itemname = "제품 이름"
+                )
+            )
+            add(
+                ItemData(
+                    cardview_image = R.drawable.img_card_cat,
+                    cardview_item = "내추럴 발란스",
+                    cardview_itemname = "제품 이름"
+                )
+            )
+            add(
+                ItemData(
+                    cardview_image = R.drawable.img_card_cat,
+                    cardview_item = "내추럴 발란스",
+                    cardview_itemname = "제품 이름"
                 )
             )
         }
         mItemAdapter.datas = mGoodsData
         mItemAdapter.notifyDataSetChanged()
+        rv_record_search.addItemDecoration(RecordItemDecoration())
+
     }
 }

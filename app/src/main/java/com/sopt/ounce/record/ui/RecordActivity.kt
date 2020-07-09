@@ -1,4 +1,4 @@
-package com.sopt.ounce.record
+package com.sopt.ounce.record.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

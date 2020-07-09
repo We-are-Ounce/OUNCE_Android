@@ -1,10 +1,8 @@
-package com.sopt.ounce.record
+package com.sopt.ounce.record.adapter
 
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.ounce.R
+import com.sopt.ounce.record.ui.RecordActivity
 import kotlinx.android.synthetic.main.record_search.view.*
 
 class RecyclerViewAdapter(private var arrayList: ArrayList<String>):
@@ -31,7 +30,10 @@ class RecyclerViewAdapter(private var arrayList: ArrayList<String>):
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val itemListView =
             LayoutInflater.from(parent.context).inflate(R.layout.record_search, parent, false)
-        val itemViewHolder = ItemViewHolder(itemListView)
+        val itemViewHolder =
+            ItemViewHolder(
+                itemListView
+            )
         mContext = parent.context
         return itemViewHolder
     }
@@ -46,7 +48,6 @@ class RecyclerViewAdapter(private var arrayList: ArrayList<String>):
         holder.itemView.item_search.setBackgroundColor(Color.TRANSPARENT)
 
         holder.itemView.setOnClickListener{
-            //나중에 수정해주기 !!!
             val intent = Intent(mContext, RecordActivity::class.java)
             intent.putExtra("passText", filterList[position])
             mContext.startActivity(intent)
