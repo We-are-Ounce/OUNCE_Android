@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.FragmentManager
 import com.sopt.ounce.R
@@ -29,7 +30,10 @@ class MainActivity : AppCompatActivity() {
         bottom_main_appbar.setOnMenuItemClickListener {
             when (it.itemId){
                 R.id.main_search -> {
-                    Log.d("ClickCallBack","search")
+//                    Log.d("ClickCallBack","search")
+                    it.isChecked = !it.isChecked
+                    Log.d("ClickCallBack","${it.isChecked}")
+
                 }
             }
             true
@@ -37,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         bottom_main_appbar.setNavigationOnClickListener {
             Log.d("ClickCallBack","logo")
+            it.isSelected = !it.isSelected
         }
 
 

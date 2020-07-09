@@ -9,11 +9,11 @@
     tools:context=".main.MainActivity">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_main_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white_five">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_main_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white_five">
 
             <fragment
                 android:id="@+id/fragment_main"
@@ -29,7 +29,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottom_main_appbar"
             style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
@@ -39,8 +38,10 @@
             android:backgroundTint="@color/white"
             android:paddingHorizontal="57dp"
             app:fabAlignmentMode="center"
+            app:hideOnScroll="true"
             app:menu="@menu/bottom_appbar_menu"
-            app:navigationIcon="@drawable/btn_plus" />
+            app:navigationIcon="@drawable/logo_home_custom" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_write"
@@ -57,4 +58,5 @@
         app:maxImageSize="32dp"
         app:srcCompat="@drawable/ic_add"
         app:tint="@null" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
