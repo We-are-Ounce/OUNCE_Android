@@ -49,7 +49,6 @@
             android:id="@+id/txt_myrecord"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="283dp"
             android:fontFamily="@font/notosanskr_medium"
             android:gravity="center|center_horizontal"
             android:text="나의 기록"

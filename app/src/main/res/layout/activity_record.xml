@@ -190,6 +190,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="114dp"
         android:numStars="5"
+        android:focusableInTouchMode="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toEndOf="@+id/textView4"
@@ -202,6 +203,7 @@
         android:layout_marginStart="18dp"
         android:layout_marginTop="16dp"
         android:numStars="5"
+        android:focusableInTouchMode="true"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
@@ -296,6 +298,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:numStars="5"
+        android:focusableInTouchMode="true"
         app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -306,6 +309,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="48dp"
         android:numStars="5"
+        android:focusableInTouchMode="true"
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar3" />
 
@@ -315,6 +319,8 @@
         android:layout_height="31dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="49dp"
+        android:numStars="5"
+        android:focusableInTouchMode="true"
         app:layout_constraintStart_toEndOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar4" />
 
