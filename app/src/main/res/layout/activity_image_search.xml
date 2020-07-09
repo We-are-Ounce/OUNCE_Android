@@ -64,6 +64,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_record_search"
         android:layout_width="0dp"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -73,9 +74,12 @@
         app:layout_constraintTop_toBottomOf="@+id/sv_record_search" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_record_item"
+        android:visibility="visible"
+        app:spanCount="2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/record_search_cardview"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
     app:cardElevation="5dp"
@@ -9,14 +9,11 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/cardview_image"
             android:layout_width="146dp"
             android:layout_height="146dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="5dp"
             android:src="@drawable/img_food_record"></ImageView>
         <TextView
         android:id="@+id/cardview_itemname"
@@ -24,9 +21,9 @@
         android:layout_height="wrap_content"
         android:text="내추럴 발란스"
             android:fontFamily="@font/notosanskr_medium"
+            android:includeFontPadding="false"
             android:textSize="10sp"
             android:gravity="center"
-        android:layout_marginLeft="32dp"
         android:layout_below="@id/cardview_image"></TextView>
         <TextView
             android:id="@+id/cardview_item"
@@ -34,9 +31,10 @@
             android:layout_height="wrap_content"
             android:text="제품 이름"
             android:fontFamily="@font/notosanskr_regular"
+            android:textColor="@color/greyish_brown"
             android:textSize="16sp"
+            android:includeFontPadding="false"
             android:gravity="center"
-            android:layout_marginLeft="32dp"
             android:layout_below="@id/cardview_itemname"></TextView>
 
 
