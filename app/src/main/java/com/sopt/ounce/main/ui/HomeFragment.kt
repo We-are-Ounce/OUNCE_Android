@@ -5,7 +5,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
@@ -72,16 +71,6 @@ class HomeFragment : Fragment() {
             ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
                 ,"company10","title10","intro10",5,5)
         )
-
-//        v.rcv_main_review.isNestedScrollingEnabled=false
-//
-//        v.sticky_scroll_main.setOnTouchListener { _, _ ->
-//            v.rcv_main_review.isNestedScrollingEnabled = v.sticky_scroll_main.canScrollVertically(1)
-//            false
-//        }
-
-
-
 
 
         return v

@@ -4,11 +4,12 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentManager
 import com.sopt.ounce.R
 import com.sopt.ounce.main.ui.*
+import com.sopt.ounce.util.StatusObject
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +19,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //상태바 업데이트
+        StatusObject.setStatusBar(this)
 
         mFm = this.supportFragmentManager
         val fragmentTransaction = mFm.beginTransaction()
@@ -53,5 +56,10 @@ class MainActivity : AppCompatActivity() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE)
                 as InputMethodManager
         return imm
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        ActivityCompat.finishAffinity(this)
     }
 }
