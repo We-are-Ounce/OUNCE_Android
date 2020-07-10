@@ -70,6 +70,8 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(mContext)
             addItemDecoration(RcvItemDeco(mContext))
         }
+
+
         mRecyclerAdapter.data = listOf(
             ReviewData("https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg"
                 ,"company1","title1","intro1",5,5),
