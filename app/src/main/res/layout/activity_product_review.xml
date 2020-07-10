@@ -75,20 +75,45 @@
                         android:text="MongMong"
                         android:textColor="@color/greyish_brown"
                         android:textSize="16sp" />
-
-                    <HorizontalScrollView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:overScrollMode="ifContentScrolls"
-                        android:scrollbars="none">
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
 
-                        <com.google.android.material.chip.ChipGroup
-                            android:id="@+id/chip_group_product_review_attr"
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:chipSpacingHorizontal="4dp" />
+                            android:textSize="12sp"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="4dp"
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:lineSpacingExtra="7sp"
+                            android:includeFontPadding="false"
+                            android:layout_marginEnd="4dp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/item_review_button"
+                            android:textColor="@color/white"
+                            android:text="건식"
 
-                    </HorizontalScrollView>
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:lineSpacingExtra="7sp"
+                            android:includeFontPadding="false"
+                            android:layout_gravity="center"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="4dp"
+                            android:background="@drawable/item_review_button"
+                            android:textColor="@color/white"
+                            android:text="주육류"
+                            />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
