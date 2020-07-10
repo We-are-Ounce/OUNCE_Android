@@ -16,7 +16,6 @@ import com.sopt.ounce.main.adapter.ReviewAdapter
 import com.sopt.ounce.main.data.BottomProfileData
 import com.sopt.ounce.main.data.ReviewData
 import com.sopt.ounce.util.RcvItemDeco
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.profile_bottomsheet.*
 
@@ -126,6 +125,8 @@ class HomeFragment : Fragment() {
             false)
         )
         mProfileAdapter.notifyDataSetChanged()
+
+        mBottomSheet.layout_bottomsheet_add_profile.setOnClickListener {  }
         mBottomSheet.show()
 
     }
