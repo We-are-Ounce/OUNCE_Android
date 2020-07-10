@@ -66,12 +66,10 @@
 
             <ImageView
                 android:id="@+id/img_login_logo"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="125dp"
                 android:layout_marginTop="63dp"
                 android:background="@drawable/img_logo"
-                android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -123,12 +121,6 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/edt_login_password" />
 
-
-
-
-
-
-
     <Button
         android:id="@+id/btn_login_btn"
         android:layout_width="0dp"
@@ -147,7 +139,7 @@
 
     <TextView
         android:id="@+id/txt_login_find_id"
-        style="@style/LoginSamllText"
+        style="@style/SamllText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
@@ -161,7 +153,7 @@
 
     <TextView
         android:id="@+id/txt_login_null"
-        style="@style/LoginSamllText"
+        style="@style/SamllText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
@@ -174,7 +166,7 @@
 
     <TextView
         android:id="@+id/txt_login_find_password"
-        style="@style/LoginSamllText"
+        style="@style/SamllText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
@@ -188,7 +180,7 @@
 
     <TextView
         android:id="@+id/txt_login_null2"
-        style="@style/LoginSamllText"
+        style="@style/SamllText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
@@ -201,7 +193,7 @@
 
     <TextView
         android:id="@+id/txt_login_signup"
-        style="@style/LoginSamllText"
+        style="@style/SamllText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"

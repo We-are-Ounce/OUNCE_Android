@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.SearchView
 import com.sopt.ounce.R
-import com.sopt.ounce.searchmain.TestActivity
+import com.sopt.ounce.main.MainActivity
 import com.sopt.ounce.searchmain.recyclerview.SearchUserAdapter
 import com.sopt.ounce.searchmain.recyclerview.SearchUserData
 import com.sopt.ounce.searchmain.recyclerview.SearchUserItemDecoration
@@ -106,8 +105,8 @@ class SearchUserFragment : Fragment() {
     }
 
     private fun settingMethodManager(){
-        val activity = activity as TestActivity
-        mInputMethodManager = activity.setImmToFragment()
+        val activity = activity as MainActivity
+        mInputMethodManager = activity.methodManagerToFragment()
     }
 
 }

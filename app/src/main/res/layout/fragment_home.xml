@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_review"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".main.ui.HomeFragment">
+
+    <me.didik.component.StickyNestedScrollView
+        android:id="@+id/sticky_scroll_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_review_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/img_main_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:src="@drawable/img_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/img_main_setting"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:paddingTop="12dp"
+                android:paddingRight="28dp"
+                android:paddingBottom="24dp"
+                android:src="@drawable/ic_baseline_settings_24"
+                app:layout_constraintDimensionRatio="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="61dp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_main_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_main_logo">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="61dp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_main_profile"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginEnd="176dp"
+                    android:src="@drawable/img_cat"
+                    app:layout_constraintDimensionRatio="1"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/img_main_dropdown"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="57dp"
+                    android:padding="7dp"
+                    android:src="@drawable/btn_dropdown"
+                    app:layout_constraintBottom_toBottomOf="@+id/txt_main_profile"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                    app:layout_constraintStart_toEndOf="@+id/txt_main_profile"
+                    app:layout_constraintTop_toTopOf="@+id/txt_main_profile" />
+
+                <TextView
+                    android:id="@+id/txt_main_profile"
+                    style="@style/fontFamiliyandPadding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:lineSpacingExtra="20sp"
+                    android:text="고양이이름"
+                    android:textColor="@color/greyish_brown"
+                    android:textFontWeight="700"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/img_main_profile"
+                    app:layout_constraintTop_toTopOf="@+id/img_main_profile" />
+
+                <ImageView
+                    android:id="@+id/img_main_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/female"
+                    app:layout_constraintStart_toStartOf="@+id/txt_main_profile"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_main_profile" />
+
+                <TextView
+                    android:id="@+id/txt_main_weight"
+                    style="@style/SamllText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:text="5kg"
+                    android:textFontWeight="100"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_main_gender"
+                    app:layout_constraintStart_toEndOf="@+id/img_main_gender"
+                    app:layout_constraintTop_toTopOf="@+id/img_main_gender" />
+
+                <TextView
+                    android:id="@+id/txt_main_age"
+                    style="@style/SamllText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:text="2살"
+                    android:textFontWeight="100"
+                    app:layout_constraintBottom_toBottomOf="@+id/txt_main_weight"
+                    app:layout_constraintStart_toEndOf="@+id/txt_main_weight"
+                    app:layout_constraintTop_toTopOf="@+id/txt_main_weight" />
+
+                <TextView
+                    android:id="@+id/txt_main_introduce"
+                    style="@style/SamllText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="고양이 한줄 소개 입니다."
+                    android:textColor="@color/greyish_brown"
+                    android:textFontWeight="400"
+                    app:layout_constraintStart_toStartOf="@+id/img_main_gender"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_main_weight" />
+
+                <TextView
+                    android:id="@+id/txt_main_follower"
+                    style="@style/SamllText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/btn_follow"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:paddingVertical="4dp"
+                    android:text="팔로워 000"
+                    android:textColor="@color/greyish_brown"
+                    android:textFontWeight="400"
+                    app:layout_constraintEnd_toStartOf="@+id/txt_main_following"
+                    app:layout_constraintStart_toStartOf="@+id/txt_main_introduce"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_main_introduce" />
+
+                <TextView
+                    android:id="@+id/txt_main_following"
+                    style="@style/SamllText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="44dp"
+                    android:background="@drawable/btn_follow"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:paddingVertical="4dp"
+                    android:text="팔로잉 000"
+                    android:textColor="@color/greyish_brown"
+                    android:textFontWeight="400"
+                    app:layout_constraintBottom_toBottomOf="@+id/txt_main_follower"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/txt_main_follower"
+                    app:layout_constraintTop_toTopOf="@+id/txt_main_follower"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <ImageView
+                    android:id="@+id/img_main_profile_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="94dp"
+                    android:layout_marginTop="62dp"
+                    android:src="@drawable/btn_bg_edit"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/img_main_profile" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_main_review_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:tag="sticky"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layout_main_profile">
+
+                <TextView
+                    android:id="@+id/txt_main_review"
+                    style="@style/fontFamiliyandPadding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="12dp"
+                    android:layout_marginLeft="30dp"
+                    android:lineSpacingExtra="20sp"
+                    android:text="리뷰"
+                    android:textColor="@color/greyish_brown"
+                    android:textFontWeight="400"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txt_main_reviewcount"
+                    style="@style/fontFamiliyandPadding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:lineSpacingExtra="22sp"
+                    android:text="(34)"
+                    android:textColor="@color/warm_grey"
+                    android:textFontWeight="100"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/txt_main_review"
+                    app:layout_constraintLeft_toRightOf="@id/txt_main_review"
+                    app:layout_constraintTop_toTopOf="@id/txt_main_review" />
+
+
+                <Spinner
+                    android:id="@+id/spinner_main"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="106dp"
+                    android:layout_marginEnd="9dp"
+                    android:backgroundTint="@color/greyish_brown"
+                    android:entries="@array/main_review_array"
+                    android:paddingLeft="4dp"
+                    app:layout_constraintBottom_toBottomOf="@id/txt_main_reviewcount"
+                    app:layout_constraintEnd_toStartOf="@+id/img_main_filter"
+                    app:layout_constraintStart_toEndOf="@+id/txt_main_reviewcount"
+                    app:layout_constraintTop_toTopOf="@id/txt_main_reviewcount" />
+
+                <ImageView
+                    android:id="@+id/img_main_filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="28dp"
+                    android:src="@drawable/btn_bg_fitter"
+                    app:layout_constraintBottom_toBottomOf="@+id/spinner_main"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/spinner_main" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_main_review"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:paddingHorizontal="28dp"
+                android:paddingTop="12dp"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintBottom_toBottomOf="@id/layout_review_container"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layout_main_review_list"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </me.didik.component.StickyNestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

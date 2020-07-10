@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import com.sopt.ounce.R
+import com.sopt.ounce.main.MainActivity
 import com.sopt.ounce.util.textCheckListener
 import com.sopt.ounce.signup.ui.SignUpActivity
 import com.sopt.ounce.util.StatusObject
@@ -111,9 +112,11 @@ class LoginActivity : AppCompatActivity() {
                 )
 
             }
-//        else{
-//            // start server
-//        }
+            else{
+                //write in server
+//                val intent = Intent(this,MainActivity::class.java)
+//                startActivity(intent)
+            }
 
         }
 
@@ -121,8 +124,6 @@ class LoginActivity : AppCompatActivity() {
         super.onBackPressed()
         ActivityCompat.finishAffinity(this)
     }
-
-
 
 
 

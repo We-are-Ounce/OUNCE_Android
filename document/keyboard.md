@@ -15,6 +15,7 @@ dependency{
 ### 레이아웃 바깥 클릭 시 키보드 내리기
 
 ```
+        val mImm : InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
  //EditText 화면 바깥 선택 시 키보드 숨기기
         layout_login_container.setOnClickListener {
             mImm.hideSoftInputFromWindow(edt_login_id.windowToken, 0)

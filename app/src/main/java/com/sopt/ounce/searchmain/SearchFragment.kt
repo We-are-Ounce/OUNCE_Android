@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
 import com.google.android.material.tabs.TabLayout
 import com.sopt.ounce.R
+import com.sopt.ounce.main.MainActivity
 import com.sopt.ounce.searchmain.recyclerview.SearchUserAdapter
 import com.sopt.ounce.searchmain.recyclerview.SearchUserData
 import com.sopt.ounce.searchmain.viewpager.SearchTapAdapter
@@ -192,7 +193,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun settingMethodManager(){
-        val activity = activity as TestActivity
-        mInputMethodManager = activity.setImmToFragment()
+        val activity = activity as MainActivity
+        mInputMethodManager = activity.methodManagerToFragment()
     }
 }
