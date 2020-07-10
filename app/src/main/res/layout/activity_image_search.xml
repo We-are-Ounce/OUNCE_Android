@@ -32,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageButton
+                android:id = "@+id/record_backk_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -39,6 +40,7 @@
                 android:src="@drawable/ic_back"/>
 
             <TextView
+                android:id="@+id/record_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/notosanskr_medium"
@@ -51,7 +53,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/sv_record_search"
+        android:id="@+id/record_search_sv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -80,7 +82,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:listitem="@layout/record_search"
-        app:layout_constraintTop_toBottomOf="@+id/sv_record_search" />
+        app:layout_constraintTop_toBottomOf="@+id/record_search_sv" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_record_item"

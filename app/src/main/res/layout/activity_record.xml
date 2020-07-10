@@ -101,47 +101,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <Button
-        android:id="@+id/button"
+    <ImageButton
+        android:id="@+id/record_dry_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="4dp"
+        android:background="@android:color/transparent"
+        android:lineSpacingExtra="7sp"
+        android:src="@drawable/img_category"
         android:text="건식"
-        android:textSize="12sp"
         android:textColor="@color/greyish_brown"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/record_deer_btn"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <Button
-        android:id="@+id/button2"
+    <ImageButton
+        android:id="@+id/record_deer_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="4dp"
         android:text="사슴"
+        android:lineSpacingExtra="7sp"
         android:textSize="12sp"
         android:textColor="@color/greyish_brown"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
+        android:src="@drawable/img_category"
+        android:background="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/record_pig_btn"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintStart_toEndOf="@+id/record_dry_btn"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <Button
-        android:id="@+id/button3"
+    <ImageButton
+        android:id="@+id/record_pig_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="56dp"
         android:text="돼지"
+        android:lineSpacingExtra="7sp"
         android:textSize="12sp"
         android:textColor="@color/greyish_brown"
+        android:src="@drawable/img_category"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:layout_constraintStart_toEndOf="@+id/record_deer_btn"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
@@ -155,7 +164,7 @@
         android:textColor="#a6a6a6"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/record_dry_btn" />
 
     <TextView
         android:id="@+id/textView4"
