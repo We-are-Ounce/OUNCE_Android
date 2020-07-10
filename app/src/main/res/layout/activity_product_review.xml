@@ -20,20 +20,24 @@
             android:descendantFocusability="beforeDescendants"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:titleEnabled="false"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tbar_product_review"
                 android:contentInsetStart="0dp"
+                android:background="@color/white"
                 app:contentInsetStart="0dp"
                 android:paddingHorizontal="20dp"
                 app:layout_collapseMode="pin"
                 >
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF">
 
                     <ImageButton
                         android:id="@+id/imgbtn_product_review_ic_back"
@@ -48,16 +52,15 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:text="제품"
-                        android:textSize="18sp"
-                        android:lineSpacingExtra="1sp"
                         android:fontFamily="@font/notosanskr_medium"
+                        android:lineSpacingExtra="1sp"
+                        android:text="제품"
                         android:textColor="@color/black"
-                        />
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageButton
                         android:id="@+id/imgbtn_product_review_ic_info"
