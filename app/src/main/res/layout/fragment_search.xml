@@ -108,6 +108,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:backgroundTint="@color/white"
             app:tabGravity="fill"
             app:tabIndicatorColor="@color/wheat"
             app:tabSelectedTextColor="@color/black"
