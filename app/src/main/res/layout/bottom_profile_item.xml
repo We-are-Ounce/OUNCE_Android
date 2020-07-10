@@ -13,7 +13,6 @@
         app:layout_constraintDimensionRatio="1"
         android:layout_width="54dp"
         android:layout_height="0dp"
-        android:scaleType="fitXY"
         android:layout_marginVertical="15dp"
         android:layout_marginLeft="28dp"
         app:layout_constraintBottom_toBottomOf="parent"

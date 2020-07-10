@@ -9,6 +9,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.fragment.app.FragmentManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.sopt.ounce.R
 import com.sopt.ounce.main.ui.*
 import com.sopt.ounce.searchmain.SearchFragment
@@ -75,6 +76,8 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
+
 
 
 

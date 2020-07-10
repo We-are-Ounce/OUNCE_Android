@@ -22,12 +22,42 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv_bottom_profile"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:nestedScrollingEnabled="false"/>
 
             </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+    <LinearLayout
+        android:id="@+id/layout_bottomsheet_add_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/fontFamiliyandPadding"
+            android:textFontWeight="400"
+            android:textSize="16sp"
+            android:lineSpacingExtra="3sp"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="계정추가"
+            android:gravity="center"
+            android:paddingVertical="12dp"/>
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:src="@drawable/ic_add"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>
