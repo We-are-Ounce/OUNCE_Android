@@ -85,6 +85,46 @@ class ProductReviewActivity : AppCompatActivity() {
                     tv_product_review_staramount = "3"
                 )
             )
+            add(
+                ProductReviewData(
+                    img_product_review_itemimg = R.drawable.img_card_cat,
+                    tv_product_review_catname = "Spring",
+                    tv_product_review_age = "5살",
+                    tv_product_review_review = "우리 고양이가 넘모 잘목네용",
+                    tv_product_review_heartamount = "5",
+                    tv_product_review_staramount = "3"
+                )
+            )
+            add(
+                ProductReviewData(
+                    img_product_review_itemimg = R.drawable.img_card_cat,
+                    tv_product_review_catname = "Spring",
+                    tv_product_review_age = "5살",
+                    tv_product_review_review = "우리 고양이가 넘모 잘목네용",
+                    tv_product_review_heartamount = "5",
+                    tv_product_review_staramount = "3"
+                )
+            )
+            add(
+                ProductReviewData(
+                    img_product_review_itemimg = R.drawable.img_card_cat,
+                    tv_product_review_catname = "Spring",
+                    tv_product_review_age = "5살",
+                    tv_product_review_review = "우리 고양이가 넘모 잘목네용",
+                    tv_product_review_heartamount = "5",
+                    tv_product_review_staramount = "3"
+                )
+            )
+            add(
+                ProductReviewData(
+                    img_product_review_itemimg = R.drawable.img_card_cat,
+                    tv_product_review_catname = "Spring",
+                    tv_product_review_age = "5살",
+                    tv_product_review_review = "우리 고양이가 넘모 잘목네용",
+                    tv_product_review_heartamount = "5",
+                    tv_product_review_staramount = "3"
+                )
+            )
         }
         productReviewAdapter.datas = mReviewData
         productReviewAdapter.notifyDataSetChanged()
