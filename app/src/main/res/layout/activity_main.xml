@@ -40,7 +40,7 @@
             app:fabAlignmentMode="center"
             app:hideOnScroll="true"
             app:menu="@menu/bottom_appbar_menu"
-            app:navigationIcon="@drawable/ic_home_black" />
+            app:navigationIcon="@drawable/ic_home" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

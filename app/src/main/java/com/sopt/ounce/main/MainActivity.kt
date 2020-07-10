@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                         it.isChecked = true
 
                         bottom_main_appbar.navigationIcon = ContextCompat.getDrawable(
-                            this,R.drawable.ic_home_grey
+                            this,R.drawable.ic_home_unselected
                         )
 
                         bottom_main_appbar.isSelected = false
@@ -63,12 +63,12 @@ class MainActivity : AppCompatActivity() {
                     .commitAllowingStateLoss()
 
                 bottom_main_appbar.navigationIcon = ContextCompat.getDrawable(
-                    this, R.drawable.ic_home_black
+                    this, R.drawable.ic_home
                 )
 
                 bottom_main_appbar.menu.getItem(0).apply {
                     isChecked = false
-                    setIcon(R.drawable.ic_search_grey)
+                    setIcon(R.drawable.ic_look_unselected)
                 }
 
                 bottom_main_appbar.isSelected = true
