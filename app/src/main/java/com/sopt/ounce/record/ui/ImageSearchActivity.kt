@@ -22,15 +22,15 @@ class ImageSearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image_search)
 
-        val searchIcon = sv_record_search.findViewById<ImageView>(R.id.search_mag_icon)
+        val searchIcon = record_search_sv.findViewById<ImageView>(R.id.search_mag_icon)
         searchIcon.setColorFilter(Color.BLACK)
 
 
-        val cancelIcon = sv_record_search.findViewById<ImageView>(R.id.search_close_btn)
+        val cancelIcon = record_search_sv.findViewById<ImageView>(R.id.search_close_btn)
         cancelIcon.setColorFilter(Color.GRAY)
 
 9
-        val textView = sv_record_search.findViewById<TextView>(R.id.search_src_text)
+        val textView = record_search_sv.findViewById<TextView>(R.id.search_src_text)
         textView.setTextColor(Color.DKGRAY)
         rv_record_search.layoutManager = LinearLayoutManager(rv_record_search.context)
         rv_record_search.setHasFixedSize(true)
