@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/totalscore_star"
+    android:drawable="@drawable/ic_evaluate_full"></item>
+    <item android:id="@+id/totalscore_nostar"
+        android:drawable="@drawable/ic_total_unselected"></item>
+
+</layer-list>
