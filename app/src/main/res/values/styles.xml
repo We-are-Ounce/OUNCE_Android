@@ -15,6 +15,11 @@
         <item name="colorControlNormal">@color/white_three</item>
     </style>
 
+    <style name="starRating" parent="Widget.AppCompat.RatingBar">
+        <item name="android:progressDrawable">@drawable/record_ratingstar</item>
+        <item name="android:minHeight">50dp</item>
+    </style>
+
     <style name="fontFamiliyandPadding">
         <item name="android:includeFontPadding">false</item>
         <item name="fontFamily">@font/notosanskr</item>
