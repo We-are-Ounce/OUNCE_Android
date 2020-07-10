@@ -7,13 +7,20 @@
         <item name="colorAccent">@color/dark</item>
         <item name="colorControlNormal">@color/white_three</item>
     </style>
+    
+    <style name="mainTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/dark</item>
+        <item name="colorControlNormal">@color/white_three</item>
+    </style>
 
     <style name="fontFamiliyandPadding">
         <item name="android:includeFontPadding">false</item>
         <item name="fontFamily">@font/notosanskr</item>
     </style>
 
-    <style name="LoginSamllText" parent="fontFamiliyandPadding">
+    <style name="SamllText" parent="fontFamiliyandPadding">
         <item name="android:textSize">12sp</item>
         <item name="android:lineSpacingExtra">7sp</item>
         <item name="android:textColor">@color/warm_grey</item>

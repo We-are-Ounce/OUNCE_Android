@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_spinner_txt"
+    android:singleLine="true"
+    style="?attr/spinnerDropDownItemStyle"
+    android:fontFamily="@font/notosanskr"
+    android:textFontWeight="100"
+    android:textSize="12sp"
+    android:lineSpacingExtra="7sp"
+    android:textColor="@color/greyish_brown"
+    android:ellipsize="marquee"
+    android:background="@drawable/custom_spinner_dropdown"
+    android:textAlignment="center"
+    />
