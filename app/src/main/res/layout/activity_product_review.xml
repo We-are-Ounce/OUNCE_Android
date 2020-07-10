@@ -26,6 +26,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tbar_product_review"
+                android:contentInsetStart="0dp"
+                app:contentInsetStart="0dp"
+                android:paddingHorizontal="20dp"
                 app:layout_collapseMode="pin"
                 >
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,6 +58,16 @@
                         android:fontFamily="@font/notosanskr_medium"
                         android:textColor="@color/black"
                         />
+
+                    <ImageButton
+                        android:id="@+id/imgbtn_product_review_ic_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:src="@drawable/ic_info"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
