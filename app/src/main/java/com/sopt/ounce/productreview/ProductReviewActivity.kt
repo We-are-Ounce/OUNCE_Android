@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.sopt.ounce.R
 import com.sopt.ounce.productreview.recyclerview.ProductReviewAdapter
 import com.sopt.ounce.productreview.recyclerview.ProductReviewData
+import com.sopt.ounce.productreview.recyclerview.ProductReviewItemDecoration
 import com.sopt.ounce.util.StatusObject
 import kotlinx.android.synthetic.main.activity_product_review.*
 
@@ -19,6 +20,7 @@ class ProductReviewActivity : AppCompatActivity() {
         productReviewAdapter = ProductReviewAdapter(this)
         rv_product_review_reviews.adapter = productReviewAdapter
         loadReviewDatas()
+        rv_product_review_reviews.addItemDecoration(ProductReviewItemDecoration())
     }
 
     private fun loadReviewDatas(){
