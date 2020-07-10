@@ -48,6 +48,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
+                    android:id="@+id/llayout_product_review_introduce"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -92,110 +93,110 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/linearLayout9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toStartOf="@+id/linearLayout7"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/img_product_review_goodsimg">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/notosanskr_regular"
-                        android:gravity="center_horizontal"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="6sp"
-                        android:text="총 리뷰"
-                        android:textColor="@color/greyish_brown"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:id="@+id/tv_product_review_reviewamount"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/notosanskr_medium"
-                        android:gravity="center_horizontal"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="6sp"
-                        android:text="3.4"
-                        android:textColor="@color/greyish_brown"
-                        android:textSize="13sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-
-                    android:id="@+id/linearLayout7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toStartOf="@+id/linearLayout8"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/linearLayout9"
-                    app:layout_constraintTop_toTopOf="@+id/linearLayout9">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/notosanskr_regular"
-                        android:gravity="center_horizontal"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="6sp"
-                        android:text="평균 총점"
-                        android:textColor="@color/greyish_brown"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:id="@+id/tv_product_review_reviewaverage"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/notosanskr_medium"
-                        android:gravity="center_horizontal"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="6sp"
-                        android:text="3.4"
-                        android:textColor="@color/greyish_brown"
-                        android:textSize="13sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/linearLayout7"
-                    app:layout_constraintTop_toTopOf="@+id/linearLayout9">
+                    android:layout_marginTop="30dp"
+                    android:id="@+id/llayout_product_revew_reviewstat"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_product_review_goodsimg">
 
-                    <TextView
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:id="@+id/llayout_product_review_reviewamount"
+                        android:layout_marginRight="72dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/notosanskr_regular"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="6sp"
-                        android:text="평균 기호도"
-                        android:textAlignment="center"
-                        android:textColor="@color/greyish_brown"
-                        android:textSize="13sp" />
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_product_review_goodaverage"
-                        android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosanskr_regular"
+                            android:gravity="center_horizontal"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="6sp"
+                            android:text="총 리뷰"
+                            android:textColor="@color/greyish_brown"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tv_product_review_reviewamount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:gravity="center_horizontal"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="6sp"
+                            android:text="3.4"
+                            android:textColor="@color/greyish_brown"
+                            android:textSize="13sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llayout_product_review_reviewaverage"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/notosanskr_medium"
-                        android:gravity="center_horizontal"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="6sp"
-                        android:text="3.7"
-                        android:textAlignment="center"
-                        android:textColor="@color/greyish_brown"
-                        android:textSize="13sp" />
+                        android:layout_marginRight="50dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosanskr_regular"
+                            android:gravity="center_horizontal"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="6sp"
+                            android:text="평균 총점"
+                            android:textColor="@color/greyish_brown"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tv_product_review_reviewaverage"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:gravity="center_horizontal"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="6sp"
+                            android:text="3.4"
+                            android:textColor="@color/greyish_brown"
+                            android:textSize="13sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llayout_product_review_goodaverage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosanskr_regular"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="6sp"
+                            android:text="평균 기호도"
+                            android:textAlignment="center"
+                            android:textColor="@color/greyish_brown"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tv_product_review_goodaverage"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:gravity="center_horizontal"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="6sp"
+                            android:text="3.7"
+                            android:textAlignment="center"
+                            android:textColor="@color/greyish_brown"
+                            android:textSize="13sp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -210,23 +211,23 @@
                     android:textColor="@color/pinkish_gray"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                    app:layout_constraintEnd_toStartOf="@+id/img_product_review_write"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout9"
+                    app:layout_constraintTop_toBottomOf="@+id/llayout_product_revew_reviewstat"
                     app:layout_constraintVertical_chainStyle="spread" />
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/img_product_review_write"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_edit"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintVertical_bias="0.75"
                     app:layout_constraintStart_toEndOf="@+id/tv_product_review_isreview"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout8" />
+                    app:layout_constraintTop_toBottomOf="@+id/llayout_product_revew_reviewstat"
+                    app:layout_constraintVertical_bias="0.75" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -256,11 +257,14 @@
             />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_product_review_reviews"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_product_review_notice"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
             android:layout_marginTop="24dp"
-            tools:listitem="@layout/item_search_main_goodssearch"
+            tools:listitem="@layout/item_product_review_review"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
