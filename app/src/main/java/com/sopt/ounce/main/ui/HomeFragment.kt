@@ -2,6 +2,7 @@ package com.sopt.ounce.main.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.sopt.ounce.R
+import com.sopt.ounce.catregister.CatRegisterActivity
 import com.sopt.ounce.main.adapter.BottomProfileAdapter
 import com.sopt.ounce.main.adapter.ReviewAdapter
 import com.sopt.ounce.main.data.BottomProfileData
@@ -27,7 +29,7 @@ class HomeFragment : Fragment() {
     private lateinit var mItem :Array<String>
     private lateinit var mRecyclerAdapter : ReviewAdapter
     private lateinit var mProfileAdapter : BottomProfileAdapter
-    private lateinit var mBottomSheet : BottomSheetDialog
+    private lateinit var mBottomsheetProfile : BottomSheetDialog
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -36,8 +38,9 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBottomSheet = BottomSheetDialog(mContext)
+        mBottomsheetProfile = BottomSheetDialog(mContext)
         mProfileAdapter = BottomProfileAdapter(mContext)
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -47,6 +50,9 @@ class HomeFragment : Fragment() {
     ): View? {
         v = inflater.inflate(R.layout.fragment_home, container, false)
         mItem = resources.getStringArray(R.array.main_review_array)
+
+        //바텀시트 프로필 설정
+        mBottomsheetProfile.setContentView(R.layout.profile_bottomsheet)
 
         // 스피너 설정
         val spinnerAdapter = ArrayAdapter(mContext,
@@ -106,8 +112,7 @@ class HomeFragment : Fragment() {
 
 
     private fun showBottomSheet(){
-        mBottomSheet.setContentView(R.layout.profile_bottomsheet)
-        mBottomSheet.rcv_bottom_profile.apply{
+        mBottomsheetProfile.rcv_bottom_profile.apply{
             adapter = mProfileAdapter
             layoutManager = LinearLayoutManager(mContext)
         }
@@ -115,19 +120,24 @@ class HomeFragment : Fragment() {
         mProfileAdapter.data = listOf(
             BottomProfileData(
                 "https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg",
-            "title1",
-            "intro1",
-            false),
+                "title1",
+                "intro1",
+                false),
             BottomProfileData(
                 "https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg",
                 "title2",
                 "intro2",
-            false)
+                false)
         )
         mProfileAdapter.notifyDataSetChanged()
 
-        mBottomSheet.layout_bottomsheet_add_profile.setOnClickListener {  }
-        mBottomSheet.show()
+        mBottomsheetProfile.layout_bottomsheet_add_profile.setOnClickListener {
+            val intent = Intent(mContext, CatRegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+
+        mBottomsheetProfile.show()
 
     }
 

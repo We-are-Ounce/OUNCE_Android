@@ -9,6 +9,7 @@
 
 
     <androidx.core.widget.NestedScrollView
+        android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -24,13 +25,14 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcv_bottom_profile"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"/>
 
             </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
     <LinearLayout
+        android:layout_weight="2"
         android:id="@+id/layout_bottomsheet_add_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
