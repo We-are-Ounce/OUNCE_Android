@@ -9,6 +9,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentManager
 import com.sopt.ounce.R
 import com.sopt.ounce.main.ui.*
+import com.sopt.ounce.searchmain.SearchFragment
 import com.sopt.ounce.util.StatusObject
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         mFm = this.supportFragmentManager
         val fragmentTransaction = mFm.beginTransaction()
         fragmentTransaction.add(R.id.fragment_main, HomeFragment())
-        fragmentTransaction.commit()
+//        fragmentTransaction.commit()
 
 
 
@@ -34,8 +35,11 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId){
                 R.id.main_search -> {
 //                    Log.d("ClickCallBack","search")
-                    it.isChecked = !it.isChecked
-                    Log.d("ClickCallBack","${it.isChecked}")
+                    if(!it.isChecked){
+                        fragmentTransaction.replace(R.id.fragment_main, SearchFragment())
+                        fragmentTransaction.commitAllowingStateLoss()
+                        it.isChecked = true
+                    }
 
                 }
             }

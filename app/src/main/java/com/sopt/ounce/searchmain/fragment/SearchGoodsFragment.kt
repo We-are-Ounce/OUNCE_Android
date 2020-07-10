@@ -2,22 +2,18 @@ package com.sopt.ounce.searchmain.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.core.view.setPadding
 import com.sopt.ounce.R
-import com.sopt.ounce.searchmain.TestActivity
+import com.sopt.ounce.main.MainActivity
 import com.sopt.ounce.searchmain.recyclerview.*
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import kotlinx.android.synthetic.main.fragment_search_goods.*
-import kotlinx.android.synthetic.main.item_search_main_goodssearch.*
 
 class SearchGoodsFragment : Fragment() {
     lateinit var searchGoodsAdapter: SearchGoodsAdapter
@@ -125,8 +121,8 @@ class SearchGoodsFragment : Fragment() {
     }
 
     private fun settingMethodManager(){
-        val activity = activity as TestActivity
-        mInputMethodManager = activity.setImmToFragment()
+        val activity = activity as MainActivity
+        mInputMethodManager = activity.methodManagerToFragment()
     }
 
 }
