@@ -44,9 +44,9 @@ class ImageSearchActivity : AppCompatActivity() {
 
     private fun getItemList() {
         val listItem = ArrayList<String>()
-        listItem.add("Abc")
-        listItem.add("Bcd")
-        listItem.add("cde")
+        listItem.add("이현우")
+        listItem.add("안드")
+        listItem.add("빅보")
         listItem.add("efg")
         listItem.add("hit")
         listItem.add("aqwf")
