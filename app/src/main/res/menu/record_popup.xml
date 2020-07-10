@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title ="수정"
+        android:id="@+id/menu_item_modify"></item>
+    <item android:title ="삭제"
+        android:id ="@+id/menu_item_delete"></item>
+</menu>
