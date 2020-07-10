@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.view.children
 import androidx.fragment.app.FragmentManager
 import com.sopt.ounce.R
 import com.sopt.ounce.main.ui.*
@@ -24,21 +26,27 @@ class MainActivity : AppCompatActivity() {
         StatusObject.setStatusBar(this)
 
         mFm = this.supportFragmentManager
-        val fragmentTransaction = mFm.beginTransaction()
-        fragmentTransaction.add(R.id.fragment_main, HomeFragment())
+
+//        fragmentTransaction.add(R.id.fragment_main, HomeFragment())
 //        fragmentTransaction.commit()
 
 
-
-
         bottom_main_appbar.setOnMenuItemClickListener {
+            val fragmentTransaction = mFm.beginTransaction()
             when (it.itemId){
                 R.id.main_search -> {
 //                    Log.d("ClickCallBack","search")
-                    if(!it.isChecked){
+                    if(!it.isChecked) {
                         fragmentTransaction.replace(R.id.fragment_main, SearchFragment())
-                        fragmentTransaction.commitAllowingStateLoss()
+                            .commitAllowingStateLoss()
+                        it.setIcon(R.drawable.ic_look)
                         it.isChecked = true
+
+                        bottom_main_appbar.navigationIcon = ContextCompat.getDrawable(
+                            this,R.drawable.ic_home_unselected
+                        )
+
+                        bottom_main_appbar.isSelected = false
                     }
 
                 }
@@ -46,9 +54,26 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+
         bottom_main_appbar.setNavigationOnClickListener {
-            Log.d("ClickCallBack","logo")
-            it.isSelected = !it.isSelected
+
+            if(!it.isSelected) {
+                val fragmentTransaction = mFm.beginTransaction()
+                fragmentTransaction.replace(R.id.fragment_main, HomeFragment())
+                    .commitAllowingStateLoss()
+
+                bottom_main_appbar.navigationIcon = ContextCompat.getDrawable(
+                    this, R.drawable.ic_home
+                )
+
+                bottom_main_appbar.menu.getItem(0).apply {
+                    isChecked = false
+                    setIcon(R.drawable.ic_look_unselected)
+                }
+
+                bottom_main_appbar.isSelected = true
+            }
+
         }
 
 

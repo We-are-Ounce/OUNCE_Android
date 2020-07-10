@@ -114,8 +114,8 @@ class LoginActivity : AppCompatActivity() {
             }
             else{
                 //write in server
-//                val intent = Intent(this,MainActivity::class.java)
-//                startActivity(intent)
+                val intent = Intent(this,MainActivity::class.java)
+                startActivity(intent)
             }
 
         }
