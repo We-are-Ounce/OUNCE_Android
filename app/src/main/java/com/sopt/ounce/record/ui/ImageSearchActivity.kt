@@ -7,9 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.ounce.R
+import com.sopt.ounce.record.adapter.ItemAdapter
 import com.sopt.ounce.record.ItemData
 import com.sopt.ounce.record.RecordItemDecoration
-import com.sopt.ounce.record.adapter.ItemAdapter
 import com.sopt.ounce.record.adapter.RecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_image_search.*
 

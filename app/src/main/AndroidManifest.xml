@@ -26,6 +26,12 @@
             android:name=".main.MainActivity"
             android:windowSoftInputMode="adjustPan"
             android:exported="true" />
+
+
+        <activity android:name=".record.ui.RecordModifyActivity"
+            android:exported="true"/>
+        <activity android:name=".record.ui.RecordActivity"
+            android:exported="true"/>
         <activity
             android:name=".login.ui.LoginActivity"
             android:exported="true"
