@@ -9,6 +9,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.fragment.app.FragmentManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.sopt.ounce.R
 import com.sopt.ounce.main.ui.*
 import com.sopt.ounce.searchmain.SearchFragment
@@ -27,8 +28,12 @@ class MainActivity : AppCompatActivity() {
 
         mFm = this.supportFragmentManager
 
-//        fragmentTransaction.add(R.id.fragment_main, HomeFragment())
+//        fragmentTransaction.add(R.id.layout_main_content, HomeFragment())
 //        fragmentTransaction.commit()
+        mFm.beginTransaction().apply {
+            add(R.id.layout_main_content,HomeFragment())
+            commit()
+        }
 
 
         bottom_main_appbar.setOnMenuItemClickListener {
@@ -37,8 +42,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.main_search -> {
 //                    Log.d("ClickCallBack","search")
                     if(!it.isChecked) {
-                        fragmentTransaction.replace(R.id.fragment_main, SearchFragment())
-                            .commitAllowingStateLoss()
+                        fragmentTransaction.replace(R.id.layout_main_content, SearchFragment())
+//                            .commitAllowingStateLoss()
+                            .commit()
                         it.setIcon(R.drawable.ic_look)
                         it.isChecked = true
 
@@ -59,9 +65,9 @@ class MainActivity : AppCompatActivity() {
 
             if(!it.isSelected) {
                 val fragmentTransaction = mFm.beginTransaction()
-                fragmentTransaction.replace(R.id.fragment_main, HomeFragment())
-                    .commitAllowingStateLoss()
-
+                fragmentTransaction.replace(R.id.layout_main_content, HomeFragment())
+//                    .commitAllowingStateLoss()
+                    .commit()
                 bottom_main_appbar.navigationIcon = ContextCompat.getDrawable(
                     this, R.drawable.ic_home
                 )
@@ -75,6 +81,8 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
+
 
 
 

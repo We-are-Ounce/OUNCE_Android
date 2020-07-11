@@ -2,18 +2,63 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="match_parent"
+        android:id="@+id/img_bottomsheet_profile"
+        app:layout_constraintDimensionRatio="1"
+        android:layout_width="54dp"
         android:layout_height="0dp"
-        android:src="@drawable/img_cat"
         android:layout_marginVertical="15dp"
+        android:layout_marginLeft="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/img_cat" />
+
+    <TextView
+        android:id="@+id/txt_bottomsheet_name"
+        style="@style/fontFamiliyandPadding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="18dp"
+        android:lineSpacingExtra="3sp"
+        android:text="Profile Name"
+        android:textColor="@color/black"
+        android:textFontWeight="400"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/img_bottomsheet_profile"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_bottomsheet_intro"
+        style="@style/fontFamiliyandPadding"
+        android:textFontWeight="400"
+        android:textSize="14sp"
+        android:lineSpacingExtra="5sp"
+        android:textColor="@color/warm_grey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="Profile Introduce"
+        app:layout_constraintStart_toStartOf="@+id/txt_bottomsheet_name"
+        app:layout_constraintTop_toBottomOf="@+id/txt_bottomsheet_name" />
+
+    <ImageView
+        android:id="@+id/img_bottomsheet_ischeck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:src="@drawable/ic_save"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

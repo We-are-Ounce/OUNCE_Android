@@ -20,6 +20,7 @@
         <item name="android:minHeight">50dp</item>
     </style>
 
+
     <style name="fontFamiliyandPadding">
         <item name="android:includeFontPadding">false</item>
         <item name="fontFamily">@font/notosanskr</item>
@@ -69,6 +70,19 @@
         <item name="android:lineSpacingExtra">7sp</item>
         <item name="android:textColor">@color/pinkish_tan</item>
         <item name="android:fontWeight">400</item>
+    </style>
+
+    <style name="filterTextStyle" parent="fontFamiliyandPadding">
+        <item name="android:fontWeight">700</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">7sp</item>
+    </style>
+
+    <style name="filterTitleStyle" parent="fontFamiliyandPadding">
+        <item name="android:fontWeight">400</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">5sp</item>
+
     </style>
 
     <style name = "MySearchViewStyle" parent="Widget.AppCompat.SearchView">
