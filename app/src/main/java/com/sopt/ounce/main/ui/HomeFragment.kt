@@ -18,6 +18,7 @@ import com.sopt.ounce.main.adapter.ReviewAdapter
 import com.sopt.ounce.main.data.BottomProfileData
 import com.sopt.ounce.main.data.ReviewData
 import com.sopt.ounce.util.RcvItemDeco
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.profile_bottomsheet.*
 
@@ -30,6 +31,7 @@ class HomeFragment : Fragment() {
     private lateinit var mRecyclerAdapter : ReviewAdapter
     private lateinit var mProfileAdapter : BottomProfileAdapter
     private lateinit var mBottomsheetProfile : BottomSheetDialog
+    private lateinit var mFilterSheet : BottomSheetDialog
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -39,6 +41,7 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBottomsheetProfile = BottomSheetDialog(mContext)
+        mFilterSheet = BottomSheetDialog(mContext)
         mProfileAdapter = BottomProfileAdapter(mContext)
 
     }
@@ -53,6 +56,8 @@ class HomeFragment : Fragment() {
 
         //바텀시트 프로필 설정
         mBottomsheetProfile.setContentView(R.layout.profile_bottomsheet)
+        //필터 바텀시트 설정
+        mFilterSheet.setContentView(R.layout.bottomsheet_filter)
 
         // 스피너 설정
         val spinnerAdapter = ArrayAdapter(mContext,
@@ -96,9 +101,7 @@ class HomeFragment : Fragment() {
         )
 
         //고양이 이름 옆 아이콘 클릭 시 다른 고양이 프로필 선택 창 생성
-        v.img_main_dropdown.setOnClickListener {
-            showBottomSheet()
-        }
+
 
 
         return v
@@ -108,8 +111,20 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mRecyclerAdapter.notifyDataSetChanged()
+        img_main_dropdown.setOnClickListener {
+            showBottomSheet()
+        }
+
+        img_main_filter.setOnClickListener {
+
+            showFilterSheet()
+        }
 
 
+    }
+
+    private fun showFilterSheet(){
+       mFilterSheet.show()
     }
 
 
