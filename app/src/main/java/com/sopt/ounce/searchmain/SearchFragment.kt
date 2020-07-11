@@ -207,6 +207,7 @@ class SearchFragment : Fragment() {
                 .listen { isShow ->
                     if (!isShow){
                         mView.sv_search_main_search.clearFocus()
+                        
                     }
 
                 }
