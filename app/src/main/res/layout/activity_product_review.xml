@@ -286,8 +286,41 @@
                 >
 
                 <RelativeLayout
+                    android:id="@+id/tbar_product_review_bottom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:background="@color/white">
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:src="@drawable/ic_back"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true"
+                        />
+
+                    <TextView
+                        android:id="@+id/tbar_product_review_productname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanskr_medium"
+                        android:lineSpacingExtra="1sp"
+                        android:text="제품명"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/tbar_product_review_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
                     android:background="@color/white">
 
                     <ImageButton

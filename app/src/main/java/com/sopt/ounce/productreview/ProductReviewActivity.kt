@@ -2,12 +2,17 @@ package com.sopt.ounce.productreview
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import com.google.android.material.appbar.AppBarLayout
 import com.sopt.ounce.R
 import com.sopt.ounce.productreview.recyclerview.ProductReviewAdapter
 import com.sopt.ounce.productreview.recyclerview.ProductReviewData
 import com.sopt.ounce.productreview.recyclerview.ProductReviewItemDecoration
 import com.sopt.ounce.util.StatusObject
 import kotlinx.android.synthetic.main.activity_product_review.*
+import kotlinx.android.synthetic.main.activity_record.*
+import kotlin.math.abs
 
 class ProductReviewActivity : AppCompatActivity() {
     lateinit var productReviewAdapter: ProductReviewAdapter
@@ -21,7 +26,25 @@ class ProductReviewActivity : AppCompatActivity() {
         rv_product_review_reviews.adapter = productReviewAdapter
         loadReviewDatas()
         rv_product_review_reviews.addItemDecoration(ProductReviewItemDecoration())
+
+        tbar_product_review_productname.text = tv_product_review_product.text
+        appbar_product_review.addOnOffsetChangedListener(object: AppBarLayout.OnOffsetChangedListener{
+            override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+                if(verticalOffset > -860) {
+                    tbar_product_review_top.visibility = View.VISIBLE
+                    tbar_product_review_bottom.visibility = View.GONE
+                    tbar_product_review_top.alpha = (860 - abs(verticalOffset.toFloat()))/860
+                    //tbar_product_review_bottom.alpha = (abs(verticalOffset.toFloat() - 860)/860)
+                }
+                else{
+                    tbar_product_review_top.visibility = View.GONE
+                    tbar_product_review_bottom.visibility = View.VISIBLE
+
+                }
+            }
+        })
     }
+
 
     private fun loadReviewDatas(){
         mReviewData.apply {
