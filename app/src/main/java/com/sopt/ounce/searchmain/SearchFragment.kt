@@ -1,5 +1,6 @@
 package com.sopt.ounce.searchmain
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -14,8 +15,10 @@ import android.widget.AutoCompleteTextView
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
 import com.google.android.material.tabs.TabLayout
@@ -39,6 +42,7 @@ class SearchFragment : Fragment() {
     private lateinit var mInputMethodManager: InputMethodManager
     private lateinit var mContext: Context
     private lateinit var mView: View
+    var isKeyboardFocused = false
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -113,12 +117,29 @@ class SearchFragment : Fragment() {
                 if(hasFocus){
                     clayout_search_main_notfocus.visibility = View.GONE
                     clayout_search_main_focus.visibility = View.VISIBLE
+                    isKeyboardFocused = true
                 }
+
 //                else{
 //                    clayout_search_main_notfocus.visibility = View.VISIBLE
 //                    clayout_search_main_focus.visibility = View.GONE
 //                }
             }
+        })
+
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                if(clayout_search_main_focus.visibility == View.VISIBLE){
+                    Log.d("true", "1")
+                    clayout_search_main_notfocus.visibility = View.VISIBLE
+                    clayout_search_main_focus.visibility = View.GONE
+                }
+                else if(clayout_search_main_focus.visibility == View.GONE){
+                    Log.d("true", "100100")
+                    ActivityCompat.finishAffinity(activity as MainActivity)
+                }
+            }
+
         })
 
         //검색 창 하단 ViewPager와 TabLayout 연동
