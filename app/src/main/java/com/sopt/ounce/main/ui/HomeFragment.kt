@@ -200,6 +200,7 @@ class HomeFragment : Fragment() {
                     setTextColor(resources.getColor(R.color.white))
                     filterList.add(text.toString())
                     Log.d("List", "$filterList")
+                    
                 } else {
                     setTextColor(resources.getColor(R.color.dark))
                     filterList.remove(text.toString())
