@@ -9,12 +9,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.activity.OnBackPressedCallback
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import com.sopt.ounce.R
 import com.sopt.ounce.catregister.CatRegisterActivity
+import com.sopt.ounce.main.MainActivity
 import com.sopt.ounce.main.adapter.BottomProfileAdapter
 import com.sopt.ounce.main.adapter.ReviewAdapter
 import com.sopt.ounce.main.data.BottomProfileData
@@ -54,6 +57,13 @@ class HomeFragment : Fragment() {
         mBottomsheetProfile = BottomSheetDialog(mContext)
         mFilterSheet = BottomSheetDialog(mContext)
         mProfileAdapter = BottomProfileAdapter(mContext)
+
+        activity?.onBackPressedDispatcher?.addCallback(this,
+        object  : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                ActivityCompat.finishAffinity(activity as MainActivity)
+            }
+        })
 
     }
 

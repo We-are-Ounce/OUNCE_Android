@@ -94,9 +94,5 @@ class MainActivity : AppCompatActivity() {
                 as InputMethodManager
         return imm
     }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        ActivityCompat.finishAffinity(this)
-    }
+    
 }
