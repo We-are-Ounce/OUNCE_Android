@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:context=".productreview.ProductReviewActivity"
+    >
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_product_review"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="@color/white"
+            android:background="@color/white"
+            app:titleEnabled="false"
+            app:toolbarId="@+id/tbar_product_review"
+            app:scrimAnimationDuration="300"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+
+
+            <RelativeLayout
+                android:id="@+id/rlayout_product_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:layout_marginTop="?attr/actionBarSize"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.4"
+                android:paddingHorizontal="36dp"
+                android:paddingTop="22dp">
+
+                <ImageView
+                    android:id="@+id/img_product_review_goodsimg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_card_cat" />
+
+                <RelativeLayout
+                    android:id="@+id/rlayout_product_review_introduce"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_toEndOf="@id/img_product_review_goodsimg">
+
+                    <TextView
+                        android:id="@+id/tv_product_review_company"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanskr_medium"
+                        android:includeFontPadding="false"
+                        android:text="MongMong"
+                        android:textColor="@color/warm_grey"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_product_review_product"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanskr_medium"
+                        android:includeFontPadding="false"
+                        android:text="MongMong"
+                        android:textColor="@color/greyish_brown"
+                        android:textSize="16sp"
+                        android:layout_below="@id/tv_product_review_company"
+                        />
+
+                    <RelativeLayout
+                        android:id="@+id/rlayout_product_review_productintro"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/tv_product_review_product">
+
+                        <TextView
+                            android:id="@+id/tv_product_review_isdry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="4dp"
+                            android:background="@drawable/item_review_button"
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="7sp"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="4dp"
+                            android:text="건식"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+
+                            />
+
+                        <TextView
+                            android:layout_toEndOf="@id/tv_product_review_isdry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/item_review_button"
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="7sp"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="4dp"
+                            android:text="주육류"
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlayout_product_revew_reviewstat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/img_product_review_goodsimg"
+                    android:layout_marginTop="30dp"
+                    android:layout_centerInParent="true"
+                    android:paddingHorizontal="12dp"
+                    >
+
+                    <RelativeLayout
+                        android:id="@+id/rlayout_product_review_reviewamount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+                            android:id="@+id/tv_product_review_totalreview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosanskr_regular"
+                            android:gravity="center_horizontal"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="6sp"
+                            android:text="총 리뷰"
+                            android:textColor="@color/greyish_brown"
+                            android:textSize="13sp"
+                            android:layout_centerHorizontal="true"
+                            />
+
+                        <TextView
+                            android:layout_below="@id/tv_product_review_totalreview"
+                            android:id="@+id/tv_product_review_totalreviewamount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:gravity="center_horizontal"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="6sp"
+                            android:text="3.4"
+                            android:textColor="@color/greyish_brown"
+                            android:layout_centerHorizontal="true"
+                            android:textSize="13sp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_centerInParent="true"
+                        android:id="@+id/rlayout_product_review_reviewaverage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_product_review_reviewaverage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosanskr_regular"
+                            android:gravity="center_horizontal"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="6sp"
+                            android:text="평균 총점"
+                            android:textColor="@color/greyish_brown"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_below="@id/tv_product_review_reviewaverage"
+                            android:layout_centerHorizontal="true"
+                            android:id="@+id/tv_product_review_reviewaverageamount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:gravity="center_horizontal"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="6sp"
+                            android:text="3.4"
+                            android:textColor="@color/greyish_brown"
+                            android:textSize="13sp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlayout_product_review_goodaverage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_product_review_goodaverage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosanskr_regular"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="6sp"
+                            android:text="평균 기호도"
+                            android:textAlignment="center"
+                            android:textColor="@color/greyish_brown"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_below="@id/tv_product_review_goodaverage"
+                            android:id="@+id/tv_product_review_goodaverageamount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:gravity="center_horizontal"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="6sp"
+                            android:text="3.7"
+                            android:textAlignment="center"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/greyish_brown"
+                            android:textSize="13sp" />
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_below="@id/rlayout_product_revew_reviewstat"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="52dp"
+                    android:paddingHorizontal="12dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/tv_product_review_isreview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanskr_medium"
+                        android:lineSpacingExtra="22sp"
+                        android:text="이미 리뷰를 작성했습니다."
+                        android:textColor="@color/pinkish_gray"
+                        android:textSize="14sp"
+                        android:layout_alignParentLeft="true"
+                        />
+
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/img_product_review_write"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_edit"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tbar_product_review"
+                android:contentInsetStart="0dp"
+                android:background="@color/white"
+                app:contentInsetStart="0dp"
+                android:paddingHorizontal="20dp"
+                app:layout_collapseMode="pin"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:src="@drawable/ic_back"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanskr_medium"
+                        android:lineSpacingExtra="1sp"
+                        android:text="제품"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/imgbtn_product_review_ic_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:src="@drawable/ic_info"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true" />
+
+                </RelativeLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="16sp"
+                android:id="@+id/tv_product_review_notice"
+                android:lineSpacingExtra="25sp"
+                android:fontFamily="@font/notosanskr_medium"
+                android:textColor="@color/greyish_brown"
+                android:text="리뷰 전체보기"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_product_review_reviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="always"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintTop_toBottomOf="@id/tv_product_review_notice"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                android:layout_marginTop="24dp"
+                tools:listitem="@layout/item_product_review_review"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
