@@ -73,10 +73,16 @@
     </style>
 
     <style name="filterTextStyle" parent="fontFamiliyandPadding">
-        <item name="fontWeight">700</item>
+        <item name="android:fontWeight">700</item>
         <item name="android:textSize">12sp</item>
         <item name="android:lineSpacingExtra">7sp</item>
-        <item name="android:textColor">@color/dark</item>
+    </style>
+
+    <style name="filterTitleStyle" parent="fontFamiliyandPadding">
+        <item name="android:fontWeight">400</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">5sp</item>
+
     </style>
 
     <style name = "MySearchViewStyle" parent="Widget.AppCompat.SearchView">
