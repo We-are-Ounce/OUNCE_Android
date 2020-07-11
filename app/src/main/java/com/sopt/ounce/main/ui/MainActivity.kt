@@ -1,17 +1,12 @@
-package com.sopt.ounce.main
+package com.sopt.ounce.main.ui
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.inputmethod.InputMethodManager
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.children
 import androidx.fragment.app.FragmentManager
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.sopt.ounce.R
-import com.sopt.ounce.main.ui.*
 import com.sopt.ounce.searchmain.SearchFragment
 import com.sopt.ounce.util.StatusObject
 import kotlinx.android.synthetic.main.activity_main.*
@@ -35,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             commit()
         }
 
-
+//        오른쪽 검색 창 클릭 시
         bottom_main_appbar.setOnMenuItemClickListener {
             val fragmentTransaction = mFm.beginTransaction()
             when (it.itemId){
@@ -60,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-
+//        왼쪽 홈 로고 클릭 시
         bottom_main_appbar.setNavigationOnClickListener {
 
             if(!it.isSelected) {

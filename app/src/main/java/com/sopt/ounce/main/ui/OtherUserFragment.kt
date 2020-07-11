@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sopt.ounce.R
+import kotlinx.android.synthetic.main.fragment_other_user.*
+import kotlinx.android.synthetic.main.fragment_other_user.view.*
 
 
 class OtherUserFragment : Fragment() {
@@ -26,6 +28,22 @@ class OtherUserFragment : Fragment() {
     ): View? {
         v = inflater.inflate(R.layout.fragment_other_user, container, false)
         return v
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        btn_other_follow.setOnClickListener {
+            if(it.isSelected){
+                // true -> false로 가니까
+                btn_other_follow.text = "팔로우"
+            }
+            else{
+                //false -> true 가니까
+                btn_other_follow.text = "팔로우 취소"
+            }
+
+            it.isSelected = !it.isSelected
+        }
     }
 
 
