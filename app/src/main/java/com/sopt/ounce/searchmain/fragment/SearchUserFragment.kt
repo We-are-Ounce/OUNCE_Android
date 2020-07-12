@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import com.sopt.ounce.R
-import com.sopt.ounce.main.MainActivity
+import com.sopt.ounce.main.ui.MainActivity
 import com.sopt.ounce.searchmain.recyclerview.SearchUserAdapter
 import com.sopt.ounce.searchmain.recyclerview.SearchUserData
 import com.sopt.ounce.searchmain.recyclerview.SearchUserItemDecoration
