@@ -113,48 +113,101 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <Button
-        android:id="@+id/button"
+    <ImageButton
+        android:id="@+id/record_dry_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="4dp"
-        android:text="건식"
-        android:textSize="12sp"
+        android:background="@android:color/transparent"
+        android:lineSpacingExtra="7sp"
+        android:src="@drawable/img_category"
         android:textColor="@color/greyish_brown"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/record_deer_btn"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <Button
-        android:id="@+id/button2"
+    <TextView
+        android:id="@+id/dry_txt"
+        android:layout_width="26dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="7sp"
+        android:text="건식"
+        android:textColor="@color/greyish_brown"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/record_dry_btn"
+        app:layout_constraintEnd_toEndOf="@+id/record_dry_btn"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="@+id/record_dry_btn"
+        app:layout_constraintTop_toBottomOf="@+id/record_dry_btn" />
+
+    <ImageButton
+        android:id="@+id/record_deer_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="4dp"
         android:text="사슴"
-        android:textColor="@color/greyish_brown"
+        android:lineSpacingExtra="7sp"
         android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
+        android:textColor="@color/greyish_brown"
+        android:src="@drawable/img_category"
+        android:background="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/record_pig_btn"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintStart_toEndOf="@+id/record_dry_btn"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <Button
-        android:id="@+id/button3"
+    <TextView
+        android:id="@+id/deer_txt"
+        android:layout_width="26dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="7sp"
+        android:text="사슴"
+        android:textColor="@color/greyish_brown"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/record_deer_btn"
+        app:layout_constraintEnd_toEndOf="@+id/record_deer_btn"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="@+id/record_deer_btn"
+        app:layout_constraintTop_toBottomOf="@+id/record_deer_btn" />
+
+    <ImageButton
+        android:id="@+id/record_pig_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="56dp"
         android:text="돼지"
+        android:lineSpacingExtra="7sp"
         android:textSize="12sp"
         android:textColor="@color/greyish_brown"
+        android:src="@drawable/img_category"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:layout_constraintStart_toEndOf="@+id/record_deer_btn"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/pig_txt"
+        android:layout_width="26dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="7sp"
+        android:text="돼지"
+        android:textColor="@color/greyish_brown"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/record_pig_btn"
+        app:layout_constraintEnd_toEndOf="@+id/record_pig_btn"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="@+id/record_pig_btn"
+        app:layout_constraintTop_toBottomOf="@+id/record_pig_btn" />
 
     <TextView
         android:id="@+id/record_date"
@@ -166,9 +219,9 @@
         android:textColor="@color/warm_grey"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="@+id/button2"
-        app:layout_constraintStart_toStartOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/record_deer_btn"
         tools:text="2020.00.00" />
 
 
@@ -187,6 +240,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/record_date" />
 
+    <com.hedgehog.ratingbar.RatingBar
+        android:id="@+id/ratingBar_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="8dp"
+        app:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:starCount="5"
+        app:starEmpty="@drawable/ic_total_unselected"
+        app:starFill="@drawable/ic_evaluate_full"
+        app:starImageHeight="24dp"
+        app:starImageWidth="24dp" />
+
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
@@ -198,6 +268,23 @@
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <com.hedgehog.ratingbar.RatingBar
+        android:id="@+id/ratingBar_favor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        app:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="@+id/ratingBar_total"
+        app:layout_constraintStart_toStartOf="@+id/ratingBar_total"
+        app:starCount="5"
+        app:starEmpty="@drawable/ic_favorite_unselected"
+        app:starFill="@drawable/ic_favorite_select"
+        app:starImageHeight="24dp"
+        app:starImageWidth="24dp" />
 
     <RatingBar
         android:id="@+id/ratingBar"
