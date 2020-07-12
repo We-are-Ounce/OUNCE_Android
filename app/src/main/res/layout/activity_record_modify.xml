@@ -313,7 +313,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
 
-
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
@@ -327,6 +326,74 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
 
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        app:SingleLine="true"
+        app:layout_constraintBottom_toBottomOf="@+id/textView8"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toTopOf="@+id/textView8"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_chip_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_chip_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_chip_four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_chip_five"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+    </com.google.android.material.chip.ChipGroup>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="묽다"
+        app:layout_constraintStart_toStartOf="@+id/chipGroup"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="단단하다"
+        app:layout_constraintEnd_toEndOf="@+id/chipGroup"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
 
     <TextView
         android:id="@+id/textView9"
@@ -338,6 +405,75 @@
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipSmellGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:SingleLine="true"
+        app:layout_constraintBottom_toBottomOf="@+id/textView9"
+        app:layout_constraintEnd_toEndOf="@+id/chipGroup"
+        app:layout_constraintStart_toStartOf="@+id/chipGroup"
+        app:layout_constraintTop_toTopOf="@+id/textView9"
+        app:layout_constraintVertical_bias="0.0"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_smellchip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_smellchip_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_smellchip_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_smellchip_four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_smellchip_five"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+    </com.google.android.material.chip.ChipGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="독하다"
+        app:layout_constraintStart_toStartOf="@+id/chipSmellGroup"
+        app:layout_constraintTop_toBottomOf="@+id/chipSmellGroup" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="독하지않다"
+        app:layout_constraintEnd_toEndOf="@+id/chipSmellGroup"
+        app:layout_constraintTop_toBottomOf="@+id/chipSmellGroup" />
 
     <TextView
         android:id="@+id/textView10"
