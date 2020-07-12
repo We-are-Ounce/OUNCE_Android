@@ -30,5 +30,6 @@ class RecordActivity : AppCompatActivity() {
         ratingBar.setStarEmptyDrawable(resources.getDrawable(R.drawable.ic_total_unselected))
         ratingBar2.setStarFillDrawable(resources.getDrawable(R.drawable.ic_favorite_select))
         ratingBar2.setStarEmptyDrawable(resources.getDrawable(R.drawable.ic_favorite_unselected))
+        
     }
 }
