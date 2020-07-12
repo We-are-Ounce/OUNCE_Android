@@ -1,4 +1,4 @@
-package com.sopt.ounce.record
+package com.sopt.ounce.record.data
 
 class ItemData (
     val cardview_image: Int,

@@ -139,7 +139,7 @@
 
     <TextView
         android:id="@+id/txt_login_find_id"
-        style="@style/SamllText"
+        style="@style/SmallText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
@@ -153,7 +153,7 @@
 
     <TextView
         android:id="@+id/txt_login_null"
-        style="@style/SamllText"
+        style="@style/SmallText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
@@ -166,7 +166,7 @@
 
     <TextView
         android:id="@+id/txt_login_find_password"
-        style="@style/SamllText"
+        style="@style/SmallText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
@@ -180,7 +180,7 @@
 
     <TextView
         android:id="@+id/txt_login_null2"
-        style="@style/SamllText"
+        style="@style/SmallText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
@@ -193,7 +193,7 @@
 
     <TextView
         android:id="@+id/txt_login_signup"
-        style="@style/SamllText"
+        style="@style/SmallText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"

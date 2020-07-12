@@ -26,7 +26,7 @@
         <item name="fontFamily">@font/notosanskr</item>
     </style>
 
-    <style name="SamllText" parent="fontFamiliyandPadding">
+    <style name="SmallText" parent="fontFamiliyandPadding">
         <item name="android:textSize">12sp</item>
         <item name="android:lineSpacingExtra">7sp</item>
         <item name="android:textColor">@color/warm_grey</item>

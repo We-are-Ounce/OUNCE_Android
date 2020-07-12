@@ -99,101 +99,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <ImageButton
-        android:id="@+id/record_dry_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="4dp"
-        android:background="@android:color/transparent"
-        android:lineSpacingExtra="7sp"
-        android:src="@drawable/img_category"
-        android:textColor="@color/greyish_brown"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/record_deer_btn"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/dry_txt"
-        android:layout_width="26dp"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:lineSpacingExtra="7sp"
-        android:text="건식"
-        android:textColor="@color/greyish_brown"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/record_dry_btn"
-        app:layout_constraintEnd_toEndOf="@+id/record_dry_btn"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="@+id/record_dry_btn"
-        app:layout_constraintTop_toBottomOf="@+id/record_dry_btn" />
-
-    <ImageButton
-        android:id="@+id/record_deer_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="4dp"
-        android:text="사슴"
-        android:lineSpacingExtra="7sp"
-        android:textSize="12sp"
-        android:textColor="@color/greyish_brown"
-        android:src="@drawable/img_category"
-        android:background="@color/white"
-        app:layout_constraintEnd_toStartOf="@+id/record_pig_btn"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/record_dry_btn"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/deer_txt"
-        android:layout_width="26dp"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:lineSpacingExtra="7sp"
-        android:text="사슴"
-        android:textColor="@color/greyish_brown"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/record_deer_btn"
-        app:layout_constraintEnd_toEndOf="@+id/record_deer_btn"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="@+id/record_deer_btn"
-        app:layout_constraintTop_toBottomOf="@+id/record_deer_btn" />
-
-    <ImageButton
-        android:id="@+id/record_pig_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="56dp"
-        android:text="돼지"
-        android:lineSpacingExtra="7sp"
-        android:textSize="12sp"
-        android:textColor="@color/greyish_brown"
-        android:src="@drawable/img_category"
-        android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/record_deer_btn"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/pig_txt"
-        android:layout_width="26dp"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:lineSpacingExtra="7sp"
-        android:text="돼지"
-        android:textColor="@color/greyish_brown"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/record_pig_btn"
-        app:layout_constraintEnd_toEndOf="@+id/record_pig_btn"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="@+id/record_pig_btn"
-        app:layout_constraintTop_toBottomOf="@+id/record_pig_btn" />
 
     <TextView
         android:id="@+id/textView3"
@@ -206,7 +111,7 @@
         android:textColor="#a6a6a6"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/record_dry_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/rcv_record_feature" />
 
     <TextView
         android:id="@+id/textView4"
@@ -278,13 +183,15 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName"
-        android:layout_width="349dp"
-        android:layout_height="38dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="아주 맛있는 퍼펙트한 사료였다 0u0"
         android:textColor="@color/greyish_brown"
         android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -619,10 +526,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
-        android:background="@color/wheat"
-        android:text="저장"
+        android:backgroundTint="@color/wheat"
         android:fontFamily="@font/notosanskr_medium"
+        android:text="저장"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/memo_edt" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_record_feature"
+        android:nestedScrollingEnabled="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="54dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="horizontal" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
