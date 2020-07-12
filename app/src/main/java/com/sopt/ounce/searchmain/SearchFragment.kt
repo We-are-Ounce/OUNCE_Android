@@ -1,8 +1,7 @@
 package com.sopt.ounce.searchmain
 
-import android.app.Activity
+
 import android.content.Context
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -12,33 +11,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.AutoCompleteTextView
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import com.google.android.material.tabs.TabLayout
 import com.sopt.ounce.R
 import com.sopt.ounce.main.MainActivity
 import com.sopt.ounce.searchmain.fragment.SearchSimilarUserFragment
-import com.sopt.ounce.searchmain.recyclerview.SearchUserAdapter
-import com.sopt.ounce.searchmain.recyclerview.SearchUserData
 import com.sopt.ounce.searchmain.viewpager.SearchSimilarPagerAdapter
 import com.sopt.ounce.searchmain.viewpager.SearchTapAdapter
-import com.sopt.ounce.searchmain.viewpager.ViewPagerAdapter
 import com.sopt.ounce.searchmain.viewpager.ViewPagerTransformer
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.fragment_cat_detail_register.*
-import kotlinx.android.synthetic.main.fragment_cat_detail_register.view.*
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
-import kotlinx.android.synthetic.main.fragment_search_user.*
-import kotlinx.android.synthetic.main.item_searchmain_similar.*
 import java.io.Serializable
 
 data class SimilarPagerData(
