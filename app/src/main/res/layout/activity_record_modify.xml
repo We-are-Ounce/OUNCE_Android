@@ -9,6 +9,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/mainTheme"
     tools:context=".record.ui.RecordModifyActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -91,9 +92,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/notosanskr_medium"
+        style="@style/fontFamiliyandPadding"
         android:layout_marginTop="14dp"
         android:text="제품 회사명"
-        android:textColor="@color/greyish_brown"
+        android:textColor="@color/warm_grey"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -105,6 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        style="@style/fontFamiliyandPadding"
         android:text="제품 이름"
         android:textColor="@color/greyish_brown"
         android:fontFamily="@font/notosanskr_medium"
@@ -331,11 +334,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        app:SingleLine="true"
+        app:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@+id/textView8"
         app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toTopOf="@+id/textView8"
-        app:singleSelection="true">
+        app:singleSelection="true"
+        >
 
         <com.google.android.material.chip.Chip
             android:id="@+id/record_chip"
@@ -384,6 +388,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:text="묽다"
+        android:textSize="10sp"
+        android:textColor="@color/warm_grey"
+        android:lineSpacingExtra="14sp"
         app:layout_constraintStart_toStartOf="@+id/chipGroup"
         app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
 
@@ -392,6 +399,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:text="단단하다"
+        android:textSize="10sp"
+        android:textColor="@color/warm_grey"
+        android:lineSpacingExtra="14sp"
         app:layout_constraintEnd_toEndOf="@+id/chipGroup"
         app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
 
@@ -410,7 +420,7 @@
         android:id="@+id/chipSmellGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:SingleLine="true"
+        app:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@+id/textView9"
         app:layout_constraintEnd_toEndOf="@+id/chipGroup"
         app:layout_constraintStart_toStartOf="@+id/chipGroup"
@@ -464,6 +474,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:text="독하다"
+        android:textSize="10sp"
+        android:textColor="@color/warm_grey"
+        android:lineSpacingExtra="14sp"
         app:layout_constraintStart_toStartOf="@+id/chipSmellGroup"
         app:layout_constraintTop_toBottomOf="@+id/chipSmellGroup" />
 
@@ -472,6 +485,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:text="독하지않다"
+        android:textSize="10sp"
+        android:textColor="@color/warm_grey"
+        android:lineSpacingExtra="14sp"
         app:layout_constraintEnd_toEndOf="@+id/chipSmellGroup"
         app:layout_constraintTop_toBottomOf="@+id/chipSmellGroup" />
 
