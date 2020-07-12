@@ -1,43 +1,33 @@
 package com.sopt.ounce.main.ui
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import androidx.activity.OnBackPressedCallback
-import androidx.core.app.ActivityCompat
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import com.sopt.ounce.R
-import com.sopt.ounce.catregister.CatRegisterActivity
 import com.sopt.ounce.main.adapter.BottomProfileAdapter
 import com.sopt.ounce.main.adapter.ReviewAdapter
-import com.sopt.ounce.main.data.BottomProfileData
 import com.sopt.ounce.main.data.ReviewData
 import com.sopt.ounce.util.RcvItemDeco
 import kotlinx.android.synthetic.main.bottomsheet_filter.*
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
-import kotlinx.android.synthetic.main.profile_bottomsheet.*
+import kotlinx.android.synthetic.main.fragment_other_user.*
+import kotlinx.android.synthetic.main.fragment_other_user.view.*
 
 
-class HomeFragment : Fragment() {
+class OtherUserFragment : Fragment() {
 
     private lateinit var mContext : Context
     private lateinit var v : View
-    private lateinit var mItem :Array<String>
-    private lateinit var mRecyclerAdapter : ReviewAdapter
-    private lateinit var mProfileAdapter : BottomProfileAdapter
-    private lateinit var mBottomsheetProfile : BottomSheetDialog
-    private lateinit var mFilterSheet : BottomSheetDialog
 
+    private lateinit var mRecyclerAdapter : ReviewAdapter
+
+    private lateinit var mFilterSheet : BottomSheetDialog
 
     //서버에 보낼 건식 습식 필터
     private var mFilterDry = mutableListOf<String>()
@@ -46,6 +36,7 @@ class HomeFragment : Fragment() {
     //서버에 보낼 제조사 필터
     private var mFilterManu = mutableListOf<String>()
 
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
@@ -53,49 +44,57 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBottomsheetProfile = BottomSheetDialog(mContext)
         mFilterSheet = BottomSheetDialog(mContext)
-        mProfileAdapter = BottomProfileAdapter(mContext)
-
-        activity?.onBackPressedDispatcher?.addCallback(this,
-        object  : OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-                ActivityCompat.finishAffinity(activity as MainActivity)
-            }
-        })
-
+        mRecyclerAdapter = ReviewAdapter(mContext)
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        v = inflater.inflate(R.layout.fragment_home, container, false)
-        mItem = resources.getStringArray(R.array.main_review_array)
-
-        //바텀시트 프로필 설정
-        mBottomsheetProfile.setContentView(R.layout.profile_bottomsheet)
-        //필터 바텀시트 설정
+        v = inflater.inflate(R.layout.fragment_other_user, container, false)
         mFilterSheet.setContentView(R.layout.bottomsheet_filter)
+        // 필터 바텀 시트 세팅
+        settingFilter()
 
-        // 스피너 설정
-        val spinnerAdapter = ArrayAdapter(mContext,
-            R.layout.main_custom_spinner, mItem)
+        // 리사이클러뷰 데이터 세팅
+        initReviewRcv()
+        return v
+    }
 
-        spinnerAdapter.setDropDownViewResource(R.layout.main_custom_dropdown)
-        v.spinner_main.apply {
-            adapter = spinnerAdapter
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //리사이클러뷰 보여주기
+        mRecyclerAdapter.notifyDataSetChanged()
+
+
+        //팔로우 버튼 클릭 시 변화
+        btn_other_follow.setOnClickListener {
+            if(it.isSelected){
+                // true -> false로 가니까
+                btn_other_follow.text = "팔로우"
+            }
+            else{
+                //false -> true 가니까
+                btn_other_follow.text = "팔로우 취소"
+            }
+
+            it.isSelected = !it.isSelected
         }
 
-        // 리사이클러뷰 설정
-        mRecyclerAdapter = ReviewAdapter(mContext)
-        v.rcv_main_review.apply {
+        //이미지 버튼 클릭 시 필터 바텀 시트 호출
+        img_other_filter.setOnClickListener {
+            showFilterSheet()
+        }
+    }
+
+//  리사이클러뷰 세팅 함수
+    private fun initReviewRcv(){
+        v.rcv_other_review.apply {
             adapter = mRecyclerAdapter
             layoutManager = LinearLayoutManager(mContext)
             addItemDecoration(RcvItemDeco(mContext))
         }
-
 
         mRecyclerAdapter.data = listOf(
             ReviewData("https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg"
@@ -120,69 +119,55 @@ class HomeFragment : Fragment() {
                 ,"company10","title10","intro10",5,5)
         )
 
-        settingFilter()
-
-
-
-        return v
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        mRecyclerAdapter.notifyDataSetChanged()
-
-        //고양이 이름 옆 아이콘 클릭 시 다른 고양이 프로필 선택 창 생성
-        img_main_dropdown.setOnClickListener {
-            showBottomSheet()
+    //필터 이미지 클릭 시 필터 바텀시트 호출 함수
+    private fun showFilterSheet(){
+        mFilterSheet.txt_filter_ok.setOnClickListener {
+            mFilterSheet.dismiss()
         }
-
-        // 필터 이미지 클릭시 필터 바텀 시트 생성
-        img_main_filter.setOnClickListener {
-            showFilterSheet()
-        }
-
-
+        mFilterSheet.show()
     }
 
+    //Chip 세팅 함수
     @Suppress("DEPRECATION")
     private fun settingFilter() {
         // 건식 습식 리스트
-        val mainFoodType = listOf<String>("건식", "습식")
+        val otherFoodType = listOf<String>("건식", "습식")
 
         // 주재료 이름 리스트
-        val mainIngredients = listOf<String>(
+        val otherIngredients = listOf<String>(
             "연어", "칠면조", "소", "닭", "양", "토끼",
             "오리", "참치", "돼지", "해산물", "사슴", "캥거루", "기타"
         )
 
         // 제조사 이름 리스트
-        val mainManu = listOf<String>(
+        val otherManu = listOf<String>(
             "GO!", "캣츠파인푸드", "테라펠리스", "나우"
         )
 
         //건식 습식 chip 생성
-        for (word in mainFoodType) {
+        for (word in otherFoodType) {
             val chip = chipSetting(word,mFilterDry)
             mFilterSheet.chipgroup_main_foodtype.addView(chip)
         }
 
         //주재료 chip 생성
-        for (word in mainIngredients) {
+        for (word in otherIngredients) {
             val chip = chipSetting(word,mFilterFoodType)
             mFilterSheet.chipgroup_main_ingredient.addView(chip)
         }
 
         //제조사 chip 생성 -> 서버 통신 받아서 유동적 해결
-        for(word in mainManu){
+        for(word in otherManu){
             val chip = chipSetting(word, mFilterManu)
             mFilterSheet.chipgroup_main_manu.addView(chip)
         }
     }
 
-
+    //Chip 아이템 생성하는 함수
     @Suppress("DEPRECATION")
-    private fun chipSetting(word : String, filterList : MutableList<String>) : Chip{
+    private fun chipSetting(word : String, filterList : MutableList<String>) : Chip {
         val c = Chip(mContext)
         c.apply {
             text = word
@@ -199,7 +184,7 @@ class HomeFragment : Fragment() {
                     setTextColor(resources.getColor(R.color.white))
                     filterList.add(text.toString())
                     Log.d("List", "$filterList")
-                    
+
                 } else {
                     setTextColor(resources.getColor(R.color.dark))
                     filterList.remove(text.toString())
@@ -212,42 +197,5 @@ class HomeFragment : Fragment() {
         return c
     }
 
-    private fun showFilterSheet(){
-        mFilterSheet.txt_filter_ok.setOnClickListener {
-            mFilterSheet.dismiss()
-        }
-        mFilterSheet.show()
-    }
-
-
-    private fun showBottomSheet(){
-        mBottomsheetProfile.rcv_bottom_profile.apply{
-            adapter = mProfileAdapter
-            layoutManager = LinearLayoutManager(mContext)
-        }
-
-        mProfileAdapter.data = listOf(
-            BottomProfileData(
-                "https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg",
-                "title1",
-                "intro1",
-                false),
-            BottomProfileData(
-                "https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg",
-                "title2",
-                "intro2",
-                false)
-        )
-        mProfileAdapter.notifyDataSetChanged()
-
-        mBottomsheetProfile.layout_bottomsheet_add_profile.setOnClickListener {
-            val intent = Intent(mContext, CatRegisterActivity::class.java)
-            startActivity(intent)
-        }
-
-
-        mBottomsheetProfile.show()
-
-    }
 
 }

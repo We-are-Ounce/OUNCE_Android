@@ -29,7 +29,7 @@
     <style name="SamllText" parent="fontFamiliyandPadding">
         <item name="android:textSize">12sp</item>
         <item name="android:lineSpacingExtra">7sp</item>
-        <item name="android:textColor">@color/warm_grey</item>
+        <item name="android:textColor">@color/greyish_two</item>
     </style>
 
     <style name="siginButtonStyle" parent="fontFamiliyandPadding">
@@ -112,5 +112,6 @@
             android:drawable="@drawable/ic_total_unselected"></item>
 
     </style>-->
+
 
 </resources>

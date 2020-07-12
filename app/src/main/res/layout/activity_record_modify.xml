@@ -9,6 +9,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/mainTheme"
     tools:context=".record.ui.RecordModifyActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -91,9 +92,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/notosanskr_medium"
+        style="@style/fontFamiliyandPadding"
         android:layout_marginTop="14dp"
         android:text="제품 회사명"
-        android:textColor="@color/greyish_brown"
+        android:textColor="@color/warm_grey"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -105,6 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        style="@style/fontFamiliyandPadding"
         android:text="제품 이름"
         android:textColor="@color/greyish_brown"
         android:fontFamily="@font/notosanskr_medium"
@@ -113,48 +116,101 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <Button
-        android:id="@+id/button"
+    <ImageButton
+        android:id="@+id/record_dry_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="4dp"
-        android:text="건식"
-        android:textSize="12sp"
+        android:background="@android:color/transparent"
+        android:lineSpacingExtra="7sp"
+        android:src="@drawable/img_category"
         android:textColor="@color/greyish_brown"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/record_deer_btn"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <Button
-        android:id="@+id/button2"
+    <TextView
+        android:id="@+id/dry_txt"
+        android:layout_width="26dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="7sp"
+        android:text="건식"
+        android:textColor="@color/greyish_brown"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/record_dry_btn"
+        app:layout_constraintEnd_toEndOf="@+id/record_dry_btn"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="@+id/record_dry_btn"
+        app:layout_constraintTop_toBottomOf="@+id/record_dry_btn" />
+
+    <ImageButton
+        android:id="@+id/record_deer_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="4dp"
         android:text="사슴"
-        android:textColor="@color/greyish_brown"
+        android:lineSpacingExtra="7sp"
         android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
+        android:textColor="@color/greyish_brown"
+        android:src="@drawable/img_category"
+        android:background="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/record_pig_btn"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintStart_toEndOf="@+id/record_dry_btn"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <Button
-        android:id="@+id/button3"
+    <TextView
+        android:id="@+id/deer_txt"
+        android:layout_width="26dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="7sp"
+        android:text="사슴"
+        android:textColor="@color/greyish_brown"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/record_deer_btn"
+        app:layout_constraintEnd_toEndOf="@+id/record_deer_btn"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="@+id/record_deer_btn"
+        app:layout_constraintTop_toBottomOf="@+id/record_deer_btn" />
+
+    <ImageButton
+        android:id="@+id/record_pig_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="56dp"
         android:text="돼지"
+        android:lineSpacingExtra="7sp"
         android:textSize="12sp"
         android:textColor="@color/greyish_brown"
+        android:src="@drawable/img_category"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:layout_constraintStart_toEndOf="@+id/record_deer_btn"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/pig_txt"
+        android:layout_width="26dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="7sp"
+        android:text="돼지"
+        android:textColor="@color/greyish_brown"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/record_pig_btn"
+        app:layout_constraintEnd_toEndOf="@+id/record_pig_btn"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="@+id/record_pig_btn"
+        app:layout_constraintTop_toBottomOf="@+id/record_pig_btn" />
 
     <TextView
         android:id="@+id/record_date"
@@ -166,9 +222,9 @@
         android:textColor="@color/warm_grey"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="@+id/button2"
-        app:layout_constraintStart_toStartOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/record_deer_btn"
         tools:text="2020.00.00" />
 
 
@@ -187,6 +243,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/record_date" />
 
+    <com.hedgehog.ratingbar.RatingBar
+        android:id="@+id/ratingBar_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="8dp"
+        app:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:starCount="5"
+        app:starEmpty="@drawable/ic_total_unselected"
+        app:starFill="@drawable/ic_evaluate_full"
+        app:starImageHeight="24dp"
+        app:starImageWidth="24dp" />
+
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
@@ -199,28 +272,22 @@
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="234dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="114dp"
-        android:numStars="5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <RatingBar
-        android:id="@+id/ratingBar2"
-        android:layout_width="233dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="16dp"
-        android:numStars="5"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+    <com.hedgehog.ratingbar.RatingBar
+        android:id="@+id/ratingBar_favor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        app:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="@+id/ratingBar_total"
+        app:layout_constraintStart_toStartOf="@+id/ratingBar_total"
+        app:starCount="5"
+        app:starEmpty="@drawable/ic_favorite_unselected"
+        app:starFill="@drawable/ic_favorite_select"
+        app:starImageHeight="24dp"
+        app:starImageWidth="24dp" />
 
     <TextView
         android:id="@+id/textView6"
@@ -249,7 +316,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
 
-
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
@@ -262,6 +328,83 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        app:singleLine="true"
+        app:layout_constraintBottom_toBottomOf="@+id/textView8"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toTopOf="@+id/textView8"
+        app:singleSelection="true"
+        >
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_chip_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_chip_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_chip_four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_chip_five"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+    </com.google.android.material.chip.ChipGroup>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="묽다"
+        android:textSize="10sp"
+        android:textColor="@color/warm_grey"
+        android:lineSpacingExtra="14sp"
+        app:layout_constraintStart_toStartOf="@+id/chipGroup"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="단단하다"
+        android:textSize="10sp"
+        android:textColor="@color/warm_grey"
+        android:lineSpacingExtra="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/chipGroup"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
@@ -272,6 +415,81 @@
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipSmellGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:singleLine="true"
+        app:layout_constraintBottom_toBottomOf="@+id/textView9"
+        app:layout_constraintEnd_toEndOf="@+id/chipGroup"
+        app:layout_constraintStart_toStartOf="@+id/chipGroup"
+        app:layout_constraintTop_toTopOf="@+id/textView9"
+        app:layout_constraintVertical_bias="0.0"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_smellchip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_smellchip_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_smellchip_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_smellchip_four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/record_smellchip_five"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedIconEnabled="true"
+            app:chipBackgroundColor="@color/white_four"
+            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+    </com.google.android.material.chip.ChipGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="독하다"
+        android:textSize="10sp"
+        android:textColor="@color/warm_grey"
+        android:lineSpacingExtra="14sp"
+        app:layout_constraintStart_toStartOf="@+id/chipSmellGroup"
+        app:layout_constraintTop_toBottomOf="@+id/chipSmellGroup" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="독하지않다"
+        android:textSize="10sp"
+        android:textColor="@color/warm_grey"
+        android:lineSpacingExtra="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/chipSmellGroup"
+        app:layout_constraintTop_toBottomOf="@+id/chipSmellGroup" />
 
     <TextView
         android:id="@+id/textView10"
@@ -284,6 +502,109 @@
         app:layout_constraintStart_toStartOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
+    <ImageButton
+        android:id="@+id/record_trouble_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:background="@color/white"
+        android:src="@drawable/btn_trouble"
+        app:layout_constraintBottom_toBottomOf="@+id/textView10"
+        app:layout_constraintEnd_toStartOf="@+id/record_ear_btn"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toTopOf="@+id/textView10" />
+
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="7sp"
+        android:textColor="@color/dark"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/record_trouble_btn"
+        app:layout_constraintEnd_toEndOf="@+id/record_trouble_btn"
+        app:layout_constraintStart_toStartOf="@+id/record_trouble_btn"
+        app:layout_constraintTop_toTopOf="@+id/record_trouble_btn"
+        tools:text="눈" />
+
+    <ImageButton
+        android:id="@+id/record_ear_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:background="@color/white"
+        android:src="@drawable/btn_trouble"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toTopOf="@+id/record_trouble_btn" />
+
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="7sp"
+        android:textColor="@color/dark"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/record_trouble_btn"
+        app:layout_constraintEnd_toEndOf="@+id/record_ear_btn"
+        app:layout_constraintStart_toStartOf="@+id/record_ear_btn"
+        app:layout_constraintTop_toTopOf="@+id/record_ear_btn"
+        tools:text="귀" />
+
+    <ImageButton
+        android:id="@+id/record_fur_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:background="@color/white"
+        android:src="@drawable/btn_trouble"
+        app:layout_constraintBottom_toBottomOf="@+id/record_ear_btn"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toTopOf="@+id/record_ear_btn" />
+
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="7sp"
+        android:textColor="@color/dark"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/record_fur_btn"
+        app:layout_constraintEnd_toEndOf="@+id/record_fur_btn"
+        app:layout_constraintStart_toStartOf="@+id/record_fur_btn"
+        app:layout_constraintTop_toTopOf="@+id/record_fur_btn"
+        tools:text="털" />
+
+    <ImageButton
+        android:id="@+id/record_vomit_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="168dp"
+        android:background="@color/white"
+        android:src="@drawable/btn_trouble"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toTopOf="@+id/record_fur_btn" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="7sp"
+        android:textColor="@color/dark"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/record_fur_btn"
+        app:layout_constraintEnd_toEndOf="@+id/record_vomit_btn"
+        app:layout_constraintStart_toStartOf="@+id/record_vomit_btn"
+        app:layout_constraintTop_toTopOf="@+id/record_vomit_btn"
+        tools:text="구토" />
+
+
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
@@ -294,35 +615,6 @@
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-    <RatingBar
-        android:id="@+id/ratingBar3"
-        android:layout_width="170dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:numStars="5"
-        app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-    <RatingBar
-        android:id="@+id/ratingBar4"
-        android:layout_width="173dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="48dp"
-        android:numStars="5"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar3" />
-
-    <RatingBar
-        android:id="@+id/ratingBar5"
-        android:layout_width="174dp"
-        android:layout_height="31dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="49dp"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar4" />
 
     <EditText
         android:id="@+id/memo_edt"

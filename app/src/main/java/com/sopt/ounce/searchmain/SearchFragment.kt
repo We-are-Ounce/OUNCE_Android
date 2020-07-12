@@ -1,6 +1,5 @@
 package com.sopt.ounce.searchmain
 
-
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -16,9 +15,9 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
 import com.google.android.material.tabs.TabLayout
 import com.sopt.ounce.R
-import com.sopt.ounce.main.MainActivity
 import com.sopt.ounce.searchmain.fragment.SearchSimilarUserFragment
 import com.sopt.ounce.searchmain.viewpager.SearchSimilarPagerAdapter
+import com.sopt.ounce.main.ui.MainActivity
 import com.sopt.ounce.searchmain.viewpager.SearchTapAdapter
 import com.sopt.ounce.searchmain.viewpager.ViewPagerTransformer
 import gun0912.tedkeyboardobserver.TedKeyboardObserver

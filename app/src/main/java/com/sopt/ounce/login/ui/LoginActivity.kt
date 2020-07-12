@@ -14,7 +14,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import com.sopt.ounce.R
-import com.sopt.ounce.main.MainActivity
+import com.sopt.ounce.main.ui.MainActivity
 import com.sopt.ounce.util.textCheckListener
 import com.sopt.ounce.signup.ui.SignUpActivity
 import com.sopt.ounce.util.StatusObject
@@ -23,6 +23,8 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var mImm: InputMethodManager
+    private  var mId : String =""
+    private  var mPassword : String =""
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,40 +45,65 @@ class LoginActivity : AppCompatActivity() {
             mImm.hideSoftInputFromWindow(edt_login_id.windowToken, 0)
         }
 
-
-
-        // 로그인 체크
-        btn_login_btn.setOnClickListener {
-            checkIdPsw()
+        //기본적으로 로그인 버튼은 동작 불가
+        //로그인 체크
+        btn_login_btn.apply {
+            setOnClickListener {
+                checkIdPsw()
+            }
+            isEnabled = false
         }
 
-        edt_login_password.textCheckListener{
-            if (it.isNullOrBlank()){
+
+        edt_login_password.apply {
+            setOnClickListener {
                 edt_login_password.background.setColorFilter(
-                    resources.getColor(R.color.white_three),
-                    PorterDuff.Mode.SRC_IN
-                )
+                    resources.getColor(R.color.black_two),
+                    PorterDuff.Mode.SRC_IN)
             }
+            textCheckListener{
+                mPassword = it.toString()
+                checkButtonClick()
+            }
+
         }
 
-        edt_login_id.textCheckListener {
-            if (it.isNullOrBlank()){
+        edt_login_id.apply {
+            setOnClickListener {
                 edt_login_id.background.setColorFilter(
-                    resources.getColor(R.color.white_three),
+                    resources.getColor(R.color.black_two),
                     PorterDuff.Mode.SRC_IN
                 )
             }
+            textCheckListener {
+                mId = it.toString()
+                checkButtonClick()
+            }
         }
-
 
         
         //회원가입 클릭 시 SignUpActivity 호출
         txt_login_signup.setOnClickListener {
-            var intent = Intent(this, SignUpActivity::class.java)
+            val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
 
 
+    }
+
+    private fun checkButtonClick(){
+        if (mId.isNotBlank() && mPassword.isNotBlank()){
+            btn_login_btn.apply {
+                isSelected = true
+                isEnabled = true
+            }
+        }
+        else{
+            btn_login_btn.apply {
+                isSelected = false
+                isEnabled = false
+            }
+        }
     }
 
         // 키보드 안보일시 EditView 포커스 해제
@@ -87,6 +114,14 @@ class LoginActivity : AppCompatActivity() {
                         // do checking EditText
                         edt_login_id.clearFocus()
                         edt_login_password.clearFocus()
+                        edt_login_id.background.setColorFilter(
+                            resources.getColor(R.color.white_three),
+                            PorterDuff.Mode.SRC_IN
+                        )
+                        edt_login_password.background.setColorFilter(
+                            resources.getColor(R.color.white_three),
+                            PorterDuff.Mode.SRC_IN
+                        )
                     }
                 }
         }
@@ -94,10 +129,8 @@ class LoginActivity : AppCompatActivity() {
         // 아이디와 패스워드 확인
         @Suppress("DEPRECATION")
         private fun checkIdPsw() {
-            val id = edt_login_id.text.toString()
-            val password = edt_login_password.text.toString()
 
-            if (id.isEmpty() || password.isEmpty()) {
+            if (mId.isEmpty() || mPassword.isEmpty()) {
                 txt_login_fail.visibility = View.VISIBLE
 
 
@@ -114,7 +147,8 @@ class LoginActivity : AppCompatActivity() {
             }
             else{
                 //write in server
-                val intent = Intent(this,MainActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("me",true)
                 startActivity(intent)
             }
 
