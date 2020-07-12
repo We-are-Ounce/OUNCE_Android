@@ -24,8 +24,10 @@ import androidx.core.content.ContextCompat.getSystemService
 import com.google.android.material.tabs.TabLayout
 import com.sopt.ounce.R
 import com.sopt.ounce.main.MainActivity
+import com.sopt.ounce.searchmain.fragment.SearchSimilarUserFragment
 import com.sopt.ounce.searchmain.recyclerview.SearchUserAdapter
 import com.sopt.ounce.searchmain.recyclerview.SearchUserData
+import com.sopt.ounce.searchmain.viewpager.SearchSimilarPagerAdapter
 import com.sopt.ounce.searchmain.viewpager.SearchTapAdapter
 import com.sopt.ounce.searchmain.viewpager.ViewPagerAdapter
 import com.sopt.ounce.searchmain.viewpager.ViewPagerTransformer
@@ -36,13 +38,25 @@ import kotlinx.android.synthetic.main.fragment_cat_detail_register.view.*
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import kotlinx.android.synthetic.main.fragment_search_user.*
+import kotlinx.android.synthetic.main.item_searchmain_similar.*
+import java.io.Serializable
 
+data class SimilarPagerData(
+    var img_search_main_profile_src : Int,
+    var tv_search_main_cat_name_txt : String,
+    var tv_search_main_cat_similarity_txt : String,
+    var img_search_main_review_1_src : Int,
+    var img_search_main_review_2_src : Int,
+    var img_search_main_review_3_src : Int
+) : Serializable
 
 class SearchFragment : Fragment() {
     private lateinit var mInputMethodManager: InputMethodManager
     private lateinit var mContext: Context
     private lateinit var mView: View
     var isKeyboardFocused = false
+    lateinit var mPagerAdapter : SearchSimilarPagerAdapter
+    var receiveDataArray : ArrayList<SimilarPagerData> = ArrayList()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -74,8 +88,10 @@ class SearchFragment : Fragment() {
             mInputMethodManager.hideSoftInputFromWindow(sv_search_main_search.windowToken,0)
         }
         //메인 화면 ViewPager 어댑터 부착
-        var viewPagerAdapter = registerViewPagerAdapter(view)
-        vp_search_main_viewpager.adapter = viewPagerAdapter
+        //var viewPagerAdapter = registerViewPagerAdapter(view)
+        //vp_search_main_viewpager.adapter = viewPagerAdapter
+        initDataArray()
+        initViewPager()
         vp_search_main_viewpager.clipToPadding = false
         vp_search_main_viewpager.clipChildren = false
         vp_search_main_viewpager.offscreenPageLimit = 2
@@ -119,11 +135,6 @@ class SearchFragment : Fragment() {
                     clayout_search_main_focus.visibility = View.VISIBLE
                     isKeyboardFocused = true
                 }
-
-//                else{
-//                    clayout_search_main_notfocus.visibility = View.VISIBLE
-//                    clayout_search_main_focus.visibility = View.GONE
-//                }
             }
         })
 
@@ -161,44 +172,86 @@ class SearchFragment : Fragment() {
         })
     }
 
-    private fun registerViewPagerAdapter(view: View) : ViewPagerAdapter{
-        var viewPagerAdapter = ViewPagerAdapter(view.context)
-        viewPagerAdapter.img_search_main_profile_src = listOf(
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat)
-        viewPagerAdapter.tv_search_main_cat_name_txt = listOf("봄이", "여름이", "가을이", "겨울이", "봄이")
-        viewPagerAdapter.tv_search_main_cat_similarity_txt = listOf(
-            "82",
-            "92",
-            "100",
-            "1",
-            "50"
-        )
-        viewPagerAdapter.img_search_main_review_1_src = listOf(
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat
-        )
-        viewPagerAdapter.img_search_main_review_2_src = listOf(
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat
-        )
-        viewPagerAdapter.img_search_main_review_3_src = listOf(
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat
-        )
-        return viewPagerAdapter
+    private fun initDataArray(){
+        receiveDataArray.apply {
+            add(
+                SimilarPagerData(
+                    img_search_main_profile_src = R.drawable.img_card_cat,
+                    tv_search_main_cat_name_txt = "봄이",
+                    tv_search_main_cat_similarity_txt = "82",
+                    img_search_main_review_1_src = R.drawable.img_card_cat,
+                    img_search_main_review_2_src = R.drawable.img_card_cat,
+                    img_search_main_review_3_src = R.drawable.img_card_cat
+                )
+            )
+            add(
+                SimilarPagerData(
+                    img_search_main_profile_src = R.drawable.img_card_cat,
+                    tv_search_main_cat_name_txt = "여름이",
+                    tv_search_main_cat_similarity_txt = "80",
+                    img_search_main_review_1_src = R.drawable.img_card_cat,
+                    img_search_main_review_2_src = R.drawable.img_card_cat,
+                    img_search_main_review_3_src = R.drawable.img_card_cat
+                )
+            )
+            add(
+                SimilarPagerData(
+                    img_search_main_profile_src = R.drawable.img_card_cat,
+                    tv_search_main_cat_name_txt = "가을이",
+                    tv_search_main_cat_similarity_txt = "90",
+                    img_search_main_review_1_src = R.drawable.img_card_cat,
+                    img_search_main_review_2_src = R.drawable.img_card_cat,
+                    img_search_main_review_3_src = R.drawable.img_card_cat
+                )
+            )
+            add(
+                SimilarPagerData(
+                    img_search_main_profile_src = R.drawable.img_card_cat,
+                    tv_search_main_cat_name_txt = "겨울이",
+                    tv_search_main_cat_similarity_txt = "12",
+                    img_search_main_review_1_src = R.drawable.img_card_cat,
+                    img_search_main_review_2_src = R.drawable.img_card_cat,
+                    img_search_main_review_3_src = R.drawable.img_card_cat
+                )
+            )
+            add(
+                SimilarPagerData(
+                    img_search_main_profile_src = R.drawable.img_card_cat,
+                    tv_search_main_cat_name_txt = "참참참",
+                    tv_search_main_cat_similarity_txt = "22",
+                    img_search_main_review_1_src = R.drawable.img_card_cat,
+                    img_search_main_review_2_src = R.drawable.img_card_cat,
+                    img_search_main_review_3_src = R.drawable.img_card_cat
+                )
+            )
+            add(
+                SimilarPagerData(
+                    img_search_main_profile_src = R.drawable.img_card_cat,
+                    tv_search_main_cat_name_txt = "우울이",
+                    tv_search_main_cat_similarity_txt = "52",
+                    img_search_main_review_1_src = R.drawable.img_card_cat,
+                    img_search_main_review_2_src = R.drawable.img_card_cat,
+                    img_search_main_review_3_src = R.drawable.img_card_cat
+                )
+            )
+        }
+    }
+
+    private fun initViewPager(){
+        //서버에서 데이터 받아
+        val adapter = SearchSimilarPagerAdapter(childFragmentManager)
+        for(iteminit in receiveDataArray){
+            var mFragment = SearchSimilarUserFragment()
+            mFragment.img_search_main_profile_src = iteminit.img_search_main_profile_src
+            mFragment.tv_search_main_cat_name_txt = iteminit.tv_search_main_cat_name_txt
+            mFragment.tv_search_main_cat_similarity_txt = iteminit.tv_search_main_cat_similarity_txt + "%"
+            mFragment.img_search_main_review_1_src = iteminit.img_search_main_review_1_src
+            mFragment.img_search_main_review_2_src = iteminit.img_search_main_review_2_src
+            mFragment.img_search_main_review_3_src = iteminit.img_search_main_review_3_src
+            adapter.addItem(mFragment)
+        }
+        adapter.notifyDataSetChanged()
+        vp_search_main_viewpager.adapter = adapter
     }
 
     private fun observeKeyboard(){
@@ -207,7 +260,7 @@ class SearchFragment : Fragment() {
                 .listen { isShow ->
                     if (!isShow){
                         mView.sv_search_main_search.clearFocus()
-                        
+
                     }
 
                 }
@@ -218,4 +271,44 @@ class SearchFragment : Fragment() {
         val activity = activity as MainActivity
         mInputMethodManager = activity.methodManagerToFragment()
     }
+
+//    private fun registerViewPagerAdapter(view: View) : ViewPagerAdapter{
+//        var viewPagerAdapter = ViewPagerAdapter(view.context)
+//        viewPagerAdapter.img_search_main_profile_src = listOf(
+//            R.drawable.img_card_cat,
+//            R.drawable.img_card_cat,
+//            R.drawable.img_card_cat,
+//            R.drawable.img_card_cat,
+//            R.drawable.img_card_cat)
+//        viewPagerAdapter.tv_search_main_cat_name_txt = listOf("봄이", "여름이", "가을이", "겨울이", "봄이")
+//        viewPagerAdapter.tv_search_main_cat_similarity_txt = listOf(
+//            "82",
+//            "92",
+//            "100",
+//            "1",
+//            "50"
+//        )
+//        viewPagerAdapter.img_search_main_review_1_src = listOf(
+//            R.drawable.img_card_cat,
+//            R.drawable.img_card_cat,
+//            R.drawable.img_card_cat,
+//            R.drawable.img_card_cat,
+//            R.drawable.img_card_cat
+//        )
+//        viewPagerAdapter.img_search_main_review_2_src = listOf(
+//            R.drawable.img_card_cat,
+//            R.drawable.img_card_cat,
+//            R.drawable.img_card_cat,
+//            R.drawable.img_card_cat,
+//            R.drawable.img_card_cat
+//        )
+//        viewPagerAdapter.img_search_main_review_3_src = listOf(
+//            R.drawable.img_card_cat,
+//            R.drawable.img_card_cat,
+//            R.drawable.img_card_cat,
+//            R.drawable.img_card_cat,
+//            R.drawable.img_card_cat
+//        )
+//        return viewPagerAdapter
+//    }
 }
