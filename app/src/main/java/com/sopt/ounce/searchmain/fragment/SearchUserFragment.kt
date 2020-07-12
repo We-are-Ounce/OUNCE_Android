@@ -87,6 +87,54 @@ class SearchUserFragment : Fragment() {
                     tv_search_user_explain = "My Fourth Cat"
                 )
             )
+            add(
+                SearchUserData(
+                    img_search_user_catimage = R.drawable.img_card_cat,
+                    tv_search_user_cat = "Winter",
+                    tv_search_user_id = "@ounceHyunWoo",
+                    tv_search_user_explain = "My Fourth Cat"
+                )
+            )
+            add(
+                SearchUserData(
+                    img_search_user_catimage = R.drawable.img_card_cat,
+                    tv_search_user_cat = "Winter",
+                    tv_search_user_id = "@ounceHyunWoo",
+                    tv_search_user_explain = "My Fourth Cat"
+                )
+            )
+            add(
+                SearchUserData(
+                    img_search_user_catimage = R.drawable.img_card_cat,
+                    tv_search_user_cat = "Winter",
+                    tv_search_user_id = "@ounceHyunWoo",
+                    tv_search_user_explain = "My Fourth Cat"
+                )
+            )
+            add(
+                SearchUserData(
+                    img_search_user_catimage = R.drawable.img_card_cat,
+                    tv_search_user_cat = "Winter",
+                    tv_search_user_id = "@ounceHyunWoo",
+                    tv_search_user_explain = "My Fourth Cat"
+                )
+            )
+            add(
+                SearchUserData(
+                    img_search_user_catimage = R.drawable.img_card_cat,
+                    tv_search_user_cat = "Winter",
+                    tv_search_user_id = "@ounceHyunWoo",
+                    tv_search_user_explain = "My Fourth Cat"
+                )
+            )
+            add(
+                SearchUserData(
+                    img_search_user_catimage = R.drawable.img_card_cat,
+                    tv_search_user_cat = "Winter",
+                    tv_search_user_id = "@ounceHyunWoo",
+                    tv_search_user_explain = "My Fourth Cat"
+                )
+            )
         }
         searchUserAdapter.datas = mUserDatas
         searchUserAdapter.notifyDataSetChanged()

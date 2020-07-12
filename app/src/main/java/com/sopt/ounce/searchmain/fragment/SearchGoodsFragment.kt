@@ -103,6 +103,66 @@ class SearchGoodsFragment : Fragment() {
                     tv_search_goods_heartamount = "2.4"
                 )
             )
+            add(
+                SearchGoodsData(
+                    img_search_goods_goodsimage = R.drawable.img_card_cat,
+                    tv_search_goods_company = "냐옹이 컴퍼니",
+                    tv_search_goods_name = "내추럴발란스 돼지고기",
+                    tv_search_goods_review = "맛있게 먹네요^^",
+                    tv_search_goods_staramount = "1",
+                    tv_search_goods_heartamount = "2.4"
+                )
+            )
+            add(
+                SearchGoodsData(
+                    img_search_goods_goodsimage = R.drawable.img_card_cat,
+                    tv_search_goods_company = "냐옹이 컴퍼니",
+                    tv_search_goods_name = "내추럴발란스 돼지고기",
+                    tv_search_goods_review = "맛있게 먹네요^^",
+                    tv_search_goods_staramount = "1",
+                    tv_search_goods_heartamount = "2.4"
+                )
+            )
+            add(
+                SearchGoodsData(
+                    img_search_goods_goodsimage = R.drawable.img_card_cat,
+                    tv_search_goods_company = "냐옹이 컴퍼니",
+                    tv_search_goods_name = "내추럴발란스 돼지고기",
+                    tv_search_goods_review = "맛있게 먹네요^^",
+                    tv_search_goods_staramount = "1",
+                    tv_search_goods_heartamount = "2.4"
+                )
+            )
+            add(
+                SearchGoodsData(
+                    img_search_goods_goodsimage = R.drawable.img_card_cat,
+                    tv_search_goods_company = "냐옹이 컴퍼니",
+                    tv_search_goods_name = "내추럴발란스 돼지고기",
+                    tv_search_goods_review = "맛있게 먹네요^^",
+                    tv_search_goods_staramount = "1",
+                    tv_search_goods_heartamount = "2.4"
+                )
+            )
+            add(
+                SearchGoodsData(
+                    img_search_goods_goodsimage = R.drawable.img_card_cat,
+                    tv_search_goods_company = "냐옹이 컴퍼니",
+                    tv_search_goods_name = "내추럴발란스 돼지고기",
+                    tv_search_goods_review = "맛있게 먹네요^^",
+                    tv_search_goods_staramount = "1",
+                    tv_search_goods_heartamount = "2.4"
+                )
+            )
+            add(
+                SearchGoodsData(
+                    img_search_goods_goodsimage = R.drawable.img_card_cat,
+                    tv_search_goods_company = "냐옹이 컴퍼니",
+                    tv_search_goods_name = "내추럴발란스 돼지고기",
+                    tv_search_goods_review = "맛있게 먹네요^^",
+                    tv_search_goods_staramount = "1",
+                    tv_search_goods_heartamount = "2.4"
+                )
+            )
         }
         searchGoodsAdapter.datas = mGoodsData
         searchGoodsAdapter.notifyDataSetChanged()
