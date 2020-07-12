@@ -104,13 +104,27 @@
         android:background="@android:color/transparent"
         android:lineSpacingExtra="7sp"
         android:src="@drawable/img_category"
-        android:text="건식"
         android:textColor="@color/greyish_brown"
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/record_deer_btn"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/dry_txt"
+        android:layout_width="26dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="7sp"
+        android:text="건식"
+        android:textColor="@color/greyish_brown"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/record_dry_btn"
+        app:layout_constraintEnd_toEndOf="@+id/record_dry_btn"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="@+id/record_dry_btn"
+        app:layout_constraintTop_toBottomOf="@+id/record_dry_btn" />
 
     <ImageButton
         android:id="@+id/record_deer_btn"
@@ -129,6 +143,21 @@
         app:layout_constraintStart_toEndOf="@+id/record_dry_btn"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
+    <TextView
+        android:id="@+id/deer_txt"
+        android:layout_width="26dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="7sp"
+        android:text="사슴"
+        android:textColor="@color/greyish_brown"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/record_deer_btn"
+        app:layout_constraintEnd_toEndOf="@+id/record_deer_btn"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="@+id/record_deer_btn"
+        app:layout_constraintTop_toBottomOf="@+id/record_deer_btn" />
+
     <ImageButton
         android:id="@+id/record_pig_btn"
         android:layout_width="wrap_content"
@@ -145,6 +174,21 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/record_deer_btn"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/pig_txt"
+        android:layout_width="26dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="7sp"
+        android:text="돼지"
+        android:textColor="@color/greyish_brown"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/record_pig_btn"
+        app:layout_constraintEnd_toEndOf="@+id/record_pig_btn"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="@+id/record_pig_btn"
+        app:layout_constraintTop_toBottomOf="@+id/record_pig_btn" />
 
     <TextView
         android:id="@+id/textView3"
@@ -184,23 +228,39 @@
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <RatingBar
+    <com.hedgehog.ratingbar.RatingBar
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
-        android:numStars="5"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="8dp"
+        app:clickable="true"
         app:layout_constraintBottom_toBottomOf="@+id/textView4"
-        app:layout_constraintStart_toEndOf="@+id/textView4" />
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:starCount="5"
+        app:starEmpty="@drawable/ic_total_unselected"
+        app:starFill="@drawable/ic_evaluate_full"
+        app:starImageHeight="24dp"
+        app:starImageWidth="24dp" />
 
-    <RatingBar
+    <com.hedgehog.ratingbar.RatingBar
         android:id="@+id/ratingBar2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:focusableInTouchMode="true"
-        android:numStars="5"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="8dp"
+        app:clickable="true"
         app:layout_constraintBottom_toBottomOf="@+id/textView5"
-        app:layout_constraintStart_toStartOf="@+id/ratingBar" />
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:starCount="5"
+        app:starEmpty="@drawable/ic_favorite_unselected"
+        app:starFill="@drawable/ic_favorite_select"
+        app:starImageHeight="24dp"
+        app:starImageWidth="24dp" />
 
     <TextView
         android:id="@+id/textView6"

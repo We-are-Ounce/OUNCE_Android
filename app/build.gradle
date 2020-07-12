@@ -79,4 +79,7 @@ dependencies {
     //Sticky ScrollView
     implementation 'com.github.didikk:sticky-nestedscrollview:1.0.1'
 
+    //ratingbar custom
+    implementation 'com.hedgehog.ratingbar:app:1.1.2'
+
 }

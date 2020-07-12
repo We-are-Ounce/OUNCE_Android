@@ -24,6 +24,9 @@ class RecordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_record)
+        ratingBar.setStarFillDrawable(resources.getDrawable(R.drawable.ic_evaluate_full))
+        ratingBar.setStarEmptyDrawable(resources.getDrawable(R.drawable.ic_total_unselected))
+
 
     }
 }
