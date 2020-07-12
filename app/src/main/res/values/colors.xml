@@ -20,4 +20,6 @@
     <color name="dark_peach">#e27950</color>
     <color name="white_six">#ebe8e5</color>
     <color name="greyish">#aaa8a6</color>
+    <color name="black_two">#333232</color>
+    <color name="greyish_two">#aea69f</color>
 </resources>
