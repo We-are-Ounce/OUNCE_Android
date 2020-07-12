@@ -115,6 +115,7 @@ class LoginActivity : AppCompatActivity() {
             else{
                 //write in server
                 val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("me",true)
                 startActivity(intent)
             }
 
