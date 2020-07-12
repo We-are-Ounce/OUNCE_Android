@@ -36,6 +36,7 @@
         <activity android:name=".record.ui.RecordModifyActivity"
             android:exported="true"/>
         <activity android:name=".record.ui.RecordActivity"
+            android:theme="@style/mainTheme"
             android:exported="true"/>
         <activity
             android:name=".login.ui.LoginActivity"

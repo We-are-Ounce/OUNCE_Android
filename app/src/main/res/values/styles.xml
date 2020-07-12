@@ -85,6 +85,16 @@
 
     </style>
 
+    <style name="recordFilterStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipMinHeight">16dp</item>
+        <item name="chipMinTouchTargetSize">0dp</item>
+        <item name="chipEndPadding">12dp</item>
+        <item name="chipStartPadding">12dp</item>
+        <item name="chipBackgroundColor">@color/record_chip_status</item>
+        <item name="checkedIconEnabled">false</item>
+        <item name="checkedIconVisible">false</item>
+    </style>
+
     <style name = "MySearchViewStyle" parent="Widget.AppCompat.SearchView">
         <!-- Background for the search query section (e.g. EditText) -->
 <!--        <item name="queryBackground">...</item>-->

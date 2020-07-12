@@ -7,7 +7,7 @@
     android:layout_height = "wrap_content"
     >
 <androidx.constraintlayout.widget.ConstraintLayout
-    android:theme="@style/mainTheme"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -237,36 +237,32 @@
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:layout_marginStart="28dp"
-        android:layout_marginBottom="8dp"
+        android:paddingBottom="8dp"
         app:clickable="true"
         app:layout_constraintBottom_toBottomOf="@+id/textView4"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:starCount="5"
         app:starEmpty="@drawable/ic_total_unselected"
         app:starFill="@drawable/ic_evaluate_full"
-        app:starImageHeight="24dp"
-        app:starImageWidth="24dp" />
+        app:starImageHeight="32dp"
+        app:starImageWidth="32dp" />
 
     <com.hedgehog.ratingbar.RatingBar
         android:id="@+id/ratingBar2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_gravity="center"
-        android:layout_marginBottom="8dp"
         app:clickable="true"
         app:layout_constraintBottom_toBottomOf="@+id/textView5"
-        app:layout_constraintEnd_toEndOf="@+id/ratingBar"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintStart_toStartOf="@+id/ratingBar"
         app:starCount="5"
         app:starEmpty="@drawable/ic_favorite_unselected"
         app:starFill="@drawable/ic_favorite_select"
-        app:starImageHeight="24dp"
-        app:starImageWidth="24dp" />
+        app:starImageHeight="32dp"
+        app:starImageWidth="32dp" />
 
     <TextView
         android:id="@+id/textView6"
@@ -284,14 +280,11 @@
         android:id="@+id/editTextTextPersonName"
         android:layout_width="349dp"
         android:layout_height="38dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="28dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="아주 맛있는 퍼펙트한 사료였다 0u0"
         android:textColor="@color/greyish_brown"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -335,7 +328,7 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="72dp"
         android:text="트러블"
         android:textColor="#000000"
         android:textSize="12sp"
@@ -355,55 +348,51 @@
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroup"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="48dp"
+        android:orientation="horizontal"
+        app:chipSpacingHorizontal="4dp"
         app:singleLine="true"
-        style="@style/mainTheme"
+        app:singleSelection="true"
         app:layout_constraintBottom_toBottomOf="@+id/textView8"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toTopOf="@+id/textView8"
-        app:singleSelection="true">
+        >
 
         <com.google.android.material.chip.Chip
             android:id="@+id/record_chip"
+            style="@style/recordFilterStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:checkedIconEnabled="true"
-            app:chipBackgroundColor="@color/white_four"
-            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+            android:checked="false" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/record_chip_two"
+            style="@style/recordFilterStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:checkedIconEnabled="true"
-            app:chipBackgroundColor="@color/white_four"
-            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+            android:layout_height="wrap_content" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/record_chip_three"
+            style="@style/recordFilterStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:checkedIconEnabled="true"
-            app:chipBackgroundColor="@color/white_four"
-            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+            android:layout_height="wrap_content" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/record_chip_four"
+            style="@style/recordFilterStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:checkedIconEnabled="true"
-            app:chipBackgroundColor="@color/white_four"
-            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+            android:layout_height="wrap_content" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/record_chip_five"
+            style="@style/recordFilterStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:checkedIconEnabled="true"
-            app:chipBackgroundColor="@color/white_four"
-            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+            android:layout_height="wrap_content" />
+
     </com.google.android.material.chip.ChipGroup>
 
 
@@ -432,55 +421,50 @@
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipSmellGroup"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:singleLine="true"
+        android:orientation="horizontal"
+        app:chipSpacingHorizontal="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView9"
         app:layout_constraintEnd_toEndOf="@+id/chipGroup"
         app:layout_constraintStart_toStartOf="@+id/chipGroup"
         app:layout_constraintTop_toTopOf="@+id/textView9"
-        app:layout_constraintVertical_bias="0.0"
+        app:singleLine="true"
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/record_smellchip"
+            style="@style/recordFilterStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:checkedIconEnabled="true"
-            app:chipBackgroundColor="@color/white_four"
-            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+            />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/record_smellchip_two"
+            style="@style/recordFilterStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:checkedIconEnabled="true"
-            app:chipBackgroundColor="@color/white_four"
-            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+            />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/record_smellchip_three"
+            style="@style/recordFilterStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:checkedIconEnabled="true"
-            app:chipBackgroundColor="@color/white_four"
-            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+            />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/record_smellchip_four"
+            style="@style/recordFilterStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:checkedIconEnabled="true"
-            app:chipBackgroundColor="@color/white_four"
-            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+            android:layout_height="wrap_content" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/record_smellchip_five"
+            style="@style/recordFilterStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:checkedIconEnabled="true"
-            app:chipBackgroundColor="@color/white_four"
-            style= "@style/Widget.MaterialComponents.Chip.Choice"/>
+            />
     </com.google.android.material.chip.ChipGroup>
 
     <TextView
@@ -506,18 +490,22 @@
         app:layout_constraintEnd_toEndOf="@+id/chipSmellGroup"
         app:layout_constraintTop_toBottomOf="@+id/chipSmellGroup" />
 
+
     <ImageButton
         android:id="@+id/record_trouble_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
         android:background="@color/white"
         android:src="@drawable/btn_trouble"
         app:layout_constraintBottom_toBottomOf="@+id/textView10"
         app:layout_constraintEnd_toStartOf="@+id/record_ear_btn"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toTopOf="@+id/textView10" />
-
+        app:layout_constraintStart_toStartOf="@+id/chipSmellGroup"
+        app:layout_constraintTop_toTopOf="@+id/textView15"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView11"
