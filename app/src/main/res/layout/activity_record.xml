@@ -368,16 +368,104 @@
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar3" />
 
-    <RatingBar
-        android:id="@+id/ratingBar5"
-        android:layout_width="174dp"
-        android:layout_height="31dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="49dp"
-        android:numStars="5"
-        android:focusableInTouchMode="true"
+    <ImageButton
+    android:id="@+id/record_trouble_btn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="48dp"
+    app:layout_constraintStart_toEndOf="@+id/textView10"
+    app:layout_constraintTop_toBottomOf="@+id/ratingBar4"
+    android:src="@drawable/btn_trouble"
+    android:background="@color/white"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="7sp"
+        android:textColor="@color/dark"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/record_trouble_btn"
+        app:layout_constraintEnd_toEndOf="@+id/record_trouble_btn"
+        app:layout_constraintStart_toStartOf="@+id/record_trouble_btn"
+        app:layout_constraintTop_toTopOf="@+id/record_trouble_btn"
+        tools:text="눈" />
+    <ImageButton
+        android:id="@+id/record_ear_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="48dp"
         app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar4" />
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar4"
+        android:src="@drawable/btn_trouble"
+        android:background="@color/white"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="7sp"
+        android:textColor="@color/dark"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/record_ear_btn"
+        app:layout_constraintEnd_toEndOf="@+id/record_ear_btn"
+        app:layout_constraintStart_toStartOf="@+id/record_ear_btn"
+        app:layout_constraintTop_toTopOf="@+id/record_ear_btn"
+        tools:text="귀" />
+    <ImageButton
+        android:id="@+id/record_fur_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar4"
+        android:src="@drawable/btn_trouble"
+        android:background="@color/white"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="7sp"
+        android:textColor="@color/dark"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/record_fur_btn"
+        app:layout_constraintEnd_toEndOf="@+id/record_fur_btn"
+        app:layout_constraintStart_toStartOf="@+id/record_fur_btn"
+        app:layout_constraintTop_toTopOf="@+id/record_fur_btn"
+        tools:text="털" />
+
+    <ImageButton
+        android:id="@+id/record_vomit_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar4"
+        android:src="@drawable/btn_trouble"
+        android:background="@color/white"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="7sp"
+        android:textColor="@color/dark"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/record_vomit_btn"
+        app:layout_constraintEnd_toEndOf="@+id/record_vomit_btn"
+        app:layout_constraintStart_toStartOf="@+id/record_vomit_btn"
+        app:layout_constraintTop_toTopOf="@+id/record_vomit_btn"
+        tools:text="구토" />
+
 
     <EditText
         android:id="@+id/memo_edt"

@@ -26,6 +26,8 @@ class RecordActivity : AppCompatActivity() {
         setContentView(R.layout.activity_record)
         ratingBar.setStarFillDrawable(resources.getDrawable(R.drawable.ic_evaluate_full))
         ratingBar.setStarEmptyDrawable(resources.getDrawable(R.drawable.ic_total_unselected))
+        ratingBar.setStarFillDrawable(resources.getDrawable(R.drawable.ic_favorite_select))
+        ratingBar.setStarEmptyDrawable(resources.getDrawable(R.drawable.ic_favorite_unselected))
 
 
     }
