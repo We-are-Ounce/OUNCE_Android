@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.ounce.R
-import com.sopt.ounce.record.ItemData
-import com.sopt.ounce.record.ItemViewHolder
+import com.sopt.ounce.record.data.ItemData
+import com.sopt.ounce.record.viewholder.ItemViewHolder
 
 class ItemAdapter(private val context: Context) : RecyclerView.Adapter<ItemViewHolder>() {
     var datas = mutableListOf<ItemData>()

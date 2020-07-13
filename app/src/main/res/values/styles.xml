@@ -26,7 +26,7 @@
         <item name="fontFamily">@font/notosanskr</item>
     </style>
 
-    <style name="SamllText" parent="fontFamiliyandPadding">
+    <style name="SmallText" parent="fontFamiliyandPadding">
         <item name="android:textSize">12sp</item>
         <item name="android:lineSpacingExtra">7sp</item>
         <item name="android:textColor">@color/greyish_two</item>
@@ -83,6 +83,16 @@
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">5sp</item>
 
+    </style>
+
+    <style name="recordFilterStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipMinHeight">16dp</item>
+        <item name="chipMinTouchTargetSize">0dp</item>
+        <item name="chipEndPadding">12dp</item>
+        <item name="chipStartPadding">12dp</item>
+        <item name="chipBackgroundColor">@color/record_chip_status</item>
+        <item name="checkedIconEnabled">false</item>
+        <item name="checkedIconVisible">false</item>
     </style>
 
     <style name = "MySearchViewStyle" parent="Widget.AppCompat.SearchView">

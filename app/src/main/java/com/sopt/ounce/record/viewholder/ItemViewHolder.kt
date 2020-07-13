@@ -1,11 +1,11 @@
-package com.sopt.ounce.record
+package com.sopt.ounce.record.viewholder
 
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.ounce.R
-import com.sopt.ounce.searchmain.recyclerview.SearchGoodsData
+import com.sopt.ounce.record.data.ItemData
 
 class ItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     val cardview_image = itemView.findViewById<ImageView>(R.id.cardview_image)

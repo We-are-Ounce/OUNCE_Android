@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.ounce.R
 import com.sopt.ounce.record.adapter.ItemAdapter
-import com.sopt.ounce.record.ItemData
+import com.sopt.ounce.record.data.ItemData
 import com.sopt.ounce.record.RecordItemDecoration
 import com.sopt.ounce.record.adapter.RecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_image_search.*
@@ -34,7 +34,6 @@ class ImageSearchActivity : AppCompatActivity() {
         textView.setTextColor(Color.DKGRAY)
         rv_record_search.layoutManager = LinearLayoutManager(rv_record_search.context)
         rv_record_search.setHasFixedSize(true)
-        rv_record_search.addItemDecoration(RecordItemDecoration())
         getItemList()
 
         mItemAdapter = ItemAdapter(this)
@@ -120,7 +119,6 @@ class ImageSearchActivity : AppCompatActivity() {
         }
         mItemAdapter.datas = mGoodsData
         mItemAdapter.notifyDataSetChanged()
-        rv_record_search.addItemDecoration(RecordItemDecoration())
 
     }
 }
