@@ -1,5 +1,6 @@
 package com.sopt.ounce.server
 
+import com.sopt.ounce.login.api.LoginService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -7,16 +8,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object UserServiceImpl {
-    private val interceptor = object : Interceptor{
-        override fun intercept(chain: Interceptor.Chain): Response {
-            val header = "application/json"
-            val newRequest = chain.request()
-                .newBuilder()
-                .addHeader("Content-Type",header)
-                .build()
+    private val interceptor = Interceptor { chain ->
+        val header = "application/json"
+        val newRequest = chain.request()
+            .newBuilder()
+            .addHeader("Content-Type",header)
+            .build()
 
-            return chain.proceed(newRequest)
-        }
+        chain.proceed(newRequest)
     }
 
     private val client = OkHttpClient.Builder().apply {
@@ -31,4 +30,5 @@ object UserServiceImpl {
         .client(client)
         .build()
 
+    val service : LoginService = retrofit.create(LoginService::class.java)
 }
