@@ -155,6 +155,7 @@ class EmailCheckFragment : Fragment() {
     // 이메일에 인증번호를 보내는 버튼 누를 때 호출
     private fun checkEmail() {
         mEmail = v.edt_email.text.toString()
+
         //6자리 난수 생성
         mCode = (100000..999999).random()
         v.txt_email_failsend.text = "인증번호를 발송했습니다."
@@ -181,7 +182,9 @@ class EmailCheckFragment : Fragment() {
         if (mCode == v.edt_email_number.text.toString().toInt()) {
             v.txt_email_failcheck.text = "인증이 완료되었습니다."
             v.txt_email_failcheck.visibility = View.VISIBLE
+            "UserInfoCheck".showLog(mEmail)
             UserInfoObject.email = mEmail
+            "UserInfoCheck".showLog("${UserInfoObject.email}")
             mActivity.buttonEnable(true)
         }
         else {

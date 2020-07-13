@@ -67,7 +67,7 @@ class IdFragment : Fragment() {
 
                 }
 
-                UserInfoObject.email = v.edt_id_input.text.toString()
+                UserInfoObject.id = v.edt_id_input.text.toString()
             }
 
             setOnFocusChangeListener { _, has ->
