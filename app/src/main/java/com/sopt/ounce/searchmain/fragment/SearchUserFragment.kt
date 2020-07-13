@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import com.sopt.ounce.R
-import com.sopt.ounce.main.MainActivity
+import com.sopt.ounce.main.ui.MainActivity
 import com.sopt.ounce.searchmain.recyclerview.SearchUserAdapter
 import com.sopt.ounce.searchmain.recyclerview.SearchUserData
 import com.sopt.ounce.searchmain.recyclerview.SearchUserItemDecoration
@@ -77,6 +77,54 @@ class SearchUserFragment : Fragment() {
                     tv_search_user_cat = "Autumn",
                     tv_search_user_id = "@ounceHyunWoo",
                     tv_search_user_explain = "My Third Cat"
+                )
+            )
+            add(
+                SearchUserData(
+                    img_search_user_catimage = R.drawable.img_card_cat,
+                    tv_search_user_cat = "Winter",
+                    tv_search_user_id = "@ounceHyunWoo",
+                    tv_search_user_explain = "My Fourth Cat"
+                )
+            )
+            add(
+                SearchUserData(
+                    img_search_user_catimage = R.drawable.img_card_cat,
+                    tv_search_user_cat = "Winter",
+                    tv_search_user_id = "@ounceHyunWoo",
+                    tv_search_user_explain = "My Fourth Cat"
+                )
+            )
+            add(
+                SearchUserData(
+                    img_search_user_catimage = R.drawable.img_card_cat,
+                    tv_search_user_cat = "Winter",
+                    tv_search_user_id = "@ounceHyunWoo",
+                    tv_search_user_explain = "My Fourth Cat"
+                )
+            )
+            add(
+                SearchUserData(
+                    img_search_user_catimage = R.drawable.img_card_cat,
+                    tv_search_user_cat = "Winter",
+                    tv_search_user_id = "@ounceHyunWoo",
+                    tv_search_user_explain = "My Fourth Cat"
+                )
+            )
+            add(
+                SearchUserData(
+                    img_search_user_catimage = R.drawable.img_card_cat,
+                    tv_search_user_cat = "Winter",
+                    tv_search_user_id = "@ounceHyunWoo",
+                    tv_search_user_explain = "My Fourth Cat"
+                )
+            )
+            add(
+                SearchUserData(
+                    img_search_user_catimage = R.drawable.img_card_cat,
+                    tv_search_user_cat = "Winter",
+                    tv_search_user_id = "@ounceHyunWoo",
+                    tv_search_user_explain = "My Fourth Cat"
                 )
             )
             add(
