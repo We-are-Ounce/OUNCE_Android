@@ -508,7 +508,8 @@
     <EditText
         android:id="@+id/memo_edt"
         android:layout_width="0dp"
-        android:layout_height="76dp"
+        android:layout_height="wrap_content"
+        android:lines="4"
         android:layout_marginStart="28dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="28dp"
