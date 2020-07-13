@@ -12,10 +12,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import com.sopt.ounce.R
+import com.sopt.ounce.server.EmailCheckServiceImpl
+import com.sopt.ounce.signup.data.RequestEmailData
+import com.sopt.ounce.signup.data.UserInfoObject
+import com.sopt.ounce.util.customEnqueue
 import com.sopt.ounce.util.textCheckListener
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
+import kotlinx.android.synthetic.main.fragment_email_check.*
 import kotlinx.android.synthetic.main.fragment_email_check.view.*
 import java.util.regex.Pattern
+import kotlin.properties.Delegates
 
 
 class EmailCheckFragment : Fragment() {
@@ -23,6 +29,8 @@ class EmailCheckFragment : Fragment() {
     private lateinit var v: View
     private lateinit var mImm: InputMethodManager
     private lateinit var mActivity: SignUpActivity
+    private var mCode by Delegates.notNull<Int>()
+    private lateinit var mEmail : String
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -131,7 +139,7 @@ class EmailCheckFragment : Fragment() {
 
         v.edt_email_number.apply {
             textCheckListener {
-                if (it?.length == 5) {
+                if (it?.length == 6) {
                     v.btn_email_check.isEnabled = true
                     v.btn_email_check.setTextColor(resources.getColor(R.color.white))
                 } else {
@@ -145,29 +153,45 @@ class EmailCheckFragment : Fragment() {
 
     // 이메일에 인증번호를 보내는 버튼 누를 때 호출
     private fun checkEmail() {
-        v.txt_email_failsend.text = "인증번호를 발송했습니다."
-        v.txt_email_failsend.visibility = View.VISIBLE
+        mEmail = v.edt_email.text.toString()
+        //6자리 난수 생성
+        mCode = (100000..999999).random()
 
-        val randomCode = (100000..999999).random()
+        val request = EmailCheckServiceImpl
+        request.service.postEmail(
+            RequestEmailData(
+                v.edt_email.text.toString(),
+                "OUNCE 회원가입 인증해주세요.",
+                "인증번호를 입력해주세요 : $mCode"
+            )
+        ).customEnqueue(
+            onSuccess = {
+                v.txt_email_failsend.text = "인증번호를 발송했습니다."
+                v.txt_email_failsend.visibility = View.VISIBLE
+            },
+            onError = {
+                v.txt_email_failsend.text = "올바른 이메일을 입력해주세요."
+                v.txt_email_failsend.visibility = View.VISIBLE
+            }
+        )
 
     }
 
     // 이메일에서 받은 인증코드를 입력하는 버튼 누를 때 호출
     private fun checkCode() {
-        if (v.edt_email_number.text?.length != 5) {
+        if (mCode == v.edt_email_number.text.toString().toInt()) {
+            v.txt_email_failcheck.text = "인증이 완료되었습니다."
+            v.txt_email_failcheck.visibility = View.VISIBLE
+            UserInfoObject.email = mEmail
+            mActivity.buttonEnable(true)
+        }
+        else {
             v.edt_email_number.background.setColorFilter(
                 resources.getColor(R.color.dark_peach),
                 PorterDuff.Mode.SRC_IN
             )
+            v.txt_email_failcheck.text = "인증번호가 틀렸습니다."
             v.txt_email_failcheck.visibility = View.VISIBLE
-        } else {
-            v.edt_email_number.background.setColorFilter(
-                resources.getColor(R.color.greyish_two),
-                PorterDuff.Mode.SRC_IN
-            )
-            v.txt_email_failcheck.visibility = View.INVISIBLE
-
-            mActivity.buttonEnable(true)
         }
     }
 
