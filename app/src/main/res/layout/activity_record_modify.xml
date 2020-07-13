@@ -507,7 +507,7 @@
             android:layout_marginTop="19dp"
             android:background="@color/black_two"
             android:fontFamily="@font/notosanskr_medium"
-            android:text="수정 완료"
+            android:text="저장"
             android:textColor="@color/white_two"
             app:layout_constraintTop_toBottomOf="@+id/memo_edt" />
 
