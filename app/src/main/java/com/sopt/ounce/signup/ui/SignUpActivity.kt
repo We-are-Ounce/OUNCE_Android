@@ -46,7 +46,6 @@ class SignUpActivity : AppCompatActivity() {
         img_signup_back.setOnClickListener {
             if(vp_signup.currentItem != 0){
                 vp_signup.currentItem -= 1
-                buttonEnable(false)
             }
             else{
                 finish()

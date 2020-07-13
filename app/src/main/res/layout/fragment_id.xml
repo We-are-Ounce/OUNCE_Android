@@ -13,18 +13,17 @@
         style="@style/textStyle_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="회원가입"
+        android:text="아이디를 입력"
         android:textFontWeight="400"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_password_null_3" />
 
     <TextView
         android:id="@+id/txt_password_null_2"
         style="@style/textStyle_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="을 위한"
+        android:text="해주세요."
         android:textFontWeight="100"
         app:layout_constraintBottom_toBottomOf="@+id/txt_password_null_1"
         app:layout_constraintStart_toEndOf="@+id/txt_password_null_1" />
@@ -34,20 +33,21 @@
         style="@style/textStyle_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="정보를 입력해주세요."
+        android:layout_marginTop="24dp"
+        android:text="회원가입을 위한"
         android:textFontWeight="100"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/txt_password_null_1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txt_id_title"
         style="@style/infoTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="32dp"
         android:text="아이디"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/txt_password_null_3" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_password_null_1" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
