@@ -15,7 +15,6 @@ class RecordItemDecoration(context : Context, size : Int = 6): RecyclerView.Item
 
     private fun dpToPx(context : Context, dp : Int) : Int {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), context.resources.displayMetrics).toInt()
-
     }
 
     override fun getItemOffsets(

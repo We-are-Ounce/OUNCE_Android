@@ -121,7 +121,7 @@
         android:layout_marginTop="26dp"
         android:fontFamily="@font/notosanskr_medium"
         android:text="총점"
-        android:textColor="#000000"
+        android:textColor="@color/black_two"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -133,7 +133,7 @@
         android:layout_marginTop="32dp"
         android:fontFamily="@font/notosanskr_medium"
         android:text="기호도"
-        android:textColor="#000000"
+        android:textColor="@color/black_two"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -176,7 +176,7 @@
         android:layout_marginTop="26dp"
         android:fontFamily="@font/notosanskr_medium"
         android:text="한 줄 평가"
-        android:textColor="@color/greyish_brown"
+        android:textColor="@color/black_two"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -215,7 +215,7 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="26dp"
         android:text="변상태"
-        android:textColor="#000000"
+        android:textColor="@color/black_two"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -226,7 +226,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="46dp"
         android:text="변냄새"
-        android:textColor="#000000"
+        android:textColor="@color/black_two"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -237,7 +237,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
         android:text="트러블"
-        android:textColor="#000000"
+        android:textColor="@color/black_two"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -248,7 +248,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
         android:text="메모"
-        android:textColor="#000000"
+        android:textColor="@color/black_two"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -398,138 +398,104 @@
         app:layout_constraintTop_toBottomOf="@+id/chipSmellGroup" />
 
 
-    <ImageButton
-        android:id="@+id/record_trouble_btn"
+    <TextView
+        android:id="@+id/record_eye_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
-        android:background="@color/white"
-        android:src="@drawable/btn_trouble"
-        app:layout_constraintBottom_toBottomOf="@+id/textView10"
-        app:layout_constraintEnd_toStartOf="@+id/record_ear_btn"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintStart_toStartOf="@+id/chipSmellGroup"
-        app:layout_constraintTop_toTopOf="@+id/textView15"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/trouble_selector"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="7sp"
-        android:textColor="@color/dark"
+        android:textColor="@color/black_two"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/record_trouble_btn"
-        app:layout_constraintEnd_toEndOf="@+id/record_trouble_btn"
-        app:layout_constraintStart_toStartOf="@+id/chipSmellGroup"
-        app:layout_constraintTop_toTopOf="@+id/record_trouble_btn"
+        app:layout_constraintBottom_toBottomOf="@+id/textView10"
+        app:layout_constraintEnd_toStartOf="@+id/record_ear_btn"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toTopOf="@+id/textView10"
         tools:text="눈" />
 
-    <ImageButton
+
+    <TextView
         android:id="@+id/record_ear_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:background="@color/white"
-        android:src="@drawable/btn_trouble"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toTopOf="@+id/record_trouble_btn" />
-
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="7sp"
-        android:textColor="@color/dark"
+        android:textColor="@color/black_two"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/record_trouble_btn"
-        app:layout_constraintEnd_toEndOf="@+id/record_ear_btn"
-        app:layout_constraintStart_toStartOf="@+id/record_ear_btn"
-        app:layout_constraintTop_toTopOf="@+id/record_ear_btn"
+        android:background="@drawable/trouble_selector"
+        app:layout_constraintBottom_toBottomOf="@+id/record_eye_btn"
+        app:layout_constraintEnd_toStartOf="@+id/record_fur_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/record_eye_btn"
+        app:layout_constraintTop_toTopOf="@+id/record_eye_btn"
         tools:text="귀" />
 
-    <ImageButton
+    <TextView
         android:id="@+id/record_fur_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:background="@color/white"
-        android:src="@drawable/btn_trouble"
+        android:gravity="center_horizontal"
+        android:background="@drawable/trouble_selector"
+        android:lineSpacingExtra="7sp"
+        android:textColor="@color/black_two"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/record_ear_btn"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toTopOf="@+id/record_ear_btn" />
+        app:layout_constraintEnd_toStartOf="@+id/record_vomit_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/record_ear_btn"
+        app:layout_constraintTop_toTopOf="@+id/record_ear_btn"
+        tools:text="털" />
 
 
     <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:lineSpacingExtra="7sp"
-        android:textColor="@color/dark"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/record_fur_btn"
-        app:layout_constraintEnd_toEndOf="@+id/record_fur_btn"
-        app:layout_constraintStart_toStartOf="@+id/record_fur_btn"
-        app:layout_constraintTop_toTopOf="@+id/record_fur_btn"
-        tools:text="털" />
-
-    <ImageButton
         android:id="@+id/record_vomit_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="168dp"
-        android:background="@color/white"
-        android:src="@drawable/btn_trouble"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
-        app:layout_constraintTop_toTopOf="@+id/record_fur_btn" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginEnd="58dp"
         android:gravity="center_horizontal"
         android:lineSpacingExtra="7sp"
-        android:textColor="@color/dark"
+        android:textColor="@color/black_two"
         android:textSize="12sp"
+        android:background="@drawable/trouble_selector"
         app:layout_constraintBottom_toBottomOf="@+id/record_fur_btn"
-        app:layout_constraintEnd_toEndOf="@+id/record_vomit_btn"
-        app:layout_constraintStart_toStartOf="@+id/record_vomit_btn"
-        app:layout_constraintTop_toTopOf="@+id/record_vomit_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/record_fur_btn"
+        app:layout_constraintTop_toTopOf="@+id/record_fur_btn"
         tools:text="구토" />
-
 
 
     <EditText
         android:id="@+id/memo_edt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:lines="4"
-        android:layout_marginStart="28dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="28dp"
-        android:text="아주 맛있는 사료였다람쥐"
-        android:textColor="@color/warm_grey"
+        android:background="@drawable/record_memo"
+        android:gravity="start"
+        android:lines="4"
+        android:text="아주 맛있는 퍼펙트한 사료였다람쥐 0u0"
+        android:padding="10dp"
+        android:textColor="@color/black_two"
         android:textSize="12sp"
-        android:background="@drawable/recordedge"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
 
     <Button
         android:id="@+id/record_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
-        android:backgroundTint="@color/wheat"
+        android:backgroundTint="@color/black_two"
         android:fontFamily="@font/notosanskr_medium"
         android:text="저장"
+        android:textColor="@color/white_two"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/memo_edt" />
