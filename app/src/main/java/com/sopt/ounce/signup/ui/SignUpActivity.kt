@@ -14,8 +14,6 @@ import kotlinx.android.synthetic.main.activity_sign_up_finish.*
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var mViewpagerAdapter : SignUpPagerAdapter
-    private var mCheck : Boolean = false
-    private var mFinal : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,16 +27,14 @@ class SignUpActivity : AppCompatActivity() {
         //확인 버튼 누를 시 다음 페이지 이동
         //기능 구현 후 조건 걸어서 클릭 못하게 하는거 필요
         btn_signup_ok.setOnClickListener {
-            if(vp_signup.currentItem < vp_signup.childCount) {
+            if(vp_signup.currentItem < vp_signup.childCount-1) {
                 vp_signup.currentItem += 1
                 buttonEnable(false)
             }
             else{
-                if (UserInfoObject.finish){
                     val intent = Intent(this, SignUpFinishActivity::class.java)
                     startActivity(intent)
                     finish()
-                }
             }
 
         }
@@ -46,7 +42,6 @@ class SignUpActivity : AppCompatActivity() {
         img_signup_back.setOnClickListener {
             if(vp_signup.currentItem != 0){
                 vp_signup.currentItem -= 1
-                buttonEnable(false)
             }
             else{
                 finish()

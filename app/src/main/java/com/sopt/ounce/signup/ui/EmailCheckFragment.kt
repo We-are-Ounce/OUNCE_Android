@@ -16,6 +16,7 @@ import com.sopt.ounce.server.EmailCheckServiceImpl
 import com.sopt.ounce.signup.data.RequestEmailData
 import com.sopt.ounce.signup.data.UserInfoObject
 import com.sopt.ounce.util.customEnqueue
+import com.sopt.ounce.util.showLog
 import com.sopt.ounce.util.textCheckListener
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.fragment_email_check.*
@@ -88,15 +89,15 @@ class EmailCheckFragment : Fragment() {
                     if (!isShow) {
                         // do checking EditText
                         v.edt_email.clearFocus()
-                        v.edt_email.background.setColorFilter(
-                            resources.getColor(R.color.greyish_two),
-                            PorterDuff.Mode.SRC_IN
-                        )
+//                        v.edt_email.background.setColorFilter(
+//                            resources.getColor(R.color.greyish_two),
+//                            PorterDuff.Mode.SRC_IN
+//                        )
                         v.edt_email_number.clearFocus()
-                        v.edt_email_number.background.setColorFilter(
-                            resources.getColor(R.color.greyish_two),
-                            PorterDuff.Mode.SRC_IN
-                        )
+//                        v.edt_email_number.background.setColorFilter(
+//                            resources.getColor(R.color.greyish_two),
+//                            PorterDuff.Mode.SRC_IN
+//                        )
                     }
                 }
         }
@@ -156,6 +157,8 @@ class EmailCheckFragment : Fragment() {
         mEmail = v.edt_email.text.toString()
         //6자리 난수 생성
         mCode = (100000..999999).random()
+        v.txt_email_failsend.text = "인증번호를 발송했습니다."
+        v.txt_email_failsend.visibility = View.VISIBLE
 
         val request = EmailCheckServiceImpl
         request.service.postEmail(
@@ -166,12 +169,8 @@ class EmailCheckFragment : Fragment() {
             )
         ).customEnqueue(
             onSuccess = {
-                v.txt_email_failsend.text = "인증번호를 발송했습니다."
-                v.txt_email_failsend.visibility = View.VISIBLE
-            },
-            onError = {
-                v.txt_email_failsend.text = "올바른 이메일을 입력해주세요."
-                v.txt_email_failsend.visibility = View.VISIBLE
+                "MailSuccess".showLog("${it.message}")
+
             }
         )
 
