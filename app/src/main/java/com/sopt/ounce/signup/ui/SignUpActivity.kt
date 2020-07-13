@@ -10,6 +10,7 @@ import com.sopt.ounce.signup.adapter.SignUpPagerAdapter
 import com.sopt.ounce.signup.data.UserInfoObject
 import com.sopt.ounce.util.StatusObject
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.activity_sign_up_finish.*
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var mViewpagerAdapter : SignUpPagerAdapter
@@ -30,10 +31,11 @@ class SignUpActivity : AppCompatActivity() {
         btn_signup_ok.setOnClickListener {
             if(vp_signup.currentItem < vp_signup.childCount) {
                 vp_signup.currentItem += 1
+                buttonEnable(false)
             }
             else{
                 if (UserInfoObject.finish){
-                    var intent = Intent(this, SignUpFinishActivity::class.java)
+                    val intent = Intent(this, SignUpFinishActivity::class.java)
                     startActivity(intent)
                     finish()
                 }
@@ -44,6 +46,7 @@ class SignUpActivity : AppCompatActivity() {
         img_signup_back.setOnClickListener {
             if(vp_signup.currentItem != 0){
                 vp_signup.currentItem -= 1
+                buttonEnable(false)
             }
             else{
                 finish()
@@ -71,6 +74,24 @@ class SignUpActivity : AppCompatActivity() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE)
                 as InputMethodManager
         return imm
+    }
+
+    //확인 버튼 클릭 활성화
+    @Suppress("DEPRECATION")
+    fun buttonEnable(enable : Boolean){
+        if(enable) {
+            btn_signup_ok.apply {
+                isEnabled = true
+                setTextColor(resources.getColor(R.color.white))
+            }
+        }
+        else{
+            btn_signup_ok.apply {
+                isEnabled = false
+                setTextColor(resources.getColor(R.color.greyish_two))
+            }
+        }
+
     }
 
 
