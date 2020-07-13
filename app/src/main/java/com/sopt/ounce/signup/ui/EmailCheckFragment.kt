@@ -89,15 +89,15 @@ class EmailCheckFragment : Fragment() {
                     if (!isShow) {
                         // do checking EditText
                         v.edt_email.clearFocus()
-                        v.edt_email.background.setColorFilter(
-                            resources.getColor(R.color.greyish_two),
-                            PorterDuff.Mode.SRC_IN
-                        )
+//                        v.edt_email.background.setColorFilter(
+//                            resources.getColor(R.color.greyish_two),
+//                            PorterDuff.Mode.SRC_IN
+//                        )
                         v.edt_email_number.clearFocus()
-                        v.edt_email_number.background.setColorFilter(
-                            resources.getColor(R.color.greyish_two),
-                            PorterDuff.Mode.SRC_IN
-                        )
+//                        v.edt_email_number.background.setColorFilter(
+//                            resources.getColor(R.color.greyish_two),
+//                            PorterDuff.Mode.SRC_IN
+//                        )
                     }
                 }
         }

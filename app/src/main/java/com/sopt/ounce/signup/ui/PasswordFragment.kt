@@ -24,10 +24,17 @@ class PasswordFragment : Fragment() {
     private lateinit var v: View
     private lateinit var mImm: InputMethodManager
     private lateinit var mActivity: SignUpActivity
+    private lateinit var mPassword : String
+    private lateinit var mPasswordCheck : String
 
     override fun onAttach(context: Context) {
         mContext = context
         super.onAttach(context)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mActivity = activity as SignUpActivity
     }
 
     override fun onCreateView(
@@ -35,42 +42,31 @@ class PasswordFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         v = inflater.inflate(R.layout.fragment_password, container, false)
-
-        return v
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         settingMethodManager()
         observeKeyboard()
 
         // 비밀번호 입력창 길이 확인에 따른
 //        밑줄 색상 변경과 문구 출력
-        edt_password_input.apply {
+        v.edt_password_input.apply {
             textCheckListener { it ->
                 if (it.isNullOrEmpty() || it.length < 5) {
-                    txt_password_issue.visibility = View.VISIBLE
-                    edt_password_input.background.setColorFilter(
-                        resources.getColor(R.color.dark_peach),
-                        PorterDuff.Mode.SRC_IN
-                    )
+                    v.txt_password_issue.visibility = View.VISIBLE
+
                 } else {
-                    txt_password_issue.visibility = View.INVISIBLE
-                    edt_password_input.background.setColorFilter(
-                        resources.getColor(R.color.greyish_two),
-                        PorterDuff.Mode.SRC_IN
-                    )
+                    v.txt_password_issue.visibility = View.INVISIBLE
+
                 }
+                mPassword = it.toString()
             }
 
             setOnFocusChangeListener { _, has ->
                 if (has) {
-                    edt_password_input.background.setColorFilter(
+                    v.edt_password_input.background.setColorFilter(
                         resources.getColor(R.color.black_two),
                         PorterDuff.Mode.SRC_IN
                     )
                 } else {
-                    edt_password_input.background.setColorFilter(
+                    v.edt_password_input.background.setColorFilter(
                         resources.getColor(R.color.greyish_two),
                         PorterDuff.Mode.SRC_IN
                     )
@@ -78,7 +74,15 @@ class PasswordFragment : Fragment() {
             }
         }
 
+        v.edt_password_check.apply{
+            textCheckListener {
+                mPasswordCheck = it.toString()
+                checkPassword(mPassword, mPasswordCheck)
+            }
+        }
 
+
+        return v
     }
 
 
@@ -88,12 +92,6 @@ class PasswordFragment : Fragment() {
 
         v.layout_password_container.setOnClickListener {
             mImm.hideSoftInputFromWindow(v.edt_password_input.windowToken, 0)
-            val password = v.edt_password_input.text.toString()
-            val passwordCheck = v.edt_password_check.text.toString()
-
-            if (password.length >= 5 && passwordCheck.isNotEmpty()) {
-                checkPassword(password, passwordCheck)
-            }
         }
     }
 
@@ -104,14 +102,17 @@ class PasswordFragment : Fragment() {
                 resources.getColor(R.color.greyish_two),
                 PorterDuff.Mode.SRC_IN
             )
+            UserInfoObject.password = mPassword
 
-            UserInfoObject.finish = true
+            mActivity.buttonEnable(true)
+
         } else {
             v.txt_password_checkissue.visibility = View.VISIBLE
             v.edt_password_check.background.setColorFilter(
                 resources.getColor(R.color.dark_peach), PorterDuff.Mode.SRC_IN
             )
-            UserInfoObject.finish = false
+
+            mActivity.buttonEnable(false)
         }
 
     }
