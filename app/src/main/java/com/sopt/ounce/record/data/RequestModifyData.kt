@@ -1,6 +1,6 @@
 package com.sopt.ounce.login.data
 
-data class RequestReviewData (
+data class RequestModifyData (
     var reviewRating : Int,
     var reviewPrefer :Int,
     var reviewInfo : String,

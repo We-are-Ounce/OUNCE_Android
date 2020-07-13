@@ -1,6 +1,6 @@
 package com.sopt.ounce.login.data
 
-data class RequestReviewData (
+data class RequestDetailData (
     var reviewRating : Int,
     var reviewPrefer :Int,
     var reviewInfo : String,
@@ -10,9 +10,6 @@ data class RequestReviewData (
     var reviewEye: Boolean,
     var reviewEar :Boolean,
     var reviewHair : Boolean,
-    var reviewVomit : Boolean,
-    var createdAt : String,
-    var foodIdx : Int,
-    var profileIdx :Int
+    var reviewVomit : Boolean
 
 )

@@ -18,15 +18,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
 import com.sopt.ounce.R
+import com.sopt.ounce.login.data.RequestReviewData
 import com.sopt.ounce.record.RecordItemDecoration
 import com.sopt.ounce.record.adapter.FeatureAdapter
 import com.sopt.ounce.record.data.FeatureData
+import com.sopt.ounce.server.UserRecordService
+import com.sopt.ounce.util.customEnqueue
 import kotlinx.android.synthetic.main.activity_record.*
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
+import kotlin.properties.Delegates
 
 class RecordActivity : AppCompatActivity() {
-    private lateinit var mFeatureAdapter : FeatureAdapter
+    private lateinit var mFeatureAdapter: FeatureAdapter
+    private var mTotal by Delegates.notNull<Int>()
+    private var mFavor by Delegates.notNull<Int>()
+
+    //서버 통신, 싱글톤 그대로 가져옴
+    private val mRecordRequest = UserRecordService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,18 +45,26 @@ class RecordActivity : AppCompatActivity() {
 //        ratingBar2.setStarFillDrawable(resources.getDrawable(R.drawable.ic_favorite_select))
 //        ratingBar2.setStarEmptyDrawable(resources.getDrawable(R.drawable.ic_favorite_unselected))
 
+        ratingBar.setOnRatingChangeListener {
+            mTotal = it.toInt()
+        }
+        ratingBar2.setOnRatingChangeListener {
+            mFavor = it.toInt()
+        }
+
         initFeatureRcv()
 
-        
     }
 
-    private fun initFeatureRcv(){
+    private fun initFeatureRcv() {
         mFeatureAdapter = FeatureAdapter(this)
         rcv_record_feature.apply {
             adapter = mFeatureAdapter
-            layoutManager  = LinearLayoutManager(this@RecordActivity,
+            layoutManager = LinearLayoutManager(
+                this@RecordActivity,
                 LinearLayoutManager.HORIZONTAL,
-                false)
+                false
+            )
             addItemDecoration(RecordItemDecoration(this@RecordActivity))
         }
 
@@ -56,5 +73,19 @@ class RecordActivity : AppCompatActivity() {
             FeatureData("사슴")
         )
         mFeatureAdapter.notifyDataSetChanged()
+    }
+
+    //리뷰 등록
+    private fun recordAddReview() {
+
+        mRecordRequest.service.postReviewAdd(
+            RequestReviewData(
+                reviewRating = mTotal,
+                reviewPrefer = mFavor,
+                reviewInfo = editTextTextPersonName.text.toString(),
+                reviewMemo = memo_edt.text.toString()
+            )
+        ).customEnqueue(onSuccess = {
+        })
     }
 }
