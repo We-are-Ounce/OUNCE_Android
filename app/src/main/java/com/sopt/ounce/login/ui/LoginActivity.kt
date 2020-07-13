@@ -11,11 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import com.amn.easysharedpreferences.EasySharedPreference
+import com.amn.easysharedpreferences.EasySharedPreferenceConfig
 import com.sopt.ounce.R
+import com.sopt.ounce.catregister.CatRegisterActivity
 import com.sopt.ounce.login.data.RequestLoginData
+import com.sopt.ounce.main.ui.MainActivity
 import com.sopt.ounce.server.UserServiceImpl
 import com.sopt.ounce.util.textCheckListener
 import com.sopt.ounce.signup.ui.SignUpActivity
@@ -35,6 +38,9 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        EasySharedPreferenceConfig.initDefault(EasySharedPreferenceConfig.Builder()
+            .inputFileName("easy_preference").inputMode(Context.MODE_PRIVATE).build())
+
 
         //상태바 아이콘 색 변경
         StatusObject.setStatusBar(this)
@@ -61,12 +67,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         edt_login_password.apply {
-//            setOnClickListener {
-//                edt_login_password.background.setColorFilter(
-//                    resources.getColor(R.color.black_two),
-//                    PorterDuff.Mode.SRC_IN
-//                )
-//            }
+
             textCheckListener {
                 mPassword = it.toString()
                 checkButtonClick()
@@ -147,8 +148,22 @@ class LoginActivity : AppCompatActivity() {
 
         mLoginRequest.service.postSignIn(RequestLoginData(mId, mPassword))
             .customEnqueue(
-                onSuccess = {
-                    Toast.makeText(this, "${it.status}", Toast.LENGTH_SHORT).show()
+                onSuccess = { it ->
+                    it.data?.let { data ->
+
+                        when (data.profileCount) {
+                            0 -> {
+                                EasySharedPreference.Companion.putString("accessToken",data.accessToken)
+                                val intent = Intent(this, CatRegisterActivity::class.java)
+                                startActivity(intent)
+                            }
+                            else -> {
+                                EasySharedPreference.Companion.putInt("profileIdx",data.profileIdx)
+                                val intent = Intent(this, MainActivity::class.java)
+                                startActivity(intent)
+                            }
+                        }
+                    }
                 },
                 onError = {
                     //statusCode == 400
@@ -174,7 +189,6 @@ class LoginActivity : AppCompatActivity() {
         super.onBackPressed()
         ActivityCompat.finishAffinity(this)
     }
-
 
 }
 
