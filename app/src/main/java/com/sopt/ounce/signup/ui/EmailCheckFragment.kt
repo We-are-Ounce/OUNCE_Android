@@ -15,17 +15,25 @@ import com.sopt.ounce.R
 import com.sopt.ounce.util.textCheckListener
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.fragment_email_check.view.*
+import java.util.regex.Pattern
 
 
 class EmailCheckFragment : Fragment() {
     private lateinit var mContext: Context
-    private lateinit var v : View
-    private lateinit var mImm : InputMethodManager
+    private lateinit var v: View
+    private lateinit var mImm: InputMethodManager
+    private lateinit var mActivity: SignUpActivity
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mActivity = activity as SignUpActivity
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +41,7 @@ class EmailCheckFragment : Fragment() {
     ): View? {
 
         v = inflater.inflate(R.layout.fragment_email_check, container, false)
+
         observeKeyboard()
 
         //이메일에 인증코드 전송 버튼 리스너
@@ -54,16 +63,12 @@ class EmailCheckFragment : Fragment() {
     }
 
 
-
-
-
     //외부에서 imm을 가져오기 위한 함수
-    private fun settingMethodManager(){
-        val activity = activity as SignUpActivity
-        mImm = activity.methodManagerToFragment()
+    private fun settingMethodManager() {
+        mImm = mActivity.methodManagerToFragment()
 
         v.layout_email_container.setOnClickListener {
-            mImm.hideSoftInputFromWindow(v.edt_email.windowToken,0)
+            mImm.hideSoftInputFromWindow(v.edt_email.windowToken, 0)
         }
     }
 
@@ -75,7 +80,15 @@ class EmailCheckFragment : Fragment() {
                     if (!isShow) {
                         // do checking EditText
                         v.edt_email.clearFocus()
+                        v.edt_email.background.setColorFilter(
+                            resources.getColor(R.color.greyish_two),
+                            PorterDuff.Mode.SRC_IN
+                        )
                         v.edt_email_number.clearFocus()
+                        v.edt_email_number.background.setColorFilter(
+                            resources.getColor(R.color.greyish_two),
+                            PorterDuff.Mode.SRC_IN
+                        )
                     }
                 }
         }
@@ -83,26 +96,47 @@ class EmailCheckFragment : Fragment() {
 
 
     @SuppressLint("ResourceAsColor")
-    private fun settingEditText(){
+    private fun settingEditText() {
+        //이메일 형식 체크 변수
+        val p = Pattern.compile(
+            "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$",
+            Pattern.CASE_INSENSITIVE
+        )
+
         v.edt_email.apply {
             textCheckListener {
-                if (it.isNullOrEmpty()){
+                val m = p.matcher(it.toString())
+                if (m.matches()) {
+                    v.btn_email_send.apply {
+                        isEnabled = true
+                        setTextColor(resources.getColor(R.color.white))
+                    }
+                } else {
+                    v.btn_email_send.apply {
+                        isEnabled = false
+                        setTextColor(resources.getColor(R.color.greyish_two))
+                    }
+                }
+            }
+
+            setOnFocusChangeListener { _, has ->
+                if (has) {
                     v.edt_email.background.setColorFilter(
-                        resources.getColor(R.color.white_three),
-                        PorterDuff.Mode.SRC_IN)
+                        resources.getColor(R.color.black_two),
+                        PorterDuff.Mode.SRC_IN
+                    )
                 }
             }
         }
 
         v.edt_email_number.apply {
             textCheckListener {
-                if(it?.length == 5){
+                if (it?.length == 5) {
                     v.btn_email_check.isEnabled = true
                     v.btn_email_check.setTextColor(resources.getColor(R.color.white))
-                }
-                else{
+                } else {
                     v.btn_email_check.isEnabled = false
-                    v.btn_email_check.setTextColor(resources.getColor(R.color.warm_grey))
+                    v.btn_email_check.setTextColor(resources.getColor(R.color.greyish_two))
                 }
             }
         }
@@ -110,35 +144,30 @@ class EmailCheckFragment : Fragment() {
     }
 
     // 이메일에 인증번호를 보내는 버튼 누를 때 호출
-    private fun checkEmail(){
-        if(v.edt_email.text.toString().isEmpty()){
-            v.edt_email.background.setColorFilter(
-                resources.getColor(R.color.pinkish_tan),
-                PorterDuff.Mode.SRC_IN)
-            v.txt_email_failsend.visibility = View.VISIBLE
-        }
-        else{
-            v.txt_email_failsend.visibility = View.INVISIBLE
-            v.edt_email.background.setColorFilter(
-                resources.getColor(R.color.white_three),
-                PorterDuff.Mode.SRC_IN)
-        }
+    private fun checkEmail() {
+        v.txt_email_failsend.text = "인증번호를 발송했습니다."
+        v.txt_email_failsend.visibility = View.VISIBLE
+
+        val randomCode = (100000..999999).random()
 
     }
 
     // 이메일에서 받은 인증코드를 입력하는 버튼 누를 때 호출
-    private fun checkCode(){
-        if(v.edt_email_number.text?.length != 5){
+    private fun checkCode() {
+        if (v.edt_email_number.text?.length != 5) {
             v.edt_email_number.background.setColorFilter(
-                resources.getColor(R.color.pinkish_tan),
-                PorterDuff.Mode.SRC_IN)
+                resources.getColor(R.color.dark_peach),
+                PorterDuff.Mode.SRC_IN
+            )
             v.txt_email_failcheck.visibility = View.VISIBLE
-        }
-        else{
+        } else {
             v.edt_email_number.background.setColorFilter(
-                resources.getColor(R.color.white_three),
-                PorterDuff.Mode.SRC_IN)
+                resources.getColor(R.color.greyish_two),
+                PorterDuff.Mode.SRC_IN
+            )
             v.txt_email_failcheck.visibility = View.INVISIBLE
+
+            mActivity.buttonEnable(true)
         }
     }
 
