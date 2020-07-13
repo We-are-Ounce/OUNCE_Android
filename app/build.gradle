@@ -82,6 +82,8 @@ dependencies {
     //ratingbar custom
     implementation 'com.hedgehog.ratingbar:app:1.1.2'
 
+    //easy SharedPreferences
+    implementation 'com.github.AmanpreetYatin:Easy-SharedPreferences:0.1.1'
 
 
 }
