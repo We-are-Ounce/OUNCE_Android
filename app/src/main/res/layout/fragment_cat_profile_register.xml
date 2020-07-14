@@ -56,9 +56,11 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_cat_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        app:layout_constraintDimensionRatio="1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="100dp"
         android:src="@drawable/img_cat"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
@@ -68,10 +70,9 @@
         android:id="@+id/img_cat_profile_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp"
         android:src="@drawable/btn_plus"
         app:layout_constraintBottom_toBottomOf="@+id/img_cat_profile"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right" />
+        app:layout_constraintEnd_toEndOf="@+id/img_cat_profile" />
 
     <TextView
         android:id="@+id/txt_catprofile_name"

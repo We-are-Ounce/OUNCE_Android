@@ -8,7 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.amn.easysharedpreferences.EasySharedPreference
 import com.sopt.ounce.R
-import com.sopt.ounce.server.UserServiceImpl
+import com.sopt.ounce.server.OunceServiceImpl
 import com.sopt.ounce.signup.adapter.SignUpPagerAdapter
 import com.sopt.ounce.signup.data.RequestSignUpdata
 import com.sopt.ounce.signup.data.UserInfoObject
@@ -16,11 +16,10 @@ import com.sopt.ounce.util.StatusObject
 import com.sopt.ounce.util.customEnqueue
 import com.sopt.ounce.util.showLog
 import kotlinx.android.synthetic.main.activity_sign_up.*
-import kotlinx.android.synthetic.main.activity_sign_up_finish.*
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var mViewpagerAdapter: SignUpPagerAdapter
-    private val mUserService: UserServiceImpl = UserServiceImpl
+    private val mUserService: OunceServiceImpl = OunceServiceImpl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +42,7 @@ class SignUpActivity : AppCompatActivity() {
                 "UserInfoCheck".showLog("${UserInfoObject.id}")
                 "UserInfoCheck".showLog("${UserInfoObject.password}")
 
-                mUserService.service.postSignUp(
+                mUserService.SERVICE.postSignUp(
                     RequestSignUpdata(
                         email = UserInfoObject.email,
                         id = UserInfoObject.id,

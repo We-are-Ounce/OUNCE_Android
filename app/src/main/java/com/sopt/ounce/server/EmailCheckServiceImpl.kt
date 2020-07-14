@@ -1,6 +1,5 @@
 package com.sopt.ounce.server
 
-import com.sopt.ounce.login.api.LoginService
 import com.sopt.ounce.signup.api.EmailCheckService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

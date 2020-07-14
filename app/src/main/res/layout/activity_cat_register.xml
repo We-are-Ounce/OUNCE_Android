@@ -28,7 +28,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/img_catregister_back"
-        app:srcCompat="@drawable/img_logo" />
+        android:src="@drawable/img_logo_login" />
 
     <ScrollView
         android:id="@+id/scroll_signup"
@@ -101,10 +101,12 @@
     <Button
         android:id="@+id/btn_catregister_ok"
         style="@style/siginButtonStyle"
-        android:background="@drawable/singup_btn_unclick"
+        android:textColor="@color/greyish_two"
+        android:enabled="false"
+        android:background="@drawable/drawable_signup_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="확인"
+        android:text="다음"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

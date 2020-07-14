@@ -5,12 +5,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.sopt.ounce.R
+import com.sopt.ounce.catregister.CatRegisterActivity
 import com.sopt.ounce.login.ui.LoginActivity
+import kotlinx.android.synthetic.main.activity_sign_up_finish.*
 
 class SignUpFinishActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up_finish)
+
+        btn_go_register.setOnClickListener {
+            val intent = Intent(this,CatRegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+
     }
 
     override fun onBackPressed() {
