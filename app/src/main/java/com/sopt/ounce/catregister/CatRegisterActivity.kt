@@ -10,6 +10,7 @@ import com.sopt.ounce.catregister.adapter.CatViewPagerAdapter
 import com.sopt.ounce.util.StatusObject
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.activity_cat_register.*
+import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.fragment_cat_profile_register.*
 
 class CatRegisterActivity : AppCompatActivity() {
@@ -44,6 +45,7 @@ class CatRegisterActivity : AppCompatActivity() {
         btn_catregister_ok.setOnClickListener {
             if(vp_catregister.currentItem == 0){
                 vp_catregister.currentItem += 1
+                buttonEnable(false)
             }
         }
 
@@ -60,6 +62,22 @@ class CatRegisterActivity : AppCompatActivity() {
     fun setImmToFragment() : InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE)
             as InputMethodManager
 
+
+    @Suppress("DEPRECATION")
+    fun buttonEnable(enable: Boolean) {
+        if (enable) {
+            btn_catregister_ok.apply {
+                isEnabled = true
+                setTextColor(resources.getColor(R.color.white))
+            }
+        } else {
+            btn_catregister_ok.apply {
+                isEnabled = false
+                setTextColor(resources.getColor(R.color.greyish_two))
+            }
+        }
+
+    }
 
 
 }

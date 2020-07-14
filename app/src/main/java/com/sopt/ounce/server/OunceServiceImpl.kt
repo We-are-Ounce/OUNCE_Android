@@ -1,13 +1,11 @@
 package com.sopt.ounce.server
 
-import com.sopt.ounce.login.api.LoginService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object UserServiceImpl {
+object OunceServiceImpl {
     private val interceptor = Interceptor { chain ->
         val header = "application/json"
         val newRequest = chain.request()
@@ -30,5 +28,5 @@ object UserServiceImpl {
         .client(client)
         .build()
 
-    val service : LoginService = retrofit.create(LoginService::class.java)
+    val SERVICE : OunceService = retrofit.create(OunceService::class.java)
 }
