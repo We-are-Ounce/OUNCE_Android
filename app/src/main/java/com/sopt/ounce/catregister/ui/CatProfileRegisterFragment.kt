@@ -21,7 +21,9 @@ import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import com.sopt.ounce.R
 import com.sopt.ounce.catregister.CatRegisterActivity
+import com.sopt.ounce.catregister.data.CatInfoData
 import com.sopt.ounce.util.showLog
+import com.sopt.ounce.util.textCheckListener
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
@@ -41,7 +43,10 @@ class CatProfileRegisterFragment : Fragment() {
     private lateinit var v: View
     private lateinit var mImm: InputMethodManager
     private lateinit var mActivity: CatRegisterActivity
-    private lateinit var mSelectedImage : Uri
+    private var mSelectedImage: Uri? = null
+
+    private var mCatName: String = ""
+    private var mCatInfo: String = ""
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -67,6 +72,20 @@ class CatProfileRegisterFragment : Fragment() {
             settingPermission()
         }
 
+        v.edt_catprofile_name.apply {
+            textCheckListener {
+                mCatName = it.toString()
+                checkText()
+            }
+        }
+
+        v.edt_catprofile_explain.apply {
+            textCheckListener {
+                mCatInfo = it.toString()
+                checkText()
+            }
+        }
+
         return v
     }
 
@@ -77,6 +96,15 @@ class CatProfileRegisterFragment : Fragment() {
             mImm.hideSoftInputFromWindow(edt_catprofile_name.windowToken, 0)
         }
 
+    }
+
+    private fun checkText() {
+        "showProfile".showLog("name : ${mCatName}, info : ${mCatInfo}")
+        if (mCatName.isNotEmpty() && mCatInfo.isNotEmpty() && mSelectedImage != null) {
+            mActivity.buttonEnable(true)
+        } else {
+            mActivity.buttonEnable(false)
+        }
     }
 
     private fun observeKeyboard() {
@@ -131,7 +159,7 @@ class CatProfileRegisterFragment : Fragment() {
 
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             val result = CropImage.getActivityResult(data)
-            if(resultCode == Activity.RESULT_OK){
+            if (resultCode == Activity.RESULT_OK) {
                 mSelectedImage = result.originalUri
                 formatImg()
                 Glide.with(this)
@@ -140,17 +168,25 @@ class CatProfileRegisterFragment : Fragment() {
         }
     }
 
-    private fun formatImg(){
+    private fun formatImg() {
         val options = BitmapFactory.Options()
-        val inputStream : InputStream = mActivity.contentResolver.openInputStream(mSelectedImage)!!
-        val bitmap = BitmapFactory.decodeStream(inputStream,null,options)
+        val inputStream: InputStream = mActivity.contentResolver.openInputStream(mSelectedImage!!)!!
+        val bitmap = BitmapFactory.decodeStream(inputStream, null, options)
         val byteArrayOutputStream = ByteArrayOutputStream()
         bitmap!!.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream)
-        val photoBody = RequestBody.create(MediaType.parse("image/jpg"), byteArrayOutputStream.toByteArray())
-        val pictureRb = MultipartBody.Part.createFormData("image", File(mSelectedImage.toString()).name,photoBody)
+        val photoBody =
+            RequestBody.create(MediaType.parse("image/jpg"), byteArrayOutputStream.toByteArray())
+        val pictureRb = MultipartBody.Part.createFormData(
+            "image",
+            File(mSelectedImage.toString()).name,
+            photoBody
+        )
 
-        "showPicture".showLog("$pictureRb")
-        "showPicture".showLog("$mSelectedImage")
+        //이미지 정보 넣어주기
+        CatInfoData.catProfile?.profileImg = pictureRb
+
+        checkText()
+
     }
 
 
