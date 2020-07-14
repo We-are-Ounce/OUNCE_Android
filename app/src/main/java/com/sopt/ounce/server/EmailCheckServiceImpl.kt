@@ -20,7 +20,6 @@ object EmailCheckServiceImpl {
     private val client = OkHttpClient.Builder().apply {
         interceptors().add(interceptor)
     }.build()
-
     private const val BASE_URL = "https://ounce.herokuapp.com/"
 
     private val retrofit : Retrofit = Retrofit.Builder()
