@@ -11,28 +11,48 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.AutoCompleteTextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
 import com.google.android.material.tabs.TabLayout
 import com.sopt.ounce.R
 import com.sopt.ounce.main.ui.MainActivity
-import com.sopt.ounce.searchmain.data.SearchSimilarUserData
+import com.sopt.ounce.searchmain.data.reommendcat.RequestRecommendCatsData
+import com.sopt.ounce.searchmain.data.reommendcat.ResponseRecommendCatsData
 import com.sopt.ounce.searchmain.fragment.SearchSimilarUserFragment
+import com.sopt.ounce.searchmain.network.recommendcat.RequestRecommendCatToServer
 import com.sopt.ounce.searchmain.viewpager.SearchSimilarPagerAdapter
 import com.sopt.ounce.searchmain.viewpager.SearchTapAdapter
 import com.sopt.ounce.searchmain.viewpager.ViewPagerTransformer
+import com.sopt.ounce.server.OunceServiceImpl
+import com.sopt.ounce.util.customEnqueue
+import com.sopt.ounce.util.showLog
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import kotlin.concurrent.thread
 
 class SearchFragment : Fragment() {
+    val requestRecommendCatToServer = RequestRecommendCatToServer
     private lateinit var mInputMethodManager: InputMethodManager
     private lateinit var mContext: Context
     private lateinit var mView: View
     var isKeyboardFocused = false
     lateinit var mPagerAdapter : SearchSimilarPagerAdapter
-    var receiveDataArraySearch : ArrayList<SearchSimilarUserData> = ArrayList()
+    //var receiveDataArraySearch : ArrayList<SearchSimilarUserData> = ArrayList()
+    var receiveDataArraySearch = ResponseRecommendCatsData.Data(
+        listOf<ResponseRecommendCatsData.Data.RecommendFood>(
+            ResponseRecommendCatsData.Data.RecommendFood("", -1)),
+        listOf<ResponseRecommendCatsData.Data.ResultProfile>(
+            ResponseRecommendCatsData.Data.ResultProfile(-1, "", "")
+        ),
+        listOf<Int>(0)
+    )
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -64,10 +84,8 @@ class SearchFragment : Fragment() {
             mInputMethodManager.hideSoftInputFromWindow(sv_search_main_search.windowToken,0)
         }
         //메인 화면 ViewPager 어댑터 부착
-        //var viewPagerAdapter = registerViewPagerAdapter(view)
-        //vp_search_main_viewpager.adapter = viewPagerAdapter
         initDataArray()
-        initViewPager()
+
         vp_search_main_viewpager.clipToPadding = false
         vp_search_main_viewpager.clipChildren = false
         vp_search_main_viewpager.offscreenPageLimit = 2
@@ -80,9 +98,8 @@ class SearchFragment : Fragment() {
         vp_search_main_viewpager.setPadding(margin,0,margin,0)
         vp_search_main_viewpager.pageMargin = margin/32
 
-
         //ViewPager와 DotsIndicator 연동
-        di_search_main_dotsindicator.setViewPager(vp_search_main_viewpager)
+
         sv_search_main_search.findViewById<AutoCompleteTextView>(R.id.search_src_text).
         setTextColor(resources.getColor(R.color.greyish_brown))
         sv_search_main_search.findViewById<AutoCompleteTextView>(R.id.search_src_text).
@@ -149,81 +166,38 @@ class SearchFragment : Fragment() {
     }
 
     private fun initDataArray(){
-        receiveDataArraySearch.apply {
-            add(
-                SearchSimilarUserData(
-                    img_search_main_profile_src = R.drawable.img_card_cat,
-                    tv_search_main_cat_name_txt = "봄이",
-                    tv_search_main_cat_similarity_txt = "82",
-                    img_search_main_review_1_src = R.drawable.img_card_cat,
-                    img_search_main_review_2_src = R.drawable.img_card_cat,
-                    img_search_main_review_3_src = R.drawable.img_card_cat
-                )
+        val ounce = OunceServiceImpl.SERVICE.requestRecommendCat(
+            RequestRecommendCatsData(
+                profileIdx = 2
             )
-            add(
-                SearchSimilarUserData(
-                    img_search_main_profile_src = R.drawable.img_card_cat,
-                    tv_search_main_cat_name_txt = "여름이",
-                    tv_search_main_cat_similarity_txt = "80",
-                    img_search_main_review_1_src = R.drawable.img_card_cat,
-                    img_search_main_review_2_src = R.drawable.img_card_cat,
-                    img_search_main_review_3_src = R.drawable.img_card_cat
-                )
-            )
-            add(
-                SearchSimilarUserData(
-                    img_search_main_profile_src = R.drawable.img_card_cat,
-                    tv_search_main_cat_name_txt = "가을이",
-                    tv_search_main_cat_similarity_txt = "90",
-                    img_search_main_review_1_src = R.drawable.img_card_cat,
-                    img_search_main_review_2_src = R.drawable.img_card_cat,
-                    img_search_main_review_3_src = R.drawable.img_card_cat
-                )
-            )
-            add(
-                SearchSimilarUserData(
-                    img_search_main_profile_src = R.drawable.img_card_cat,
-                    tv_search_main_cat_name_txt = "겨울이",
-                    tv_search_main_cat_similarity_txt = "12",
-                    img_search_main_review_1_src = R.drawable.img_card_cat,
-                    img_search_main_review_2_src = R.drawable.img_card_cat,
-                    img_search_main_review_3_src = R.drawable.img_card_cat
-                )
-            )
-            add(
-                SearchSimilarUserData(
-                    img_search_main_profile_src = R.drawable.img_card_cat,
-                    tv_search_main_cat_name_txt = "참참참",
-                    tv_search_main_cat_similarity_txt = "22",
-                    img_search_main_review_1_src = R.drawable.img_card_cat,
-                    img_search_main_review_2_src = R.drawable.img_card_cat,
-                    img_search_main_review_3_src = R.drawable.img_card_cat
-                )
-            )
-            add(
-                SearchSimilarUserData(
-                    img_search_main_profile_src = R.drawable.img_card_cat,
-                    tv_search_main_cat_name_txt = "우울이",
-                    tv_search_main_cat_similarity_txt = "52",
-                    img_search_main_review_1_src = R.drawable.img_card_cat,
-                    img_search_main_review_2_src = R.drawable.img_card_cat,
-                    img_search_main_review_3_src = R.drawable.img_card_cat
-                )
-            )
-        }
+        )
+
+        ounce.customEnqueue(
+            onSuccess = {
+                receiveDataArraySearch = it.data.copy()
+                initViewPager()
+                di_search_main_dotsindicator.setViewPager(vp_search_main_viewpager)
+            },
+            onError = {
+            }
+        )
+
+
     }
 
     private fun initViewPager(){
         //서버에서 데이터 받아
         mPagerAdapter = SearchSimilarPagerAdapter(childFragmentManager)
-        for(iteminit in receiveDataArraySearch){
+        for(i in receiveDataArraySearch.resultProfile.indices){
             var mFragment = SearchSimilarUserFragment()
-            mFragment.img_search_main_profile_src = iteminit.img_search_main_profile_src
-            mFragment.tv_search_main_cat_name_txt = iteminit.tv_search_main_cat_name_txt
-            mFragment.tv_search_main_cat_similarity_txt = iteminit.tv_search_main_cat_similarity_txt + "%"
-            mFragment.img_search_main_review_1_src = iteminit.img_search_main_review_1_src
-            mFragment.img_search_main_review_2_src = iteminit.img_search_main_review_2_src
-            mFragment.img_search_main_review_3_src = iteminit.img_search_main_review_3_src
+            mFragment.img_search_main_profile_src = receiveDataArraySearch.resultProfile.get(i).profileImg
+            mFragment.tv_search_main_cat_name_txt = receiveDataArraySearch.resultProfile.get(i).profileName
+            mFragment.profileIdx = receiveDataArraySearch.resultProfile.get(i).profileIdx
+            mFragment.tv_search_main_cat_similarity_txt = receiveDataArraySearch.similarity.get(i)
+            for(arrIndices in receiveDataArraySearch.recommendFoodList.indices){
+                if(mFragment.profileIdx == receiveDataArraySearch.recommendFoodList.get(arrIndices).profileIdx)
+                    mFragment.img_search_main_review.add(receiveDataArraySearch.recommendFoodList.get(arrIndices).foodImg)
+            }
             mPagerAdapter.addItem(mFragment)
         }
         mPagerAdapter.notifyDataSetChanged()
