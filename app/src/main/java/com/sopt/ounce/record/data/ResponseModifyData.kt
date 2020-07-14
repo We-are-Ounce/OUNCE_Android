@@ -1,6 +1,5 @@
 package com.sopt.ounce.login.data
 
-import com.google.gson.annotations.SerializedName
 
 data class ResponseModifyData(
     val data: Data?,

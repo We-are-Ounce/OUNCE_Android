@@ -83,7 +83,13 @@ class RecordActivity : AppCompatActivity() {
                 reviewRating = mTotal,
                 reviewPrefer = mFavor,
                 reviewInfo = editTextTextPersonName.text.toString(),
-                reviewMemo = memo_edt.text.toString()
+                reviewMemo = memo_edt.text.toString(),
+                reviewStatus = chipGroup.checked.toInt(),
+                reviewSmell = chipSmellGroup.checked.toInt(),
+                reviewEye =  record_eye_btn.checked.toInt(),
+                reviewEar = record_ear_btn.checked.toInt(),
+                reviewHair =record_fur_btn.checked.toInt(),
+                reviewVomit = record_vomit_btn.checked.toInt()
             )
         ).customEnqueue(onSuccess = {
         })

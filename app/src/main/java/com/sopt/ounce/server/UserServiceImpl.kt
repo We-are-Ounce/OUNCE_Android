@@ -1,9 +1,9 @@
 package com.sopt.ounce.server
 
 import com.sopt.ounce.login.api.LoginService
+import com.sopt.ounce.login.api.RecordService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -31,4 +31,5 @@ object UserServiceImpl {
         .build()
 
     val service : LoginService = retrofit.create(LoginService::class.java)
+
 }
