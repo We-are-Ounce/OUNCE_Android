@@ -1,5 +1,6 @@
 package com.sopt.ounce.server
 
+import com.sopt.ounce.catregister.data.ResponseCatProfileData
 import com.sopt.ounce.login.data.RequestLoginData
 import com.sopt.ounce.login.data.ResponseLoginData
 import com.sopt.ounce.signup.data.RequestSignUpdata
@@ -14,26 +15,23 @@ interface OunceService {
     @Headers("Content-Type:application/json")
     @POST("user/signin")
     fun postSignIn(
-        @Body body : RequestLoginData
-    ) : Call<ResponseLoginData>
+        @Body body: RequestLoginData
+    ): Call<ResponseLoginData>
 
+    @Headers("Content-Type:application/json")
     @POST("user/signup")
     fun postSignUp(
-        @Body body : RequestSignUpdata
-    ) : Call<ResponseSignUpData>
+        @Body body: RequestSignUpdata
+    ): Call<ResponseSignUpData>
 
     @Multipart
     @POST("profile/register")
     fun postCatProfile(
-        @Header("Token") token : String,
-
+        @Header("Token") token: String,
         // profileImg = pictureRb
-        @Part profileImg : MultipartBody.Part,
+        @Part profileImg: MultipartBody.Part,
         //실제 사용 시
         //val name = RequestBody.create(MediaType.parse("text/plain"), 값)
-        @Part("profileName") profileName : RequestBody,
-        @Part("profileWeight") profileWeight : RequestBody,
-        @Part("profileGender") profileGender : RequestBody,
-        @Part("profileAge") profileAge : RequestBody
-    )
+        @PartMap body: HashMap<String, RequestBody>
+    ): Call<ResponseCatProfileData>
 }

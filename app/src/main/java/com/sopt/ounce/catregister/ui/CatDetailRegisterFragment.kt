@@ -10,18 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import com.sopt.ounce.R
-import com.sopt.ounce.catregister.CatRegisterActivity
-import com.sopt.ounce.catregister.adapter.CatViewPagerAdapter
 import com.sopt.ounce.catregister.data.CatInfoData
 import com.sopt.ounce.util.showLog
 import com.sopt.ounce.util.textCheckListener
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.fragment_cat_detail_register.*
 import kotlinx.android.synthetic.main.fragment_cat_detail_register.view.*
-import kotlinx.android.synthetic.main.fragment_cat_profile_register.*
-import kotlinx.android.synthetic.main.fragment_cat_profile_register.view.*
-import kotlinx.android.synthetic.main.fragment_password.view.*
-import java.util.*
 
 class CatDetailRegisterFragment : Fragment() {
     private lateinit var mContext: Context
@@ -64,15 +58,11 @@ class CatDetailRegisterFragment : Fragment() {
         radioGroup_detail.setOnCheckedChangeListener { _, id ->
             when (id) {
                 R.id.radiobutton_man -> {
-                    radiobutton_man.setTextColor(resources.getColor(R.color.white))
-                    radiobutton_woman.setTextColor(resources.getColor(R.color.greyish_brown))
                     CatInfoData.profileGender = "male"
 
                     "CatInfoData".showLog("CatInfoData.profileGender : ${CatInfoData.profileGender}")
                 }
                 R.id.radiobutton_woman -> {
-                    radiobutton_man.setTextColor(resources.getColor(R.color.greyish_brown))
-                    radiobutton_woman.setTextColor(resources.getColor(R.color.white))
                     CatInfoData.profileGender = "femail"
 
                     "CatInfoData".showLog("CatInfoData.profileGender : ${CatInfoData.profileGender}")

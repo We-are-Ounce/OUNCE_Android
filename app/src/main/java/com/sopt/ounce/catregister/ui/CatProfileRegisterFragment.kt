@@ -17,7 +17,6 @@ import com.bumptech.glide.Glide
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import com.sopt.ounce.R
-import com.sopt.ounce.catregister.CatRegisterActivity
 import com.sopt.ounce.catregister.data.CatInfoData
 import com.sopt.ounce.util.showLog
 import com.sopt.ounce.util.textCheckListener
@@ -26,7 +25,6 @@ import com.theartofdev.edmodo.cropper.CropImageView
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.fragment_cat_profile_register.*
 import kotlinx.android.synthetic.main.fragment_cat_profile_register.view.*
-import kotlinx.android.synthetic.main.fragment_id.view.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -156,31 +154,15 @@ class CatProfileRegisterFragment : Fragment() {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             val result = CropImage.getActivityResult(data)
             if (resultCode == Activity.RESULT_OK) {
-                mSelectedImage = result.originalUri
+                mSelectedImage = result.uri
                 Glide.with(this)
                     .load(mSelectedImage).thumbnail(0.1f).into(v.img_cat_profile)
 
+
                 CatInfoData.catProfileUri = mSelectedImage
+                "ShowCatProfileUri".showLog("${CatInfoData.catProfileUri.toString()}")
                 checkText()
             }
         }
     }
-
-    private fun formatImg() {
-        val options = BitmapFactory.Options()
-        val inputStream: InputStream = mActivity.contentResolver.openInputStream(mSelectedImage!!)!!
-        val bitmap = BitmapFactory.decodeStream(inputStream, null, options)
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap!!.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream)
-        val photoBody =
-            RequestBody.create(MediaType.parse("image/jpg"), byteArrayOutputStream.toByteArray())
-        val pictureRb = MultipartBody.Part.createFormData(
-            "profileImage",
-            File(mSelectedImage.toString()).name,
-            photoBody
-        )
-
-    }
-
-
 }
