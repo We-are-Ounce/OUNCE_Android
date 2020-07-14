@@ -2,6 +2,8 @@ package com.sopt.ounce.server
 
 import com.sopt.ounce.login.data.RequestLoginData
 import com.sopt.ounce.login.data.ResponseLoginData
+import com.sopt.ounce.searchmain.data.reommendcat.RequestRecommendCatsData
+import com.sopt.ounce.searchmain.data.reommendcat.ResponseRecommendCatsData
 import com.sopt.ounce.signup.data.RequestSignUpdata
 import com.sopt.ounce.signup.data.ResponseSignUpData
 import com.sopt.ounce.signup.data.UserInfoObject
@@ -19,4 +21,9 @@ interface OunceService {
     fun postSignUp(
         @Body body : RequestSignUpdata
     ) : Call<ResponseSignUpData>
+
+    @POST("search/recommend")
+    fun requestRecommendCat(
+        @Body body : RequestRecommendCatsData
+    ) : Call<ResponseRecommendCatsData>
 }

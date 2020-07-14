@@ -7,6 +7,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface RequestRecoomendCatInterface {
-    @POST("/search/user")
+    @POST("search/user")
     fun requestRecommedCat(@Body body : RequestRecommendCatsData) : Call<ResponseRecommendCatsData>
 }

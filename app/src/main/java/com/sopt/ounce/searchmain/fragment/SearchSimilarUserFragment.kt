@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.item_searchmain_similar.view.*
 
 class SearchSimilarUserFragment : Fragment(){
 
-    var img_search_main_profile_src = ""
+    var img_search_main_profile_src : String = ""
     var tv_search_main_cat_name_txt = ""
     var tv_search_main_cat_similarity_txt = 0
     var img_search_main_review = ArrayList<String>()
@@ -54,7 +54,31 @@ class SearchSimilarUserFragment : Fragment(){
 //        view.img_search_main_review_3.setImageResource(img_search_main_review_3_src)
         Glide.with(view).load(img_search_main_profile_src).into(view.img_search_main_profile)
         view.tv_search_main_cat_name.text = tv_search_main_cat_name_txt
-        view.tv_search_main_cat_similarity.text = tv_search_main_cat_similarity_txt.toString()
+        view.tv_search_main_cat_similarity.text = tv_search_main_cat_similarity_txt.toString() + "%"
+        val imgIdx = img_search_main_review.size
+        when(imgIdx){
+            0 -> {
+                view.img_search_main_review_1.setImageResource(R.drawable.img_card_cat)
+                view.img_search_main_review_2.setImageResource(R.drawable.img_card_cat)
+                view.img_search_main_review_3.setImageResource(R.drawable.img_card_cat)
+            }
+            1 -> {
+                Glide.with(view).load(img_search_main_review.get(0)).into(view.img_search_main_review_1)
+                view.img_search_main_review_2.setImageResource(R.drawable.img_card_cat)
+                view.img_search_main_review_3.setImageResource(R.drawable.img_card_cat)
+            }
+            2 -> {
+                Glide.with(view).load(img_search_main_review.get(0)).into(view.img_search_main_review_1)
+                Glide.with(view).load(img_search_main_review.get(1)).into(view.img_search_main_review_2)
+                view.img_search_main_review_3.setImageResource(R.drawable.img_card_cat)
+            }
+            else -> {
+                Glide.with(view).load(img_search_main_review.get(0)).into(view.img_search_main_review_1)
+                Glide.with(view).load(img_search_main_review.get(1)).into(view.img_search_main_review_2)
+                Glide.with(view).load(img_search_main_review.get(2)).into(view.img_search_main_review_3)
+            }
+        }
+
 
     }
 
