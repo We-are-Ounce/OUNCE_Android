@@ -19,7 +19,7 @@ import com.sopt.ounce.R
 import com.sopt.ounce.catregister.CatRegisterActivity
 import com.sopt.ounce.login.data.RequestLoginData
 import com.sopt.ounce.main.ui.MainActivity
-import com.sopt.ounce.server.UserServiceImpl
+import com.sopt.ounce.server.OunceServiceImpl
 import com.sopt.ounce.util.textCheckListener
 import com.sopt.ounce.signup.ui.SignUpActivity
 import com.sopt.ounce.util.StatusObject
@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
     private var mId: String = ""
     private var mPassword: String = ""
 
-    private val mLoginRequest: UserServiceImpl = UserServiceImpl
+    private val mLoginRequest: OunceServiceImpl = OunceServiceImpl
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -146,7 +146,7 @@ class LoginActivity : AppCompatActivity() {
     @Suppress("DEPRECATION")
     private fun checkIdPsw() {
 
-        mLoginRequest.service.postSignIn(RequestLoginData(mId, mPassword))
+        mLoginRequest.SERVICE.postSignIn(RequestLoginData(mId, mPassword))
             .customEnqueue(
                 onSuccess = { it ->
                     it.data?.let { data ->
