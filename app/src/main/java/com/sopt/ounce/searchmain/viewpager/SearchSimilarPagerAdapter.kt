@@ -15,4 +15,5 @@ class SearchSimilarPagerAdapter(fragmentManager: FragmentManager) : FragmentStat
     fun addItem(searchSimilarUserFragment : SearchSimilarUserFragment){
         fragmentArray.add(searchSimilarUserFragment)
     }
+
 }

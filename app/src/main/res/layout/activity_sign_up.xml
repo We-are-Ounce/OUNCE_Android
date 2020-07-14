@@ -100,7 +100,9 @@
     <Button
         android:id="@+id/btn_signup_ok"
         style="@style/siginButtonStyle"
-        android:background="@drawable/singup_btn_unclick"
+        android:textColor="@color/greyish_two"
+        android:background="@drawable/drawable_signup_btn"
+        android:enabled="false"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="확인"

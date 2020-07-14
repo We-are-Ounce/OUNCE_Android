@@ -1,5 +1,7 @@
 package com.sopt.ounce.signup.data
 
 object UserInfoObject {
-    var  finish : Boolean = false
+    var id : String = ""
+    var email: String = ""
+    var password : String =""
 }

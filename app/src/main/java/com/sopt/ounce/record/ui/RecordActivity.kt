@@ -2,31 +2,13 @@ package com.sopt.ounce.record.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.Manifest
-import android.app.Activity
-import android.content.ContentValues
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.net.Uri
-import android.os.Build
-import android.provider.MediaStore
-import android.util.Log
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipDrawable
 import com.sopt.ounce.R
-import com.sopt.ounce.login.data.RequestReviewData
 import com.sopt.ounce.record.RecordItemDecoration
 import com.sopt.ounce.record.adapter.FeatureAdapter
 import com.sopt.ounce.record.data.FeatureData
 import com.sopt.ounce.server.UserRecordService
-import com.sopt.ounce.util.customEnqueue
 import kotlinx.android.synthetic.main.activity_record.*
-import java.io.FileOutputStream
-import java.text.SimpleDateFormat
 import kotlin.properties.Delegates
 
 class RecordActivity : AppCompatActivity() {
@@ -78,20 +60,5 @@ class RecordActivity : AppCompatActivity() {
     //리뷰 등록
     private fun recordAddReview() {
 
-        mRecordRequest.service.postReviewAdd(
-            RequestReviewData(
-                reviewRating = mTotal,
-                reviewPrefer = mFavor,
-                reviewInfo = editTextTextPersonName.text.toString(),
-                reviewMemo = memo_edt.text.toString(),
-                reviewStatus = chipGroup.checked.toInt(),
-                reviewSmell = chipSmellGroup.checked.toInt(),
-                reviewEye =  record_eye_btn.checked.toInt(),
-                reviewEar = record_ear_btn.checked.toInt(),
-                reviewHair =record_fur_btn.checked.toInt(),
-                reviewVomit = record_vomit_btn.checked.toInt()
-            )
-        ).customEnqueue(onSuccess = {
-        })
     }
 }

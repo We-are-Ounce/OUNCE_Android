@@ -68,7 +68,7 @@
     <style name="pinkTextStyle" parent="fontFamiliyandPadding">
         <item name="android:textSize">12sp</item>
         <item name="android:lineSpacingExtra">7sp</item>
-        <item name="android:textColor">@color/pinkish_tan</item>
+        <item name="android:textColor">@color/dark_peach</item>
         <item name="android:fontWeight">400</item>
     </style>
 

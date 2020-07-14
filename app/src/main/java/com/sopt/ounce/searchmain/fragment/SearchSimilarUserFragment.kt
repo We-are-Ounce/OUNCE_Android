@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.sopt.ounce.R
+import kotlinx.android.synthetic.main.item_searchmain_similar.*
 import kotlinx.android.synthetic.main.item_searchmain_similar.view.*
 
-class SearchSimilarUserFragment : Fragment() {
+class SearchSimilarUserFragment : Fragment(){
 
     var img_search_main_profile_src = 0
     var tv_search_main_cat_name_txt = ""
@@ -16,6 +18,7 @@ class SearchSimilarUserFragment : Fragment() {
     var img_search_main_review_1_src = 0
     var img_search_main_review_2_src = 0
     var img_search_main_review_3_src = 0
+    lateinit var mView : View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,13 +28,21 @@ class SearchSimilarUserFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view = inflater.inflate(R.layout.item_searchmain_similar, container, false)
-        bindInfo(view)
-        return view
+        mView = inflater.inflate(R.layout.item_searchmain_similar, container, false)
+        bindInfo(mView)
+        return mView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        img_search_main_profile.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(p0: View?) {
+                Toast.makeText(mView.context, "position: ${tv_search_main_cat_name_txt}", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
     }
 
     fun bindInfo(view : View){
@@ -42,4 +53,5 @@ class SearchSimilarUserFragment : Fragment() {
         view.img_search_main_review_2.setImageResource(img_search_main_review_2_src)
         view.img_search_main_review_3.setImageResource(img_search_main_review_3_src)
     }
+
 }
