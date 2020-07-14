@@ -11,8 +11,10 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import com.sopt.ounce.R
 import com.sopt.ounce.catregister.CatRegisterActivity
+import com.sopt.ounce.catregister.adapter.CatViewPagerAdapter
 import com.sopt.ounce.catregister.data.CatInfoData
 import com.sopt.ounce.util.showLog
+import com.sopt.ounce.util.textCheckListener
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.fragment_cat_detail_register.*
 import kotlinx.android.synthetic.main.fragment_cat_detail_register.view.*
@@ -25,10 +27,16 @@ class CatDetailRegisterFragment : Fragment() {
     private lateinit var mContext: Context
     private lateinit var v: View
     private lateinit var mImm: InputMethodManager
+    private lateinit var mActivity: CatRegisterActivity
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mActivity = activity as CatRegisterActivity
     }
 
     override fun onCreateView(
@@ -70,6 +78,7 @@ class CatDetailRegisterFragment : Fragment() {
                     "CatInfoData".showLog("CatInfoData.profileGender : ${CatInfoData.profileGender}")
                 }
             }
+            checkData()
         }
 
         check_newtral.setOnCheckedChangeListener { _, check ->
@@ -80,8 +89,35 @@ class CatDetailRegisterFragment : Fragment() {
                 CatInfoData.profileNeutral = "false"
                 "CatInfoData".showLog("CatInfoData.profileNeutral : ${CatInfoData.profileNeutral}")
             }
+            checkData()
         }
 
+        edt_cat_age.apply {
+            textCheckListener {
+                CatInfoData.profileAge = it.toString()
+                checkData()
+            }
+        }
+
+        edt_cat_weight.apply {
+            textCheckListener {
+                CatInfoData.profileWeight = it.toString()
+                checkData()
+            }
+        }
+
+    }
+
+    private fun checkData() {
+        if (CatInfoData.profileAge.isBlank() ||
+            CatInfoData.profileGender.isBlank() ||
+            CatInfoData.profileNeutral.isBlank() ||
+            CatInfoData.profileWeight.isBlank()
+        ) {
+            mActivity.buttonEnable(false)
+        } else {
+            mActivity.buttonEnable(true)
+        }
     }
 
     private fun observeKeyboard() {
@@ -99,8 +135,7 @@ class CatDetailRegisterFragment : Fragment() {
     }
 
     private fun settingMethodManager() {
-        val activity = activity as CatRegisterActivity
-        mImm = activity.setImmToFragment()
+        mImm = mActivity.setImmToFragment()
 
     }
 
