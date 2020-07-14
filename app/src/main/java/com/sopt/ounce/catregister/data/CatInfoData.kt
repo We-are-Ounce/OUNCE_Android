@@ -8,8 +8,7 @@ object CatInfoData {
     var profileWeight : String = ""
     var profileGender : String = ""
     var profileNeutral : String = ""
-    var profileAge : Int = 0
+    var profileAge : String =""
     var profileInfo : String = ""
-    var userIdx : Int = 0
 
 }
