@@ -4,18 +4,15 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
@@ -74,14 +71,14 @@ class CatProfileRegisterFragment : Fragment() {
 
         v.edt_catprofile_name.apply {
             textCheckListener {
-                mCatName = it.toString()
+                CatInfoData.profileName = it.toString()
                 checkText()
             }
         }
 
         v.edt_catprofile_explain.apply {
             textCheckListener {
-                mCatInfo = it.toString()
+                CatInfoData.profileInfo = it.toString()
                 checkText()
             }
         }
@@ -99,8 +96,7 @@ class CatProfileRegisterFragment : Fragment() {
     }
 
     private fun checkText() {
-        "showProfile".showLog("name : ${mCatName}, info : ${mCatInfo}")
-        if (mCatName.isNotEmpty() && mCatInfo.isNotEmpty() && mSelectedImage != null) {
+        if (CatInfoData.profileName.isNotEmpty() && CatInfoData.profileInfo.isNotEmpty() && mSelectedImage != null) {
             mActivity.buttonEnable(true)
         } else {
             mActivity.buttonEnable(false)
@@ -161,9 +157,11 @@ class CatProfileRegisterFragment : Fragment() {
             val result = CropImage.getActivityResult(data)
             if (resultCode == Activity.RESULT_OK) {
                 mSelectedImage = result.originalUri
-                formatImg()
                 Glide.with(this)
                     .load(mSelectedImage).thumbnail(0.1f).into(v.img_cat_profile)
+
+                CatInfoData.catProfileUri = mSelectedImage
+                checkText()
             }
         }
     }
@@ -177,15 +175,10 @@ class CatProfileRegisterFragment : Fragment() {
         val photoBody =
             RequestBody.create(MediaType.parse("image/jpg"), byteArrayOutputStream.toByteArray())
         val pictureRb = MultipartBody.Part.createFormData(
-            "image",
+            "profileImage",
             File(mSelectedImage.toString()).name,
             photoBody
         )
-
-        //이미지 정보 넣어주기
-        CatInfoData.catProfile?.profileImg = pictureRb
-
-        checkText()
 
     }
 
