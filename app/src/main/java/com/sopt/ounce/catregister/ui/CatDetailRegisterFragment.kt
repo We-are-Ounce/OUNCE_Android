@@ -11,17 +11,20 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import com.sopt.ounce.R
 import com.sopt.ounce.catregister.CatRegisterActivity
+import com.sopt.ounce.catregister.data.CatInfoData
+import com.sopt.ounce.util.showLog
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.fragment_cat_detail_register.*
 import kotlinx.android.synthetic.main.fragment_cat_detail_register.view.*
 import kotlinx.android.synthetic.main.fragment_cat_profile_register.*
 import kotlinx.android.synthetic.main.fragment_cat_profile_register.view.*
 import kotlinx.android.synthetic.main.fragment_password.view.*
+import java.util.*
 
 class CatDetailRegisterFragment : Fragment() {
-    private lateinit var mContext : Context
-    private lateinit var v : View
-    private lateinit var mImm : InputMethodManager
+    private lateinit var mContext: Context
+    private lateinit var v: View
+    private lateinit var mImm: InputMethodManager
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -47,29 +50,45 @@ class CatDetailRegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         layout_catdetail.setOnClickListener {
-            mImm.hideSoftInputFromWindow(edt_cat_age.windowToken,0)
+            mImm.hideSoftInputFromWindow(edt_cat_age.windowToken, 0)
         }
 
         radioGroup_detail.setOnCheckedChangeListener { _, id ->
-            when (id){
+            when (id) {
                 R.id.radiobutton_man -> {
                     radiobutton_man.setTextColor(resources.getColor(R.color.white))
                     radiobutton_woman.setTextColor(resources.getColor(R.color.greyish_brown))
+                    CatInfoData.profileGender = "male"
+
+                    "CatInfoData".showLog("CatInfoData.profileGender : ${CatInfoData.profileGender}")
                 }
                 R.id.radiobutton_woman -> {
                     radiobutton_man.setTextColor(resources.getColor(R.color.greyish_brown))
                     radiobutton_woman.setTextColor(resources.getColor(R.color.white))
+                    CatInfoData.profileGender = "femail"
+
+                    "CatInfoData".showLog("CatInfoData.profileGender : ${CatInfoData.profileGender}")
                 }
+            }
+        }
+
+        check_newtral.setOnCheckedChangeListener { _, check ->
+            if (check) {
+                CatInfoData.profileNeutral = "true"
+                "CatInfoData".showLog("CatInfoData.profileNeutral : ${CatInfoData.profileNeutral}")
+            } else {
+                CatInfoData.profileNeutral = "false"
+                "CatInfoData".showLog("CatInfoData.profileNeutral : ${CatInfoData.profileNeutral}")
             }
         }
 
     }
 
-    private fun observeKeyboard(){
-        activity?.let{
+    private fun observeKeyboard() {
+        activity?.let {
             TedKeyboardObserver(it)
                 .listen { isShow ->
-                    if (!isShow){
+                    if (!isShow) {
                         v.edt_cat_age.clearFocus()
                         v.edt_cat_weight.clearFocus()
                     }
@@ -79,7 +98,7 @@ class CatDetailRegisterFragment : Fragment() {
 
     }
 
-    private fun settingMethodManager(){
+    private fun settingMethodManager() {
         val activity = activity as CatRegisterActivity
         mImm = activity.setImmToFragment()
 
