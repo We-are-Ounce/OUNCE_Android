@@ -6,6 +6,8 @@ import com.sopt.ounce.login.data.*
 import com.sopt.ounce.main.data.BottomProfileData
 import com.sopt.ounce.main.data.ResponseMainProfileData
 import com.sopt.ounce.main.data.ResponseMainReviewData
+import com.sopt.ounce.record.data.RequestFoodRecordData
+import com.sopt.ounce.record.data.ResponseFoodRecordData
 import com.sopt.ounce.searchmain.data.foodsearch.RequestFoodSearchData
 import com.sopt.ounce.searchmain.data.foodsearch.ResponseFoodSearchData
 import com.sopt.ounce.searchmain.data.reommendcat.RequestRecommendCatsData
@@ -74,6 +76,7 @@ interface OunceService {
         @Path("reviewIdx") reviewIdx: Int
     ) : Call<ResponseDeleteData>
 
+
     @Headers("Content-Type:application/json")
     @POST("search/recommend")
     fun requestRecommendCat(
@@ -116,6 +119,12 @@ interface OunceService {
     fun postFoodSearch(
         @Body body : RequestFoodSearchData
     ) : Call<ResponseFoodSearchData>
+
+
+    @POST("search/food")
+    fun postFoodRcvSearch(
+        @Body body :RequestFoodRecordData
+    ): Call<ResponseFoodRecordData>
 
     @Headers("Content-Type:application/json")
     @POST("search/reviewAll/avgRating")
