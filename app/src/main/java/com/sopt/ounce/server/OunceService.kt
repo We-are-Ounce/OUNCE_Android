@@ -3,6 +3,8 @@ package com.sopt.ounce.server
 
 import com.sopt.ounce.catregister.data.ResponseCatProfileData
 import com.sopt.ounce.login.data.*
+import com.sopt.ounce.main.data.ResponseMainProfileData
+import com.sopt.ounce.main.data.ResponseMainReviewData
 import com.sopt.ounce.searchmain.data.foodsearch.RequestFoodSearchData
 import com.sopt.ounce.searchmain.data.foodsearch.ResponseFoodSearchData
 import com.sopt.ounce.searchmain.data.reommendcat.RequestRecommendCatsData
@@ -17,7 +19,7 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface OunceService {
-
+    //로그인 회원가입 인터페이스 //////////
     @Headers("Content-Type:application/json")
     @POST("user/signin")
     fun postSignIn(
@@ -29,6 +31,16 @@ interface OunceService {
     fun postSignUp(
         @Body body : RequestSignUpdata
     ) : Call<ResponseSignUpData>
+
+    @Multipart
+    @POST("profile/register")
+    fun postCatProfile(
+        @Header("Token") token: String,
+        @Part profileImg: MultipartBody.Part,
+        @PartMap body: HashMap<String, RequestBody>
+    ): Call<ResponseCatProfileData>
+
+    //////////////////////////////////////
 
     //review
     @Headers("Content-Type:application/json")
@@ -60,19 +72,6 @@ interface OunceService {
         @Header("token") accessToken: String,
         @Path("reviewIdx") reviewIdx: Int
     ) : Call<ResponseDeleteData>
-    //
-
-
-    @Multipart
-    @POST("profile/register")
-    fun postCatProfile(
-        @Header("Token") token: String,
-        // profileImg = pictureRb
-        @Part profileImg: MultipartBody.Part,
-        //실제 사용 시
-        //val name = RequestBody.create(MediaType.parse("text/plain"), 값)
-        @PartMap body: HashMap<String, RequestBody>
-    ): Call<ResponseCatProfileData>
 
     @Headers("Content-Type:application/json")
     @POST("search/recommend")
@@ -85,6 +84,22 @@ interface OunceService {
     fun postUserSearch(
         @Body body : RequestUserIdData
     ) : Call<ResponseUserSearchData>
+
+
+    //메인 화면 뷰 통신 인터페이스//
+    @GET("profile/mainProfile/{profileIdx}")
+    fun getMainProfile(
+        @Header("token") token : String,
+        @Path("profileIdx") profileIdx : Int
+    ) : Call<ResponseMainProfileData>
+
+
+    @GET("review/{profileIdx}/prefer")
+    fun getMainReview(
+        @Path("profileIdx")profileIdx: Int,
+        @Query("pageStart") start : Int,
+        @Query("pageEnd") end : Int
+    ) : Call<ResponseMainReviewData>
 
     @Headers("Content-Type:application/json")
     @POST("search/food")

@@ -13,6 +13,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.amn.easysharedpreferences.EasySharedPreference
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import com.sopt.ounce.R
@@ -20,8 +22,11 @@ import com.sopt.ounce.catregister.ui.CatRegisterActivity
 import com.sopt.ounce.main.adapter.BottomProfileAdapter
 import com.sopt.ounce.main.adapter.ReviewAdapter
 import com.sopt.ounce.main.data.BottomProfileData
-import com.sopt.ounce.main.data.ReviewData
+import com.sopt.ounce.main.data.ResponseMainProfileData
+import com.sopt.ounce.server.OunceServiceImpl
 import com.sopt.ounce.util.RcvItemDeco
+import com.sopt.ounce.util.customEnqueue
+import com.sopt.ounce.util.showLog
 import kotlinx.android.synthetic.main.bottomsheet_filter.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -37,6 +42,10 @@ class HomeFragment : Fragment() {
     private lateinit var mProfileAdapter : BottomProfileAdapter
     private lateinit var mBottomsheetProfile : BottomSheetDialog
     private lateinit var mFilterSheet : BottomSheetDialog
+    private val mOunce = OunceServiceImpl
+    // 리뷰 새로고침을 위한 카운트
+    private var mPaging = 1
+
 
 
     //서버에 보낼 건식 습식 필터
@@ -53,6 +62,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         mBottomsheetProfile = BottomSheetDialog(mContext)
         mFilterSheet = BottomSheetDialog(mContext)
         mProfileAdapter = BottomProfileAdapter(mContext)
@@ -66,6 +76,7 @@ class HomeFragment : Fragment() {
 
     }
 
+    @Suppress("DEPRECATION")
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -96,35 +107,27 @@ class HomeFragment : Fragment() {
             addItemDecoration(RcvItemDeco(mContext))
         }
 
-
-        mRecyclerAdapter.data = listOf(
-            ReviewData("https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg"
-                ,"company1","title1","intro1",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2020/06/29/19/26/piano-5353974__340.jpg"
-                ,"company2","title2","intro2",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/30/10/12/notredame-de-paris-4515298__340.jpg"
-                ,"company3","title3","intro3",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/10/01/13/58/coffee-4518354__340.png"
-                ,"company4","title4","intro4",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
-                ,"company5","title5","intro5",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
-                ,"company5","title5","intro5",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
-                ,"company5","title5","intro5",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
-                ,"company5","title5","intro5",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
-                ,"company9","title9","intro9",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
-                ,"company10","title10","intro10",5,5)
-        )
-
         settingFilter()
 
+        // 서버 통신 시작한 후 데이터들을 받아서 프로필 뷰에 뿌려주기
+        startServerProfile()
+
+        // 리뷰 데이터를 받아서 리사이클러 뷰로 뿌리기기
+        startServerReview()
+
+        v.swipe_main_review.apply{
+            setColorSchemeColors(resources.getColor(R.color.dark_peach))
+            startServerReview()
+            v.swipe_main_review.isRefreshing = false
+
+        }
 
 
-        return v
+
+
+
+
+       return v
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -248,6 +251,72 @@ class HomeFragment : Fragment() {
 
         mBottomsheetProfile.show()
 
+    }
+
+    private fun startServerProfile(){
+        val accessToken = EasySharedPreference.Companion.getString("accessToken","")
+        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx",0)
+
+        mOunce.SERVICE.getMainProfile(accessToken,profileIdx).customEnqueue(
+            onSuccess = {
+                "OunceServerSuccess".showLog("메인프로필 화면 데이터 전달 성공 \n : ${it.data}")
+
+                settingDraw(it.data[0])
+            },
+            onError = {
+                "OunceServerError".showLog("메인프로필 화면 통신 오류 \n : ${it.code()}")
+            }
+        )
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun settingDraw(data : ResponseMainProfileData.Data){
+        Glide.with(this)
+            .load(data.profileImg)
+            .error(R.drawable.img_cat)
+            .into(v.img_main_profile)
+
+        v.txt_main_profile.text = data.profileName
+        v.txt_main_weight.text = "${data.profileWeight}kg"
+        v.txt_main_age.text ="${data.profileAge}살"
+        v.txt_main_introduce.text = data.profileInfo
+        v.txt_main_follower.text = "팔로워 ${data.follower}"
+        v.txt_main_following.text = "팔로인 ${data.following}"
+
+        if(data.profileGender == "male"){
+            if(data.profileNeutral == "true"){
+                v.img_main_gender.setImageResource(R.drawable.ic_nuetrul_male)
+            }
+            else{
+                v.img_main_gender.setImageResource(R.drawable.ic_male)
+            }
+        }
+        else{
+            if(data.profileNeutral == "true"){
+                v.img_main_gender.setImageResource(R.drawable.ic_nuetrul_female)
+            }
+            else{
+                v.img_main_gender.setImageResource(R.drawable.ic_female)
+            }
+
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun startServerReview(){
+        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx",0)
+        mOunce.SERVICE.getMainReview(profileIdx,mPaging,mPaging + 9).customEnqueue(
+            onSuccess = {
+                "OunceServerSuccess".showLog("메인 프로필 리뷰 목록 불러오기 성공 \n ${it.data}")
+                mRecyclerAdapter.data.addAll(it.data)
+                mRecyclerAdapter.notifyDataSetChanged()
+                v.txt_main_reviewcount.text = "(${it.data.size})"
+                mPaging += 10
+            },
+            onError = {
+                "OunceServerError".showLog("메인 프로필 리뷰 목록 불러오기 오류")
+            }
+        )
     }
 
 }

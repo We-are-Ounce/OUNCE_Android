@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import com.sopt.ounce.R
-import com.sopt.ounce.main.adapter.BottomProfileAdapter
 import com.sopt.ounce.main.adapter.ReviewAdapter
-import com.sopt.ounce.main.data.ReviewData
 import com.sopt.ounce.util.RcvItemDeco
 import kotlinx.android.synthetic.main.bottomsheet_filter.*
 import kotlinx.android.synthetic.main.fragment_other_user.*
@@ -96,28 +94,28 @@ class OtherUserFragment : Fragment() {
             addItemDecoration(RcvItemDeco(mContext))
         }
 
-        mRecyclerAdapter.data = listOf(
-            ReviewData("https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg"
-                ,"company1","title1","intro1",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2020/06/29/19/26/piano-5353974__340.jpg"
-                ,"company2","title2","intro2",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/30/10/12/notredame-de-paris-4515298__340.jpg"
-                ,"company3","title3","intro3",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/10/01/13/58/coffee-4518354__340.png"
-                ,"company4","title4","intro4",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
-                ,"company5","title5","intro5",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
-                ,"company5","title5","intro5",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
-                ,"company5","title5","intro5",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
-                ,"company5","title5","intro5",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
-                ,"company9","title9","intro9",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
-                ,"company10","title10","intro10",5,5)
-        )
+//        mRecyclerAdapter.data = listOf(
+//            ReviewData("https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg"
+//                ,"company1","title1","intro1",5,5),
+//            ReviewData("https://cdn.pixabay.com/photo/2020/06/29/19/26/piano-5353974__340.jpg"
+//                ,"company2","title2","intro2",5,5),
+//            ReviewData("https://cdn.pixabay.com/photo/2019/09/30/10/12/notredame-de-paris-4515298__340.jpg"
+//                ,"company3","title3","intro3",5,5),
+//            ReviewData("https://cdn.pixabay.com/photo/2019/10/01/13/58/coffee-4518354__340.png"
+//                ,"company4","title4","intro4",5,5),
+//            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
+//                ,"company5","title5","intro5",5,5),
+//            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
+//                ,"company5","title5","intro5",5,5),
+//            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
+//                ,"company5","title5","intro5",5,5),
+//            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
+//                ,"company5","title5","intro5",5,5),
+//            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
+//                ,"company9","title9","intro9",5,5),
+//            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
+//                ,"company10","title10","intro10",5,5)
+//        )
 
     }
 

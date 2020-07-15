@@ -14,6 +14,7 @@ import com.sopt.ounce.record.adapter.RecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_image_search.*
 
 class ImageSearchActivity : AppCompatActivity() {
+
     private lateinit var adapter: RecyclerViewAdapter
     lateinit var mItemAdapter: ItemAdapter
     var mGoodsData = mutableListOf<ItemData>()
