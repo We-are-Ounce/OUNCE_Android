@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
-                android:src="@drawable/img_logo"
+                android:src="@drawable/img_logo_appbar_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -37,10 +37,9 @@
             <ImageView
                 android:id="@+id/img_main_setting"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:paddingTop="12dp"
-                android:paddingRight="28dp"
-                android:paddingBottom="24dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:scaleType="fitXY"
                 android:src="@drawable/ic_baseline_settings_24"
                 app:layout_constraintDimensionRatio="1"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -83,17 +82,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+
                 <ImageView
-                    android:id="@+id/img_main_dropdown"
+                    android:id="@+id/img_main_profile_dropdown"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginEnd="57dp"
-                    android:padding="7dp"
+                    android:padding="8dp"
                     android:src="@drawable/btn_dropdown"
                     app:layout_constraintBottom_toBottomOf="@+id/txt_main_profile"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                    app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintStart_toEndOf="@+id/txt_main_profile"
-                    app:layout_constraintTop_toTopOf="@+id/txt_main_profile" />
+                    app:layout_constraintTop_toTopOf="@id/txt_main_profile" />
 
                 <TextView
                     android:id="@+id/txt_main_profile"
@@ -263,7 +262,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="28dp"
-                    android:src="@drawable/btn_bg_fitter"
+                    android:src="@drawable/btn_filter"
                     app:layout_constraintBottom_toBottomOf="@+id/spinner_main"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/spinner_main" />
