@@ -2,8 +2,7 @@ package com.sopt.ounce.server
 
 
 import com.sopt.ounce.catregister.data.ResponseCatProfileData
-import com.sopt.ounce.login.data.RequestLoginData
-import com.sopt.ounce.login.data.ResponseLoginData
+import com.sopt.ounce.login.data.*
 import com.sopt.ounce.main.data.ResponseMainProfileData
 import com.sopt.ounce.main.data.ResponseMainReviewData
 import com.sopt.ounce.searchmain.data.foodsearch.RequestFoodSearchData
@@ -20,7 +19,7 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface OunceService {
-
+    //로그인 회원가입 인터페이스 //////////
     @Headers("Content-Type:application/json")
     @POST("user/signin")
     fun postSignIn(
@@ -32,6 +31,16 @@ interface OunceService {
     fun postSignUp(
         @Body body : RequestSignUpdata
     ) : Call<ResponseSignUpData>
+
+    @Multipart
+    @POST("profile/register")
+    fun postCatProfile(
+        @Header("Token") token: String,
+        @Part profileImg: MultipartBody.Part,
+        @PartMap body: HashMap<String, RequestBody>
+    ): Call<ResponseCatProfileData>
+
+    //////////////////////////////////////
 
     //review
     @Headers("Content-Type:application/json")
@@ -66,13 +75,7 @@ interface OunceService {
     //
 
 
-    @Multipart
-    @POST("profile/register")
-    fun postCatProfile(
-        @Header("Token") token: String,
-        @Part profileImg: MultipartBody.Part,
-        @PartMap body: HashMap<String, RequestBody>
-    ): Call<ResponseCatProfileData>
+
   
     @POST("search/recommend")
     fun requestRecommendCat(
@@ -84,7 +87,7 @@ interface OunceService {
         @Body body : RequestUserIdData
     ) : Call<ResponseUserSearchData>
 
-    //메인 화면 뷰 통신 인터페이스
+    //메인 화면 뷰 통신 인터페이스//
     @GET("profile/mainProfile/{profileIdx}")
     fun getMainProfile(
         @Header("token") token : String,
@@ -104,5 +107,5 @@ interface OunceService {
     fun postFoodSearch(
         @Body body : RequestFoodSearchData
     ) : Call<ResponseFoodSearchData>
-  
+    ///////////////////
 }
