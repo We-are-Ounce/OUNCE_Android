@@ -17,7 +17,7 @@ class RecordModifyActivity : AppCompatActivity() {
     //서비스 호출
     private val mModifyRequest = OunceServiceImpl
 
-    private val mDeleteData = OunceServiceImpl
+    //private val mDeleteData = OunceServiceImpl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

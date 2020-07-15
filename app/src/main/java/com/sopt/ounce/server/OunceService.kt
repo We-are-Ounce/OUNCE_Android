@@ -2,8 +2,7 @@ package com.sopt.ounce.server
 
 
 import com.sopt.ounce.catregister.data.ResponseCatProfileData
-import com.sopt.ounce.login.data.RequestLoginData
-import com.sopt.ounce.login.data.ResponseLoginData
+import com.sopt.ounce.login.data.*
 import com.sopt.ounce.searchmain.data.reommendcat.RequestRecommendCatsData
 import com.sopt.ounce.searchmain.data.reommendcat.ResponseRecommendCatsData
 import com.sopt.ounce.searchmain.data.usersearch.RequestUserIdData
@@ -59,8 +58,6 @@ interface OunceService {
         @Header("token") accessToken: String,
         @Path("reviewIdx") reviewIdx: Int
     ) : Call<ResponseDeleteData>
-    //
-
 
     @Multipart
     @POST("profile/register")
