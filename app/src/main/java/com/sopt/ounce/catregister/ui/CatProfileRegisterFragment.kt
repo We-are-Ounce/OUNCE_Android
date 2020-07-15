@@ -4,30 +4,27 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import com.sopt.ounce.R
-import com.sopt.ounce.catregister.CatRegisterActivity
+import com.sopt.ounce.catregister.data.CatInfoData
 import com.sopt.ounce.util.showLog
+import com.sopt.ounce.util.textCheckListener
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.fragment_cat_profile_register.*
 import kotlinx.android.synthetic.main.fragment_cat_profile_register.view.*
-import kotlinx.android.synthetic.main.fragment_id.view.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -41,7 +38,10 @@ class CatProfileRegisterFragment : Fragment() {
     private lateinit var v: View
     private lateinit var mImm: InputMethodManager
     private lateinit var mActivity: CatRegisterActivity
-    private lateinit var mSelectedImage : Uri
+    private var mSelectedImage: Uri? = null
+
+    private var mCatName: String = ""
+    private var mCatInfo: String = ""
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -67,6 +67,20 @@ class CatProfileRegisterFragment : Fragment() {
             settingPermission()
         }
 
+        v.edt_catprofile_name.apply {
+            textCheckListener {
+                CatInfoData.profileName = it.toString()
+                checkText()
+            }
+        }
+
+        v.edt_catprofile_explain.apply {
+            textCheckListener {
+                CatInfoData.profileInfo = it.toString()
+                checkText()
+            }
+        }
+
         return v
     }
 
@@ -77,6 +91,14 @@ class CatProfileRegisterFragment : Fragment() {
             mImm.hideSoftInputFromWindow(edt_catprofile_name.windowToken, 0)
         }
 
+    }
+
+    private fun checkText() {
+        if (CatInfoData.profileName.isNotEmpty() && CatInfoData.profileInfo.isNotEmpty() && mSelectedImage != null) {
+            mActivity.buttonEnable(true)
+        } else {
+            mActivity.buttonEnable(false)
+        }
     }
 
     private fun observeKeyboard() {
@@ -131,27 +153,16 @@ class CatProfileRegisterFragment : Fragment() {
 
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             val result = CropImage.getActivityResult(data)
-            if(resultCode == Activity.RESULT_OK){
-                mSelectedImage = result.originalUri
-                formatImg()
+            if (resultCode == Activity.RESULT_OK) {
+                mSelectedImage = result.uri
                 Glide.with(this)
                     .load(mSelectedImage).thumbnail(0.1f).into(v.img_cat_profile)
+
+
+                CatInfoData.catProfileUri = mSelectedImage
+                "ShowCatProfileUri".showLog("${CatInfoData.catProfileUri.toString()}")
+                checkText()
             }
         }
     }
-
-    private fun formatImg(){
-        val options = BitmapFactory.Options()
-        val inputStream : InputStream = mActivity.contentResolver.openInputStream(mSelectedImage)!!
-        val bitmap = BitmapFactory.decodeStream(inputStream,null,options)
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap!!.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream)
-        val photoBody = RequestBody.create(MediaType.parse("image/jpg"), byteArrayOutputStream.toByteArray())
-        val pictureRb = MultipartBody.Part.createFormData("image", File(mSelectedImage.toString()).name,photoBody)
-
-        "showPicture".showLog("$pictureRb")
-        "showPicture".showLog("$mSelectedImage")
-    }
-
-
 }

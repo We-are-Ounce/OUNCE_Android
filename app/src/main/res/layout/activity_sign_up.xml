@@ -71,7 +71,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/vp_signup"
                 app:progressMode="false"
-                app:selectedDotColor="@color/dark" />
+                app:selectedDotColor="@color/black_two" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
