@@ -63,7 +63,8 @@ class RecordActivity : AppCompatActivity() {
                     1,
                     1,
                     1,
-                    EasySharedPreference.getInt("profileIdx",1)
+                    //EasySharedPreference.getInt("profileIdx",1)
+                2
 
                 )
 

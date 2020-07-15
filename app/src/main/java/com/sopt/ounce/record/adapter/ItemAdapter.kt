@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sopt.ounce.R
 import com.sopt.ounce.record.data.ItemData
 import com.sopt.ounce.record.viewholder.ItemViewHolder
+import com.sopt.ounce.searchmain.data.foodsearch.FoodData
 
 class ItemAdapter(private val context: Context) : RecyclerView.Adapter<ItemViewHolder>() {
-    var datas = mutableListOf<ItemData>()
+    var datas = mutableListOf<FoodData>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val view = LayoutInflater.from(context).inflate(
             R.layout.record_search_cardview,

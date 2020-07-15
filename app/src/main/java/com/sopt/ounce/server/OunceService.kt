@@ -5,6 +5,8 @@ import com.sopt.ounce.catregister.data.ResponseCatProfileData
 import com.sopt.ounce.login.data.*
 import com.sopt.ounce.main.data.ResponseMainProfileData
 import com.sopt.ounce.main.data.ResponseMainReviewData
+import com.sopt.ounce.record.data.RequestFoodRecordData
+import com.sopt.ounce.record.data.ResponseFoodRecordData
 import com.sopt.ounce.searchmain.data.foodsearch.RequestFoodSearchData
 import com.sopt.ounce.searchmain.data.foodsearch.ResponseFoodSearchData
 import com.sopt.ounce.searchmain.data.reommendcat.RequestRecommendCatsData
@@ -73,17 +75,7 @@ interface OunceService {
         @Path("reviewIdx") reviewIdx: Int
     ) : Call<ResponseDeleteData>
 
-    @Multipart
-    @POST("profile/register")
-    fun postCatProfile(
-        @Header("Token") token: String,
-        // profileImg = pictureRb
-        @Part profileImg: MultipartBody.Part,
-        //실제 사용 시
-        //val name = RequestBody.create(MediaType.parse("text/plain"), 값)
-        @PartMap body: HashMap<String, RequestBody>
-    ): Call<ResponseCatProfileData>
-  
+
     @POST("search/recommend")
     fun requestRecommendCat(
         @Body body : RequestRecommendCatsData
@@ -114,5 +106,10 @@ interface OunceService {
     fun postFoodSearch(
         @Body body : RequestFoodSearchData
     ) : Call<ResponseFoodSearchData>
+
+    @POST("search/food")
+    fun postFoodRcvSearch(
+        @Body body :RequestFoodRecordData
+    ): Call<ResponseFoodRecordData>
 
 }
