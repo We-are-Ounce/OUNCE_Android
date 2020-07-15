@@ -16,7 +16,7 @@ import androidx.core.app.ActivityCompat
 import com.amn.easysharedpreferences.EasySharedPreference
 import com.amn.easysharedpreferences.EasySharedPreferenceConfig
 import com.sopt.ounce.R
-import com.sopt.ounce.catregister.CatRegisterActivity
+import com.sopt.ounce.catregister.ui.CatRegisterActivity
 import com.sopt.ounce.login.data.RequestLoginData
 import com.sopt.ounce.main.ui.MainActivity
 import com.sopt.ounce.server.OunceServiceImpl

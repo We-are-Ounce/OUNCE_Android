@@ -5,7 +5,7 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".catregister.CatRegisterActivity">
+    tools:context=".catregister.ui.CatRegisterActivity">
 
     <ImageView
         android:id="@+id/img_catregister_back"
@@ -72,7 +72,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/vp_catregister"
                 app:progressMode="false"
-                app:selectedDotColor="@color/dark" />
+                app:selectedDotColor="@color/black_two" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
