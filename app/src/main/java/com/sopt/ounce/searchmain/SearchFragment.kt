@@ -18,12 +18,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 import com.sopt.ounce.R
 import com.sopt.ounce.main.ui.MainActivity
+import com.sopt.ounce.searchmain.data.foodsearch.FoodData
+import com.sopt.ounce.searchmain.data.foodsearch.RequestFoodSearchData
+import com.sopt.ounce.searchmain.data.foodsearch.ResponseFoodSearchData
 import com.sopt.ounce.searchmain.data.reommendcat.RequestRecommendCatsData
 import com.sopt.ounce.searchmain.data.reommendcat.ResponseRecommendCatsData
 import com.sopt.ounce.searchmain.data.usersearch.RequestUserIdData
 import com.sopt.ounce.searchmain.data.usersearch.ResponseUserSearchData
 import com.sopt.ounce.searchmain.data.usersearch.UserData
 import com.sopt.ounce.searchmain.fragment.SearchSimilarUserFragment
+import com.sopt.ounce.searchmain.recyclerview.SearchGoodsAdapter
 import com.sopt.ounce.searchmain.recyclerview.SearchUserAdapter
 import com.sopt.ounce.searchmain.viewpager.SearchSimilarPagerAdapter
 import com.sopt.ounce.searchmain.viewpager.SearchTapAdapter
@@ -33,6 +37,9 @@ import com.sopt.ounce.util.customEnqueue
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SearchFragment : Fragment() {
     private lateinit var mInputMethodManager: InputMethodManager
@@ -42,6 +49,7 @@ class SearchFragment : Fragment() {
     var isKeyboardFocused = false
     lateinit var mPagerAdapter : SearchSimilarPagerAdapter
     lateinit var mUserSearchData : ResponseUserSearchData
+    lateinit var mFoodSearchData : ResponseFoodSearchData
     lateinit var mSearchTapAdapter: SearchTapAdapter
 
     var receiveDataArraySearch = ResponseRecommendCatsData.Data(
@@ -165,12 +173,8 @@ class SearchFragment : Fragment() {
         })
 
         //검색기능 구현
-        //cView.rv_search_user_searchresult.adapter = searchUserAdapter
-        //searchUserAdapter = SearchUserAdapter(view.context)
-        //cView.rv_search_user_searchresult.adapter = searchUserAdapter
         sv_search_main_search.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-                Log.d("Search - Find", "here-2")
                 if(tab_search_main_onfocus.selectedTabPosition == 0){
                     val ounce = OunceServiceImpl.SERVICE.postUserSearch(
                         RequestUserIdData(
@@ -184,8 +188,8 @@ class SearchFragment : Fragment() {
                             mUserSearchData = it
                             val mUserSearchAdapter = SearchUserAdapter(view.context)
                             val mActivity = activity as MainActivity
-                            val searchRecyclerView = mActivity.findViewById<RecyclerView>(R.id.rv_search_user_searchresult)
-                            searchRecyclerView.adapter = mUserSearchAdapter
+                            val searchUserRecyclerView = mActivity.findViewById<RecyclerView>(R.id.rv_search_user_searchresult)
+                            searchUserRecyclerView.adapter = mUserSearchAdapter
                             mUserSearchAdapter.datas =  mUserSearchData.data as MutableList<UserData>
                             mUserSearchAdapter.notifyDataSetChanged()
                         },
@@ -196,6 +200,62 @@ class SearchFragment : Fragment() {
                     )
                 }
                 else if(tab_search_main_onfocus.selectedTabPosition == 1){
+                    Log.d("Search - request", "here0")
+                    Log.d("Search - query", "${query!!}")
+                    val ounce = OunceServiceImpl.SERVICE.postFoodSearch(
+                        RequestFoodSearchData(
+                            searchKeyword = query!!,
+                            pageStart = 1,
+                            pageEnd = 5
+                        )
+                    )
+                    Log.d("Search - request", "here1")
+
+//                    ounce.customEnqueue(
+//                        onSuccess = {
+//                            Log.d("Search - response", "here0")
+//                            mFoodSearchData = it
+//                            val mFoodSearchAdapter = SearchGoodsAdapter(view.context)
+//                            val mActivity = activity as MainActivity
+//                            val searchFoodRecyclerView = mActivity.findViewById<RecyclerView>(R.id.rv_search_goods_goodsresult)
+//                            searchFoodRecyclerView.adapter = mFoodSearchAdapter
+//                            mFoodSearchAdapter.datas = mFoodSearchData.data as MutableList<FoodData>
+//                            Log.d("Search - Data", "${mFoodSearchData.data}")
+//                            mFoodSearchAdapter.notifyDataSetChanged()
+//                            Log.d("Search - request", "here2")
+//                        },
+//                        onFaile = {
+//                            Log.d("Search - failure", "here0")
+//                        },
+//                        onError = {
+//                            Log.d("Search - error", "here0")
+//                        }
+//                    )
+                    ounce.enqueue(object : Callback<ResponseFoodSearchData>{
+                        override fun onFailure(call: Call<ResponseFoodSearchData>, t: Throwable) {
+                            Log.d("Search - fail Message", "${t.message}")
+                        }
+
+                        override fun onResponse(
+                            call: Call<ResponseFoodSearchData>,
+                            response: Response<ResponseFoodSearchData>
+                        ) {
+                            Log.d("Search - response", "here0")
+                            Log.d("Search - response", "${response.body()!!.status}")
+                            Log.d("Search - response", "${response.body()!!.message}")
+                            mFoodSearchData = response.body()!!
+                            val mFoodSearchAdapter = SearchGoodsAdapter(view.context)
+                            val mActivity = activity as MainActivity
+                            val searchFoodRecyclerView = mActivity.findViewById<RecyclerView>(R.id.rv_search_goods_goodsresult)
+                            searchFoodRecyclerView.adapter = mFoodSearchAdapter
+                            mFoodSearchAdapter.datas = mFoodSearchData.data as MutableList<FoodData>
+                            Log.d("Search - Data", "${mFoodSearchData.data}")
+                            mFoodSearchAdapter.notifyDataSetChanged()
+                            Log.d("Search - request", "here2")
+                        }
+
+
+                    })
                 }
                 return true
             }
@@ -223,8 +283,6 @@ class SearchFragment : Fragment() {
             onError = {
             }
         )
-
-
     }
 
     private fun initViewPager(){

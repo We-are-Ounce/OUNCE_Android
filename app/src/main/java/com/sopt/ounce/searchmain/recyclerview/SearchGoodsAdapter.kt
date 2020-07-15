@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.ounce.R
+import com.sopt.ounce.searchmain.data.foodsearch.FoodData
 
 class SearchGoodsAdapter(private val context: Context): RecyclerView.Adapter<SearchGoodsViewHolder>() {
-    var datas = mutableListOf<SearchGoodsData>()
+    var datas = mutableListOf<FoodData>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchGoodsViewHolder {
         val view = LayoutInflater.from(context).inflate(
             R.layout.item_search_main_goodssearch,
