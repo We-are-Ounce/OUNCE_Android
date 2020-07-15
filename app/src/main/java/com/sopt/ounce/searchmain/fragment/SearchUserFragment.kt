@@ -2,6 +2,7 @@ package com.sopt.ounce.searchmain.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import com.sopt.ounce.R
 import com.sopt.ounce.main.ui.MainActivity
+import com.sopt.ounce.searchmain.data.usersearch.ResponseUserSearchData
 import com.sopt.ounce.searchmain.recyclerview.SearchUserAdapter
 import com.sopt.ounce.searchmain.recyclerview.SearchUserData
 import com.sopt.ounce.searchmain.recyclerview.SearchUserItemDecoration
@@ -23,6 +25,7 @@ class SearchUserFragment : Fragment() {
     private lateinit var mView: View
     private lateinit var iView : View
     var mUserDatas = mutableListOf<SearchUserData>()
+    lateinit var mUserSearchData : ResponseUserSearchData
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -31,6 +34,7 @@ class SearchUserFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("Search - Create", "create")
     }
 
     override fun onCreateView(
@@ -42,102 +46,17 @@ class SearchUserFragment : Fragment() {
         iView = inflater.inflate(R.layout.fragment_search, container, false)
         observeKeyboard()
         settingMethodManager()
+        Log.d("Search - CreateView", "CreateViewBefore")
         return mView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        searchUserAdapter = SearchUserAdapter(view.context)
+        Log.d("Search - afterViewCreated", "afterViewCreated")
+        searchUserAdapter = SearchUserAdapter(mView.context)
         rv_search_user_searchresult.adapter = searchUserAdapter
-        loadUserResultData()
+        Log.d("Search - after", "data set")
         rv_search_user_searchresult.addItemDecoration(SearchUserItemDecoration())
-    }
-
-    private fun loadUserResultData(){
-        mUserDatas.apply {
-            add(
-                SearchUserData(
-                    img_search_user_catimage = R.drawable.img_card_cat,
-                    tv_search_user_cat = "Spring",
-                    tv_search_user_id = "@ounceHyunWoo",
-                    tv_search_user_explain = "My First Cat"
-                )
-            )
-            add(
-                SearchUserData(
-                    img_search_user_catimage = R.drawable.img_card_cat,
-                    tv_search_user_cat = "Summer",
-                    tv_search_user_id = "@ounceHyunWoo",
-                    tv_search_user_explain = "My Second Cat"
-                )
-            )
-            add(
-                SearchUserData(
-                    img_search_user_catimage = R.drawable.img_card_cat,
-                    tv_search_user_cat = "Autumn",
-                    tv_search_user_id = "@ounceHyunWoo",
-                    tv_search_user_explain = "My Third Cat"
-                )
-            )
-            add(
-                SearchUserData(
-                    img_search_user_catimage = R.drawable.img_card_cat,
-                    tv_search_user_cat = "Winter",
-                    tv_search_user_id = "@ounceHyunWoo",
-                    tv_search_user_explain = "My Fourth Cat"
-                )
-            )
-            add(
-                SearchUserData(
-                    img_search_user_catimage = R.drawable.img_card_cat,
-                    tv_search_user_cat = "Winter",
-                    tv_search_user_id = "@ounceHyunWoo",
-                    tv_search_user_explain = "My Fourth Cat"
-                )
-            )
-            add(
-                SearchUserData(
-                    img_search_user_catimage = R.drawable.img_card_cat,
-                    tv_search_user_cat = "Winter",
-                    tv_search_user_id = "@ounceHyunWoo",
-                    tv_search_user_explain = "My Fourth Cat"
-                )
-            )
-            add(
-                SearchUserData(
-                    img_search_user_catimage = R.drawable.img_card_cat,
-                    tv_search_user_cat = "Winter",
-                    tv_search_user_id = "@ounceHyunWoo",
-                    tv_search_user_explain = "My Fourth Cat"
-                )
-            )
-            add(
-                SearchUserData(
-                    img_search_user_catimage = R.drawable.img_card_cat,
-                    tv_search_user_cat = "Winter",
-                    tv_search_user_id = "@ounceHyunWoo",
-                    tv_search_user_explain = "My Fourth Cat"
-                )
-            )
-            add(
-                SearchUserData(
-                    img_search_user_catimage = R.drawable.img_card_cat,
-                    tv_search_user_cat = "Winter",
-                    tv_search_user_id = "@ounceHyunWoo",
-                    tv_search_user_explain = "My Fourth Cat"
-                )
-            )
-            add(
-                SearchUserData(
-                    img_search_user_catimage = R.drawable.img_card_cat,
-                    tv_search_user_cat = "Winter",
-                    tv_search_user_id = "@ounceHyunWoo",
-                    tv_search_user_explain = "My Fourth Cat"
-                )
-            )
-        }
-        searchUserAdapter.datas = mUserDatas
-        searchUserAdapter.notifyDataSetChanged()
     }
 
     private fun observeKeyboard(){
