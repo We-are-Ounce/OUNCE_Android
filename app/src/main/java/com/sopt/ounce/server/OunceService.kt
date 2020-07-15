@@ -3,6 +3,8 @@ package com.sopt.ounce.server
 import com.sopt.ounce.catregister.data.ResponseCatProfileData
 import com.sopt.ounce.login.data.RequestLoginData
 import com.sopt.ounce.login.data.ResponseLoginData
+import com.sopt.ounce.searchmain.data.foodsearch.RequestFoodSearchData
+import com.sopt.ounce.searchmain.data.foodsearch.ResponseFoodSearchData
 import com.sopt.ounce.searchmain.data.reommendcat.RequestRecommendCatsData
 import com.sopt.ounce.searchmain.data.reommendcat.ResponseRecommendCatsData
 import com.sopt.ounce.searchmain.data.usersearch.RequestUserIdData
@@ -48,4 +50,9 @@ interface OunceService {
     fun postUserSearch(
         @Body body : RequestUserIdData
     ) : Call<ResponseUserSearchData>
+
+    @POST("search/food")
+    fun postFoodSearch(
+        @Body body : RequestFoodSearchData
+    ) : Call<ResponseFoodSearchData>
 }
