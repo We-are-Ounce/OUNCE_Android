@@ -3,6 +3,7 @@ package com.sopt.ounce.server
 
 import com.sopt.ounce.catregister.data.ResponseCatProfileData
 import com.sopt.ounce.login.data.*
+import com.sopt.ounce.main.data.BottomProfileData
 import com.sopt.ounce.main.data.ResponseMainProfileData
 import com.sopt.ounce.main.data.ResponseMainReviewData
 import com.sopt.ounce.record.data.RequestFoodRecordData
@@ -76,15 +77,18 @@ interface OunceService {
     ) : Call<ResponseDeleteData>
 
 
+    @Headers("Content-Type:application/json")
     @POST("search/recommend")
     fun requestRecommendCat(
         @Body body : RequestRecommendCatsData
     ) : Call<ResponseRecommendCatsData>
 
+    @Headers("Content-Type:application/json")
     @POST("search/user")
     fun postUserSearch(
         @Body body : RequestUserIdData
     ) : Call<ResponseUserSearchData>
+
 
     //메인 화면 뷰 통신 인터페이스//
     @GET("profile/mainProfile/{profileIdx}")
@@ -102,14 +106,36 @@ interface OunceService {
     ) : Call<ResponseMainReviewData>
 
 
+    @Headers("Content-Type:apllication/json")
+    @GET("profile/convesion/{profileIdx}")
+    fun getConvesionProfile(
+        @Path("profileIdx") profileIdx: Int
+    ) : Call<BottomProfileData>
+    /////////////////////////////////////////////
+
+
+    @Headers("Content-Type:application/json")
     @POST("search/food")
     fun postFoodSearch(
         @Body body : RequestFoodSearchData
     ) : Call<ResponseFoodSearchData>
+
 
     @POST("search/food")
     fun postFoodRcvSearch(
         @Body body :RequestFoodRecordData
     ): Call<ResponseFoodRecordData>
 
+    @Headers("Content-Type:application/json")
+    @POST("search/reviewAll/avgRating")
+    fun postReviewSortTotalScore(
+        @Body body : RequestFoodSearchData
+    ) : Call<ResponseFoodSearchData>
+
+    @Headers("Content-Type:application/json")
+    @POST("search/reviewAll/avgPrefer")
+    fun postReviewSortFavorite(
+        @Body body : RequestFoodSearchData
+    ) : Call<ResponseFoodSearchData>
+  
 }
