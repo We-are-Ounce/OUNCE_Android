@@ -227,19 +227,32 @@ class HomeFragment : Fragment() {
             adapter = mProfileAdapter
             layoutManager = LinearLayoutManager(mContext)
         }
+        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx",0)
 
-        mProfileAdapter.data = listOf(
-            BottomProfileData(
-                "https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg",
-                "title1",
-                "intro1",
-                false),
-            BottomProfileData(
-                "https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg",
-                "title2",
-                "intro2",
-                false)
+        mOunce.SERVICE.getConvesionProfile(profileIdx).customEnqueue(
+            onSuccess = {
+                "OunceStatus".showLog("프로필 바텀시트 호출 메세지 : ${it.message}")
+                it.data?.let {data ->
+                    mProfileAdapter.data = data
+                }
+            },
+            onError = {
+                "OunceError".showLog("프로필 바텀시트 호출 오류")
+            }
         )
+
+//        mProfileAdapter.data = listOf(
+//            BottomProfileData(
+//                "https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg",
+//                "title1",
+//                "intro1",
+//                false),
+//            BottomProfileData(
+//                "https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg",
+//                "title2",
+//                "intro2",
+//                false)
+//        )
         mProfileAdapter.notifyDataSetChanged()
 
         mBottomsheetProfile.layout_bottomsheet_add_profile.setOnClickListener {

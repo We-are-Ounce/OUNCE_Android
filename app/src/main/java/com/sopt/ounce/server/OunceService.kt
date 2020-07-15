@@ -3,6 +3,7 @@ package com.sopt.ounce.server
 
 import com.sopt.ounce.catregister.data.ResponseCatProfileData
 import com.sopt.ounce.login.data.*
+import com.sopt.ounce.main.data.BottomProfileData
 import com.sopt.ounce.main.data.ResponseMainProfileData
 import com.sopt.ounce.main.data.ResponseMainReviewData
 import com.sopt.ounce.searchmain.data.foodsearch.RequestFoodSearchData
@@ -99,6 +100,12 @@ interface OunceService {
         @Query("pageEnd") end : Int
     ) : Call<ResponseMainReviewData>
 
+    @Headers("Content-Type:apllication/json")
+    @GET("profile/convesion/{profileIdx}")
+    fun getConvesionProfile(
+        @Path("profileIdx") profileIdx: Int
+    ) : Call<BottomProfileData>
+    /////////////////////////////////////////////
 
     @POST("search/food")
     fun postFoodSearch(
