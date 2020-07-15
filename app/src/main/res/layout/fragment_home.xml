@@ -270,7 +270,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcv_main_review"
                 android:layout_width="match_parent"

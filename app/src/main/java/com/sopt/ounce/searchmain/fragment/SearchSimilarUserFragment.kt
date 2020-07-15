@@ -38,7 +38,7 @@ class SearchSimilarUserFragment : Fragment(){
 
         img_search_main_profile.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
-                Toast.makeText(mView.context, "position: ${tv_search_main_cat_name_txt}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(mView.context, "profileIdx: ${profileIdx}", Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -51,19 +51,19 @@ class SearchSimilarUserFragment : Fragment(){
         val imgIdx = img_search_main_review.size
         when(imgIdx){
             0 -> {
-                view.img_search_main_review_1.setImageResource(R.drawable.img_card_cat)
-                view.img_search_main_review_2.setImageResource(R.drawable.img_card_cat)
-                view.img_search_main_review_3.setImageResource(R.drawable.img_card_cat)
+                view.img_search_main_review_1.setImageResource(R.drawable.ic_empty)
+                view.img_search_main_review_2.setImageResource(R.drawable.ic_empty)
+                view.img_search_main_review_3.setImageResource(R.drawable.ic_empty)
             }
             1 -> {
                 Glide.with(view).load(img_search_main_review.get(0)).into(view.img_search_main_review_1)
-                view.img_search_main_review_2.setImageResource(R.drawable.img_card_cat)
-                view.img_search_main_review_3.setImageResource(R.drawable.img_card_cat)
+                view.img_search_main_review_2.setImageResource(R.drawable.ic_empty)
+                view.img_search_main_review_3.setImageResource(R.drawable.ic_empty)
             }
             2 -> {
                 Glide.with(view).load(img_search_main_review.get(0)).into(view.img_search_main_review_1)
                 Glide.with(view).load(img_search_main_review.get(1)).into(view.img_search_main_review_2)
-                view.img_search_main_review_3.setImageResource(R.drawable.img_card_cat)
+                view.img_search_main_review_3.setImageResource(R.drawable.ic_empty)
             }
             else -> {
                 Glide.with(view).load(img_search_main_review.get(0)).into(view.img_search_main_review_1)
