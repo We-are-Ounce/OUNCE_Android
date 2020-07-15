@@ -43,6 +43,8 @@ class HomeFragment : Fragment() {
     private lateinit var mBottomsheetProfile : BottomSheetDialog
     private lateinit var mFilterSheet : BottomSheetDialog
     private val mOunce = OunceServiceImpl
+    // 리뷰 새로고침을 위한 카운트
+    private var mPaging = 1
 
 
 
@@ -74,6 +76,7 @@ class HomeFragment : Fragment() {
 
     }
 
+    @Suppress("DEPRECATION")
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -111,6 +114,16 @@ class HomeFragment : Fragment() {
 
         // 리뷰 데이터를 받아서 리사이클러 뷰로 뿌리기기
         startServerReview()
+
+        v.swipe_main_review.apply{
+            setColorSchemeColors(resources.getColor(R.color.dark_peach))
+            startServerReview()
+            v.swipe_main_review.isRefreshing = false
+
+        }
+
+
+
 
 
 
@@ -269,17 +282,36 @@ class HomeFragment : Fragment() {
         v.txt_main_introduce.text = data.profileInfo
         v.txt_main_follower.text = "팔로워 ${data.follower}"
         v.txt_main_following.text = "팔로인 ${data.following}"
+
+        if(data.profileGender == "male"){
+            if(data.profileNeutral == "true"){
+                v.img_main_gender.setImageResource(R.drawable.ic_nuetrul_male)
+            }
+            else{
+                v.img_main_gender.setImageResource(R.drawable.ic_male)
+            }
+        }
+        else{
+            if(data.profileNeutral == "true"){
+                v.img_main_gender.setImageResource(R.drawable.ic_nuetrul_female)
+            }
+            else{
+                v.img_main_gender.setImageResource(R.drawable.ic_female)
+            }
+
+        }
     }
 
     @SuppressLint("SetTextI18n")
     private fun startServerReview(){
         val profileIdx = EasySharedPreference.Companion.getInt("profileIdx",0)
-        mOunce.SERVICE.getMainReview(profileIdx,1,3).customEnqueue(
+        mOunce.SERVICE.getMainReview(profileIdx,mPaging,mPaging + 9).customEnqueue(
             onSuccess = {
                 "OunceServerSuccess".showLog("메인 프로필 리뷰 목록 불러오기 성공 \n ${it.data}")
-                mRecyclerAdapter.data = it.data
+                mRecyclerAdapter.data.addAll(it.data)
                 mRecyclerAdapter.notifyDataSetChanged()
                 v.txt_main_reviewcount.text = "(${it.data.size})"
+                mPaging += 10
             },
             onError = {
                 "OunceServerError".showLog("메인 프로필 리뷰 목록 불러오기 오류")
