@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amn.easysharedpreferences.EasySharedPreference
+import com.bumptech.glide.Glide
 import com.sopt.ounce.R
 import com.sopt.ounce.login.data.RequestReviewData
 import com.sopt.ounce.login.data.ResponseReviewData
@@ -15,6 +16,7 @@ import com.sopt.ounce.main.ui.MainActivity
 import com.sopt.ounce.record.RecordItemDecoration
 import com.sopt.ounce.record.adapter.FeatureAdapter
 import com.sopt.ounce.record.data.FeatureData
+import com.sopt.ounce.searchmain.data.foodsearch.FoodData
 import com.sopt.ounce.server.OunceServiceImpl
 import com.sopt.ounce.util.showLog
 import kotlinx.android.synthetic.main.activity_record.*
@@ -39,6 +41,12 @@ class RecordActivity : AppCompatActivity() {
 //        ratingBar.setStarEmptyDrawable(resources.getDrawable(R.drawable.ic_total_unselected))
 //        ratingBar2.setStarFillDrawable(resources.getDrawable(R.drawable.ic_favorite_select))
 //        ratingBar2.setStarEmptyDrawable(resources.getDrawable(R.drawable.ic_favorite_unselected))
+
+        val intent = intent
+        val foodData : FoodData = intent.getSerializableExtra("foodItem") as FoodData
+
+        Glide.with(this).load(foodData.foodImg).into(image_Preview)
+
 
         ratingBar.setOnRatingChangeListener {
             mTotal = it.toInt()

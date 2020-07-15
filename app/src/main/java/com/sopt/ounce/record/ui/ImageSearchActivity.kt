@@ -3,6 +3,7 @@ package com.sopt.ounce.record.ui
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
@@ -40,9 +41,19 @@ class ImageSearchActivity : AppCompatActivity() {
         textView.setTextColor(Color.DKGRAY)
         rv_record_search.layoutManager = LinearLayoutManager(rv_record_search.context)
         rv_record_search.setHasFixedSize(true)
-        //getItemList()
+        getItemList()
         mItemAdapter = ItemAdapter(this)
         rv_record_item.adapter = mItemAdapter
+        record_search_sv.setOnQueryTextFocusChangeListener(object : View.OnFocusChangeListener{
+            override fun onFocusChange(view: View?, hasFocus: Boolean) {
+                if(hasFocus){
+                    rv_record_search.visibility = View.GONE
+                    rv_record_item.visibility = View.VISIBLE
+                }
+            }
+
+        })
+
         record_search_sv.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 val ounce = OunceServiceImpl.SERVICE.postFoodSearch(
