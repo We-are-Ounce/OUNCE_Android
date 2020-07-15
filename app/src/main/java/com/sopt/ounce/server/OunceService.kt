@@ -73,16 +73,6 @@ interface OunceService {
         @Path("reviewIdx") reviewIdx: Int
     ) : Call<ResponseDeleteData>
 
-    @Multipart
-    @POST("profile/register")
-    fun postCatProfile(
-        @Header("Token") token: String,
-        // profileImg = pictureRb
-        @Part profileImg: MultipartBody.Part,
-        //실제 사용 시
-        //val name = RequestBody.create(MediaType.parse("text/plain"), 값)
-        @PartMap body: HashMap<String, RequestBody>
-    ): Call<ResponseCatProfileData>
   
     @POST("search/recommend")
     fun requestRecommendCat(

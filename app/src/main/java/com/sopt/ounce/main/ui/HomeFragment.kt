@@ -9,10 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.amn.easysharedpreferences.EasySharedPreference
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -115,17 +118,13 @@ class HomeFragment : Fragment() {
         // 리뷰 데이터를 받아서 리사이클러 뷰로 뿌리기기
         startServerReview()
 
-        v.swipe_main_review.apply{
-            setColorSchemeColors(resources.getColor(R.color.dark_peach))
-            startServerReview()
-            v.swipe_main_review.isRefreshing = false
-
-        }
-
-
-
-
-
+        //최하단으로 이동했을 때 10개 씩 데이터 추가
+        v.sticky_scroll_main.setOnScrollChangeListener(
+            NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+                if (scrollY == (v.getChildAt(0).measuredHeight - v.measuredHeight)){
+                    startServerReview()
+                }
+        })
 
        return v
     }
