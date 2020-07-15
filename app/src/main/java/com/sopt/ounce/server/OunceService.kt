@@ -2,8 +2,7 @@ package com.sopt.ounce.server
 
 
 import com.sopt.ounce.catregister.data.ResponseCatProfileData
-import com.sopt.ounce.login.data.RequestLoginData
-import com.sopt.ounce.login.data.ResponseLoginData
+import com.sopt.ounce.login.data.*
 import com.sopt.ounce.searchmain.data.foodsearch.RequestFoodSearchData
 import com.sopt.ounce.searchmain.data.foodsearch.ResponseFoodSearchData
 import com.sopt.ounce.searchmain.data.reommendcat.RequestRecommendCatsData
@@ -74,19 +73,34 @@ interface OunceService {
         //val name = RequestBody.create(MediaType.parse("text/plain"), 값)
         @PartMap body: HashMap<String, RequestBody>
     ): Call<ResponseCatProfileData>
-  
+
+    @Headers("Content-Type:application/json")
     @POST("search/recommend")
     fun requestRecommendCat(
         @Body body : RequestRecommendCatsData
     ) : Call<ResponseRecommendCatsData>
 
+    @Headers("Content-Type:application/json")
     @POST("search/user")
     fun postUserSearch(
         @Body body : RequestUserIdData
     ) : Call<ResponseUserSearchData>
 
+    @Headers("Content-Type:application/json")
     @POST("search/food")
     fun postFoodSearch(
+        @Body body : RequestFoodSearchData
+    ) : Call<ResponseFoodSearchData>
+
+    @Headers("Content-Type:application/json")
+    @POST("search/reviewAll/avgRating")
+    fun postReviewSortTotalScore(
+        @Body body : RequestFoodSearchData
+    ) : Call<ResponseFoodSearchData>
+
+    @Headers("Content-Type:application/json")
+    @POST("search/reviewAll/avgPrefer")
+    fun postReviewSortFavorite(
         @Body body : RequestFoodSearchData
     ) : Call<ResponseFoodSearchData>
   

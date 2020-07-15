@@ -40,18 +40,11 @@ class SearchSimilarUserFragment : Fragment(){
             override fun onClick(p0: View?) {
                 Toast.makeText(mView.context, "position: ${tv_search_main_cat_name_txt}", Toast.LENGTH_SHORT).show()
             }
-
         })
 
     }
 
     fun bindInfo(view : View){
-//        view.img_search_main_profile.setImageResource(img_search_main_profile_src)
-//        view.tv_search_main_cat_name.text = tv_search_main_cat_name_txt
-//        view.tv_search_main_cat_similarity.text = tv_search_main_cat_similarity_txt
-//        view.img_search_main_review_1.setImageResource(img_search_main_review_1_src)
-//        view.img_search_main_review_2.setImageResource(img_search_main_review_2_src)
-//        view.img_search_main_review_3.setImageResource(img_search_main_review_3_src)
         Glide.with(view).load(img_search_main_profile_src).into(view.img_search_main_profile)
         view.tv_search_main_cat_name.text = tv_search_main_cat_name_txt
         view.tv_search_main_cat_similarity.text = tv_search_main_cat_similarity_txt.toString() + "%"

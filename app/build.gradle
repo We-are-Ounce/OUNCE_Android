@@ -85,5 +85,7 @@ dependencies {
     //easy SharedPreferences
     implementation 'com.github.AmanpreetYatin:Easy-SharedPreferences:0.1.1'
 
+    //ViewModelProviders, ViewModel
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
 }

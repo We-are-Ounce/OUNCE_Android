@@ -10,14 +10,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
 import android.widget.AutoCompleteTextView
+import android.widget.Spinner
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.SearchView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 import com.sopt.ounce.R
 import com.sopt.ounce.main.ui.MainActivity
+import com.sopt.ounce.searchmain.data.SpinnerAdapterViewModel
 import com.sopt.ounce.searchmain.data.foodsearch.FoodData
 import com.sopt.ounce.searchmain.data.foodsearch.RequestFoodSearchData
 import com.sopt.ounce.searchmain.data.foodsearch.ResponseFoodSearchData
@@ -37,6 +44,8 @@ import com.sopt.ounce.util.customEnqueue
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
+import kotlinx.android.synthetic.main.fragment_search_goods.*
+import kotlinx.android.synthetic.main.fragment_search_goods.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,6 +60,8 @@ class SearchFragment : Fragment() {
     lateinit var mUserSearchData : ResponseUserSearchData
     lateinit var mFoodSearchData : ResponseFoodSearchData
     lateinit var mSearchTapAdapter: SearchTapAdapter
+    var productQuery = ""
+
 
     var receiveDataArraySearch = ResponseRecommendCatsData.Data(
         listOf<ResponseRecommendCatsData.Data.RecommendFood>(
@@ -100,7 +111,7 @@ class SearchFragment : Fragment() {
 
         vp_search_main_viewpager.clipToPadding = false
         vp_search_main_viewpager.clipChildren = false
-        vp_search_main_viewpager.offscreenPageLimit = 2
+        vp_search_main_viewpager.offscreenPageLimit = 1
         //메인 화면 PageTransFormer 부착
         vp_search_main_viewpager.setPageTransformer(true, ViewPagerTransformer())
         val DpValue = 80
@@ -200,8 +211,6 @@ class SearchFragment : Fragment() {
                     )
                 }
                 else if(tab_search_main_onfocus.selectedTabPosition == 1){
-                    Log.d("Search - request", "here0")
-                    Log.d("Search - query", "${query!!}")
                     val ounce = OunceServiceImpl.SERVICE.postFoodSearch(
                         RequestFoodSearchData(
                             searchKeyword = query!!,
@@ -209,52 +218,31 @@ class SearchFragment : Fragment() {
                             pageEnd = 5
                         )
                     )
-                    Log.d("Search - request", "here1")
-
-//                    ounce.customEnqueue(
-//                        onSuccess = {
-//                            Log.d("Search - response", "here0")
-//                            mFoodSearchData = it
-//                            val mFoodSearchAdapter = SearchGoodsAdapter(view.context)
-//                            val mActivity = activity as MainActivity
-//                            val searchFoodRecyclerView = mActivity.findViewById<RecyclerView>(R.id.rv_search_goods_goodsresult)
-//                            searchFoodRecyclerView.adapter = mFoodSearchAdapter
-//                            mFoodSearchAdapter.datas = mFoodSearchData.data as MutableList<FoodData>
-//                            Log.d("Search - Data", "${mFoodSearchData.data}")
-//                            mFoodSearchAdapter.notifyDataSetChanged()
-//                            Log.d("Search - request", "here2")
-//                        },
-//                        onFaile = {
-//                            Log.d("Search - failure", "here0")
-//                        },
-//                        onError = {
-//                            Log.d("Search - error", "here0")
-//                        }
-//                    )
                     ounce.enqueue(object : Callback<ResponseFoodSearchData>{
                         override fun onFailure(call: Call<ResponseFoodSearchData>, t: Throwable) {
-                            Log.d("Search - fail Message", "${t.message}")
                         }
 
                         override fun onResponse(
                             call: Call<ResponseFoodSearchData>,
                             response: Response<ResponseFoodSearchData>
                         ) {
-                            Log.d("Search - response", "here0")
-                            Log.d("Search - response", "${response.body()!!.status}")
-                            Log.d("Search - response", "${response.body()!!.message}")
-                            mFoodSearchData = response.body()!!
-                            val mFoodSearchAdapter = SearchGoodsAdapter(view.context)
-                            val mActivity = activity as MainActivity
-                            val searchFoodRecyclerView = mActivity.findViewById<RecyclerView>(R.id.rv_search_goods_goodsresult)
-                            searchFoodRecyclerView.adapter = mFoodSearchAdapter
-                            mFoodSearchAdapter.datas = mFoodSearchData.data as MutableList<FoodData>
-                            Log.d("Search - Data", "${mFoodSearchData.data}")
-                            mFoodSearchAdapter.notifyDataSetChanged()
-                            Log.d("Search - request", "here2")
+                            if(!response.body()!!.data.isNullOrEmpty()){
+                                val mViewModel = ViewModelProviders.of(activity as MainActivity).get(SpinnerAdapterViewModel::class.java)
+                                mViewModel.productQuery = query!!
+                                productQuery = query!!
+                                mFoodSearchData = response.body()!!
+                                val mFoodSearchAdapter = SearchGoodsAdapter(view.context)
+                                val mActivity = activity as MainActivity
+                                val searchFoodRecyclerView = mActivity.findViewById<RecyclerView>(R.id.rv_search_goods_goodsresult)
+                                val searchSpinner = mActivity.findViewById<Spinner>(R.id.spn_search_goods_filter)
+                                if(searchSpinner.visibility == View.GONE)
+                                    searchSpinner.visibility = View.VISIBLE
+                                searchFoodRecyclerView.adapter = mFoodSearchAdapter
+                                mFoodSearchAdapter.datas = mFoodSearchData.data as MutableList<FoodData>
+                                mFoodSearchAdapter.notifyDataSetChanged()
+
+                            }
                         }
-
-
                     })
                 }
                 return true
@@ -263,8 +251,83 @@ class SearchFragment : Fragment() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 return false
             }
-
         })
+//        val mActivity = activity as MainActivity
+//        val searchSpinner = mActivity.findViewById<Spinner>(R.id.spn_search_goods_filter)
+//        if(searchSpinner.visibility == View.VISIBLE){
+//            searchSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+//                override fun onNothingSelected(p0: AdapterView<*>?) {
+//
+//                }
+//
+//                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+//                    val selectedItem = parent!!.getItemAtPosition(position).toString()
+//                    if (selectedItem == "기호도 순"){
+//                        val sortFavoriteSearch = OunceServiceImpl.SERVICE.postReviewSortFavorite(
+//                            RequestFoodSearchData(
+//                                searchKeyword = productQuery,
+//                                pageStart = 1,
+//                                pageEnd = 5
+//                            )
+//                        )
+//                        sortFavoriteSearch.enqueue(object : Callback<ResponseFoodSearchData>{
+//                            override fun onFailure(
+//                                call: Call<ResponseFoodSearchData>,
+//                                t: Throwable
+//                            ) {
+//                            }
+//
+//                            override fun onResponse(
+//                                call: Call<ResponseFoodSearchData>,
+//                                response: Response<ResponseFoodSearchData>
+//                            ) {
+//                                mFoodSearchData = response.body()!!
+//                                val mFoodSearchAdapter = SearchGoodsAdapter(view!!.context)
+//                                val mActivity = activity as MainActivity
+//                                val searchFoodRecyclerView = mActivity.findViewById<RecyclerView>(R.id.rv_search_goods_goodsresult)
+//                                searchFoodRecyclerView.adapter = mFoodSearchAdapter
+//                                mFoodSearchAdapter.datas = mFoodSearchData.data as MutableList<FoodData>
+//                                mFoodSearchAdapter.notifyDataSetChanged()
+//                            }
+//
+//                        })
+//                    }
+//                    else if(selectedItem == "총점 순"){
+//                        val sortScoreSearch = OunceServiceImpl.SERVICE.postReviewSortTotalScore(
+//                            RequestFoodSearchData(
+//                                searchKeyword = productQuery,
+//                                pageStart = 1,
+//                                pageEnd = 5
+//                            )
+//                        )
+//                        sortScoreSearch.enqueue(object : Callback<ResponseFoodSearchData>{
+//                            override fun onFailure(
+//                                call: Call<ResponseFoodSearchData>,
+//                                t: Throwable
+//                            ) {
+//
+//                            }
+//
+//                            override fun onResponse(
+//                                call: Call<ResponseFoodSearchData>,
+//                                response: Response<ResponseFoodSearchData>
+//                            ) {
+//                                mFoodSearchData = response.body()!!
+//                                val mFoodSearchAdapter = SearchGoodsAdapter(view!!.context)
+//                                val mActivity = activity as MainActivity
+//                                val searchFoodRecyclerView = mActivity.findViewById<RecyclerView>(R.id.rv_search_goods_goodsresult)
+//                                searchFoodRecyclerView.adapter = mFoodSearchAdapter
+//                                mFoodSearchAdapter.datas = mFoodSearchData.data as MutableList<FoodData>
+//                                mFoodSearchAdapter.notifyDataSetChanged()
+//                            }
+//
+//                        })
+//                    }
+//                }
+//
+//            }
+//        }
+
     }
 
     private fun initDataArray(){
