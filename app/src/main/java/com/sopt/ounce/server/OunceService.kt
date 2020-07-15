@@ -74,16 +74,18 @@ interface OunceService {
         @Path("reviewIdx") reviewIdx: Int
     ) : Call<ResponseDeleteData>
 
-  
+    @Headers("Content-Type:application/json")
     @POST("search/recommend")
     fun requestRecommendCat(
         @Body body : RequestRecommendCatsData
     ) : Call<ResponseRecommendCatsData>
 
+    @Headers("Content-Type:application/json")
     @POST("search/user")
     fun postUserSearch(
         @Body body : RequestUserIdData
     ) : Call<ResponseUserSearchData>
+
 
     //메인 화면 뷰 통신 인터페이스//
     @GET("profile/mainProfile/{profileIdx}")
@@ -100,6 +102,7 @@ interface OunceService {
         @Query("pageEnd") end : Int
     ) : Call<ResponseMainReviewData>
 
+
     @Headers("Content-Type:apllication/json")
     @GET("profile/convesion/{profileIdx}")
     fun getConvesionProfile(
@@ -107,9 +110,23 @@ interface OunceService {
     ) : Call<BottomProfileData>
     /////////////////////////////////////////////
 
+
+    @Headers("Content-Type:application/json")
     @POST("search/food")
     fun postFoodSearch(
         @Body body : RequestFoodSearchData
     ) : Call<ResponseFoodSearchData>
 
+    @Headers("Content-Type:application/json")
+    @POST("search/reviewAll/avgRating")
+    fun postReviewSortTotalScore(
+        @Body body : RequestFoodSearchData
+    ) : Call<ResponseFoodSearchData>
+
+    @Headers("Content-Type:application/json")
+    @POST("search/reviewAll/avgPrefer")
+    fun postReviewSortFavorite(
+        @Body body : RequestFoodSearchData
+    ) : Call<ResponseFoodSearchData>
+  
 }
