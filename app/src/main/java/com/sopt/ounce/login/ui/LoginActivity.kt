@@ -24,6 +24,7 @@ import com.sopt.ounce.util.textCheckListener
 import com.sopt.ounce.signup.ui.SignUpActivity
 import com.sopt.ounce.util.StatusObject
 import com.sopt.ounce.util.customEnqueue
+import com.sopt.ounce.util.showLog
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -150,14 +151,15 @@ class LoginActivity : AppCompatActivity() {
             .customEnqueue(
                 onSuccess = { it ->
                     it.data?.let { data ->
-
+                        EasySharedPreference.Companion.putString("accessToken",data.accessToken)
                         when (data.profileCount) {
                             0 -> {
-                                EasySharedPreference.Companion.putString("accessToken",data.accessToken)
+
                                 val intent = Intent(this, CatRegisterActivity::class.java)
                                 startActivity(intent)
                             }
                             else -> {
+                                "OunceServerStatus".showLog("로그인 시 profileIdx : ${data.profileIdx}")
                                 EasySharedPreference.Companion.putInt("profileIdx",data.profileIdx)
                                 val intent = Intent(this, MainActivity::class.java)
                                 startActivity(intent)

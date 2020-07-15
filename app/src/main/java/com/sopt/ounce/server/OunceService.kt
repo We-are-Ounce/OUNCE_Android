@@ -3,6 +3,8 @@ package com.sopt.ounce.server
 import com.sopt.ounce.catregister.data.ResponseCatProfileData
 import com.sopt.ounce.login.data.RequestLoginData
 import com.sopt.ounce.login.data.ResponseLoginData
+import com.sopt.ounce.main.data.ResponseMainProfileData
+import com.sopt.ounce.main.data.ResponseMainReviewData
 import com.sopt.ounce.searchmain.data.reommendcat.RequestRecommendCatsData
 import com.sopt.ounce.searchmain.data.reommendcat.ResponseRecommendCatsData
 import com.sopt.ounce.searchmain.data.usersearch.RequestUserIdData
@@ -32,10 +34,7 @@ interface OunceService {
     @POST("profile/register")
     fun postCatProfile(
         @Header("Token") token: String,
-        // profileImg = pictureRb
         @Part profileImg: MultipartBody.Part,
-        //실제 사용 시
-        //val name = RequestBody.create(MediaType.parse("text/plain"), 값)
         @PartMap body: HashMap<String, RequestBody>
     ): Call<ResponseCatProfileData>
   
@@ -48,4 +47,22 @@ interface OunceService {
     fun postUserSearch(
         @Body body : RequestUserIdData
     ) : Call<ResponseUserSearchData>
+
+
+    //메인 화면 뷰 통신 인터페이스
+    @GET("profile/mainProfile/{profileIdx}")
+    fun getMainProfile(
+        @Header("token") token : String,
+        @Path("profileIdx") profileIdx : Int
+    ) : Call<ResponseMainProfileData>
+
+
+    @GET("review/{profileIdx}/prefer")
+    fun getMainReview(
+        @Path("profileIdx")profileIdx: Int,
+        @Query("pageStart") start : Int,
+        @Query("pageEnd") end : Int
+    ) : Call<ResponseMainReviewData>
+
+
 }

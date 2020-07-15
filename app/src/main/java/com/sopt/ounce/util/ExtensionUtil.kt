@@ -33,12 +33,13 @@ fun EditText.textCheckListener(textCheck: (CharSequence?) -> Unit) {
 }
 
 fun <ResponseType> Call<ResponseType>.customEnqueue(
-    onFaile: () -> Unit = { "netWork".showLog("통신 실패") },
+    onFaile: () -> Unit = { "OunceServerStatus".showLog("통신 실패") },
     onSuccess: (ResponseType) -> Unit,
     onError: (Response<ResponseType>) -> Unit = {}
 ) {
     this.enqueue(object : Callback<ResponseType> {
         override fun onFailure(call: Call<ResponseType>, t: Throwable) {
+            "OunceServerStatus".showLog("ServerFail : ${t.message}")
             onFaile()
         }
 
