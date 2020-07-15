@@ -9,10 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.amn.easysharedpreferences.EasySharedPreference
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -115,10 +118,13 @@ class HomeFragment : Fragment() {
         // 리뷰 데이터를 받아서 리사이클러 뷰로 뿌리기기
         startServerReview()
 
-
-
-
-
+        //최하단으로 이동했을 때 10개 씩 데이터 추가
+        v.sticky_scroll_main.setOnScrollChangeListener(
+            NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+                if (scrollY == (v.getChildAt(0).measuredHeight - v.measuredHeight)){
+                    startServerReview()
+                }
+        })
 
        return v
     }
@@ -221,19 +227,32 @@ class HomeFragment : Fragment() {
             adapter = mProfileAdapter
             layoutManager = LinearLayoutManager(mContext)
         }
+        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx",0)
 
-        mProfileAdapter.data = listOf(
-            BottomProfileData(
-                "https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg",
-                "title1",
-                "intro1",
-                false),
-            BottomProfileData(
-                "https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg",
-                "title2",
-                "intro2",
-                false)
+        mOunce.SERVICE.getConvesionProfile(profileIdx).customEnqueue(
+            onSuccess = {
+                "OunceStatus".showLog("프로필 바텀시트 호출 메세지 : ${it.message}")
+                it.data?.let {data ->
+                    mProfileAdapter.data = data
+                }
+            },
+            onError = {
+                "OunceError".showLog("프로필 바텀시트 호출 오류")
+            }
         )
+
+//        mProfileAdapter.data = listOf(
+//            BottomProfileData(
+//                "https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg",
+//                "title1",
+//                "intro1",
+//                false),
+//            BottomProfileData(
+//                "https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg",
+//                "title2",
+//                "intro2",
+//                false)
+//        )
         mProfileAdapter.notifyDataSetChanged()
 
         mBottomsheetProfile.layout_bottomsheet_add_profile.setOnClickListener {

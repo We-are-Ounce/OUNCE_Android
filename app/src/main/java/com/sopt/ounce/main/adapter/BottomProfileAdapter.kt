@@ -10,7 +10,7 @@ import com.sopt.ounce.main.viewholder.BottomProfileViewHolder
 
 class BottomProfileAdapter (private val context : Context) : RecyclerView.Adapter<BottomProfileViewHolder>(){
 
-    var data = listOf<BottomProfileData>()
+    var data = listOf<BottomProfileData.Data>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BottomProfileViewHolder {
         val view = LayoutInflater.from(context)
