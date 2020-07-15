@@ -73,26 +73,18 @@ interface OunceService {
         @Path("reviewIdx") reviewIdx: Int
     ) : Call<ResponseDeleteData>
 
-    @Multipart
-    @POST("profile/register")
-    fun postCatProfile(
-        @Header("Token") token: String,
-        // profileImg = pictureRb
-        @Part profileImg: MultipartBody.Part,
-        //실제 사용 시
-        //val name = RequestBody.create(MediaType.parse("text/plain"), 값)
-        @PartMap body: HashMap<String, RequestBody>
-    ): Call<ResponseCatProfileData>
-  
+    @Headers("Content-Type:application/json")
     @POST("search/recommend")
     fun requestRecommendCat(
         @Body body : RequestRecommendCatsData
     ) : Call<ResponseRecommendCatsData>
 
+    @Headers("Content-Type:application/json")
     @POST("search/user")
     fun postUserSearch(
         @Body body : RequestUserIdData
     ) : Call<ResponseUserSearchData>
+
 
     //메인 화면 뷰 통신 인터페이스//
     @GET("profile/mainProfile/{profileIdx}")
@@ -109,10 +101,22 @@ interface OunceService {
         @Query("pageEnd") end : Int
     ) : Call<ResponseMainReviewData>
 
-
+    @Headers("Content-Type:application/json")
     @POST("search/food")
     fun postFoodSearch(
         @Body body : RequestFoodSearchData
     ) : Call<ResponseFoodSearchData>
 
+    @Headers("Content-Type:application/json")
+    @POST("search/reviewAll/avgRating")
+    fun postReviewSortTotalScore(
+        @Body body : RequestFoodSearchData
+    ) : Call<ResponseFoodSearchData>
+
+    @Headers("Content-Type:application/json")
+    @POST("search/reviewAll/avgPrefer")
+    fun postReviewSortFavorite(
+        @Body body : RequestFoodSearchData
+    ) : Call<ResponseFoodSearchData>
+  
 }
