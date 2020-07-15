@@ -2,6 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+
+        android:background="#fafafa"
         android:id="@+id/fm_search_good"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,6 +25,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_search_goods_goodsresult"
+        android:paddingHorizontal="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
