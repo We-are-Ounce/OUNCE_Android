@@ -7,12 +7,10 @@ data class RequestReviewData (
     var reviewMemo : String,
     var reviewStatus : Int,
     var reviewSmell : Int,
-    var reviewEye: Boolean,
-    var reviewEar :Boolean,
-    var reviewHair : Boolean,
-    var reviewVomit : Boolean,
-    var createdAt : String,
+    var reviewEye: Int,
+    var reviewEar :Int,
+    var reviewHair : Int,
+    var reviewVomit : Int,
     var foodIdx : Int,
     var profileIdx :Int
-
 )

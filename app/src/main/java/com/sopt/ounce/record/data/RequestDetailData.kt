@@ -1,6 +1,7 @@
 package com.sopt.ounce.login.data
 
 data class RequestDetailData (
+    var foodIdx : Int,
     var reviewRating : Int,
     var reviewPrefer :Int,
     var reviewInfo : String,
