@@ -115,13 +115,6 @@ class HomeFragment : Fragment() {
         // 리뷰 데이터를 받아서 리사이클러 뷰로 뿌리기기
         startServerReview()
 
-        v.swipe_main_review.apply{
-            setColorSchemeColors(resources.getColor(R.color.dark_peach))
-            startServerReview()
-            v.swipe_main_review.isRefreshing = false
-
-        }
-
 
 
 

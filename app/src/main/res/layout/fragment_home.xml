@@ -269,16 +269,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayout
-                android:id="@+id/swipe_main_review"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:srl_direction="bottom"
-                app:layout_constraintBottom_toBottomOf="@id/layout_review_container"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_main_review_list">
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcv_main_review"
                     android:layout_width="match_parent"
@@ -292,9 +282,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/layout_main_review_list"/>
-
-            </com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayout>
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
