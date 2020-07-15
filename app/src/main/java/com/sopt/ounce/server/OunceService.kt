@@ -5,6 +5,8 @@ import com.sopt.ounce.login.data.RequestLoginData
 import com.sopt.ounce.login.data.ResponseLoginData
 import com.sopt.ounce.searchmain.data.reommendcat.RequestRecommendCatsData
 import com.sopt.ounce.searchmain.data.reommendcat.ResponseRecommendCatsData
+import com.sopt.ounce.searchmain.data.usersearch.RequestUserIdData
+import com.sopt.ounce.searchmain.data.usersearch.ResponseUserSearchData
 import com.sopt.ounce.signup.data.RequestSignUpdata
 import com.sopt.ounce.signup.data.ResponseSignUpData
 import okhttp3.MultipartBody
@@ -42,4 +44,8 @@ interface OunceService {
         @Body body : RequestRecommendCatsData
     ) : Call<ResponseRecommendCatsData>
 
+    @POST("search/user")
+    fun postUserSearch(
+        @Body body : RequestUserIdData
+    ) : Call<ResponseUserSearchData>
 }

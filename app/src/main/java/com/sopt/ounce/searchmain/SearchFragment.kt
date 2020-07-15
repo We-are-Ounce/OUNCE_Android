@@ -11,39 +11,39 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.AutoCompleteTextView
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 import com.sopt.ounce.R
 import com.sopt.ounce.main.ui.MainActivity
 import com.sopt.ounce.searchmain.data.reommendcat.RequestRecommendCatsData
 import com.sopt.ounce.searchmain.data.reommendcat.ResponseRecommendCatsData
+import com.sopt.ounce.searchmain.data.usersearch.RequestUserIdData
+import com.sopt.ounce.searchmain.data.usersearch.ResponseUserSearchData
+import com.sopt.ounce.searchmain.data.usersearch.UserData
 import com.sopt.ounce.searchmain.fragment.SearchSimilarUserFragment
-import com.sopt.ounce.searchmain.network.recommendcat.RequestRecommendCatToServer
+import com.sopt.ounce.searchmain.recyclerview.SearchUserAdapter
 import com.sopt.ounce.searchmain.viewpager.SearchSimilarPagerAdapter
 import com.sopt.ounce.searchmain.viewpager.SearchTapAdapter
 import com.sopt.ounce.searchmain.viewpager.ViewPagerTransformer
 import com.sopt.ounce.server.OunceServiceImpl
 import com.sopt.ounce.util.customEnqueue
-import com.sopt.ounce.util.showLog
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import kotlin.concurrent.thread
 
 class SearchFragment : Fragment() {
-    val requestRecommendCatToServer = RequestRecommendCatToServer
     private lateinit var mInputMethodManager: InputMethodManager
     private lateinit var mContext: Context
     private lateinit var mView: View
+    private lateinit var cView : View
     var isKeyboardFocused = false
     lateinit var mPagerAdapter : SearchSimilarPagerAdapter
-    //var receiveDataArraySearch : ArrayList<SearchSimilarUserData> = ArrayList()
+    lateinit var mUserSearchData : ResponseUserSearchData
+    lateinit var mSearchTapAdapter: SearchTapAdapter
+
     var receiveDataArraySearch = ResponseRecommendCatsData.Data(
         listOf<ResponseRecommendCatsData.Data.RecommendFood>(
             ResponseRecommendCatsData.Data.RecommendFood("", -1)),
@@ -72,6 +72,10 @@ class SearchFragment : Fragment() {
             container,
             false
         )
+        cView = inflater.inflate(R.layout.fragment_search_user,
+            container,
+            false
+            )
         observeKeyboard()
         settingMethodManager()
         return mView
@@ -99,7 +103,6 @@ class SearchFragment : Fragment() {
         vp_search_main_viewpager.pageMargin = margin/32
 
         //ViewPager와 DotsIndicator 연동
-
         sv_search_main_search.findViewById<AutoCompleteTextView>(R.id.search_src_text).
         setTextColor(resources.getColor(R.color.greyish_brown))
         sv_search_main_search.findViewById<AutoCompleteTextView>(R.id.search_src_text).
@@ -134,12 +137,10 @@ class SearchFragment : Fragment() {
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
                 if(clayout_search_main_focus.visibility == View.VISIBLE){
-                    Log.d("true", "1")
                     clayout_search_main_notfocus.visibility = View.VISIBLE
                     clayout_search_main_focus.visibility = View.GONE
                 }
                 else if(clayout_search_main_focus.visibility == View.GONE){
-                    Log.d("true", "100100")
                     ActivityCompat.finishAffinity(activity as MainActivity)
                 }
             }
@@ -147,21 +148,62 @@ class SearchFragment : Fragment() {
         })
 
         //검색 창 하단 ViewPager와 TabLayout 연동
-        vp_search_main_search.adapter = SearchTapAdapter(view.context,
-            childFragmentManager,
-            tab_search_main_onfocus.tabCount)
+        mSearchTapAdapter = SearchTapAdapter(view.context,childFragmentManager,tab_search_main_onfocus.tabCount)
+        vp_search_main_search.adapter =  mSearchTapAdapter
         vp_search_main_search.addOnPageChangeListener(
             TabLayout.TabLayoutOnPageChangeListener(tab_search_main_onfocus))
         tab_search_main_onfocus.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
+           override fun onTabUnselected(tab: TabLayout.Tab?) {
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 vp_search_main_search.currentItem = tab_search_main_onfocus.selectedTabPosition
             }
+        })
+
+        //검색기능 구현
+        //cView.rv_search_user_searchresult.adapter = searchUserAdapter
+        //searchUserAdapter = SearchUserAdapter(view.context)
+        //cView.rv_search_user_searchresult.adapter = searchUserAdapter
+        sv_search_main_search.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                Log.d("Search - Find", "here-2")
+                if(tab_search_main_onfocus.selectedTabPosition == 0){
+                    val ounce = OunceServiceImpl.SERVICE.postUserSearch(
+                        RequestUserIdData(
+                            userId = query!!,
+                            pageEnd = 5,
+                            pageStart = 1
+                        )
+                    )
+                    ounce.customEnqueue(
+                        onSuccess = {
+                            mUserSearchData = it
+                            val mUserSearchAdapter = SearchUserAdapter(view.context)
+                            val mActivity = activity as MainActivity
+                            val searchRecyclerView = mActivity.findViewById<RecyclerView>(R.id.rv_search_user_searchresult)
+                            searchRecyclerView.adapter = mUserSearchAdapter
+                            mUserSearchAdapter.datas =  mUserSearchData.data as MutableList<UserData>
+                            mUserSearchAdapter.notifyDataSetChanged()
+                        },
+                        onFaile = {
+                        },
+                        onError = {
+                        }
+                    )
+                }
+                else if(tab_search_main_onfocus.selectedTabPosition == 1){
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
         })
     }
 
