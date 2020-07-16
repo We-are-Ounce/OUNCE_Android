@@ -7,7 +7,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.ounce.R
 import com.sopt.ounce.record.ui.RecordActivity
@@ -26,6 +29,15 @@ class RecyclerViewAdapter(private var arrayList: ArrayList<String>):
 
     }
 
+    interface OnItemClickListener{
+        fun onItemClick(v : View, position: Int)
+    }
+
+    private var listener : OnItemClickListener? = null
+
+    fun setOnItemClickListener (listener : OnItemClickListener){
+        this.listener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val itemListView =
@@ -46,19 +58,11 @@ class RecyclerViewAdapter(private var arrayList: ArrayList<String>):
         holder.itemView.tv_search.text = filterList[position]
         holder.itemView.tv_search.setTextColor(Color.BLACK)
         holder.itemView.item_search.setBackgroundColor(Color.TRANSPARENT)
-
-//        holder.itemView.setOnClickListener{
-//            val intent = Intent(mContext, RecordActivity::class.java)
-//            intent.putExtra("passText", filterList[position])
-//            mContext.startActivity(intent)
-//        }
         holder.itemView.item_search.img_delete.setOnClickListener {
             if(arrayList.isNotEmpty()){
                 arrayList.removeAt(position)
-                Log.d("remove", "${position}")
                 notifyDataSetChanged()
             }
-
             else
                 Toast.makeText(mContext, "리스트에 원소가 없습니다", Toast.LENGTH_SHORT).show()
         }
