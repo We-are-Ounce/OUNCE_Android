@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mFm: FragmentManager
 
+    @Suppress("NAME_SHADOWING")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,18 +26,11 @@ class MainActivity : AppCompatActivity() {
         StatusObject.setStatusBar(this)
 
         mFm = this.supportFragmentManager
-        val intent: Intent = intent
-        val meOrYou: Boolean = intent.getBooleanExtra("me", true)
 
-        if (meOrYou) {
-            mFm.beginTransaction().apply {
-                add(R.id.layout_main_content, HomeFragment())
-                commit()
-            }
-        } else {
-            mFm.beginTransaction().apply {
-                add(R.id.layout_main_content, OtherUserFragment())
-            }
+
+        mFm.beginTransaction().apply {
+            add(R.id.layout_main_content, HomeFragment())
+            commit()
         }
 
 
@@ -97,9 +91,8 @@ class MainActivity : AppCompatActivity() {
 
 
     fun methodManagerToFragment(): InputMethodManager {
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE)
+        return getSystemService(Context.INPUT_METHOD_SERVICE)
                 as InputMethodManager
-        return imm
     }
 
 }
