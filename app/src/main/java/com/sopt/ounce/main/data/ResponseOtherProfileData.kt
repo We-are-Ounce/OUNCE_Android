@@ -1,14 +1,14 @@
 package com.sopt.ounce.main.data
 
-
-data class ResponseMainProfileData(
+data class ResponseOtherProfileData(
     val status : Int,
     val success : Boolean,
     val data : Data
 ){
     data class Data(
         val reviewCountAll : Int,
-        val profileInfoArray : List<Profile>
+        val profileInfoArray : List<Profile>,
+        val ischeck : Boolean
     ){
         data class Profile(
             val profileImg : String,

@@ -3,14 +3,9 @@ package com.sopt.ounce.server
 
 import com.sopt.ounce.catregister.data.ResponseCatProfileData
 import com.sopt.ounce.login.data.*
-import com.sopt.ounce.main.data.BottomProfileData
-import com.sopt.ounce.main.data.ResponseFilterData
-import com.sopt.ounce.main.data.ResponseMainProfileData
-import com.sopt.ounce.main.data.ResponseMainReviewData
+import com.sopt.ounce.main.data.*
 import com.sopt.ounce.record.data.RequestFoodRecordData
-import com.sopt.ounce.main.data.RequestSelectedFilter
 import com.sopt.ounce.record.data.ResponseFoodRecordData
-import com.sopt.ounce.record.data.ResponseSearchFood
 import com.sopt.ounce.searchmain.data.foodsearch.RequestFoodSearchData
 import com.sopt.ounce.searchmain.data.foodsearch.ResponseFoodSearchData
 import com.sopt.ounce.searchmain.data.reommendcat.RequestRecommendCatsData
@@ -103,7 +98,7 @@ interface OunceService {
     ) : Call<ResponseMainProfileData>
 
 
-    @GET("review/{profileIdx}/prefer")
+    @GET("review/{profileIdx}")
     fun getMainReview(
         @Path("profileIdx")profileIdx: Int,
         @Query("pageStart") start : Int,
@@ -128,8 +123,37 @@ interface OunceService {
         @Path("profileIdx") profileIdx: Int,
         @Body body : RequestSelectedFilter
     ) : Call<ResponseMainReviewData>
+    /////////////////////////////////////////////
+
+    ///다른 프로필 조회 인터페이스 ////////////////
+    @Headers("Content-Type:application/json")
+    @GET("profile")
+    fun getOtherProfile(
+        @Query("myprofileIdx") myprofileIdx : Int,
+        @Query("profileIdx") otherIdx : Int
+    ) : Call<ResponseOtherProfileData>
+
+    @GET("profile/review/{profileIdx}")
+    fun getOtherProfileReview(
+        @Path("profileIdx") profileIdx : Int,
+        @Query("pageStart") pageStart : Int,
+        @Query("pageEnd") pageEnd : Int
+    ) : Call<ResponseMainReviewData>
+
+    @Headers("Content-Type:application/json")
+    @POST("profile/requestFollow")
+    fun postFollow(
+        @Body body : RequestFollowData
+    ) : Call<ResponseFollowData>
+
+    @Headers("Content-Type:applicaation/json")
+    @HTTP(method = "DELETE", path = "profile/deleteFollow", hasBody = true)
+    fun deleteFollow(
+        @Body body :RequestFollowData
+    ) : Call<ResponseFollowData>
 
     /////////////////////////////////////////////
+
     @Headers("Content-Type:application/json")
     @POST("search/toWrite/{profileIdx}")
     fun postRecordFoodSearch(

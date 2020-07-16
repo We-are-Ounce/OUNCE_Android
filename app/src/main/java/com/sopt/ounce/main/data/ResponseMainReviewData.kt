@@ -16,8 +16,8 @@ data class ResponseMainReviewData(
         val foodManu : String,
         val foodName : String,
         val reviewInfo : String,
-        val reviewRating : Int,
-        val reviewPrefer : Int,
+        val reviewRating : String,
+        val reviewPrefer : String,
         val createdAt : String
     ) : Serializable
 }
