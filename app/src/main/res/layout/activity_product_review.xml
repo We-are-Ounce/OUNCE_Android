@@ -276,7 +276,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/notosanskr_medium"
                         android:lineSpacingExtra="22sp"
-                        android:text="이미 리뷰를 작성했습니다."
+                        android:text="리뷰를 작성해주세요."
                         android:textColor="@color/pinkish_gray"
                         android:textSize="14sp"
                         android:layout_alignParentLeft="true"
@@ -344,6 +344,7 @@
                     android:background="@color/white">
 
                     <ImageButton
+                        android:id="@+id/img_product_review_back"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"

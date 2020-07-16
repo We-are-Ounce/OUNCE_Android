@@ -1,17 +1,21 @@
 package com.sopt.ounce.productreview
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import com.amn.easysharedpreferences.EasySharedPreference
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import com.sopt.ounce.R
 import com.sopt.ounce.productreview.recyclerview.ProductReviewAdapter
 import com.sopt.ounce.productreview.recyclerview.ProductReviewData
 import com.sopt.ounce.productreview.recyclerview.ProductReviewItemDecoration
+import com.sopt.ounce.record.data.RecordSearchFoodData
+import com.sopt.ounce.record.ui.RecordActivity
 import com.sopt.ounce.searchmain.data.foodsearch.FoodData
 import com.sopt.ounce.searchmain.data.showreview.ReviewData
 import com.sopt.ounce.util.StatusObject
@@ -22,6 +26,9 @@ import kotlin.math.abs
 class ProductReviewActivity : AppCompatActivity() {
     lateinit var productReviewAdapter: ProductReviewAdapter
     var mReviewData = mutableListOf<ProductReviewData>()
+    //내가 이 제품에 대한 리뷰를 작성했는 지
+    var isWritten = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_review)
@@ -53,6 +60,48 @@ class ProductReviewActivity : AppCompatActivity() {
         tv_product_review_reviewaverageamount.text = dataFood.avgRating.toString()
         tv_product_review_goodaverageamount.text = dataFood.avgPrefer.toString()
 
+        val myProfileIdx = EasySharedPreference.getInt("profileIdx", 0)
+        for(itemReview in dataListReview){
+            if(myProfileIdx == itemReview.profileIdx)
+                isWritten = true
+        }
+        //내 리뷰가 저 안에 들어있음
+        if(isWritten) {
+            tv_product_review_isreview.text = "이미 리뷰를 작성했습니다."
+            tv_product_review_isreview.setTextColor(resources.getColor(R.color.black_two))
+        }
+
+        //뒤로가기 버튼 누르면 액티비티가 끝나게
+        img_product_review_back.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(view: View?) {
+                this@ProductReviewActivity.finish()
+            }
+        })
+
+        //작성 버튼 클릭 리스너
+        img_product_review_write.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(view: View?) {
+                val myRecordSearchFoodData = RecordSearchFoodData(
+                    dataFood.foodIdx,
+                    dataFood.foodImg,
+                    dataFood.foodManu,
+                    dataFood.foodName
+                )
+                val intent = Intent(view!!.context, RecordActivity::class.java)
+                intent.putExtra("foodItem", myRecordSearchFoodData)
+                view!!.context.startActivity(intent)
+                //내가 리뷰를 작성 안 했는데 작성버튼을 누르면 리뷰 작성
+//                if(!isWritten){
+//
+//
+//                }
+//                //내가 리뷰를 작성한 제품의 작성버튼을 누르면 리뷰 수정
+//                else{
+//
+//                }
+            }
+
+        })
 
         productReviewAdapter = ProductReviewAdapter(this)
         rv_product_review_reviews.adapter = productReviewAdapter
