@@ -133,7 +133,16 @@ class OtherActivity : AppCompatActivity() {
                 onSuccess = {
                     "OunceServerSuccess".showLog("다른계정 프로필 조회 성공")
                     txt_other_reviewcount.text="(${it.data.reviewCountAll})"
-                    btn_other_follow.isSelected = it.data.ischeck
+
+                    if(it.data.ischeck){
+                        btn_other_follow.isSelected = it.data.ischeck
+                        btn_other_follow.text = "팔로우 취소"
+                    }
+                    else{
+                        btn_other_follow.isSelected = it.data.ischeck
+                        btn_other_follow.text="팔로우"
+                    }
+
 
                     //프로필 뷰에 붙이기
                     settingDrawable(it.data.profileInfoArray[0])
