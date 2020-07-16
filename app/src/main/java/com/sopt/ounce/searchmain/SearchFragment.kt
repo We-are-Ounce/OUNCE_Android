@@ -158,6 +158,10 @@ class SearchFragment : Fragment() {
                 if(clayout_search_main_focus.visibility == View.VISIBLE){
                     clayout_search_main_notfocus.visibility = View.VISIBLE
                     clayout_search_main_focus.visibility = View.GONE
+                    sv_search_main_search.setQuery("", false)
+                    val mViewModel = ViewModelProviders.of(activity as MainActivity).get(SpinnerAdapterViewModel::class.java)
+                    mViewModel.userQuery = ""
+                    mViewModel.productQuery = ""
                 }
                 else if(clayout_search_main_focus.visibility == View.GONE){
                     ActivityCompat.finishAffinity(activity as MainActivity)
@@ -171,6 +175,7 @@ class SearchFragment : Fragment() {
         vp_search_main_search.adapter =  mSearchTapAdapter
         vp_search_main_search.addOnPageChangeListener(
             TabLayout.TabLayoutOnPageChangeListener(tab_search_main_onfocus))
+
         tab_search_main_onfocus.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
@@ -180,6 +185,7 @@ class SearchFragment : Fragment() {
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 vp_search_main_search.currentItem = tab_search_main_onfocus.selectedTabPosition
+                sv_search_main_search.setQuery("", false)
             }
         })
 
@@ -190,12 +196,14 @@ class SearchFragment : Fragment() {
                     val ounce = OunceServiceImpl.SERVICE.postUserSearch(
                         RequestUserIdData(
                             userId = query!!,
-                            pageEnd = 5,
-                            pageStart = 1
+                            pageStart = 1,
+                            pageEnd = 100
                         )
                     )
                     ounce.customEnqueue(
                         onSuccess = {
+                            val mViewModel = ViewModelProviders.of(activity as MainActivity).get(SpinnerAdapterViewModel::class.java)
+                            mViewModel.userQuery == query!!
                             mUserSearchData = it
                             val mUserSearchAdapter = SearchUserAdapter(view.context)
                             val mActivity = activity as MainActivity
@@ -211,11 +219,11 @@ class SearchFragment : Fragment() {
                     )
                 }
                 else if(tab_search_main_onfocus.selectedTabPosition == 1){
-                    val ounce = OunceServiceImpl.SERVICE.postFoodSearch(
+                    val ounce = OunceServiceImpl.SERVICE.postReviewSortFavorite(
                         RequestFoodSearchData(
                             searchKeyword = query!!,
                             pageStart = 1,
-                            pageEnd = 5
+                            pageEnd = 100
                         )
                     )
                     ounce.enqueue(object : Callback<ResponseFoodSearchData>{
@@ -229,7 +237,7 @@ class SearchFragment : Fragment() {
                             if(!response.body()!!.data.isNullOrEmpty()){
                                 val mViewModel = ViewModelProviders.of(activity as MainActivity).get(SpinnerAdapterViewModel::class.java)
                                 mViewModel.productQuery = query!!
-                                productQuery = query!!
+                                //productQuery = query!!
                                 mFoodSearchData = response.body()!!
                                 val mFoodSearchAdapter = SearchGoodsAdapter(view.context)
                                 val mActivity = activity as MainActivity
@@ -240,7 +248,6 @@ class SearchFragment : Fragment() {
                                 searchFoodRecyclerView.adapter = mFoodSearchAdapter
                                 mFoodSearchAdapter.datas = mFoodSearchData.data as MutableList<FoodData>
                                 mFoodSearchAdapter.notifyDataSetChanged()
-
                             }
                         }
                     })
@@ -252,7 +259,6 @@ class SearchFragment : Fragment() {
                 return false
             }
         })
-
     }
 
     private fun initDataArray(){

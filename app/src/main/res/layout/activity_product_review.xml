@@ -313,6 +313,7 @@
                     android:background="@color/white">
 
                     <ImageButton
+                        android:id="@+id/img_product_review_back_unfocus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"

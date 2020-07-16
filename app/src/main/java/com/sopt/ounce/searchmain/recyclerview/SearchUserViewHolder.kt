@@ -1,11 +1,13 @@
 package com.sopt.ounce.searchmain.recyclerview
 
+import android.content.Intent
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sopt.ounce.R
+import com.sopt.ounce.main.ui.OtherActivity
 import com.sopt.ounce.searchmain.data.usersearch.UserData
 import kotlinx.android.synthetic.main.item_search_main_usersearch.view.*
 
@@ -27,6 +29,14 @@ class SearchUserViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         tv_search_user_explain.text = userData.profileInfo
         userIdx = userData.userIdx
         profileIdx = userData.profileIdx
+        img_search_user_catimage.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(view: View?) {
+                val intent = Intent(view!!.context, OtherActivity::class.java)
+                intent.putExtra("otherProfile", profileIdx)
+                view!!.context.startActivity(intent)
+            }
+
+        })
 
     }
 }
