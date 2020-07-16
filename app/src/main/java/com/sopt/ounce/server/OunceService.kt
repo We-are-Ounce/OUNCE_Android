@@ -4,6 +4,7 @@ package com.sopt.ounce.server
 import com.sopt.ounce.catregister.data.ResponseCatProfileData
 import com.sopt.ounce.login.data.*
 import com.sopt.ounce.main.data.BottomProfileData
+import com.sopt.ounce.main.data.ResponseFilterData
 import com.sopt.ounce.main.data.ResponseMainProfileData
 import com.sopt.ounce.main.data.ResponseMainReviewData
 import com.sopt.ounce.record.data.RequestFoodRecordData
@@ -114,13 +115,18 @@ interface OunceService {
         @Path("profileIdx") profileIdx: Int
     ) : Call<BottomProfileData>
 
+    @GET("review/{profileIdx}/category")
+    fun getFilterManu(
+        @Path("profileIdx") profileIdx: Int
+    ) : Call<ResponseFilterData>
+
+    /////////////////////////////////////////////
     @Headers("Content-Type:application/json")
     @POST("search/toWrite/{profileIdx}")
     fun postRecordFoodSearch(
         @Path("profileIdx") profileIdx: Int,
         @Body body : RequestFoodRecordData
     ) : Call<ResponseFoodRecordData>
-    /////////////////////////////////////////////
 
 
     @Headers("Content-Type:application/json")

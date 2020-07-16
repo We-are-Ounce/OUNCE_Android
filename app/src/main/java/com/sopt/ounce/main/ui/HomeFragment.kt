@@ -25,6 +25,7 @@ import com.sopt.ounce.catregister.ui.CatRegisterActivity
 import com.sopt.ounce.main.adapter.BottomProfileAdapter
 import com.sopt.ounce.main.adapter.ReviewAdapter
 import com.sopt.ounce.main.data.BottomProfileData
+import com.sopt.ounce.main.data.ResponseFilterData
 import com.sopt.ounce.main.data.ResponseMainProfileData
 import com.sopt.ounce.server.OunceServiceImpl
 import com.sopt.ounce.util.RcvItemDeco
@@ -110,7 +111,7 @@ class HomeFragment : Fragment() {
             addItemDecoration(RcvItemDeco(mContext))
         }
 
-        settingFilter()
+//        settingFilter()
 
         // 서버 통신 시작한 후 데이터들을 받아서 프로필 뷰에 뿌려주기
         startServerProfile()
@@ -158,10 +159,23 @@ class HomeFragment : Fragment() {
             "오리", "참치", "돼지", "해산물", "사슴", "캥거루", "기타"
         )
 
-        // 제조사 이름 리스트
-        val mainManu = listOf<String>(
-            "GO!", "캣츠파인푸드", "테라펠리스", "나우"
+        //서버에서 제조사 이름 리스트 받아오기 시작
+        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx",0)
+        mOunce.SERVICE.getFilterManu(profileIdx).customEnqueue(
+            onSuccess = {
+                "OunceServer".showLog("리뷰 필터 불러오기 성공 \n ${it.data}")
+                //제조사 chip 생성 -> 서버 통신 받아서 유동적 해결
+                for(word in it.data){
+                    "OunceStatus".showLog("리뷰 필터 데이터 단어 : ${word.foodManu}")
+                    val chip = chipSetting(word.foodManu, mFilterManu)
+                    mFilterSheet.chipgroup_main_manu.addView(chip)
+                }
+            },
+            onError = {
+                "OunceServerError".showLog("리뷰 필터 목록 ${it.code()}")
+            }
         )
+
 
         //건식 습식 chip 생성
         for (word in mainFoodType) {
@@ -175,11 +189,7 @@ class HomeFragment : Fragment() {
             mFilterSheet.chipgroup_main_ingredient.addView(chip)
         }
 
-        //제조사 chip 생성 -> 서버 통신 받아서 유동적 해결
-        for(word in mainManu){
-            val chip = chipSetting(word, mFilterManu)
-            mFilterSheet.chipgroup_main_manu.addView(chip)
-        }
+
     }
 
 
@@ -193,17 +203,15 @@ class HomeFragment : Fragment() {
             isCheckedIconVisible = false
             setChipBackgroundColorResource(R.color.custom_filter)
             setTextAppearanceResource(R.style.filterTextStyle)
-            setTextColor(resources.getColor(R.color.dark))
+            setTextColor(resources.getColor(R.color.black_two))
             setChipStrokeColorResource(R.color.custom_filter_stroke)
             chipStrokeWidth = 6f
             setOnClickListener {
                 if (isChecked) {
-                    setTextColor(resources.getColor(R.color.white))
                     filterList.add(text.toString())
                     Log.d("List", "$filterList")
                     
                 } else {
-                    setTextColor(resources.getColor(R.color.dark))
                     filterList.remove(text.toString())
                     Log.d("List", "$filterList")
 
@@ -215,6 +223,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun showFilterSheet(){
+        settingFilter()
         mFilterSheet.txt_filter_ok.setOnClickListener {
             mFilterSheet.dismiss()
         }
@@ -241,18 +250,6 @@ class HomeFragment : Fragment() {
             }
         )
 
-//        mProfileAdapter.data = listOf(
-//            BottomProfileData(
-//                "https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg",
-//                "title1",
-//                "intro1",
-//                false),
-//            BottomProfileData(
-//                "https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg",
-//                "title2",
-//                "intro2",
-//                false)
-//        )
         mProfileAdapter.notifyDataSetChanged()
 
         mBottomsheetProfile.layout_bottomsheet_add_profile.setOnClickListener {
@@ -293,7 +290,7 @@ class HomeFragment : Fragment() {
         v.txt_main_age.text ="${data.profileAge}살"
         v.txt_main_introduce.text = data.profileInfo
         v.txt_main_follower.text = "팔로워 ${data.follower}"
-        v.txt_main_following.text = "팔로인 ${data.following}"
+        v.txt_main_following.text = "팔로잉 ${data.following}"
 
         if(data.profileGender == "male"){
             if(data.profileNeutral == "true"){
