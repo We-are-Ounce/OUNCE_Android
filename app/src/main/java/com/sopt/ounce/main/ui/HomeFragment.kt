@@ -8,7 +8,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.NestedScrollView
@@ -62,6 +64,7 @@ class HomeFragment : Fragment() {
     //서버에 보낼 제조사 필터
     private var mFilterManu = mutableListOf<String>()
 
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
@@ -107,6 +110,31 @@ class HomeFragment : Fragment() {
         spinnerAdapter.setDropDownViewResource(R.layout.main_custom_dropdown)
         v.spinner_main.apply {
             adapter = spinnerAdapter
+            onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(p0: AdapterView<*>?){
+                }
+
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+                    when(parent?.getItemAtPosition(position).toString()){
+                        "날짜 순" -> {
+                            mRecyclerAdapter.data.clear()
+                            startServerReviewDate()
+                        }
+
+                        "총점 순" -> {
+                            mRecyclerAdapter.data.clear()
+                            startServerReviewRating()
+                        }
+
+                        "기호도 순" -> {
+                            mRecyclerAdapter.data.clear()
+                            startServerReviewPrefer()
+                        }
+
+                    }
+                }
+            }
         }
 
         // 리사이클러뷰 설정
@@ -125,9 +153,21 @@ class HomeFragment : Fragment() {
 
         //최하단으로 이동했을 때 10개 씩 데이터 추가
         v.sticky_scroll_main.setOnScrollChangeListener(
-            NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, _ ->
                 if (scrollY == (v.getChildAt(0).measuredHeight - v.measuredHeight)) {
-                    startServerReviewDate()
+
+                    when(v.spinner_main.selectedItem){
+                        "날짜 순" -> {
+                            startServerReviewDate()
+                        }
+                        "총점 순" -> {
+                            startServerReviewRating()
+                        }
+                        "기호도 순" -> {
+                            startServerReviewPrefer()
+                        }
+                    }
+
                 }
             })
 
@@ -359,13 +399,13 @@ class HomeFragment : Fragment() {
         val profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 0)
         mOunce.SERVICE.getRatingReview(profileIdx, mPagingRating, mPagingRating + 9).customEnqueue(
             onSuccess = {
-                "OunceServerSuccess".showLog("메인 프로필 리뷰 목록 불러오기 성공 \n ${it.data}")
+                "OunceServerSuccess".showLog("총점으로 리뷰 목록 불러오기 성공 \n ${it.data}")
                 mRecyclerAdapter.data.addAll(it.data)
                 mRecyclerAdapter.notifyDataSetChanged()
                 mPagingRating += 10
             },
             onError = {
-                "OunceServerError".showLog("메인 프로필 리뷰 목록 불러오기 오류")
+                "OunceServerError".showLog("총점으로 리뷰 목록 불러오기 오류")
             }
         )
     }
@@ -377,13 +417,13 @@ class HomeFragment : Fragment() {
         val profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 0)
         mOunce.SERVICE.getPreferReview(profileIdx, mPagingPrefer, mPagingPrefer + 9).customEnqueue(
             onSuccess = {
-                "OunceServerSuccess".showLog("메인 프로필 리뷰 목록 불러오기 성공 \n ${it.data}")
+                "OunceServerSuccess".showLog("선호도로 리뷰 목록 불러오기 성공 \n ${it.data}")
                 mRecyclerAdapter.data.addAll(it.data)
                 mRecyclerAdapter.notifyDataSetChanged()
                 mPagingPrefer += 10
             },
             onError = {
-                "OunceServerError".showLog("메인 프로필 리뷰 목록 불러오기 오류")
+                "OunceServerError".showLog("선호도로 리뷰 목록 불러오기 오류")
             }
         )
     }

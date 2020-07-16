@@ -5,7 +5,6 @@ import com.sopt.ounce.catregister.data.ResponseCatProfileData
 import com.sopt.ounce.login.data.*
 import com.sopt.ounce.main.data.BottomProfileData
 import com.sopt.ounce.main.data.ResponseMainProfileData
-import com.sopt.ounce.main.data.ResponseMainReviewData
 import com.sopt.ounce.record.data.*
 import com.sopt.ounce.main.data.*
 import com.sopt.ounce.main.data.ResponseReviewData
