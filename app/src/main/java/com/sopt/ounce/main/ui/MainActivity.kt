@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.amn.easysharedpreferences.EasySharedPreference
 import com.sopt.ounce.R
 import com.sopt.ounce.record.ui.ImageSearchActivity
 import com.sopt.ounce.record.ui.RecordActivity
@@ -93,6 +95,15 @@ class MainActivity : AppCompatActivity() {
     fun methodManagerToFragment(): InputMethodManager {
         return getSystemService(Context.INPUT_METHOD_SERVICE)
                 as InputMethodManager
+    }
+
+    @Suppress("DEPRECATION")
+    fun resetFragment(idx : Int, fragment : Fragment?, fm : FragmentManager?) {
+        EasySharedPreference.Companion.putInt("profileIdx", idx)
+        val ft = mFm.beginTransaction()
+        if (fragment != null) {
+            ft.detach(fragment).attach(fragment).commit()
+        }
     }
 
 }

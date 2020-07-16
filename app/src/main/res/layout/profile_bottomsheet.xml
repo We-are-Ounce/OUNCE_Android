@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -7,9 +8,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <TextView
+        style="@style/fontFamiliyandPadding"
+        android:textSize="16sp"
+        android:lineSpacingExtra="3sp"
+        android:textColor="@color/black_two"
+        android:textFontWeight="400"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="나의 다른 고양이"/>
+
 
     <androidx.core.widget.NestedScrollView
         android:layout_weight="1"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -45,7 +59,7 @@
             android:textFontWeight="400"
             android:textSize="16sp"
             android:lineSpacingExtra="3sp"
-            android:textColor="@color/black"
+            android:textColor="@color/dark_peach"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="계정추가"
@@ -57,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
-            android:src="@drawable/ic_add"/>
+            android:src="@drawable/ic_baseline_add_orange"/>
 
     </LinearLayout>
 
