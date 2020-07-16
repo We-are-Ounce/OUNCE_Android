@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import com.sopt.ounce.R
+import com.sopt.ounce.record.ui.ImageSearchActivity
 import com.sopt.ounce.record.ui.RecordActivity
 import com.sopt.ounce.searchmain.SearchFragment
 import com.sopt.ounce.util.StatusObject
@@ -88,7 +89,7 @@ class MainActivity : AppCompatActivity() {
 
 
         fab_write.setOnClickListener {
-            val intent = Intent(this, RecordActivity::class.java)
+            val intent = Intent(this, ImageSearchActivity::class.java)
             startActivity(intent)
         }
 
