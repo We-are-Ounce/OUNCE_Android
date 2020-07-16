@@ -120,6 +120,7 @@ class ImageSearchActivity : AppCompatActivity() {
             }
 
         })
+
 //        mItemAdapter = ItemAdapter(this)
 //        rv_record_item.adapter = mItemAdapter
         //getGoodsList()
