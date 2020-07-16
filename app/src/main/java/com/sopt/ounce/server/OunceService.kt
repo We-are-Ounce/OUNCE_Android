@@ -8,7 +8,9 @@ import com.sopt.ounce.main.data.ResponseFilterData
 import com.sopt.ounce.main.data.ResponseMainProfileData
 import com.sopt.ounce.main.data.ResponseMainReviewData
 import com.sopt.ounce.record.data.RequestFoodRecordData
+import com.sopt.ounce.main.data.RequestSelectedFilter
 import com.sopt.ounce.record.data.ResponseFoodRecordData
+import com.sopt.ounce.record.data.ResponseSearchFood
 import com.sopt.ounce.searchmain.data.foodsearch.RequestFoodSearchData
 import com.sopt.ounce.searchmain.data.foodsearch.ResponseFoodSearchData
 import com.sopt.ounce.searchmain.data.reommendcat.RequestRecommendCatsData
@@ -119,6 +121,13 @@ interface OunceService {
     fun getFilterManu(
         @Path("profileIdx") profileIdx: Int
     ) : Call<ResponseFilterData>
+
+    @Headers("Content-Type:application/json")
+    @POST("review/{profileIdx}/filter")
+    fun postSelectFiltering(
+        @Path("profileIdx") profileIdx: Int,
+        @Body body : RequestSelectedFilter
+    ) : Call<ResponseMainReviewData>
 
     /////////////////////////////////////////////
     @Headers("Content-Type:application/json")
