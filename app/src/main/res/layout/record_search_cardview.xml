@@ -1,56 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="8dp"
-    app:cardPreventCornerOverlap="true">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:id="@+id/cardview_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1"
+        android:src="@drawable/img_food_record"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-        <ImageView
-            android:id="@+id/cardview_image"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="1"
-            android:src="@drawable/img_food_record"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/cardview_itemname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cardview_image"
+        android:fontFamily="@font/notosanskr_medium"
+        android:textColor="#515050"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="9sp"
+        android:layout_marginTop="6dp"
+        android:text="내추럴 발란스"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardview_image"/>
 
-        <TextView
-            android:id="@+id/cardview_itemname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cardview_image"
-            android:fontFamily="@font/notosanskr_medium"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:lineSpacingExtra="9sp"
-            android:paddingTop="5dp"
-            android:text="내추럴 발란스"
-            android:textSize="10sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardview_image"></TextView>
+    <TextView
+        android:id="@+id/cardview_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cardview_itemname"
+        android:fontFamily="@font/notosanskr_regular"
+        android:includeFontPadding="false"
+        android:text="제품 이름"
+        android:singleLine="true"
+        android:textColor="@color/black_two"
+        android:textSize="16sp"
+        android:lineSpacingExtra="3sp"
+        app:layout_constraintStart_toStartOf="@+id/cardview_itemname"
+        app:layout_constraintTop_toBottomOf="@+id/cardview_itemname"/>
 
-        <TextView
-            android:id="@+id/cardview_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cardview_itemname"
-            android:fontFamily="@font/notosanskr_regular"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:paddingTop="5dp"
-            android:text="제품 이름"
-            android:textColor="@color/greyish_brown"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/cardview_itemname"
-            app:layout_constraintTop_toBottomOf="@+id/cardview_itemname"></TextView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-        
-
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

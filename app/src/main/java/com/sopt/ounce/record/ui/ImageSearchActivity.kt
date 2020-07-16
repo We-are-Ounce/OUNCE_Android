@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.amn.easysharedpreferences.EasySharedPreference
 import com.sopt.ounce.R
 import com.sopt.ounce.record.adapter.ItemAdapter
@@ -57,6 +58,7 @@ class ImageSearchActivity : AppCompatActivity() {
         getItemList()
         mItemAdapter = ItemAdapter(this)
         rv_record_item.adapter = mItemAdapter
+        rv_record_item.addItemDecoration(RecordItemDecoration(this))
         record_search_sv.setOnQueryTextFocusChangeListener(object : View.OnFocusChangeListener{
             override fun onFocusChange(view: View?, hasFocus: Boolean) {
                 if(hasFocus){
