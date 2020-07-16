@@ -1,5 +1,7 @@
 package com.sopt.ounce.productreview
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -30,6 +32,7 @@ class ProductReviewActivity : AppCompatActivity() {
         val dataFood : FoodData = intent.getSerializableExtra("foodInfo") as FoodData
         var dataArrayReview : Array<ReviewData> = intent.getSerializableExtra("foodReview") as Array<ReviewData>
         val dataListReview = dataArrayReview.toList()
+        val foodLink = dataFood.foodLink
 
         Glide.with(this).load(dataFood.foodImg).into(img_product_review_goodsimg)
         tv_product_review_company.text = dataFood.foodManu
@@ -71,6 +74,17 @@ class ProductReviewActivity : AppCompatActivity() {
 
                 }
             }
+        })
+        imgbtn_product_review_ic_info.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(view: View?) {
+//                val intentWeb = Intent(Intent.ACTION_VIEW)
+//                intent.data = Uri.parse(foodLink)
+//                startActivity(intent)
+                val intentWeb = Intent(view!!.context, WebViewActivity::class.java)
+                intentWeb.putExtra("webPage", foodLink)
+                view!!.context.startActivity(intentWeb)
+            }
+
         })
     }
 }
