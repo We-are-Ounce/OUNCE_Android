@@ -65,9 +65,7 @@ class SearchGoodsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             override fun onClick(view: View?) {
                 val ounce = OunceServiceImpl.SERVICE.postShowReviewAll(
                     RequestShowReviewData(
-                        foodIdx = foodIdx,
-                        pageStart = 1,
-                        pageEnd = 100
+                        foodIdx = foodIdx
                     )
                 )
                 ounce.customEnqueue(

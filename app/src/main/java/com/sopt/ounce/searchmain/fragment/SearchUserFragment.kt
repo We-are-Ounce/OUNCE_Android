@@ -8,15 +8,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.core.view.get
+import androidx.lifecycle.ViewModelProviders
 import com.sopt.ounce.R
 import com.sopt.ounce.main.ui.MainActivity
+import com.sopt.ounce.searchmain.data.SpinnerAdapterViewModel
+import com.sopt.ounce.searchmain.data.usersearch.RequestUserIdData
 import com.sopt.ounce.searchmain.data.usersearch.ResponseUserSearchData
+import com.sopt.ounce.searchmain.data.usersearch.UserData
 import com.sopt.ounce.searchmain.recyclerview.SearchUserAdapter
 import com.sopt.ounce.searchmain.recyclerview.SearchUserData
 import com.sopt.ounce.searchmain.recyclerview.SearchUserItemDecoration
+import com.sopt.ounce.server.OunceServiceImpl
+import com.sopt.ounce.util.customEnqueue
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import kotlinx.android.synthetic.main.fragment_search_user.*
+import kotlinx.android.synthetic.main.fragment_search_user.view.*
 
 class SearchUserFragment : Fragment() {
     lateinit var searchUserAdapter : SearchUserAdapter
@@ -24,8 +32,6 @@ class SearchUserFragment : Fragment() {
     private lateinit var mContext: Context
     private lateinit var mView: View
     private lateinit var iView : View
-    var mUserDatas = mutableListOf<SearchUserData>()
-    lateinit var mUserSearchData : ResponseUserSearchData
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -46,16 +52,13 @@ class SearchUserFragment : Fragment() {
         iView = inflater.inflate(R.layout.fragment_search, container, false)
         observeKeyboard()
         settingMethodManager()
-        Log.d("Search - CreateView", "CreateViewBefore")
         return mView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("Search - afterViewCreated", "afterViewCreated")
         searchUserAdapter = SearchUserAdapter(mView.context)
         rv_search_user_searchresult.adapter = searchUserAdapter
-        Log.d("Search - after", "data set")
         rv_search_user_searchresult.addItemDecoration(SearchUserItemDecoration())
     }
 

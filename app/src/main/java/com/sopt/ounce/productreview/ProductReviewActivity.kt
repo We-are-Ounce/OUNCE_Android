@@ -78,6 +78,12 @@ class ProductReviewActivity : AppCompatActivity() {
             }
         })
 
+        img_product_review_back_unfocus.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(p0: View?) {
+                this@ProductReviewActivity.finish()
+            }
+        })
+
         //작성 버튼 클릭 리스너
         img_product_review_write.setOnClickListener(object : View.OnClickListener{
             override fun onClick(view: View?) {
@@ -126,9 +132,6 @@ class ProductReviewActivity : AppCompatActivity() {
         })
         imgbtn_product_review_ic_info.setOnClickListener(object : View.OnClickListener{
             override fun onClick(view: View?) {
-//                val intentWeb = Intent(Intent.ACTION_VIEW)
-//                intent.data = Uri.parse(foodLink)
-//                startActivity(intent)
                 val intentWeb = Intent(view!!.context, WebViewActivity::class.java)
                 intentWeb.putExtra("webPage", foodLink)
                 view!!.context.startActivity(intentWeb)

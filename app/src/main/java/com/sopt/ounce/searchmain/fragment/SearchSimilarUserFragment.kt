@@ -1,5 +1,6 @@
 package com.sopt.ounce.searchmain.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.sopt.ounce.R
+import com.sopt.ounce.main.ui.OtherActivity
+import com.sopt.ounce.productreview.ProductReviewActivity
 import kotlinx.android.synthetic.main.item_searchmain_similar.*
 import kotlinx.android.synthetic.main.item_searchmain_similar.view.*
 
@@ -37,8 +40,11 @@ class SearchSimilarUserFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         img_search_main_profile.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(p0: View?) {
-                Toast.makeText(mView.context, "profileIdx: ${profileIdx}", Toast.LENGTH_SHORT).show()
+            override fun onClick(view: View?) {
+                //Toast.makeText(mView.context, "profileIdx: ${profileIdx}", Toast.LENGTH_SHORT).show()
+                val intent = Intent(mView.context, OtherActivity::class.java)
+                intent.putExtra("otherProfile", profileIdx)
+                mView.context.startActivity(intent)
             }
         })
 

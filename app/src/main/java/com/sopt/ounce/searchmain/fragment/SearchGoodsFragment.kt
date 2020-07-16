@@ -26,6 +26,7 @@ import com.sopt.ounce.util.customEnqueue
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import kotlinx.android.synthetic.main.fragment_search_goods.*
+import kotlinx.android.synthetic.main.fragment_search_goods.view.*
 
 class SearchGoodsFragment : Fragment() {
     lateinit var searchGoodsAdapter: SearchGoodsAdapter
@@ -98,58 +99,46 @@ class SearchGoodsFragment : Fragment() {
                 val mViewModel = ViewModelProviders.of(activity as MainActivity).get(
                     SpinnerAdapterViewModel::class.java)
                 if(selectedItem == "기호도 순"){
-                    Log.d("Search - sortFavorite", "requestBefore")
                     val sortFavoriteSearch = OunceServiceImpl.SERVICE.postReviewSortFavorite(
                         RequestFoodSearchData(
                             searchKeyword = mViewModel.productQuery,
                             pageStart = 1,
-                            pageEnd = 5
+                            pageEnd = 200
                         )
                     )
-                    Log.d("Search - sortFavorite", "requestAfter")
                     sortFavoriteSearch.customEnqueue(
                         onSuccess = {
-                            Log.d("Search - sortFavorite", "responseSuccessBefore")
-                            Log.d("Search - favoriteDataBefore", "${searchGoodsAdapter.datas.toString()}")
                             mGoodsData = it.data as MutableList<FoodData>
+                            rv_search_goods_goodsresult.adapter = searchGoodsAdapter
+                            searchGoodsAdapter.datas.clear()
                             searchGoodsAdapter.datas = mGoodsData
                             searchGoodsAdapter.notifyDataSetChanged()
-                            Log.d("Search - sortFavorite", "responseSuccessAfter")
-                            Log.d("Search - favoriteDataAfter", "${searchGoodsAdapter.datas.toString()}")
                         },
                         onError = {
-                            Log.d("Search - sortFavorite", "responseError")
                         },
                         onFaile = {
-                            Log.d("Search - sortFavorite", "responseFailure")
                         }
                     )
                 }
                 else if(selectedItem == "총점 순"){
-                    Log.d("Search - sortTotal", "requestBefore")
                     val sortScoreSearch = OunceServiceImpl.SERVICE.postReviewSortTotalScore(
                         RequestFoodSearchData(
                             searchKeyword = mViewModel.productQuery,
                             pageStart = 1,
-                            pageEnd = 5
+                            pageEnd = 200
                         )
                     )
-                    Log.d("Search - sortTotal", "requestAfter")
                     sortScoreSearch.customEnqueue(
                         onSuccess = {
-                            Log.d("Search - sortTotal", "reponseSuccessBefore")
-                            Log.d("Search - totalDataBefore", "${searchGoodsAdapter.datas.toString()}")
                             mGoodsData = it.data as MutableList<FoodData>
+                            rv_search_goods_goodsresult.adapter = searchGoodsAdapter
+                            searchGoodsAdapter.datas.clear()
                             searchGoodsAdapter.datas = mGoodsData
                             searchGoodsAdapter.notifyDataSetChanged()
-                            Log.d("Search - sortTotal", "reponseSuccessAfter")
-                            Log.d("Search - totalDataAfter", "${searchGoodsAdapter.datas.toString()}")
                         },
                         onError = {
-                            Log.d("Search - sortTotal", "reponseError")
                         },
                         onFaile = {
-                            Log.d("Search - sortTotal", "reponseFailure")
                         }
                     )
                 }
