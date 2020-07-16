@@ -64,11 +64,11 @@ class OtherActivity : AppCompatActivity() {
 
         //팔로우 버튼 클릭 시 변화
         btn_other_follow.setOnClickListener {
-            if(it.isSelected){
+            if (it.isSelected) {
+                startUnFollow()
                 // true -> false로 가니까
                 btn_other_follow.text = "팔로우"
-            }
-            else{
+            } else {
                 //팔로우 신청 api 실행
                 startFollow()
                 //false -> true 가니까
@@ -91,8 +91,24 @@ class OtherActivity : AppCompatActivity() {
 
     }
 
+    private fun startUnFollow() {
+//        val myProfileIdx = EasySharedPreference.getInt("profileIdx",0)
+        mOunce.SERVICE.deleteFollow(
+            RequestFollowData(
+                26,
+                1
+            )
+        ).customEnqueue(
+            onSuccess = {
+                Toast.makeText(this,it.message,Toast.LENGTH_SHORT).show()
+            },
+            onError = {
+                Toast.makeText(this,"팔로우 취소 실패",Toast.LENGTH_SHORT).show()
+            }
+        )
+    }
+
     private fun startFollow() {
-        // 팔로우 수락 api 작성 요망
 //        val myProfileIdx = EasySharedPreference.getInt("profileIdx",0)
         mOunce.SERVICE.postFollow(
             RequestFollowData(
@@ -102,10 +118,10 @@ class OtherActivity : AppCompatActivity() {
         ).customEnqueue(
             onSuccess = {
                 "OunceServerSuccess".showLog("팔로우 성공")
-                Toast.makeText(this, it.message,Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
             },
             onError = {
-                Toast.makeText(this,"팔로우 신청 실패", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "팔로우 신청 실패", Toast.LENGTH_SHORT).show()
             }
         )
     }
@@ -113,7 +129,7 @@ class OtherActivity : AppCompatActivity() {
     private fun startServerOtherReview() {
 //        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx",0)
         "OunceServerState".showLog("다른 계정 프로필 리뷰 서버 통신 시작")
-        mOunce.SERVICE.getOtherProfileReview(1, mPaging,mPaging+9)
+        mOunce.SERVICE.getOtherProfileReview(1, mPaging, mPaging + 9)
             .customEnqueue(
                 onSuccess = {
                     "OunceServerSuccess".showLog("다른 프로필 리뷰 조회 성공\n ${it.data}")
@@ -132,15 +148,14 @@ class OtherActivity : AppCompatActivity() {
             .customEnqueue(
                 onSuccess = {
                     "OunceServerSuccess".showLog("다른계정 프로필 조회 성공")
-                    txt_other_reviewcount.text="(${it.data.reviewCountAll})"
+                    txt_other_reviewcount.text = "(${it.data.reviewCountAll})"
 
-                    if(it.data.ischeck){
+                    if (it.data.ischeck) {
                         btn_other_follow.isSelected = it.data.ischeck
                         btn_other_follow.text = "팔로우 취소"
-                    }
-                    else{
+                    } else {
                         btn_other_follow.isSelected = it.data.ischeck
-                        btn_other_follow.text="팔로우"
+                        btn_other_follow.text = "팔로우"
                     }
 
 
@@ -152,7 +167,7 @@ class OtherActivity : AppCompatActivity() {
 
     //프로필 뷰에 데이터 붙이는 함수
     @SuppressLint("SetTextI18n")
-    private fun settingDrawable(data : ResponseOtherProfileData.Data.Profile) {
+    private fun settingDrawable(data: ResponseOtherProfileData.Data.Profile) {
         Glide.with(this)
             .load(data.profileImg)
             .error(R.drawable.img_cat)
@@ -161,18 +176,16 @@ class OtherActivity : AppCompatActivity() {
         txt_other_profile.text = data.profileName
         txt_other_weight.text = "${data.profileWeight}kg"
         txt_other_age.text = "${data.profileAge}살"
-        if(data.profileGender == "male"){
-            if(data.profileNeutral == "true"){
+        if (data.profileGender == "male") {
+            if (data.profileNeutral == "true") {
                 img_other_gender.setImageResource(R.drawable.ic_nuetrul_male)
-            }
-            else{
+            } else {
                 img_other_gender.setImageResource(R.drawable.ic_male)
             }
-        }else{
-            if(data.profileNeutral == "true"){
+        } else {
+            if (data.profileNeutral == "true") {
                 img_other_gender.setImageResource(R.drawable.ic_nuetrul_female)
-            }
-            else{
+            } else {
                 img_other_gender.setImageResource(R.drawable.ic_female)
             }
         }

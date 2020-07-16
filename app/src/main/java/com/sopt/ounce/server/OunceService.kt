@@ -146,6 +146,12 @@ interface OunceService {
         @Body body : RequestFollowData
     ) : Call<ResponseFollowData>
 
+    @Headers("Content-Type:applicaation/json")
+    @HTTP(method = "DELETE", path = "profile/deleteFollow", hasBody = true)
+    fun deleteFollow(
+        @Body body :RequestFollowData
+    ) : Call<ResponseFollowData>
+
     /////////////////////////////////////////////
 
     @Headers("Content-Type:application/json")
