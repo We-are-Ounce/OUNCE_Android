@@ -35,7 +35,9 @@ class ProductReviewActivity : AppCompatActivity() {
         tv_product_review_company.text = dataFood.foodManu
         tv_product_review_product.text = dataFood.foodName
         tv_product_review_isdry.text = dataFood.foodDry
-        tv_product_reivew_meat.text = dataFood.foodMeat
+        tv_product_reivew_meat_1.text = dataFood.foodMeat
+        tv_product_reivew_meat_2.text = dataFood.foodMeat
+        Log.d("Review - meat", "${dataFood.foodMeat}")
         Log.d("Review - meat", "${dataFood.foodMeat}")
         tv_product_review_totalreviewamount.text = dataFood.reviewCount.toString()
         tv_product_review_reviewaverageamount.text = dataFood.avgRating.toString()

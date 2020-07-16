@@ -126,9 +126,10 @@
             app:layout_constraintTop_toTopOf="parent"
             android:backgroundTint="@color/white"
             app:tabGravity="fill"
-            app:tabIndicatorColor="@color/wheat"
+            android:fontFamily = "@font/notosanskr_medium"
+            app:tabIndicatorColor="@color/dark_peach"
             app:tabSelectedTextColor="@color/black"
-            app:tabTextColor="@color/pinkish_gray">
+            app:tabTextColor="@color/greyish_two">
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_search_main_user"
@@ -136,6 +137,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="사용자"
+                android:textSize = "16sp"
+                android:lineSpacingExtra="3sp"
                 android:textStyle="bold" />
 
             <com.google.android.material.tabs.TabItem
@@ -144,7 +147,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="제품"
-                android:textColor="@color/black"
+                android:textSize = "16sp"
+                android:lineSpacingExtra="3sp"
                 android:textStyle="bold" />
 
         </com.google.android.material.tabs.TabLayout>
