@@ -304,6 +304,7 @@ class HomeFragment : Fragment() {
 
     private fun showBottomSheet() {
         val accessToken = EasySharedPreference.Companion.getString("accessToken", "")
+        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx ",0)
         mBottomsheetProfile.rcv_bottom_profile.apply {
             adapter = mProfileAdapter
             layoutManager = LinearLayoutManager(mContext)
@@ -312,26 +313,26 @@ class HomeFragment : Fragment() {
         mProfileAdapter.setOnItemClickListener(object : BottomProfileAdapter.OnItemClickListener {
             @Suppress("DEPRECATION")
             override fun onItemClick(v: View, data: BottomProfileData.Data) {
+                EasySharedPreference.Companion.putInt("profileIdx", data.profileIdx)
                 val activity = activity as MainActivity
                 activity.resetFragment(data.profileIdx, this@HomeFragment, fragmentManager)
+                mBottomsheetProfile.dismiss()
             }
         })
 
-        mOunce.SERVICE.getConversionProfile(accessToken).customEnqueue(
+        mOunce.SERVICE.getConversionProfile(accessToken,profileIdx).customEnqueue(
             onSuccess = {
                 "OunceStatus".showLog("프로필 바텀시트 호출 메세지 : ${it.message}")
                 "OunceStatus".showLog("프로필 바텀시트 데이터 전달 \n ${it.data}")
                 mProfileAdapter.data = it.data
+                mProfileAdapter.notifyDataSetChanged()
             },
             onError = {
                 "OunceError".showLog("프로필 바텀시트 호출 오류")
             }
         )
 
-        mProfileAdapter.notifyDataSetChanged()
-
         mBottomsheetProfile.layout_bottomsheet_add_profile.setOnClickListener {
-
             mOunce.SERVICE.postIsLimit(accessToken).customEnqueue(
                 onSuccess = {
                     it.data.let { data ->

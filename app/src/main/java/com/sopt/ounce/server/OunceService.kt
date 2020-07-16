@@ -132,7 +132,8 @@ interface OunceService {
     @Headers("Content-Type:application/json")
     @GET("profile/conversion/{profileIdx}")
     fun getConversionProfile(
-        @Header("token") token: String
+        @Header("token") token: String,
+        @Path("profileIdx") profileIdx : Int
     ) : Call<BottomProfileData>
 
     @GET("review/{profileIdx}/category")
