@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amn.easysharedpreferences.EasySharedPreference
 import com.bumptech.glide.Glide
@@ -22,15 +25,24 @@ import com.sopt.ounce.util.customEnqueue
 import com.sopt.ounce.util.showLog
 import kotlinx.android.synthetic.main.activity_other.*
 import kotlinx.android.synthetic.main.bottomsheet_filter.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlin.properties.Delegates
 
 class OtherActivity : AppCompatActivity() {
 
     private lateinit var mRecyclerAdapter: ReviewAdapter
     private lateinit var mFilterSheet: BottomSheetDialog
     private val mOunce = OunceServiceImpl
+    private var mOtherProfileIdx by Delegates.notNull<Int>()
+    private lateinit var mItem: Array<String>
 
-    // 리뷰 새로고침을 위한 카운트
-    private var mPaging = 0
+
+    // 리뷰 새로고침을 위한 카운트 (최신순)
+    private var mPagingDate = 0
+    // 리뷰 새로고침을 위한 카운트 (총점순)
+    private var mPagingRating = 0
+    //리뷰 새로고침을 위한 카운트 (기호도순)
+    private var mPagingPrefer = 0
 
     //서버에 보낼 건식 습식 필터
     private var mFilterDry = mutableListOf<String>()
@@ -46,10 +58,49 @@ class OtherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_other)
 
+        val intent = intent
+        mOtherProfileIdx = intent.getIntExtra("otherProfile",0)
+        mItem = resources.getStringArray(R.array.main_review_array)
+
         mFilterSheet = BottomSheetDialog(this)
         mFilterSheet.setContentView(R.layout.bottomsheet_filter)
 
         mRecyclerAdapter = ReviewAdapter(this)
+
+        //스피너 설정
+        val spinnerAdapter = ArrayAdapter(
+            this,
+            R.layout.main_custom_spinner, mItem
+        )
+        spinnerAdapter.setDropDownViewResource(R.layout.main_custom_dropdown)
+        spinner_other.apply {
+            adapter = spinnerAdapter
+            onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(p0: AdapterView<*>?){
+                }
+
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+                    when(parent?.getItemAtPosition(position).toString()){
+                        "날짜 순" -> {
+                            mRecyclerAdapter.data.clear()
+                            startServerReviewDate()
+                        }
+
+                        "총점 순" -> {
+                            mRecyclerAdapter.data.clear()
+                            startServerReviewRating()
+                        }
+
+                        "기호도 순" -> {
+                            mRecyclerAdapter.data.clear()
+                            startServerReviewPrefer()
+                        }
+
+                    }
+                }
+            }
+        }
 
         //다른사람 데이터 보여주기 시작
         startServer()
@@ -89,6 +140,26 @@ class OtherActivity : AppCompatActivity() {
         }
 
 
+        sticky_scroll_other.setOnScrollChangeListener(
+            NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, _ ->
+                if (scrollY == (v.getChildAt(0).measuredHeight - v.measuredHeight)) {
+
+                    when(v.spinner_main.selectedItem){
+                        "날짜 순" -> {
+                            startServerReviewDate()
+                        }
+                        "총점 순" -> {
+                            startServerReviewRating()
+                        }
+                        "기호도 순" -> {
+                            startServerReviewPrefer()
+                        }
+                    }
+
+                }
+            })
+
+
     }
 
     private fun startUnFollow() {
@@ -126,25 +197,60 @@ class OtherActivity : AppCompatActivity() {
         )
     }
 
-    private fun startServerOtherReview() {
+    private fun startServerReviewDate() {
 //        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx",0)
         "OunceServerState".showLog("다른 계정 프로필 리뷰 서버 통신 시작")
-        mOunce.SERVICE.getOtherProfileReview(1, mPaging, mPaging + 9)
+        mOunce.SERVICE.getOtherProfileReview(mOtherProfileIdx, mPagingDate, mPagingDate + 9)
             .customEnqueue(
                 onSuccess = {
                     "OunceServerSuccess".showLog("다른 프로필 리뷰 조회 성공\n ${it.data}")
                     mRecyclerAdapter.data.addAll(it.data)
                     mRecyclerAdapter.notifyDataSetChanged()
-                    mPaging += 10
+                    mPagingDate += 10
                 }
             )
+    }
+
+    private fun startServerReviewRating(){
+        mPagingDate = 0
+        mPagingPrefer = 0
+
+        mOunce.SERVICE.getRatingReview(mOtherProfileIdx, mPagingRating, mPagingRating + 9).customEnqueue(
+            onSuccess = {
+                "OunceServerSuccess".showLog("총점으로 리뷰 목록 불러오기 성공 \n ${it.data}")
+                mRecyclerAdapter.data.addAll(it.data)
+                mRecyclerAdapter.notifyDataSetChanged()
+                mPagingRating += 10
+            },
+            onError = {
+                "OunceServerError".showLog("총점으로 리뷰 목록 불러오기 오류")
+            }
+        )
+    }
+
+    private fun startServerReviewPrefer(){
+        mPagingDate = 0
+        mPagingRating = 0
+
+        mOunce.SERVICE.getPreferReview(mOtherProfileIdx, mPagingPrefer, mPagingPrefer + 9).customEnqueue(
+            onSuccess = {
+                "OunceServerSuccess".showLog("선호도로 리뷰 목록 불러오기 성공 \n ${it.data}")
+                mRecyclerAdapter.data.addAll(it.data)
+                mRecyclerAdapter.notifyDataSetChanged()
+                mPagingPrefer += 10
+            },
+            onError = {
+                "OunceServerError".showLog("선호도로 리뷰 목록 불러오기 오류")
+            }
+        )
     }
 
     @SuppressLint("SetTextI18n")
     private fun startServer() {
         // myprofileIdx = 내 프로필 인덱스
         // otherIdx = intent로 받아온 인덱스
-        mOunce.SERVICE.getOtherProfile(myprofileIdx = 26, otherIdx = 1)
+        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx",0)
+        mOunce.SERVICE.getOtherProfile(myprofileIdx = profileIdx, otherIdx = mOtherProfileIdx)
             .customEnqueue(
                 onSuccess = {
                     "OunceServerSuccess".showLog("다른계정 프로필 조회 성공")
@@ -201,7 +307,7 @@ class OtherActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@OtherActivity)
             addItemDecoration(RcvItemDeco(this@OtherActivity))
         }
-        startServerOtherReview()
+        startServerReviewDate()
     }
 
     //필터 이미지 클릭 시 필터 바텀시트 호출 함수
@@ -234,10 +340,10 @@ class OtherActivity : AppCompatActivity() {
     @Suppress("DEPRECATION")
     private fun settingFilter() {
         // 건식 습식 리스트
-        val otherFoodType = listOf<String>("건식", "습식")
+        val otherFoodType = listOf("건식", "습식")
 
         // 주재료 이름 리스트
-        val otherIngredients = listOf<String>(
+        val otherIngredients = listOf(
             "연어", "칠면조", "소", "닭", "양", "토끼",
             "오리", "참치", "돼지", "해산물", "사슴", "캥거루", "기타"
         )

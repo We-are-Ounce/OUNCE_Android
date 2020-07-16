@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.amn.easysharedpreferences.EasySharedPreference
 import com.bumptech.glide.Glide
 import com.sopt.ounce.R
 import com.sopt.ounce.main.data.ResponseReviewData
@@ -32,7 +33,14 @@ class ReviewViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         star.text = data.reviewRating
 
         itemView.setOnClickListener {
+            val myProfileIdx = EasySharedPreference.Companion.getInt("profileIdx",0)
             val intent = Intent(itemView.context, RecordModifyActivity::class.java)
+            if(myProfileIdx == data.profileIdx){
+                intent.putExtra("isMy",true)
+            }
+            else{
+                intent.putExtra("isMy",false)
+            }
             intent.putExtra("data", data)
             itemView.context.startActivity(intent)
         }

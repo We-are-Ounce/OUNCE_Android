@@ -10,6 +10,7 @@ data class ResponseReviewData(
     val data : List<Data>
 ){
     data class Data(
+        val profileIdx : Int,
         val reviewIdx : Int,
         val foodIdx : Int,
         val foodImg : String,
