@@ -24,7 +24,8 @@ class SearchGoodsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     val tv_search_goods_staramount = itemView.findViewById<TextView>(R.id.tv_search_goods_staramount)
     val tv_search_goods_heartamount = itemView.findViewById<TextView>(R.id.tv_search_goods_heartamount)
     var foodIdx = 0
-    var foodMeat = ""
+    var foodMeat1 = ""
+    var foodMeat2 = ""
     var foodDry = ""
     var foodLink = ""
     var reviewCount = 0
@@ -53,7 +54,8 @@ class SearchGoodsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             else -> tv_search_goods_heartamount.text = "0"
         }
         foodIdx = foodData.foodIdx
-        foodMeat = foodData.foodMeat
+        foodMeat1 = foodData.foodMeat1
+        foodMeat2 = foodData.foodMeat2
         foodDry = foodData.foodDry
         foodLink = foodData.foodLink
         reviewCount = foodData.reviewCount
