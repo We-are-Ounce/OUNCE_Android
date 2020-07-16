@@ -4,6 +4,7 @@ package com.sopt.ounce.server
 import com.sopt.ounce.catregister.data.ResponseCatProfileData
 import com.sopt.ounce.login.data.*
 import com.sopt.ounce.main.data.*
+import com.sopt.ounce.main.data.ResponseReviewData
 import com.sopt.ounce.record.data.RequestFoodRecordData
 import com.sopt.ounce.record.data.ResponseFoodRecordData
 import com.sopt.ounce.searchmain.data.foodsearch.RequestFoodSearchData
@@ -98,13 +99,26 @@ interface OunceService {
     ) : Call<ResponseMainProfileData>
 
 
-    @GET("review/{profileIdx}")
+    @GET("review/{profileIdx}/date")
     fun getMainReview(
         @Path("profileIdx")profileIdx: Int,
         @Query("pageStart") start : Int,
         @Query("pageEnd") end : Int
-    ) : Call<ResponseMainReviewData>
+    ) : Call<ResponseReviewData>
 
+    @GET("review/{profileIdx}/rating")
+    fun getRatingReview(
+        @Path("profileIdx") profileIdx: Int,
+        @Query("pageStart") start : Int,
+        @Query("pageEnd") end : Int
+    ) : Call<ResponseReviewData>
+
+    @GET("review/{profileIdx}/prefer")
+    fun getPreferReview(
+        @Path("profileIdx") profileIdx: Int,
+        @Query("pageStart") start : Int,
+        @Query("pageEnd") end : Int
+    ) : Call<ResponseReviewData>
 
     @Headers("Content-Type:application/json")
     @GET("profile/convesion/{profileIdx}")
@@ -122,7 +136,7 @@ interface OunceService {
     fun postSelectFiltering(
         @Path("profileIdx") profileIdx: Int,
         @Body body : RequestSelectedFilter
-    ) : Call<ResponseMainReviewData>
+    ) : Call<ResponseReviewData>
     /////////////////////////////////////////////
 
     ///다른 프로필 조회 인터페이스 ////////////////
@@ -133,12 +147,12 @@ interface OunceService {
         @Query("profileIdx") otherIdx : Int
     ) : Call<ResponseOtherProfileData>
 
-    @GET("profile/review/{profileIdx}")
+    @GET("review/{profileIdx}/date")
     fun getOtherProfileReview(
         @Path("profileIdx") profileIdx : Int,
         @Query("pageStart") pageStart : Int,
         @Query("pageEnd") pageEnd : Int
-    ) : Call<ResponseMainReviewData>
+    ) : Call<ResponseReviewData>
 
     @Headers("Content-Type:application/json")
     @POST("profile/requestFollow")
