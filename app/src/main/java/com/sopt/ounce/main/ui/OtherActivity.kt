@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.amn.easysharedpreferences.EasySharedPreference
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
@@ -24,6 +25,9 @@ class OtherActivity : AppCompatActivity() {
     private lateinit var mRecyclerAdapter: ReviewAdapter
     private lateinit var mFilterSheet: BottomSheetDialog
     private val mOunce = OunceServiceImpl
+
+    // 리뷰 새로고침을 위한 카운트
+    private var mPaging = 1
 
     //서버에 보낼 건식 습식 필터
     private var mFilterDry = mutableListOf<String>()
@@ -46,6 +50,7 @@ class OtherActivity : AppCompatActivity() {
 
         //다른사람 데이터 보여주기 시작
         startServer()
+
 
         // 필터 바텀 시트 세팅
         settingFilter()
@@ -79,6 +84,20 @@ class OtherActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun startServerOtherReview() {
+//        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx",0)
+        "OunceServerState".showLog("다른 계정 프로필 리뷰 서버 통신 시작")
+        mOunce.SERVICE.getOtherProfileReview(1, 0,9)
+            .customEnqueue(
+                onSuccess = {
+                    "OunceServerSuccess".showLog("다른 프로필 리뷰 조회 성공\n ${it.data}")
+                    mRecyclerAdapter.data.addAll(it.data)
+                    mRecyclerAdapter.notifyDataSetChanged()
+                    mPaging += 10
+                }
+            )
     }
 
     @SuppressLint("SetTextI18n")
@@ -136,6 +155,7 @@ class OtherActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@OtherActivity)
             addItemDecoration(RcvItemDeco(this@OtherActivity))
         }
+        startServerOtherReview()
     }
 
     //필터 이미지 클릭 시 필터 바텀시트 호출 함수

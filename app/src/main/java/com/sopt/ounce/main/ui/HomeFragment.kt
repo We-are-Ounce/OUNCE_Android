@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
     private val mOunce = OunceServiceImpl
 
     // 리뷰 새로고침을 위한 카운트
-    private var mPaging = 1
+    private var mPaging = 0
 
 
     //서버에 보낼 건식 습식 필터

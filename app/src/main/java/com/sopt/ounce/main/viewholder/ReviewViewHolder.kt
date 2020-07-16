@@ -28,8 +28,8 @@ class ReviewViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         company.text = data.foodManu
         title.text = data.foodName
         review.text = data.reviewInfo
-        heart.text = data.reviewPrefer.toString()
-        star.text = data.reviewRating.toString()
+        heart.text = data.reviewPrefer
+        star.text = data.reviewRating
 
         itemView.setOnClickListener {
             val intent = Intent(itemView.context, RecordModifyActivity::class.java)

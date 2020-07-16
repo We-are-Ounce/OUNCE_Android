@@ -98,7 +98,7 @@ interface OunceService {
     ) : Call<ResponseMainProfileData>
 
 
-    @GET("review/{profileIdx}/prefer")
+    @GET("review/{profileIdx}")
     fun getMainReview(
         @Path("profileIdx")profileIdx: Int,
         @Query("pageStart") start : Int,
@@ -132,6 +132,13 @@ interface OunceService {
         @Query("myprofileIdx") myprofileIdx : Int,
         @Query("profileIdx") otherIdx : Int
     ) : Call<ResponseOtherProfileData>
+
+    @GET("profile/review/{profileIdx}")
+    fun getOtherProfileReview(
+        @Path("profileIdx") profileIdx : Int,
+        @Query("pageStart") pageStart : Int,
+        @Query("pageEnd") pageEnd : Int
+    ) : Call<ResponseMainReviewData>
     /////////////////////////////////////////////
 
     @Headers("Content-Type:application/json")
