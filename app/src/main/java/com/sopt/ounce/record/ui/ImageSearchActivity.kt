@@ -108,9 +108,7 @@ class ImageSearchActivity : AppCompatActivity() {
 //                        else{
 //                            Toast.makeText(this@ImageSearchActivity, "리스폰스에 객체가 없어용", Toast.LENGTH_SHORT).show()
 //                        }
-
                     }
-
                 })
                 return true
             }
@@ -118,7 +116,6 @@ class ImageSearchActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 return false
             }
-
         })
 //        mItemAdapter = ItemAdapter(this)
 //        rv_record_item.adapter = mItemAdapter

@@ -62,7 +62,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txt_record_company"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
@@ -89,7 +89,7 @@
         app:layout_constraintTop_toBottomOf="@+id/appbarLayout" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txt_record_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -100,7 +100,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_record_company" />
 
 
     <TextView
@@ -185,7 +185,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/edt_record_sigle_memo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="48dp"
@@ -209,7 +209,7 @@
         android:textColor="#a6a6a6"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_record_sigle_memo" />
 
     <TextView
         android:id="@+id/textView8"
@@ -257,7 +257,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
+        android:id="@+id/chipGroup_status"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -336,8 +336,8 @@
         android:orientation="horizontal"
         app:chipSpacingHorizontal="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView9"
-        app:layout_constraintEnd_toEndOf="@+id/chipGroup"
-        app:layout_constraintStart_toStartOf="@+id/chipGroup"
+        app:layout_constraintEnd_toEndOf="@+id/chipGroup_status"
+        app:layout_constraintStart_toStartOf="@+id/chipGroup_status"
         app:layout_constraintTop_toTopOf="@+id/textView9"
         app:singleLine="true"
         app:singleSelection="true">
@@ -493,7 +493,7 @@
 
 
     <Button
-        android:id="@+id/record_button"
+        android:id="@+id/btn_record_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
@@ -514,7 +514,7 @@
         android:layout_marginHorizontal="54dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/txt_record_name"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="horizontal" />
 

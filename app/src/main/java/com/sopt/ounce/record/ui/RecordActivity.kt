@@ -27,8 +27,19 @@ import kotlin.properties.Delegates
 class RecordActivity : AppCompatActivity() {
 
     private lateinit var mFeatureAdapter: FeatureAdapter
+    // 총점 기호도 체크 변수
     private var mTotal by Delegates.notNull<Int>()
     private var mFavor by Delegates.notNull<Int>()
+
+    // 트러블 현상에 관한 변수
+    private var mEye = 0
+    private var mEar = 0
+    private var mFur = 0
+    private var mVomit = 0
+
+    // 변 상태에 관한 변수
+    private var mStatus = 0
+    private var mSmell = 0
 
     //서버 통신, 싱글톤 그대로 가져옴
     private val mRecordRequest = OunceServiceImpl
@@ -45,27 +56,32 @@ class RecordActivity : AppCompatActivity() {
         val foodData : RecordSearchFoodData = intent.getSerializableExtra("foodItem") as RecordSearchFoodData
 
         Glide.with(this).load(foodData.foodImg).into(image_Preview)
-        textView.text = foodData.foodManu
-        textView2.text = foodData.foodName
+        txt_record_company.text = foodData.foodManu
+        txt_record_name.text = foodData.foodName
         val foodIdx = foodData.foodIdx
 
+        //총점을 받아오는 클릭 리스너
         ratingBar.setOnRatingChangeListener {
             mTotal = it.toInt()
         }
+        //기호도를 받아오는 클릭 리스너
         ratingBar2.setOnRatingChangeListener {
             mFavor = it.toInt()
         }
 
         initFeatureRcv()
 
+        // 트러블 체크 리스너
         record_eye_btn.setOnClickListener {
             if(it.isSelected){
                 it.setBackgroundResource(R.drawable.trouble_full)
                 it.isSelected = false
+                mEye = 0
             }
             else{
                 it.setBackgroundResource(R.drawable.trouble_empty)
                 it.isSelected = true
+                mEye = 1
             }
         }
 
@@ -73,10 +89,12 @@ class RecordActivity : AppCompatActivity() {
             if(it.isSelected){
                 it.setBackgroundResource(R.drawable.trouble_full)
                 it.isSelected = false
+                mEar = 0
             }
             else{
                 it.setBackgroundResource(R.drawable.trouble_empty)
                 it.isSelected = true
+                mEar = 1
             }
         }
 
@@ -84,10 +102,12 @@ class RecordActivity : AppCompatActivity() {
             if(it.isSelected){
                 it.setBackgroundResource(R.drawable.trouble_full)
                 it.isSelected = false
+                mFur = 0
             }
             else{
                 it.setBackgroundResource(R.drawable.trouble_empty)
                 it.isSelected = true
+                mFur = 1
             }
         }
 
@@ -95,47 +115,37 @@ class RecordActivity : AppCompatActivity() {
             if(it.isSelected){
                 it.setBackgroundResource(R.drawable.trouble_full)
                 it.isSelected = false
+                mVomit = 0
             }
             else{
                 it.setBackgroundResource(R.drawable.trouble_empty)
                 it.isSelected = true
+                mVomit = 1
             }
         }
 
+        //뒤로가기 클릭 시 뒤로 이동
         record_goback_btn.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
             finish()
         }
 
-        record_button.setOnClickListener {
-            val data = RequestRecordReviewData(
-                1,
-                1,
-                "한줄리뷰",
-                "리뷰메모입니다",
-                1,
-                1,
-                0,
-                1,
-                1,
-                1,
-                1,
-                EasySharedPreference.getInt("profileIdx",1)
-            )
+        chipGroup_status.setOnClickListener {
+            Toast.makeText(this,"${chipGroup_status.checkedChipId}",Toast.LENGTH_SHORT).show()
+        }
 
-            var data_test = RequestRecordReviewData(
+        btn_record_save.setOnClickListener {
+            val data = RequestRecordReviewData(
+                mTotal, mFavor,
+                edt_record_sigle_memo.text.toString(),
+                memo_edt.text.toString(),
                 1,
                 1,
-                "메모",
-                "리뷰",
-                1,
-                0,
-                0,
-                1,
-                1,
-                1,
-                2,
-                3
+                mEye,
+                mEar,
+                mFur,
+                mVomit,
+                foodIdx,
+                EasySharedPreference.getInt("profileIdx",1)
             )
 
             val postAddReview = mRecordRequest.SERVICE.postAddReview(
@@ -168,9 +178,6 @@ class RecordActivity : AppCompatActivity() {
                         }
 
                     }
-                    else{
-
-                    }
                 }
 
 
@@ -199,12 +206,4 @@ class RecordActivity : AppCompatActivity() {
         mFeatureAdapter.notifyDataSetChanged()
     }
 
-    //리뷰 등록
-    private fun recordAddReview() {
-
-
-
-
-
-    }
 }
