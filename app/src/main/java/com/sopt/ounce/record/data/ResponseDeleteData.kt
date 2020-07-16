@@ -1,4 +1,4 @@
-package com.sopt.ounce.login.data
+package com.sopt.ounce.record.data
 
 import com.google.gson.annotations.SerializedName
 

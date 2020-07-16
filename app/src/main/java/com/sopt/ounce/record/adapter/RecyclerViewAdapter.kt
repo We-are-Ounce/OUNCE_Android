@@ -47,11 +47,11 @@ class RecyclerViewAdapter(private var arrayList: ArrayList<String>):
         holder.itemView.tv_search.setTextColor(Color.BLACK)
         holder.itemView.item_search.setBackgroundColor(Color.TRANSPARENT)
 
-        holder.itemView.setOnClickListener{
-            val intent = Intent(mContext, RecordActivity::class.java)
-            intent.putExtra("passText", filterList[position])
-            mContext.startActivity(intent)
-        }
+//        holder.itemView.setOnClickListener{
+//            val intent = Intent(mContext, RecordActivity::class.java)
+//            intent.putExtra("passText", filterList[position])
+//            mContext.startActivity(intent)
+//        }
         holder.itemView.item_search.img_delete.setOnClickListener {
             if(arrayList.isNotEmpty()){
                 arrayList.removeAt(position)

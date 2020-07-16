@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import com.sopt.ounce.R
 import com.sopt.ounce.record.ui.ImageSearchActivity
+import com.sopt.ounce.record.ui.RecordActivity
 import com.sopt.ounce.searchmain.SearchFragment
 import com.sopt.ounce.util.StatusObject
 import kotlinx.android.synthetic.main.activity_main.*

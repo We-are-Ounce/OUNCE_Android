@@ -1,4 +1,4 @@
-package com.sopt.ounce.login.data
+package com.sopt.ounce.record.data
 
 data class RequestDeleteData (
     var reviewRating : Int,

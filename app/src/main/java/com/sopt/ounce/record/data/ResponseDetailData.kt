@@ -1,6 +1,6 @@
-package com.sopt.ounce.login.data
+package com.sopt.ounce.record.data
 
-import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class ResponseDetailData(
     val data: Data?,
@@ -22,5 +22,5 @@ data class ResponseDetailData(
         val createdAt : String,
         val foodIdx : Int,
         val profileIdx :Int
-    )
+    ) : Serializable
 }

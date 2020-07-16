@@ -1,15 +1,21 @@
 package com.sopt.ounce.record.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.PopupMenu
 import android.widget.Toast
 import com.amn.easysharedpreferences.EasySharedPreference
 import com.sopt.ounce.R
-import com.sopt.ounce.login.data.RequestModifyData
+import com.sopt.ounce.record.data.RequestModifyData
+import com.sopt.ounce.main.ui.MainActivity
 import com.sopt.ounce.server.OunceServiceImpl
 import com.sopt.ounce.util.customEnqueue
 import kotlinx.android.synthetic.main.activity_record_modify.*
+import kotlinx.android.synthetic.main.activity_record_modify.record_ear_btn
+import kotlinx.android.synthetic.main.activity_record_modify.record_eye_btn
+import kotlinx.android.synthetic.main.activity_record_modify.record_fur_btn
+import kotlinx.android.synthetic.main.activity_record_modify.record_vomit_btn
 
 class RecordModifyActivity : AppCompatActivity() {
 
@@ -30,6 +36,54 @@ class RecordModifyActivity : AppCompatActivity() {
                 true
             }
             popup.show()
+        }
+
+        record_eye_btn.setOnClickListener {
+            if(it.isSelected){
+                it.setBackgroundResource(R.drawable.trouble_full)
+                it.isSelected = false
+            }
+            else{
+                it.setBackgroundResource(R.drawable.trouble_empty)
+                it.isSelected = true
+            }
+        }
+
+        record_ear_btn.setOnClickListener {
+            if(it.isSelected){
+                it.setBackgroundResource(R.drawable.trouble_full)
+                it.isSelected = false
+            }
+            else{
+                it.setBackgroundResource(R.drawable.trouble_empty)
+                it.isSelected = true
+            }
+        }
+
+        record_fur_btn.setOnClickListener {
+            if(it.isSelected){
+                it.setBackgroundResource(R.drawable.trouble_full)
+                it.isSelected = false
+            }
+            else{
+                it.setBackgroundResource(R.drawable.trouble_empty)
+                it.isSelected = true
+            }
+        }
+
+        record_vomit_btn.setOnClickListener {
+            if(it.isSelected){
+                it.setBackgroundResource(R.drawable.trouble_full)
+                it.isSelected = false
+            }
+            else{
+                it.setBackgroundResource(R.drawable.trouble_empty)
+                it.isSelected = true
+            }
+        }
+        record_x_btn.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            finish()
         }
 
         val accessToken: String = EasySharedPreference.Companion.getString("accessToken","")
