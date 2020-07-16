@@ -12,6 +12,8 @@ import com.sopt.ounce.searchmain.data.foodsearch.RequestFoodSearchData
 import com.sopt.ounce.searchmain.data.foodsearch.ResponseFoodSearchData
 import com.sopt.ounce.searchmain.data.reommendcat.RequestRecommendCatsData
 import com.sopt.ounce.searchmain.data.reommendcat.ResponseRecommendCatsData
+import com.sopt.ounce.searchmain.data.showreview.RequestShowReviewData
+import com.sopt.ounce.searchmain.data.showreview.ResponseShowReviewData
 import com.sopt.ounce.searchmain.data.usersearch.RequestUserIdData
 import com.sopt.ounce.searchmain.data.usersearch.ResponseUserSearchData
 import com.sopt.ounce.signup.data.RequestSignUpdata
@@ -137,5 +139,11 @@ interface OunceService {
     fun postReviewSortFavorite(
         @Body body : RequestFoodSearchData
     ) : Call<ResponseFoodSearchData>
+
+    @Headers("Content-Type:application/json")
+    @POST("search/reviewAll")
+    fun postShowReviewAll(
+        @Body body : RequestShowReviewData
+    ) : Call<ResponseShowReviewData>
   
 }

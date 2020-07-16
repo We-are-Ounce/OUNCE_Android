@@ -40,8 +40,9 @@
 
                 <ImageView
                     android:id="@+id/img_product_review_goodsimg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="93dp"
+                    android:layout_height="93dp"
+                    android:scaleType="fitXY"
                     android:src="@drawable/img_card_cat" />
 
                 <RelativeLayout
@@ -99,6 +100,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/tv_product_reivew_meat"
                             android:layout_toEndOf="@id/tv_product_review_isdry"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
