@@ -54,8 +54,8 @@ class SearchGoodsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             else -> tv_search_goods_heartamount.text = "0"
         }
         foodIdx = foodData.foodIdx
-        foodMeat1 = foodData.foodMeat1
-        foodMeat2 = foodData.foodMeat2
+        foodMeat1 = foodData.foodMeat
+        foodMeat2 = foodData.foodMeat
         foodDry = foodData.foodDry
         foodLink = foodData.foodLink
         reviewCount = foodData.reviewCount
