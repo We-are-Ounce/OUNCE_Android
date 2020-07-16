@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sopt.ounce.R
-import com.sopt.ounce.main.data.ResponseMainReviewData
+import com.sopt.ounce.main.data.ResponseReviewData
 import com.sopt.ounce.record.ui.RecordModifyActivity
 
 class ReviewViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -18,7 +18,7 @@ class ReviewViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val heart: TextView = view.findViewById(R.id.tv_main_goods_heartamount)
     private val star: TextView = view.findViewById(R.id.tv_main_goods_staramount)
 
-    fun onBind(data: ResponseMainReviewData.Data) {
+    fun onBind(data: ResponseReviewData.Data) {
         Glide.with(itemView)
             .load(data.foodImg)
             .placeholder(R.drawable.img_cat)

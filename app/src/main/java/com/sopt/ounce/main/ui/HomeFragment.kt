@@ -45,8 +45,12 @@ class HomeFragment : Fragment() {
     private lateinit var mFilterSheet: BottomSheetDialog
     private val mOunce = OunceServiceImpl
 
-    // 리뷰 새로고침을 위한 카운트
-    private var mPaging = 0
+    // 리뷰 새로고침을 위한 카운트 (최신순)
+    private var mPagingDate = 0
+    // 리뷰 새로고침을 위한 카운트 (총점순)
+    private var mPagingRating = 0
+    //리뷰 새로고침을 위한 카운트 (기호도순)
+    private var mPagingPrefer = 0
 
 
     //서버에 보낼 건식 습식 필터
@@ -117,13 +121,13 @@ class HomeFragment : Fragment() {
         startServerProfile()
 
         // 리뷰 데이터를 받아서 리사이클러 뷰로 뿌리기기
-        startServerReview()
+        startServerReviewDate()
 
         //최하단으로 이동했을 때 10개 씩 데이터 추가
         v.sticky_scroll_main.setOnScrollChangeListener(
             NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
                 if (scrollY == (v.getChildAt(0).measuredHeight - v.measuredHeight)) {
-                    startServerReview()
+                    startServerReviewDate()
                 }
             })
 
@@ -330,14 +334,53 @@ class HomeFragment : Fragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun startServerReview() {
+    private fun startServerReviewDate() {
+        mPagingPrefer = 0
+        mPagingRating = 0
+
         val profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 0)
-        mOunce.SERVICE.getMainReview(profileIdx, mPaging, mPaging + 9).customEnqueue(
+        mOunce.SERVICE.getMainReview(profileIdx, mPagingDate, mPagingDate + 9).customEnqueue(
             onSuccess = {
                 "OunceServerSuccess".showLog("메인 프로필 리뷰 목록 불러오기 성공 \n ${it.data}")
                 mRecyclerAdapter.data.addAll(it.data)
                 mRecyclerAdapter.notifyDataSetChanged()
-                mPaging += 10
+                mPagingDate += 10
+            },
+            onError = {
+                "OunceServerError".showLog("메인 프로필 리뷰 목록 불러오기 오류")
+            }
+        )
+    }
+
+    private fun startServerReviewRating(){
+        mPagingDate = 0
+        mPagingPrefer = 0
+
+        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 0)
+        mOunce.SERVICE.getRatingReview(profileIdx, mPagingRating, mPagingRating + 9).customEnqueue(
+            onSuccess = {
+                "OunceServerSuccess".showLog("메인 프로필 리뷰 목록 불러오기 성공 \n ${it.data}")
+                mRecyclerAdapter.data.addAll(it.data)
+                mRecyclerAdapter.notifyDataSetChanged()
+                mPagingRating += 10
+            },
+            onError = {
+                "OunceServerError".showLog("메인 프로필 리뷰 목록 불러오기 오류")
+            }
+        )
+    }
+
+    private fun startServerReviewPrefer(){
+        mPagingDate = 0
+        mPagingRating = 0
+
+        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 0)
+        mOunce.SERVICE.getPreferReview(profileIdx, mPagingPrefer, mPagingPrefer + 9).customEnqueue(
+            onSuccess = {
+                "OunceServerSuccess".showLog("메인 프로필 리뷰 목록 불러오기 성공 \n ${it.data}")
+                mRecyclerAdapter.data.addAll(it.data)
+                mRecyclerAdapter.notifyDataSetChanged()
+                mPagingPrefer += 10
             },
             onError = {
                 "OunceServerError".showLog("메인 프로필 리뷰 목록 불러오기 오류")

@@ -3,7 +3,7 @@ package com.sopt.ounce.main.data
 
 import java.io.Serializable
 
-data class ResponseMainReviewData(
+data class ResponseReviewData(
     val status : Int,
     val success : Boolean,
     val message : String,
