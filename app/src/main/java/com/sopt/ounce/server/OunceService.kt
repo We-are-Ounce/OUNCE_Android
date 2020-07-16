@@ -108,11 +108,18 @@ interface OunceService {
     ) : Call<ResponseMainReviewData>
 
 
-    @Headers("Content-Type:apllication/json")
+    @Headers("Content-Type:application/json")
     @GET("profile/convesion/{profileIdx}")
     fun getConvesionProfile(
         @Path("profileIdx") profileIdx: Int
     ) : Call<BottomProfileData>
+
+    @Headers("Content-Type:application/json")
+    @POST("search/toWrite/{profileIdx}")
+    fun postRecordFoodSearch(
+        @Path("profileIdx") profileIdx: Int,
+        @Body body : RequestFoodRecordData
+    ) : Call<ResponseFoodRecordData>
     /////////////////////////////////////////////
 
 
@@ -121,12 +128,6 @@ interface OunceService {
     fun postFoodSearch(
         @Body body : RequestFoodSearchData
     ) : Call<ResponseFoodSearchData>
-
-
-    @POST("search/food")
-    fun postFoodRcvSearch(
-        @Body body :RequestFoodRecordData
-    ): Call<ResponseFoodRecordData>
 
     @Headers("Content-Type:application/json")
     @POST("search/reviewAll/avgRating")
