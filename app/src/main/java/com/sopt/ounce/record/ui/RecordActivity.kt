@@ -1,24 +1,21 @@
 package com.sopt.ounce.record.ui
 
 import android.content.Intent
-import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amn.easysharedpreferences.EasySharedPreference
 import com.bumptech.glide.Glide
 import com.sopt.ounce.R
-import com.sopt.ounce.login.data.RequestReviewData
-import com.sopt.ounce.login.data.ResponseReviewData
+import com.sopt.ounce.record.data.RequestRecordReviewData
+import com.sopt.ounce.record.data.ResponseRecordReviewData
 import com.sopt.ounce.main.ui.MainActivity
 import com.sopt.ounce.record.RecordItemDecoration
 import com.sopt.ounce.record.adapter.FeatureAdapter
 import com.sopt.ounce.record.data.FeatureData
 import com.sopt.ounce.record.data.RecordSearchFoodData
-import com.sopt.ounce.searchmain.data.foodsearch.FoodData
 import com.sopt.ounce.server.OunceServiceImpl
 import com.sopt.ounce.util.showLog
 import kotlinx.android.synthetic.main.activity_record.*
@@ -113,7 +110,7 @@ class RecordActivity : AppCompatActivity() {
 
 
         record_button.setOnClickListener {
-            val data = RequestReviewData(
+            val data = RequestRecordReviewData(
                 1,
                 1,
                 "한줄리뷰",
@@ -130,7 +127,7 @@ class RecordActivity : AppCompatActivity() {
 
             )
 
-            var data_test = RequestReviewData(
+            var data_test = RequestRecordReviewData(
                 1,
                 1,
                 "메모",
@@ -154,19 +151,19 @@ class RecordActivity : AppCompatActivity() {
 
             //비동기통신에서 오류처리
             "Record - call".showLog("here0")
-            postAddReview.enqueue(object : Callback<ResponseReviewData> {
-                override fun onFailure(call: Call<ResponseReviewData>, t: Throwable) {
+            postAddReview.enqueue(object : Callback<ResponseRecordReviewData> {
+                override fun onFailure(call: Call<ResponseRecordReviewData>, t: Throwable) {
                     Log.e("recordAdd-failure:",t.toString())
                 }
 
                 override fun onResponse(
-                    call: Call<ResponseReviewData>,
-                    response: Response<ResponseReviewData>
+                    call: Call<ResponseRecordReviewData>,
+                    responseRecord: Response<ResponseRecordReviewData>
                 ) {
                     "Record - call".showLog("here1")
-                    if(response.isSuccessful){
+                    if(responseRecord.isSuccessful){
                         //성공했을 때 처리
-                        if(response.body()!!.success){
+                        if(responseRecord.body()!!.success){
                             "Record - success".showLog("here2")
                             Toast.makeText(this@RecordActivity,"리뷰 등록 성공입니다.",Toast.LENGTH_SHORT).show()
                             finish()

@@ -1,7 +1,7 @@
-package com.sopt.ounce.login.data
+package com.sopt.ounce.record.data
 
 
-data class ResponseReviewData(
+data class ResponseRecordReviewData(
     val message: String,
     val status: Int,
     val success: Boolean

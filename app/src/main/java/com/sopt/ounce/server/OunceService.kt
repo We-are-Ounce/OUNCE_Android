@@ -6,8 +6,7 @@ import com.sopt.ounce.login.data.*
 import com.sopt.ounce.main.data.BottomProfileData
 import com.sopt.ounce.main.data.ResponseMainProfileData
 import com.sopt.ounce.main.data.ResponseMainReviewData
-import com.sopt.ounce.record.data.RequestFoodRecordData
-import com.sopt.ounce.record.data.ResponseFoodRecordData
+import com.sopt.ounce.record.data.*
 import com.sopt.ounce.searchmain.data.foodsearch.RequestFoodSearchData
 import com.sopt.ounce.searchmain.data.foodsearch.ResponseFoodSearchData
 import com.sopt.ounce.searchmain.data.reommendcat.RequestRecommendCatsData
@@ -52,8 +51,8 @@ interface OunceService {
     @POST("review/add")
     fun postAddReview(
         @Header("Token") token : String,
-        @Body body : RequestReviewData
-    ) : Call<ResponseReviewData>
+        @Body body : RequestRecordReviewData
+    ) : Call<ResponseRecordReviewData>
 
     @Headers("Content-Type:application/json")
     @PUT("review/update/:reviewIdx")

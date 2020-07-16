@@ -1,5 +1,7 @@
 package com.sopt.ounce.record.data
 
+import java.io.Serializable
+
 data class ResponseSearchFood(
     val data: Data?,
     val message: String,
@@ -19,5 +21,5 @@ data class ResponseSearchFood(
         val reviewInfo : String,
         val avgRating  : Int,
         val avgPrefer : Int
-    )
+    ) : Serializable
 }

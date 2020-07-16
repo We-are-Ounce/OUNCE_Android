@@ -7,11 +7,10 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import com.amn.easysharedpreferences.EasySharedPreference
 import com.sopt.ounce.R
-import com.sopt.ounce.login.data.RequestModifyData
+import com.sopt.ounce.record.data.RequestModifyData
 import com.sopt.ounce.main.ui.MainActivity
 import com.sopt.ounce.server.OunceServiceImpl
 import com.sopt.ounce.util.customEnqueue
-import kotlinx.android.synthetic.main.activity_record.*
 import kotlinx.android.synthetic.main.activity_record_modify.*
 import kotlinx.android.synthetic.main.activity_record_modify.record_ear_btn
 import kotlinx.android.synthetic.main.activity_record_modify.record_eye_btn
