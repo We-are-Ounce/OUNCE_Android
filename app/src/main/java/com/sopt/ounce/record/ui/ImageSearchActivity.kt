@@ -23,11 +23,14 @@ import com.sopt.ounce.searchmain.data.foodsearch.FoodData
 import com.sopt.ounce.searchmain.data.foodsearch.RequestFoodSearchData
 import com.sopt.ounce.server.OunceServiceImpl
 import com.sopt.ounce.util.customEnqueue
+import com.sopt.ounce.util.showLog
 import kotlinx.android.synthetic.main.activity_image_search.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.Path
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ImageSearchActivity : AppCompatActivity() {
 
@@ -88,6 +91,21 @@ class ImageSearchActivity : AppCompatActivity() {
                     ) {
                         Log.d("Record - error", "response")
                         if(response.isSuccessful){
+                            if(EasySharedPreference.getListString("searchList").isNullOrEmpty()){
+                                val searchList = ArrayList<String>()
+                                "Record - listItem".showLog("${searchList.toString()}")
+                                searchList.add(query!!)
+                                "Record - listItem".showLog("${searchList.toString()}")
+                                "Record - listItem".showLog(query!!)
+                                EasySharedPreference.putListString("searchList", searchList)
+                            }else{
+                                val searchList = EasySharedPreference.getListString("searchList") as ArrayList<String>
+                                "Record - listItem".showLog("${searchList.toString()}")
+                                searchList.add(query!!)
+                                "Record - listItem".showLog("${searchList.toString()}")
+                                "Record - listItem".showLog(query!!)
+                                EasySharedPreference.putListString("searchList", searchList)
+                            }
                             Log.d("Record - error", "responseSuccess")
                             val mItemData = response.body()!!.data
                             mItemAdapter.datas = mItemData as MutableList<RecordSearchFoodData>
@@ -120,6 +138,12 @@ class ImageSearchActivity : AppCompatActivity() {
             }
 
         })
+        record_backk_btn.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(p0: View?) {
+                this@ImageSearchActivity.finish()
+            }
+
+        })
 
 //        mItemAdapter = ItemAdapter(this)
 //        rv_record_item.adapter = mItemAdapter
@@ -127,19 +151,17 @@ class ImageSearchActivity : AppCompatActivity() {
     }
 
     private fun getItemList() {
-        val listItem = ArrayList<String>()
-        listItem.add("이현우")
-        listItem.add("안드")
-        listItem.add("빅보")
-        listItem.add("바보")
-        listItem.add("주예는")
-        listItem.add("귀여워")
-        listItem.add("깜찍이")
-        listItem.add("꾹구각가")
-        listItem.add("메롱")
-        listItem.add("끄아")
-        listItem.add("국국")
-        adapter = RecyclerViewAdapter(listItem)
+        val listItem = EasySharedPreference.getListString("searchList") as ArrayList<String>
+        val listAdapter = listItem[0].split(",=,").map{it.trim()}.toMutableList()
+        listAdapter.reverse()
+        Log.d("Record - data", listAdapter.toString())
+        if(!listAdapter.isNullOrEmpty()){
+            adapter = RecyclerViewAdapter(listAdapter.subList(0,3).toList() as ArrayList<String>)
+        }
+        else{
+            listAdapter.add("최근 검색어")
+            adapter =  RecyclerViewAdapter(listAdapter.subList(0,3).toList() as ArrayList<String>)
+        }
         rv_record_search.adapter = adapter
     }
 
