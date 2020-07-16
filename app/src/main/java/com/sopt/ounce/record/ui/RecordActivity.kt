@@ -107,8 +107,6 @@ class RecordActivity : AppCompatActivity() {
             finish()
         }
 
-
-
         record_button.setOnClickListener {
             val data = RequestRecordReviewData(
                 1,
@@ -139,7 +137,6 @@ class RecordActivity : AppCompatActivity() {
                 2,
                 3
             )
-
 
             val postAddReview = mRecordRequest.SERVICE.postAddReview(
                 EasySharedPreference.Companion.getString("accessToken",""),
