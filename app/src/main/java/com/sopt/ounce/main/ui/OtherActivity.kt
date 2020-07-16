@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amn.easysharedpreferences.EasySharedPreference
 import com.bumptech.glide.Glide
@@ -12,6 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import com.sopt.ounce.R
 import com.sopt.ounce.main.adapter.ReviewAdapter
+import com.sopt.ounce.main.data.RequestFollowData
 import com.sopt.ounce.main.data.RequestSelectedFilter
 import com.sopt.ounce.main.data.ResponseOtherProfileData
 import com.sopt.ounce.server.OunceServiceImpl
@@ -91,6 +93,21 @@ class OtherActivity : AppCompatActivity() {
 
     private fun startFollow() {
         // 팔로우 수락 api 작성 요망
+//        val myProfileIdx = EasySharedPreference.getInt("profileIdx",0)
+        mOunce.SERVICE.postFollow(
+            RequestFollowData(
+                26,
+                1
+            )
+        ).customEnqueue(
+            onSuccess = {
+                "OunceServerSuccess".showLog("팔로우 성공")
+                Toast.makeText(this, it.message,Toast.LENGTH_SHORT).show()
+            },
+            onError = {
+                Toast.makeText(this,"팔로우 신청 실패", Toast.LENGTH_SHORT).show()
+            }
+        )
     }
 
     private fun startServerOtherReview() {

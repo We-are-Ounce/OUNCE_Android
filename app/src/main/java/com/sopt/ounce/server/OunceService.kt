@@ -140,6 +140,12 @@ interface OunceService {
         @Query("pageEnd") pageEnd : Int
     ) : Call<ResponseMainReviewData>
 
+    @Headers("Content-Type:application/json")
+    @POST("profile/requestFollow")
+    fun postFollow(
+        @Body body : RequestFollowData
+    ) : Call<ResponseFollowData>
+
     /////////////////////////////////////////////
 
     @Headers("Content-Type:application/json")
