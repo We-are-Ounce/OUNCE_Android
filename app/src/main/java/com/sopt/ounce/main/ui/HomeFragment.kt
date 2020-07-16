@@ -9,13 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.amn.easysharedpreferences.EasySharedPreference
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -24,9 +22,7 @@ import com.sopt.ounce.R
 import com.sopt.ounce.catregister.ui.CatRegisterActivity
 import com.sopt.ounce.main.adapter.BottomProfileAdapter
 import com.sopt.ounce.main.adapter.ReviewAdapter
-import com.sopt.ounce.main.data.BottomProfileData
 import com.sopt.ounce.main.data.RequestSelectedFilter
-import com.sopt.ounce.main.data.ResponseFilterData
 import com.sopt.ounce.main.data.ResponseMainProfileData
 import com.sopt.ounce.server.OunceServiceImpl
 import com.sopt.ounce.util.RcvItemDeco
@@ -264,7 +260,7 @@ class HomeFragment : Fragment() {
         mOunce.SERVICE.getConvesionProfile(profileIdx).customEnqueue(
             onSuccess = {
                 "OunceStatus".showLog("프로필 바텀시트 호출 메세지 : ${it.message}")
-                it.data?.let { data ->
+                it.data.let { data ->
                     mProfileAdapter.data = data
                 }
             },
@@ -285,6 +281,7 @@ class HomeFragment : Fragment() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun startServerProfile() {
         val accessToken = EasySharedPreference.Companion.getString("accessToken", "")
         val profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 0)
@@ -292,8 +289,9 @@ class HomeFragment : Fragment() {
         mOunce.SERVICE.getMainProfile(accessToken, profileIdx).customEnqueue(
             onSuccess = {
                 "OunceServerSuccess".showLog("메인프로필 화면 데이터 전달 성공 \n : ${it.data}")
+                v.txt_main_reviewcount.text = "(${it.data.reviewCountAll})"
 
-                settingDraw(it.data[0])
+                settingDraw(it.data.profileInfoArray[0])
             },
             onError = {
                 "OunceServerError".showLog("메인프로필 화면 통신 오류 \n : ${it.code()}")
@@ -302,7 +300,7 @@ class HomeFragment : Fragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun settingDraw(data: ResponseMainProfileData.Data) {
+    private fun settingDraw(data: ResponseMainProfileData.Data.Profile) {
         Glide.with(this)
             .load(data.profileImg)
             .error(R.drawable.img_cat)
@@ -339,7 +337,6 @@ class HomeFragment : Fragment() {
                 "OunceServerSuccess".showLog("메인 프로필 리뷰 목록 불러오기 성공 \n ${it.data}")
                 mRecyclerAdapter.data.addAll(it.data)
                 mRecyclerAdapter.notifyDataSetChanged()
-                v.txt_main_reviewcount.text = "(${it.data.size})"
                 mPaging += 10
             },
             onError = {

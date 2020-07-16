@@ -3,14 +3,9 @@ package com.sopt.ounce.server
 
 import com.sopt.ounce.catregister.data.ResponseCatProfileData
 import com.sopt.ounce.login.data.*
-import com.sopt.ounce.main.data.BottomProfileData
-import com.sopt.ounce.main.data.ResponseFilterData
-import com.sopt.ounce.main.data.ResponseMainProfileData
-import com.sopt.ounce.main.data.ResponseMainReviewData
+import com.sopt.ounce.main.data.*
 import com.sopt.ounce.record.data.RequestFoodRecordData
-import com.sopt.ounce.main.data.RequestSelectedFilter
 import com.sopt.ounce.record.data.ResponseFoodRecordData
-import com.sopt.ounce.record.data.ResponseSearchFood
 import com.sopt.ounce.searchmain.data.foodsearch.RequestFoodSearchData
 import com.sopt.ounce.searchmain.data.foodsearch.ResponseFoodSearchData
 import com.sopt.ounce.searchmain.data.reommendcat.RequestRecommendCatsData
@@ -128,8 +123,17 @@ interface OunceService {
         @Path("profileIdx") profileIdx: Int,
         @Body body : RequestSelectedFilter
     ) : Call<ResponseMainReviewData>
-
     /////////////////////////////////////////////
+
+    ///다른 프로필 조회 인터페이스 ////////////////
+    @Headers("Content-Type:application/json")
+    @GET("profile")
+    fun getOtherProfile(
+        @Query("myprofileIdx") myprofileIdx : Int,
+        @Query("profileIdx") otherIdx : Int
+    ) : Call<ResponseOtherProfileData>
+    /////////////////////////////////////////////
+
     @Headers("Content-Type:application/json")
     @POST("search/toWrite/{profileIdx}")
     fun postRecordFoodSearch(

@@ -1,23 +1,29 @@
 package com.sopt.ounce.main.ui
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import com.sopt.ounce.R
 import com.sopt.ounce.main.adapter.ReviewAdapter
+import com.sopt.ounce.main.data.ResponseOtherProfileData
+import com.sopt.ounce.server.OunceServiceImpl
 import com.sopt.ounce.util.RcvItemDeco
+import com.sopt.ounce.util.customEnqueue
+import com.sopt.ounce.util.showLog
 import kotlinx.android.synthetic.main.activity_other.*
 import kotlinx.android.synthetic.main.bottomsheet_filter.*
 
 class OtherActivity : AppCompatActivity() {
 
     private lateinit var mRecyclerAdapter: ReviewAdapter
-
     private lateinit var mFilterSheet: BottomSheetDialog
+    private val mOunce = OunceServiceImpl
 
     //서버에 보낼 건식 습식 필터
     private var mFilterDry = mutableListOf<String>()
@@ -37,6 +43,9 @@ class OtherActivity : AppCompatActivity() {
         mFilterSheet.setContentView(R.layout.bottomsheet_filter)
 
         mRecyclerAdapter = ReviewAdapter(this)
+
+        //다른사람 데이터 보여주기 시작
+        startServer()
 
         // 필터 바텀 시트 세팅
         settingFilter()
@@ -70,6 +79,55 @@ class OtherActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun startServer() {
+        // myprofileIdx = 내 프로필 인덱스
+        // otherIdx = intent로 받아온 인덱스
+        mOunce.SERVICE.getOtherProfile(myprofileIdx = 26, otherIdx = 0)
+            .customEnqueue(
+                onSuccess = {
+                    "OunceServerSuccess".showLog("다른계정 프로필 조회 성공")
+                    txt_other_reviewcount.text="(${it.data.reviewCountAll})"
+                    btn_other_follow.isSelected = it.data.ischeck
+
+                    //프로필 뷰에 붙이기
+                    settingDrawable(it.data.profileInfoArray[0])
+                }
+            )
+    }
+
+    //프로필 뷰에 데이터 붙이는 함수
+    @SuppressLint("SetTextI18n")
+    private fun settingDrawable(data : ResponseOtherProfileData.Data.Profile) {
+        Glide.with(this)
+            .load(data.profileImg)
+            .error(R.drawable.img_cat)
+            .into(img_other_profile)
+
+        txt_other_profile.text = data.profileName
+        txt_other_weight.text = "${data.profileWeight}kg"
+        txt_other_age.text = "${data.profileAge}살"
+        if(data.profileGender == "male"){
+            if(data.profileNeutral == "true"){
+                img_other_gender.setImageResource(R.drawable.ic_nuetrul_male)
+            }
+            else{
+                img_other_gender.setImageResource(R.drawable.ic_male)
+            }
+        }else{
+            if(data.profileNeutral == "true"){
+                img_other_gender.setImageResource(R.drawable.ic_nuetrul_female)
+            }
+            else{
+                img_other_gender.setImageResource(R.drawable.ic_female)
+            }
+        }
+
+        txt_other_introduce.text = data.profileInfo
+        txt_other_follower.text = "팔로워 ${data.follower}"
+        txt_other_following.text = "팔로잉 ${data.following}"
     }
 
     private fun initReviewRcv() {
