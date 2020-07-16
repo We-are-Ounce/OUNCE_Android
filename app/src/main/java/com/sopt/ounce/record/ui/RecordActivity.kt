@@ -61,10 +61,6 @@ class RecordActivity : AppCompatActivity() {
 
         initFeatureRcv()
 
-//        record_eye_btn.setOnClickListener(object : View.OnClickListener){
-//                GradientDrawable myGrad = (GradientDrawable)textView.getBackground();
-//
-//        }
         record_eye_btn.setOnClickListener {
             if(it.isSelected){
                 it.setBackgroundResource(R.drawable.trouble_full)
@@ -154,7 +150,7 @@ class RecordActivity : AppCompatActivity() {
                 EasySharedPreference.Companion.getString("accessToken",""),
                 data)
 
-            EasySharedPreference.Companion.getString("accessToken","")
+            //EasySharedPreference.Companion.getString("accessToken","")
 
             //비동기통신에서 오류처리
             "Record - call".showLog("here0")
