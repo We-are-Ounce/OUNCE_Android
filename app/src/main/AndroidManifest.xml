@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".catregister.ui.CatRegisterFinishActivity"></activity>
+        <activity android:name=".productreview.WebViewActivity"></activity>
+        <activity android:name=".catregister.ui.CatRegisterFinishActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
@@ -48,7 +49,7 @@
             android:theme="@style/mainTheme" />
         <activity
             android:name=".record.ui.ImageSearchActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".login.ui.LoginActivity"
             android:exported="true"
@@ -60,7 +61,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
