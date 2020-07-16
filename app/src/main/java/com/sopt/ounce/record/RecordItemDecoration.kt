@@ -27,6 +27,8 @@ class RecordItemDecoration(context : Context, size : Int = 6): RecyclerView.Item
 
         if(parent.getChildAdapterPosition(view) != state.itemCount - 1){
             outRect.right = size_space
+            outRect.left = size_space
+            outRect.bottom = size_space
         }
     }
 }
