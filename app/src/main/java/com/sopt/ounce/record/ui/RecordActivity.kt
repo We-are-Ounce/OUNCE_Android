@@ -122,9 +122,7 @@ class RecordActivity : AppCompatActivity() {
                 1,
                 1,
                 1,
-                //EasySharedPreference.getInt("profileIdx",1)
-                2
-
+                EasySharedPreference.getInt("profileIdx",1)
             )
 
             var data_test = RequestRecordReviewData(
@@ -171,6 +169,9 @@ class RecordActivity : AppCompatActivity() {
                             Toast.makeText(this@RecordActivity,"필요한 값이 없습니다.",Toast.LENGTH_SHORT).show()
                             finish()
                         }
+
+                    }
+                    else{
 
                     }
                 }
