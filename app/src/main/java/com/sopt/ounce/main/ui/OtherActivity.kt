@@ -27,7 +27,7 @@ class OtherActivity : AppCompatActivity() {
     private val mOunce = OunceServiceImpl
 
     // 리뷰 새로고침을 위한 카운트
-    private var mPaging = 1
+    private var mPaging = 0
 
     //서버에 보낼 건식 습식 필터
     private var mFilterDry = mutableListOf<String>()
@@ -89,7 +89,7 @@ class OtherActivity : AppCompatActivity() {
     private fun startServerOtherReview() {
 //        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx",0)
         "OunceServerState".showLog("다른 계정 프로필 리뷰 서버 통신 시작")
-        mOunce.SERVICE.getOtherProfileReview(1, 0,9)
+        mOunce.SERVICE.getOtherProfileReview(1, mPaging,mPaging+9)
             .customEnqueue(
                 onSuccess = {
                     "OunceServerSuccess".showLog("다른 프로필 리뷰 조회 성공\n ${it.data}")
@@ -178,9 +178,19 @@ class OtherActivity : AppCompatActivity() {
             "오리", "참치", "돼지", "해산물", "사슴", "캥거루", "기타"
         )
 
-        // 제조사 이름 리스트
-        val otherManu = listOf<String>(
-            "GO!", "캣츠파인푸드", "테라펠리스", "나우"
+        mOunce.SERVICE.getFilterManu(1).customEnqueue(
+            onSuccess = {
+                "OunceServer".showLog("리뷰 필터 불러오기 성공 \n ${it.data}")
+                //제조사 chip 생성 -> 서버 통신 받아서 유동적 해결
+                for (word in it.data) {
+                    "OunceStatus".showLog("리뷰 필터 데이터 단어 : ${word.foodManu}")
+                    val chip = chipSetting(word.foodManu, mFilterManu)
+                    mFilterSheet.chipgroup_main_manu.addView(chip)
+                }
+            },
+            onError = {
+                "OunceServerError".showLog("리뷰 필터 목록 ${it.code()}")
+            }
         )
 
         //건식 습식 chip 생성
@@ -193,12 +203,6 @@ class OtherActivity : AppCompatActivity() {
         for (word in otherIngredients) {
             val chip = chipSetting(word, mFilterFoodType)
             mFilterSheet.chipgroup_main_ingredient.addView(chip)
-        }
-
-        //제조사 chip 생성 -> 서버 통신 받아서 유동적 해결
-        for (word in otherManu) {
-            val chip = chipSetting(word, mFilterManu)
-            mFilterSheet.chipgroup_main_manu.addView(chip)
         }
     }
 
