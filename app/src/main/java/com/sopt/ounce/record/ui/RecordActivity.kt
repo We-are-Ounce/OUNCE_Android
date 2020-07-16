@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amn.easysharedpreferences.EasySharedPreference
 import com.bumptech.glide.Glide
+import com.google.android.material.chip.Chip
 import com.sopt.ounce.R
 import com.sopt.ounce.record.data.RequestRecordReviewData
 import com.sopt.ounce.record.data.ResponseRecordReviewData
@@ -27,6 +28,7 @@ import kotlin.properties.Delegates
 class RecordActivity : AppCompatActivity() {
 
     private lateinit var mFeatureAdapter: FeatureAdapter
+
     // 총점 기호도 체크 변수
     private var mTotal by Delegates.notNull<Int>()
     private var mFavor by Delegates.notNull<Int>()
@@ -44,6 +46,8 @@ class RecordActivity : AppCompatActivity() {
     //서버 통신, 싱글톤 그대로 가져옴
     private val mRecordRequest = OunceServiceImpl
 
+    private lateinit var foodData: RecordSearchFoodData
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_record)
@@ -53,7 +57,7 @@ class RecordActivity : AppCompatActivity() {
 //        ratingBar2.setStarEmptyDrawable(resources.getDrawable(R.drawable.ic_favorite_unselected))
 
         val intent = intent
-        val foodData : RecordSearchFoodData = intent.getSerializableExtra("foodItem") as RecordSearchFoodData
+        foodData = intent.getSerializableExtra("foodItem") as RecordSearchFoodData
 
         Glide.with(this).load(foodData.foodImg).into(image_Preview)
         txt_record_company.text = foodData.foodManu
@@ -63,22 +67,23 @@ class RecordActivity : AppCompatActivity() {
         //총점을 받아오는 클릭 리스너
         ratingBar.setOnRatingChangeListener {
             mTotal = it.toInt()
+            "RecordStatus".showLog("${it.toInt()}")
         }
         //기호도를 받아오는 클릭 리스너
         ratingBar2.setOnRatingChangeListener {
             mFavor = it.toInt()
+            "RecordStatus".showLog("${it.toInt()}")
         }
 
         initFeatureRcv()
 
         // 트러블 체크 리스너
         record_eye_btn.setOnClickListener {
-            if(it.isSelected){
+            if (it.isSelected) {
                 it.setBackgroundResource(R.drawable.trouble_full)
                 it.isSelected = false
                 mEye = 0
-            }
-            else{
+            } else {
                 it.setBackgroundResource(R.drawable.trouble_empty)
                 it.isSelected = true
                 mEye = 1
@@ -86,12 +91,11 @@ class RecordActivity : AppCompatActivity() {
         }
 
         record_ear_btn.setOnClickListener {
-            if(it.isSelected){
+            if (it.isSelected) {
                 it.setBackgroundResource(R.drawable.trouble_full)
                 it.isSelected = false
                 mEar = 0
-            }
-            else{
+            } else {
                 it.setBackgroundResource(R.drawable.trouble_empty)
                 it.isSelected = true
                 mEar = 1
@@ -99,12 +103,11 @@ class RecordActivity : AppCompatActivity() {
         }
 
         record_fur_btn.setOnClickListener {
-            if(it.isSelected){
+            if (it.isSelected) {
                 it.setBackgroundResource(R.drawable.trouble_full)
                 it.isSelected = false
                 mFur = 0
-            }
-            else{
+            } else {
                 it.setBackgroundResource(R.drawable.trouble_empty)
                 it.isSelected = true
                 mFur = 1
@@ -112,12 +115,11 @@ class RecordActivity : AppCompatActivity() {
         }
 
         record_vomit_btn.setOnClickListener {
-            if(it.isSelected){
+            if (it.isSelected) {
                 it.setBackgroundResource(R.drawable.trouble_full)
                 it.isSelected = false
                 mVomit = 0
-            }
-            else{
+            } else {
                 it.setBackgroundResource(R.drawable.trouble_empty)
                 it.isSelected = true
                 mVomit = 1
@@ -125,32 +127,32 @@ class RecordActivity : AppCompatActivity() {
         }
 
         //뒤로가기 클릭 시 뒤로 이동
-        record_goback_btn.setOnClickListener{
+        record_goback_btn.setOnClickListener {
             finish()
         }
 
-        chipGroup_status.setOnClickListener {
-            Toast.makeText(this,"${chipGroup_status.checkedChipId}",Toast.LENGTH_SHORT).show()
-        }
+        setChipCheckListener()
 
         btn_record_save.setOnClickListener {
             val data = RequestRecordReviewData(
-                mTotal, mFavor,
+                mTotal,
+                mFavor,
                 edt_record_sigle_memo.text.toString(),
                 memo_edt.text.toString(),
-                1,
-                1,
+                mStatus,
+                mSmell,
                 mEye,
                 mEar,
                 mFur,
                 mVomit,
                 foodIdx,
-                EasySharedPreference.getInt("profileIdx",1)
+                EasySharedPreference.getInt("profileIdx", 1)
             )
 
             val postAddReview = mRecordRequest.SERVICE.postAddReview(
-                EasySharedPreference.Companion.getString("accessToken",""),
-                data)
+                EasySharedPreference.Companion.getString("accessToken", ""),
+                data
+            )
 
             //EasySharedPreference.Companion.getString("accessToken","")
 
@@ -158,7 +160,7 @@ class RecordActivity : AppCompatActivity() {
             "Record - call".showLog("here0")
             postAddReview.enqueue(object : Callback<ResponseRecordReviewData> {
                 override fun onFailure(call: Call<ResponseRecordReviewData>, t: Throwable) {
-                    Log.e("recordAdd-failure:",t.toString())
+                    Log.e("recordAdd-failure:", t.toString())
                 }
 
                 override fun onResponse(
@@ -166,14 +168,16 @@ class RecordActivity : AppCompatActivity() {
                     responseRecord: Response<ResponseRecordReviewData>
                 ) {
                     "Record - call".showLog("here1")
-                    if(responseRecord.isSuccessful){
+                    if (responseRecord.isSuccessful) {
                         //성공했을 때 처리
-                        if(responseRecord.body()!!.success){
+                        if (responseRecord.body()!!.success) {
                             "Record - success".showLog("here2")
-                            Toast.makeText(this@RecordActivity,"리뷰 등록 성공입니다.",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@RecordActivity, "리뷰 등록 성공입니다.", Toast.LENGTH_SHORT)
+                                .show()
                             finish()
-                        }else{
-                            Toast.makeText(this@RecordActivity,"필요한 값이 없습니다.",Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(this@RecordActivity, "필요한 값이 없습니다.", Toast.LENGTH_SHORT)
+                                .show()
                             finish()
                         }
 
@@ -183,6 +187,74 @@ class RecordActivity : AppCompatActivity() {
 
             })
         }
+
+    }
+
+    private fun setChipCheckListener() {
+        chipGroup_status.setOnCheckedChangeListener { group, checkedId ->
+            if (checkedId == -1) {
+                mStatus = 0
+            }
+        }
+        record_chip.setOnCheckedChangeListener { _, checked ->
+            if (checked) {
+                mStatus = 1
+            }
+        }
+        record_chip_two.setOnCheckedChangeListener { _, checked ->
+            if (checked) {
+                mStatus = 2
+            }
+        }
+        record_chip_three.setOnCheckedChangeListener { _, checked ->
+            if (checked) {
+                mStatus = 3
+            }
+        }
+        record_chip_four.setOnCheckedChangeListener { _, checked ->
+            if (checked) {
+                mStatus = 4
+            }
+        }
+        record_chip_five.setOnCheckedChangeListener { _, checked ->
+            if (checked) {
+                mStatus = 5
+            }
+        }
+
+
+        chipSmellGroup.setOnCheckedChangeListener { _, checkedId ->
+            if (checkedId == -1) {
+                mSmell = 0
+            }
+        }
+
+        record_smellchip.setOnCheckedChangeListener { _, checked ->
+            if (checked) {
+                mSmell = 1
+            }
+        }
+        record_smellchip_two.setOnCheckedChangeListener { _, checked ->
+            if (checked) {
+                mSmell = 2
+            }
+        }
+        record_smellchip_three.setOnCheckedChangeListener { _, checked ->
+            if (checked) {
+                mSmell = 3
+            }
+        }
+        record_smellchip_four.setOnCheckedChangeListener { _, checked ->
+            if (checked) {
+                mSmell = 4
+            }
+        }
+        record_smellchip_five.setOnCheckedChangeListener { _, checked ->
+            if (checked) {
+                mSmell = 5
+            }
+        }
+
 
     }
 
@@ -197,12 +269,20 @@ class RecordActivity : AppCompatActivity() {
             )
             addItemDecoration(RecordItemDecoration(this@RecordActivity))
         }
-         //어댑터 구현하기
-        mFeatureAdapter.data = listOf(
-            FeatureData("건식"),
-            FeatureData("사슴"),
-            FeatureData("돼지")
-        )
+        //어댑터 구현하기
+        if (foodData.foodMeat2.isNullOrEmpty()) {
+            mFeatureAdapter.data = listOf(
+                FeatureData(foodData.foodDry),
+                FeatureData(foodData.foodMeat1)
+            )
+        } else {
+            mFeatureAdapter.data = listOf(
+                FeatureData(foodData.foodDry),
+                FeatureData(foodData.foodMeat1),
+                FeatureData(foodData.foodMeat2!!)
+            )
+        }
+
         mFeatureAdapter.notifyDataSetChanged()
     }
 
