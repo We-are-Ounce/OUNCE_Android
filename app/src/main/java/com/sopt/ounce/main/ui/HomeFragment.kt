@@ -25,6 +25,8 @@ import com.sopt.ounce.catregister.ui.CatRegisterActivity
 import com.sopt.ounce.main.adapter.BottomProfileAdapter
 import com.sopt.ounce.main.adapter.ReviewAdapter
 import com.sopt.ounce.main.data.BottomProfileData
+import com.sopt.ounce.main.data.RequestSelectedFilter
+import com.sopt.ounce.main.data.ResponseFilterData
 import com.sopt.ounce.main.data.ResponseMainProfileData
 import com.sopt.ounce.server.OunceServiceImpl
 import com.sopt.ounce.util.RcvItemDeco
@@ -38,23 +40,25 @@ import kotlinx.android.synthetic.main.profile_bottomsheet.*
 
 class HomeFragment : Fragment() {
 
-    private lateinit var mContext : Context
-    private lateinit var v : View
-    private lateinit var mItem :Array<String>
-    private lateinit var mRecyclerAdapter : ReviewAdapter
-    private lateinit var mProfileAdapter : BottomProfileAdapter
-    private lateinit var mBottomsheetProfile : BottomSheetDialog
-    private lateinit var mFilterSheet : BottomSheetDialog
+    private lateinit var mContext: Context
+    private lateinit var v: View
+    private lateinit var mItem: Array<String>
+    private lateinit var mRecyclerAdapter: ReviewAdapter
+    private lateinit var mProfileAdapter: BottomProfileAdapter
+    private lateinit var mBottomsheetProfile: BottomSheetDialog
+    private lateinit var mFilterSheet: BottomSheetDialog
     private val mOunce = OunceServiceImpl
+
     // 리뷰 새로고침을 위한 카운트
     private var mPaging = 1
 
 
-
     //서버에 보낼 건식 습식 필터
     private var mFilterDry = mutableListOf<String>()
+
     //서버에 보낼 주재료 필터
     private var mFilterFoodType = mutableListOf<String>()
+
     //서버에 보낼 제조사 필터
     private var mFilterManu = mutableListOf<String>()
 
@@ -71,11 +75,11 @@ class HomeFragment : Fragment() {
         mProfileAdapter = BottomProfileAdapter(mContext)
 
         activity?.onBackPressedDispatcher?.addCallback(this,
-        object  : OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-                ActivityCompat.finishAffinity(activity as MainActivity)
-            }
-        })
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    ActivityCompat.finishAffinity(activity as MainActivity)
+                }
+            })
 
     }
 
@@ -92,10 +96,13 @@ class HomeFragment : Fragment() {
         mBottomsheetProfile.setContentView(R.layout.profile_bottomsheet)
         //필터 바텀시트 설정
         mFilterSheet.setContentView(R.layout.bottomsheet_filter)
+        settingFilter()
 
         // 스피너 설정
-        val spinnerAdapter = ArrayAdapter(mContext,
-            R.layout.main_custom_spinner, mItem)
+        val spinnerAdapter = ArrayAdapter(
+            mContext,
+            R.layout.main_custom_spinner, mItem
+        )
 
         spinnerAdapter.setDropDownViewResource(R.layout.main_custom_dropdown)
         v.spinner_main.apply {
@@ -110,8 +117,6 @@ class HomeFragment : Fragment() {
             addItemDecoration(RcvItemDeco(mContext))
         }
 
-        settingFilter()
-
         // 서버 통신 시작한 후 데이터들을 받아서 프로필 뷰에 뿌려주기
         startServerProfile()
 
@@ -121,12 +126,12 @@ class HomeFragment : Fragment() {
         //최하단으로 이동했을 때 10개 씩 데이터 추가
         v.sticky_scroll_main.setOnScrollChangeListener(
             NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-                if (scrollY == (v.getChildAt(0).measuredHeight - v.measuredHeight)){
+                if (scrollY == (v.getChildAt(0).measuredHeight - v.measuredHeight)) {
                     startServerReview()
                 }
-        })
+            })
 
-       return v
+        return v
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -158,33 +163,42 @@ class HomeFragment : Fragment() {
             "오리", "참치", "돼지", "해산물", "사슴", "캥거루", "기타"
         )
 
-        // 제조사 이름 리스트
-        val mainManu = listOf<String>(
-            "GO!", "캣츠파인푸드", "테라펠리스", "나우"
+        //서버에서 제조사 이름 리스트 받아오기 시작
+        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 0)
+        mOunce.SERVICE.getFilterManu(profileIdx).customEnqueue(
+            onSuccess = {
+                "OunceServer".showLog("리뷰 필터 불러오기 성공 \n ${it.data}")
+                //제조사 chip 생성 -> 서버 통신 받아서 유동적 해결
+                for (word in it.data) {
+                    "OunceStatus".showLog("리뷰 필터 데이터 단어 : ${word.foodManu}")
+                    val chip = chipSetting(word.foodManu, mFilterManu)
+                    mFilterSheet.chipgroup_main_manu.addView(chip)
+                }
+            },
+            onError = {
+                "OunceServerError".showLog("리뷰 필터 목록 ${it.code()}")
+            }
         )
+
 
         //건식 습식 chip 생성
         for (word in mainFoodType) {
-            val chip = chipSetting(word,mFilterDry)
+            val chip = chipSetting(word, mFilterDry)
             mFilterSheet.chipgroup_main_foodtype.addView(chip)
         }
 
         //주재료 chip 생성
         for (word in mainIngredients) {
-            val chip = chipSetting(word,mFilterFoodType)
+            val chip = chipSetting(word, mFilterFoodType)
             mFilterSheet.chipgroup_main_ingredient.addView(chip)
         }
 
-        //제조사 chip 생성 -> 서버 통신 받아서 유동적 해결
-        for(word in mainManu){
-            val chip = chipSetting(word, mFilterManu)
-            mFilterSheet.chipgroup_main_manu.addView(chip)
-        }
+
     }
 
 
     @Suppress("DEPRECATION")
-    private fun chipSetting(word : String, filterList : MutableList<String>) : Chip{
+    private fun chipSetting(word: String, filterList: MutableList<String>): Chip {
         val c = Chip(mContext)
         c.apply {
             text = word
@@ -193,17 +207,15 @@ class HomeFragment : Fragment() {
             isCheckedIconVisible = false
             setChipBackgroundColorResource(R.color.custom_filter)
             setTextAppearanceResource(R.style.filterTextStyle)
-            setTextColor(resources.getColor(R.color.dark))
+            setTextColor(resources.getColor(R.color.black_two))
             setChipStrokeColorResource(R.color.custom_filter_stroke)
             chipStrokeWidth = 6f
             setOnClickListener {
                 if (isChecked) {
-                    setTextColor(resources.getColor(R.color.white))
                     filterList.add(text.toString())
                     Log.d("List", "$filterList")
-                    
+
                 } else {
-                    setTextColor(resources.getColor(R.color.dark))
                     filterList.remove(text.toString())
                     Log.d("List", "$filterList")
 
@@ -214,25 +226,45 @@ class HomeFragment : Fragment() {
         return c
     }
 
-    private fun showFilterSheet(){
+    private fun showFilterSheet() {
         mFilterSheet.txt_filter_ok.setOnClickListener {
+            //필터 적용된 리뷰 목록 통신해서 기록갱신
+            val profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 0)
+            mOunce.SERVICE.postSelectFiltering(
+                profileIdx,
+                RequestSelectedFilter(
+                    foodManu = mFilterManu,
+                    foodDry = mFilterDry,
+                    foodMeat = mFilterFoodType
+                )
+            ).customEnqueue(
+                onSuccess = {
+                    "OunceServerSuccess".showLog("리뷰 필터 적용 완료")
+                    mRecyclerAdapter.data.clear()
+                    mRecyclerAdapter.data.addAll(it.data)
+                    mRecyclerAdapter.notifyDataSetChanged()
+                },
+                onError = {
+                    "OunceServerError".showLog("리뷰 필터 적용 실패")
+                }
+            )
             mFilterSheet.dismiss()
         }
         mFilterSheet.show()
     }
 
 
-    private fun showBottomSheet(){
-        mBottomsheetProfile.rcv_bottom_profile.apply{
+    private fun showBottomSheet() {
+        mBottomsheetProfile.rcv_bottom_profile.apply {
             adapter = mProfileAdapter
             layoutManager = LinearLayoutManager(mContext)
         }
-        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx",0)
+        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 0)
 
         mOunce.SERVICE.getConvesionProfile(profileIdx).customEnqueue(
             onSuccess = {
                 "OunceStatus".showLog("프로필 바텀시트 호출 메세지 : ${it.message}")
-                it.data?.let {data ->
+                it.data?.let { data ->
                     mProfileAdapter.data = data
                 }
             },
@@ -241,18 +273,6 @@ class HomeFragment : Fragment() {
             }
         )
 
-//        mProfileAdapter.data = listOf(
-//            BottomProfileData(
-//                "https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg",
-//                "title1",
-//                "intro1",
-//                false),
-//            BottomProfileData(
-//                "https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg",
-//                "title2",
-//                "intro2",
-//                false)
-//        )
         mProfileAdapter.notifyDataSetChanged()
 
         mBottomsheetProfile.layout_bottomsheet_add_profile.setOnClickListener {
@@ -265,11 +285,11 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun startServerProfile(){
-        val accessToken = EasySharedPreference.Companion.getString("accessToken","")
-        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx",0)
+    private fun startServerProfile() {
+        val accessToken = EasySharedPreference.Companion.getString("accessToken", "")
+        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 0)
 
-        mOunce.SERVICE.getMainProfile(accessToken,profileIdx).customEnqueue(
+        mOunce.SERVICE.getMainProfile(accessToken, profileIdx).customEnqueue(
             onSuccess = {
                 "OunceServerSuccess".showLog("메인프로필 화면 데이터 전달 성공 \n : ${it.data}")
 
@@ -282,7 +302,7 @@ class HomeFragment : Fragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun settingDraw(data : ResponseMainProfileData.Data){
+    private fun settingDraw(data: ResponseMainProfileData.Data) {
         Glide.with(this)
             .load(data.profileImg)
             .error(R.drawable.img_cat)
@@ -290,24 +310,21 @@ class HomeFragment : Fragment() {
 
         v.txt_main_profile.text = data.profileName
         v.txt_main_weight.text = "${data.profileWeight}kg"
-        v.txt_main_age.text ="${data.profileAge}살"
+        v.txt_main_age.text = "${data.profileAge}살"
         v.txt_main_introduce.text = data.profileInfo
         v.txt_main_follower.text = "팔로워 ${data.follower}"
-        v.txt_main_following.text = "팔로인 ${data.following}"
+        v.txt_main_following.text = "팔로잉 ${data.following}"
 
-        if(data.profileGender == "male"){
-            if(data.profileNeutral == "true"){
+        if (data.profileGender == "male") {
+            if (data.profileNeutral == "true") {
                 v.img_main_gender.setImageResource(R.drawable.ic_nuetrul_male)
-            }
-            else{
+            } else {
                 v.img_main_gender.setImageResource(R.drawable.ic_male)
             }
-        }
-        else{
-            if(data.profileNeutral == "true"){
+        } else {
+            if (data.profileNeutral == "true") {
                 v.img_main_gender.setImageResource(R.drawable.ic_nuetrul_female)
-            }
-            else{
+            } else {
                 v.img_main_gender.setImageResource(R.drawable.ic_female)
             }
 
@@ -315,9 +332,9 @@ class HomeFragment : Fragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun startServerReview(){
-        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx",0)
-        mOunce.SERVICE.getMainReview(profileIdx,mPaging,mPaging + 9).customEnqueue(
+    private fun startServerReview() {
+        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 0)
+        mOunce.SERVICE.getMainReview(profileIdx, mPaging, mPaging + 9).customEnqueue(
             onSuccess = {
                 "OunceServerSuccess".showLog("메인 프로필 리뷰 목록 불러오기 성공 \n ${it.data}")
                 mRecyclerAdapter.data.addAll(it.data)

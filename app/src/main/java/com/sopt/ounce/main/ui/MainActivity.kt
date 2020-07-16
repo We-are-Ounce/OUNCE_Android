@@ -8,7 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import com.sopt.ounce.R
-import com.sopt.ounce.record.ui.RecordActivity
+import com.sopt.ounce.record.ui.ImageSearchActivity
 import com.sopt.ounce.searchmain.SearchFragment
 import com.sopt.ounce.util.StatusObject
 import kotlinx.android.synthetic.main.activity_main.*
@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mFm: FragmentManager
 
+    @Suppress("NAME_SHADOWING")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,18 +25,11 @@ class MainActivity : AppCompatActivity() {
         StatusObject.setStatusBar(this)
 
         mFm = this.supportFragmentManager
-        val intent: Intent = intent
-        val meOrYou: Boolean = intent.getBooleanExtra("me", true)
 
-        if (meOrYou) {
-            mFm.beginTransaction().apply {
-                add(R.id.layout_main_content, HomeFragment())
-                commit()
-            }
-        } else {
-            mFm.beginTransaction().apply {
-                add(R.id.layout_main_content, OtherUserFragment())
-            }
+
+        mFm.beginTransaction().apply {
+            add(R.id.layout_main_content, HomeFragment())
+            commit()
         }
 
 
@@ -88,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
 
         fab_write.setOnClickListener {
-            val intent = Intent(this, RecordActivity::class.java)
+            val intent = Intent(this, ImageSearchActivity::class.java)
             startActivity(intent)
         }
 
@@ -96,9 +90,8 @@ class MainActivity : AppCompatActivity() {
 
 
     fun methodManagerToFragment(): InputMethodManager {
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE)
+        return getSystemService(Context.INPUT_METHOD_SERVICE)
                 as InputMethodManager
-        return imm
     }
 
 }
