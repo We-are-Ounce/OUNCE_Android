@@ -82,7 +82,6 @@ class RecordModifyActivity : AppCompatActivity() {
             }
         }
         record_x_btn.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
             finish()
         }
 
