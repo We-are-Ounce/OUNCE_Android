@@ -1,5 +1,7 @@
 package com.sopt.ounce.searchmain.data.foodsearch
 
+import java.io.Serializable
+
 data class FoodData(
     val avgPrefer: Float,
     val avgRating: Float,
@@ -13,4 +15,4 @@ data class FoodData(
     val reviewCount: Int,
     val reviewIdx: Int,
     val reviewInfo: String
-)
+) : Serializable

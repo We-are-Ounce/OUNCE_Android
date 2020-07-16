@@ -1,5 +1,6 @@
 package com.sopt.ounce.searchmain.recyclerview
 
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -7,7 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sopt.ounce.R
+import com.sopt.ounce.productreview.ProductReviewActivity
 import com.sopt.ounce.searchmain.data.foodsearch.FoodData
+import com.sopt.ounce.searchmain.data.showreview.RequestShowReviewData
+import com.sopt.ounce.searchmain.data.showreview.ReviewData
+import com.sopt.ounce.server.OunceServiceImpl
+import com.sopt.ounce.util.customEnqueue
 
 class SearchGoodsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     val img_search_goods_goodsimage = itemView.findViewById<ImageView>(
@@ -52,5 +58,32 @@ class SearchGoodsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         foodLink = foodData.foodLink
         reviewCount = foodData.reviewCount
         reviewIdx = foodData.reviewIdx
+
+        img_search_goods_goodsimage.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(view: View?) {
+                val ounce = OunceServiceImpl.SERVICE.postShowReviewAll(
+                    RequestShowReviewData(
+                        foodIdx = foodIdx
+                    )
+                )
+
+                ounce.customEnqueue(
+                    onSuccess = {
+                        val reviewData = it.data.toTypedArray()
+                        val intent = Intent(itemView.context, ProductReviewActivity::class.java)
+                        intent.putExtra("foodInfo", foodData)
+                        intent.putExtra("foodReview", reviewData)
+                        itemView.context.startActivity(intent)
+                    },
+                    onFaile = {
+
+                    },
+                    onError = {
+
+                    }
+                )
+            }
+
+        })
     }
 }
