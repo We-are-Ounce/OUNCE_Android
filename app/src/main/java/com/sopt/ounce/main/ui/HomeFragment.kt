@@ -96,6 +96,7 @@ class HomeFragment : Fragment() {
         mBottomsheetProfile.setContentView(R.layout.profile_bottomsheet)
         //필터 바텀시트 설정
         mFilterSheet.setContentView(R.layout.bottomsheet_filter)
+        settingFilter()
 
         // 스피너 설정
         val spinnerAdapter = ArrayAdapter(
@@ -115,8 +116,6 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(mContext)
             addItemDecoration(RcvItemDeco(mContext))
         }
-
-//        settingFilter()
 
         // 서버 통신 시작한 후 데이터들을 받아서 프로필 뷰에 뿌려주기
         startServerProfile()
@@ -228,7 +227,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun showFilterSheet() {
-        settingFilter()
         mFilterSheet.txt_filter_ok.setOnClickListener {
             //필터 적용된 리뷰 목록 통신해서 기록갱신
             val profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 0)
