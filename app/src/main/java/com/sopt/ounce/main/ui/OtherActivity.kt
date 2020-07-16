@@ -12,6 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import com.sopt.ounce.R
 import com.sopt.ounce.main.adapter.ReviewAdapter
+import com.sopt.ounce.main.data.RequestSelectedFilter
 import com.sopt.ounce.main.data.ResponseOtherProfileData
 import com.sopt.ounce.server.OunceServiceImpl
 import com.sopt.ounce.util.RcvItemDeco
@@ -66,6 +67,8 @@ class OtherActivity : AppCompatActivity() {
                 btn_other_follow.text = "팔로우"
             }
             else{
+                //팔로우 신청 api 실행
+                startFollow()
                 //false -> true 가니까
                 btn_other_follow.text = "팔로우 취소"
             }
@@ -84,6 +87,10 @@ class OtherActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun startFollow() {
+        // 팔로우 수락 api 작성 요망
     }
 
     private fun startServerOtherReview() {
@@ -161,6 +168,24 @@ class OtherActivity : AppCompatActivity() {
     //필터 이미지 클릭 시 필터 바텀시트 호출 함수
     private fun showFilterSheet() {
         mFilterSheet.txt_filter_ok.setOnClickListener {
+            mOunce.SERVICE.postSelectFiltering(
+                1,
+                RequestSelectedFilter(
+                    foodManu = mFilterManu,
+                    foodDry = mFilterDry,
+                    foodMeat = mFilterFoodType
+                )
+            ).customEnqueue(
+                onSuccess = {
+                    "OunceServerSuccess".showLog("리뷰 필터 적용 완료")
+                    mRecyclerAdapter.data.clear()
+                    mRecyclerAdapter.data.addAll(it.data)
+                    mRecyclerAdapter.notifyDataSetChanged()
+                },
+                onError = {
+                    "OunceServerError".showLog("리뷰 필터 적용 실패")
+                }
+            )
             mFilterSheet.dismiss()
         }
         mFilterSheet.show()
