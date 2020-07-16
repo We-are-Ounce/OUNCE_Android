@@ -85,7 +85,7 @@ class OtherActivity : AppCompatActivity() {
     private fun startServer() {
         // myprofileIdx = 내 프로필 인덱스
         // otherIdx = intent로 받아온 인덱스
-        mOunce.SERVICE.getOtherProfile(myprofileIdx = 26, otherIdx = 0)
+        mOunce.SERVICE.getOtherProfile(myprofileIdx = 26, otherIdx = 1)
             .customEnqueue(
                 onSuccess = {
                     "OunceServerSuccess".showLog("다른계정 프로필 조회 성공")
