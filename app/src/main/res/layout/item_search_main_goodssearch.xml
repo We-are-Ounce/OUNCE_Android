@@ -44,15 +44,39 @@
             android:textColor="@color/greyish_brown"
             android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/tv_search_goods_review"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/notosanskr_regular"
-            android:includeFontPadding="false"
-            android:text="리뷰(25)"
-            android:textColor="@color/battleship_grey"
-            android:textSize="12sp" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanskr_regular"
+                android:includeFontPadding="false"
+                android:text="리뷰 ("
+                android:textColor="@color/battleship_grey"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/tv_search_goods_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanskr_regular"
+                android:includeFontPadding="false"
+                android:text="25"
+                android:textColor="@color/battleship_grey"
+                android:textSize="12sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanskr_regular"
+                android:includeFontPadding="false"
+                android:text=")"
+                android:textColor="@color/battleship_grey"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
@@ -77,21 +101,21 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/notosanskr_regular"
             android:includeFontPadding="false"
-            android:layout_marginRight="7dp"
-            android:text="5"
+            android:layout_marginEnd="7dp"
+            android:text = "5"
             android:textSize="14sp" />
 
         <ImageView
             android:id="@+id/img_search_goods_heart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="3dp"
+            android:layout_marginEnd="3dp"
             android:src="@drawable/ic_review_heart"
             />
         <TextView
             android:id="@+id/tv_search_goods_heartamount"
             android:textSize="14sp"
-            android:text="5"
+            android:text = "5"
             android:fontFamily="@font/notosanskr_regular"
             android:includeFontPadding="false"
             android:layout_width="wrap_content"

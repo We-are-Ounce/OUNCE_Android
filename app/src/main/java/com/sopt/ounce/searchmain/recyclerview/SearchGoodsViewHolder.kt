@@ -36,7 +36,7 @@ class SearchGoodsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         Glide.with(itemView).load(foodData.foodImg).into(img_search_goods_goodsimage)
         tv_search_goods_company.text = foodData.foodManu
         tv_search_goods_name.text = foodData.foodName
-        tv_search_goods_review.text = foodData.reviewInfo
+        tv_search_goods_review.text = foodData.reviewCount.toString()
         when(foodData.avgRating.toInt()){
             1 -> tv_search_goods_staramount.text = "1"
             2 -> tv_search_goods_staramount.text = "2"
@@ -61,14 +61,15 @@ class SearchGoodsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         reviewCount = foodData.reviewCount
         reviewIdx = foodData.reviewIdx
 
-        img_search_goods_goodsimage.setOnClickListener(object : View.OnClickListener{
+        itemView.setOnClickListener(object : View.OnClickListener{
             override fun onClick(view: View?) {
                 val ounce = OunceServiceImpl.SERVICE.postShowReviewAll(
                     RequestShowReviewData(
-                        foodIdx = foodIdx
+                        foodIdx = foodIdx,
+                        pageStart = 1,
+                        pageEnd = 100
                     )
                 )
-
                 ounce.customEnqueue(
                     onSuccess = {
                         val reviewData = it.data.toTypedArray()
@@ -78,14 +79,11 @@ class SearchGoodsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
                         itemView.context.startActivity(intent)
                     },
                     onFaile = {
-
                     },
                     onError = {
-
                     }
                 )
             }
-
         })
     }
 }
