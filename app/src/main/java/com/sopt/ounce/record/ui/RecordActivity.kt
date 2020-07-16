@@ -16,6 +16,7 @@ import com.sopt.ounce.main.ui.MainActivity
 import com.sopt.ounce.record.RecordItemDecoration
 import com.sopt.ounce.record.adapter.FeatureAdapter
 import com.sopt.ounce.record.data.FeatureData
+import com.sopt.ounce.record.data.RecordSearchFoodData
 import com.sopt.ounce.searchmain.data.foodsearch.FoodData
 import com.sopt.ounce.server.OunceServiceImpl
 import com.sopt.ounce.util.showLog
@@ -43,10 +44,12 @@ class RecordActivity : AppCompatActivity() {
 //        ratingBar2.setStarEmptyDrawable(resources.getDrawable(R.drawable.ic_favorite_unselected))
 
         val intent = intent
-        val foodData : FoodData = intent.getSerializableExtra("foodItem") as FoodData
+        val foodData : RecordSearchFoodData = intent.getSerializableExtra("foodItem") as RecordSearchFoodData
 
         Glide.with(this).load(foodData.foodImg).into(image_Preview)
-
+        textView.text = foodData.foodManu
+        textView2.text = foodData.foodName
+        val foodIdx = foodData.foodIdx
 
         ratingBar.setOnRatingChangeListener {
             mTotal = it.toInt()
