@@ -21,6 +21,8 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.viewpager.widget.ViewPager
 import com.amn.easysharedpreferences.EasySharedPreference
 import com.google.android.material.tabs.TabLayout
 import com.sopt.ounce.R
@@ -103,7 +105,7 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Log.d("Search - Call", "Start")
         fm_container.setOnClickListener {
             mInputMethodManager.hideSoftInputFromWindow(sv_search_main_search.windowToken,0)
         }
@@ -114,14 +116,33 @@ class SearchFragment : Fragment() {
         vp_search_main_viewpager.clipChildren = false
         vp_search_main_viewpager.offscreenPageLimit = 1
         //메인 화면 PageTransFormer 부착
-        vp_search_main_viewpager.setPageTransformer(true, ViewPagerTransformer())
-        val DpValue = 80
+        vp_search_main_viewpager.setPageTransformer(false, ViewPagerTransformer())
+        val DpValue = 40
         val DisplayDensity = resources.displayMetrics.density
         val margin = DpValue * DisplayDensity.toInt()
 
         vp_search_main_viewpager.setPadding(margin,0,margin,0)
         vp_search_main_viewpager.pageMargin = margin/32
+        vp_search_main_viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+            override fun onPageScrollStateChanged(state: Int) {
+                val mActivity = activity as MainActivity
+                val swipeViewPage = mActivity.findViewById<SwipeRefreshLayout>(R.id.swipe_main_refresh)
+                swipeViewPage.isEnabled = (state == ViewPager.SCROLL_STATE_IDLE)
+            }
 
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+
+            }
+
+        })
         //ViewPager와 DotsIndicator 연동
         sv_search_main_search.findViewById<AutoCompleteTextView>(R.id.search_src_text).
         setTextColor(resources.getColor(R.color.greyish_brown))
@@ -263,12 +284,13 @@ class SearchFragment : Fragment() {
     }
 
     private fun initDataArray(){
+        Log.d("Search - Call", "requestBefore")
         val ounce = OunceServiceImpl.SERVICE.requestRecommendCat(
             RequestRecommendCatsData(
                 profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 1)
             )
         )
-
+        Log.d("Search - Call", "requestAfter")
         ounce.customEnqueue(
             onSuccess = {
                 receiveDataArraySearch = it.data.copy()
