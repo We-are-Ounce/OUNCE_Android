@@ -80,7 +80,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/record_toolbar">
 
                 <ImageView
-                    android:id="@+id/image_Preview"
+                    android:id="@+id/image_Preview2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -222,7 +222,6 @@
             android:layout_marginEnd="48dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="아주 맛있는 퍼펙트한 사료였다 0u0"
             android:hint="한 줄 평가입니다."
             android:textColor="@color/greyish_brown"
             android:textSize="14sp"
@@ -485,7 +484,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
         <EditText
-            android:id="@+id/memo_edt"
+            android:id="@+id/memo_edt2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -493,7 +492,6 @@
             android:background="@drawable/record_memo"
             android:gravity="start"
             android:lines="4"
-            android:text="아주 맛있는 퍼펙트한 사료였다람쥐 0u0"
             android:hint="메모입니다."
             android:padding="10dp"
             android:textColor="@color/black_two"
@@ -510,9 +508,9 @@
             android:layout_marginTop="19dp"
             android:background="@color/black_two"
             android:fontFamily="@font/notosanskr_medium"
-            android:text="저장"
+            android:text="수정 완료"
             android:textColor="@color/white_two"
-            app:layout_constraintTop_toBottomOf="@+id/memo_edt" />
+            app:layout_constraintTop_toBottomOf="@+id/memo_edt2" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

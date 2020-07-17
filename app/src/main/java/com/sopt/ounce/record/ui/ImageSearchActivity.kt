@@ -55,7 +55,7 @@ class ImageSearchActivity : AppCompatActivity() {
         textView.setTextColor(Color.DKGRAY)
         rv_record_search.layoutManager = LinearLayoutManager(rv_record_search.context)
         rv_record_search.setHasFixedSize(true)
-        getItemList()
+        //getItemList()
         mItemAdapter = ItemAdapter(this)
         rv_record_item.adapter = mItemAdapter
         rv_record_item.addItemDecoration(RecordItemDecoration(this))
@@ -113,7 +113,6 @@ class ImageSearchActivity : AppCompatActivity() {
                         }
 
                     }
-
                 })
                 return true
             }
@@ -121,7 +120,6 @@ class ImageSearchActivity : AppCompatActivity() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 return false
             }
-
         })
         record_backk_btn.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
@@ -147,67 +145,4 @@ class ImageSearchActivity : AppCompatActivity() {
 
     }
 
-//    private fun getGoodsList(){
-//        mGoodsData.apply {
-//            add(
-//                ItemData(
-//                    cardview_image = R.drawable.img_card_cat,
-//                    cardview_item = "내추럴 발란스",
-//                    cardview_itemname = "제품 이름 "
-//                )
-//            )
-//            add(
-//                ItemData(
-//                    cardview_image = R.drawable.img_card_cat,
-//                    cardview_item = "내추럴 발란스",
-//                    cardview_itemname = "제품 이름"
-//                )
-//            )
-//            add(
-//                ItemData(
-//                    cardview_image = R.drawable.img_card_cat,
-//                    cardview_item = "내추럴 발란스",
-//                    cardview_itemname = "제품 이름"
-//                )
-//            )
-//            add(
-//                ItemData(
-//                    cardview_image = R.drawable.img_card_cat,
-//                    cardview_item = "내추럴 발란스",
-//                    cardview_itemname = "제품 이름"
-//                )
-//            )
-//            add(
-//                ItemData(
-//                    cardview_image = R.drawable.img_card_cat,
-//                    cardview_item = "내추럴 발란스",
-//                    cardview_itemname = "제품 이름"
-//                )
-//            )
-//            add(
-//                ItemData(
-//                    cardview_image = R.drawable.img_card_cat,
-//                    cardview_item = "내추럴 발란스",
-//                    cardview_itemname = "제품 이름"
-//                )
-//            )
-//            add(
-//                ItemData(
-//                    cardview_image = R.drawable.img_card_cat,
-//                    cardview_item = "내추럴 발란스",
-//                    cardview_itemname = "제품 이름"
-//                )
-//            )
-//            add(
-//                ItemData(
-//                    cardview_image = R.drawable.img_card_cat,
-//                    cardview_item = "내추럴 발란스",
-//                    cardview_itemname = "제품 이름"
-//                )
-//            )
-//        }
-//        mItemAdapter.datas = mGoodsData
-//        mItemAdapter.notifyDataSetChanged()
-//
-//    }
 }
