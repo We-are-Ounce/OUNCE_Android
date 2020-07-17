@@ -141,24 +141,24 @@ class OtherActivity : AppCompatActivity() {
         }
 
 
-        sticky_scroll_other.setOnScrollChangeListener(
-            NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, _ ->
-                if (scrollY == (v.getChildAt(0).measuredHeight - v.measuredHeight)) {
-
-                    when(v.spinner_main.selectedItem){
-                        "날짜 순" -> {
-                            startServerReviewDate()
-                        }
-                        "총점 순" -> {
-                            startServerReviewRating()
-                        }
-                        "기호도 순" -> {
-                            startServerReviewPrefer()
-                        }
-                    }
-
-                }
-            })
+//        sticky_scroll_other.setOnScrollChangeListener(
+//            NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, _ ->
+//                if (scrollY == (v.getChildAt(0).measuredHeight - v.measuredHeight)) {
+//
+//                    when(v.spinner_main.selectedItem){
+//                        "날짜 순" -> {
+//                            startServerReviewDate()
+//                        }
+//                        "총점 순" -> {
+//                            startServerReviewRating()
+//                        }
+//                        "기호도 순" -> {
+//                            startServerReviewPrefer()
+//                        }
+//                    }
+//
+//                }
+//            })
 
 
     }
@@ -203,7 +203,7 @@ class OtherActivity : AppCompatActivity() {
         mPagingPrefer = 0
 
         "OunceServerState".showLog("다른 계정 프로필 리뷰 서버 통신 시작")
-        mOunce.SERVICE.getOtherProfileReview(mOtherProfileIdx, mPagingDate, mPagingDate + 9)
+        mOunce.SERVICE.getOtherProfileReview(mOtherProfileIdx, 1, 100)
             .customEnqueue(
                 onSuccess = {
                     "OunceServerSuccess".showLog("날짜 순 다른 프로필 리뷰 조회 성공\n ${it.data}")
@@ -219,7 +219,7 @@ class OtherActivity : AppCompatActivity() {
         mPagingDate = 0
         mPagingPrefer = 0
 
-        mOunce.SERVICE.getRatingReview(mOtherProfileIdx, mPagingRating, mPagingRating + 9).customEnqueue(
+        mOunce.SERVICE.getRatingReview(mOtherProfileIdx, 1, 100).customEnqueue(
             onSuccess = {
                 "OunceServerSuccess".showLog("총점으로 리뷰 목록 불러오기 성공 \n ${it.data}")
                 mRecyclerAdapter.data.addAll(it.data)
@@ -236,7 +236,7 @@ class OtherActivity : AppCompatActivity() {
         mPagingDate = 0
         mPagingRating = 0
 
-        mOunce.SERVICE.getPreferReview(mOtherProfileIdx, mPagingPrefer, mPagingPrefer + 9).customEnqueue(
+        mOunce.SERVICE.getPreferReview(mOtherProfileIdx, 1, 100).customEnqueue(
             onSuccess = {
                 "OunceServerSuccess".showLog("선호도로 리뷰 목록 불러오기 성공 \n ${it.data}")
                 mRecyclerAdapter.data.addAll(it.data)
