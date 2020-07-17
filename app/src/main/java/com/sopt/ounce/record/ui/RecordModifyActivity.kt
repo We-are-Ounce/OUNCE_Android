@@ -58,6 +58,8 @@ class RecordModifyActivity : AppCompatActivity() {
             }
             popup.show()
         }
+        // 받은 데이터를 화면에 보여주는 상태 설정
+        initReviewDataInLayout()
 
         //총점을 받아오는 리뷰 수정 클릭 리스너
         ratingBar.setOnRatingChangeListener {
@@ -119,39 +121,43 @@ class RecordModifyActivity : AppCompatActivity() {
         }
 
         val accessToken: String = EasySharedPreference.Companion.getString("accessToken", "")
+
         //리뷰 수정
         //리뷰 수정 데이터 불러오기
+        record_update_button.setOnClickListener {
+            mModifyRequest.SERVICE.putUpdateReview(
+                accessToken = accessToken,
+                reviewIdx = 2,
+                body = RequestModifyData(
+                    modify_Total,
+                    modify_Favor,
+                    editTextTextPersonName.text.toString(),
+                    memo_edt2.text.toString(),
+                    modify_Status,
+                    modify_Smell,
+                    modifyEye,
+                    modifyEar,
+                    modifyFur,
+                    modifyVomit,
+                    foodData.foodIdx,
+                    EasySharedPreference.getInt("profileIdx", 1)
+                )
+            ).customEnqueue(
+                onSuccess = {
+                    // 서버통신에 성공해서 데이터를 받아왔을 때
+                    Toast.makeText(this@RecordModifyActivity, "내가 쓴 리뷰 수정 성공", Toast.LENGTH_SHORT)
+                        .show()
+                    finish()
 
+                },
+                onError = {
+                    Toast.makeText(this@RecordModifyActivity, "리뷰 수정 권한이 없습니다.", Toast.LENGTH_SHORT)
+                        .show()
+                    finish()
+                }
+            )
+        }
 
-//        mModifyRequest.SERVICE.putUpdateReview(
-//            accessToken = accessToken,
-//            reviewIdx = 2,
-//            body = RequestModifyData(
-//                modify_Total,
-//                modify_Favor,
-//                editTextTextPersonName.text.toString(),
-//                memo_edt2.text.toString(),
-//                modify_Status,
-//                modify_Smell,
-//                modifyEye,
-//                modifyEar,
-//                modifyFur,
-//                modifyVomit,
-//                foodData.foodIdx,
-//                EasySharedPreference.getInt("profileIdx", 1)
-//            )
-//        ).customEnqueue(
-//        onSuccess = {
-//            // 서버통신에 성공해서 데이터를 받아왔을 때
-//            Toast.makeText(this@RecordModifyActivity, "내가 쓴 리뷰 수정 성공", Toast.LENGTH_SHORT).show()
-//            finish()
-//
-//        },
-//        onError = {
-//            Toast.makeText(this@RecordModifyActivity, "리뷰 수정 권한이 없습니다.", Toast.LENGTH_SHORT).show()
-//            finish()
-//        }
-//        )
 
         //리뷰 삭제
 //        mDeleteData.SERVICE.deleteDataReview(accessToken).customEnqueue(
@@ -164,6 +170,10 @@ class RecordModifyActivity : AppCompatActivity() {
 //            }
 //
 //        )
+
+    }
+
+    private fun initReviewDataInLayout() {
 
     }
 
