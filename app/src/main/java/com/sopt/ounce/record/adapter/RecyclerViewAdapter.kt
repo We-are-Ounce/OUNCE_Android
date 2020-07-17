@@ -20,29 +20,31 @@ import com.sopt.ounce.util.showLog
 import kotlinx.android.synthetic.main.record_search.view.*
 
 class RecyclerViewAdapter(private var arrayList: ArrayList<String>):
-    RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+    RecyclerView.Adapter<RecyclerViewAdapter.ItemViewHolder>(){
     var filterList = ArrayList<String>()
+    private var listener : OnTextClickListener?
+    interface OnTextClickListener{
+        fun onItemClick(v : View, text: String)
+    }
+    fun setOnTextClickListener (listener : OnTextClickListener){
+        this.listener = listener
+    }
     init{
         filterList = arrayList
+        listener = null
     }
 
     lateinit var mContext: Context
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-
+        fun bind(listener: OnTextClickListener){
+            //itemView.tv_search.
+        }
     }
 
-    interface OnItemClickListener{
-        fun onItemClick(v : View, position: Int)
-    }
 
-    private var listener : OnItemClickListener? = null
 
-    fun setOnItemClickListener (listener : OnItemClickListener){
-        this.listener = listener
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val itemListView =
             LayoutInflater.from(parent.context).inflate(R.layout.record_search, parent, false)
         val itemViewHolder =
@@ -57,7 +59,7 @@ class RecyclerViewAdapter(private var arrayList: ArrayList<String>):
         return filterList.size
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.itemView.tv_search.text = filterList[position]
         "Record - dataDeleteBefore".showLog(filterList.toString())
         holder.itemView.tv_search.setTextColor(Color.BLACK)
@@ -70,5 +72,6 @@ class RecyclerViewAdapter(private var arrayList: ArrayList<String>):
                 notifyDataSetChanged()
             }
         }
+
     }
 }
