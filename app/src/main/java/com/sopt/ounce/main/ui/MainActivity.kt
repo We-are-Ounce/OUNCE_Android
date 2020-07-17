@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.sopt.ounce.main.ui
 
 import android.content.Context
@@ -89,6 +91,18 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //위로 당겨서 새로고침
+        swipe_main_refresh.setColorSchemeColors(resources.getColor(R.color.dark_peach))
+        swipe_main_refresh.setOnRefreshListener {
+            val intent = Intent(this, MainActivity::class.java)
+            finish()
+            overridePendingTransition(0,0)
+            startActivity(intent)
+
+
+            swipe_main_refresh.isRefreshing = false
+        }
+
     }
 
 
@@ -98,12 +112,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     @Suppress("DEPRECATION")
-    fun resetFragment(idx : Int, fragment : Fragment?, fm : FragmentManager?) {
+    fun resetFragment(idx : Int) {
         EasySharedPreference.Companion.putInt("profileIdx", idx)
-        val ft = mFm.beginTransaction()
-        if (fragment != null) {
-            ft.detach(fragment).attach(fragment).commit()
-        }
+        finish()
+        overridePendingTransition(0,0)
+        startActivity(intent)
     }
 
 }

@@ -11,7 +11,7 @@ import com.sopt.ounce.main.viewholder.BottomProfileViewHolder
 
 class BottomProfileAdapter (private val context : Context) : RecyclerView.Adapter<BottomProfileViewHolder>(){
 
-    var data = listOf<BottomProfileData.Data>()
+    var data = arrayListOf<BottomProfileData.Data>()
     interface  OnItemClickListener{
         fun onItemClick(v : View, data : BottomProfileData.Data)
     }
