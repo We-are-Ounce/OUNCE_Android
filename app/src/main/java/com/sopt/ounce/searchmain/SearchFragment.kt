@@ -265,7 +265,7 @@ class SearchFragment : Fragment() {
     private fun initDataArray(){
         val ounce = OunceServiceImpl.SERVICE.requestRecommendCat(
             RequestRecommendCatsData(
-                profileIdx = EasySharedPreference.getInt("profileIdx", 1)
+                profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 1)
             )
         )
 
