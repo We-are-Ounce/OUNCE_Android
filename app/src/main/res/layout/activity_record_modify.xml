@@ -10,7 +10,7 @@
         style="@style/mainTheme"
         android:id="@+id/layout_modify_parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         tools:context=".record.ui.RecordModifyActivity">
 
@@ -513,7 +513,7 @@
             android:backgroundTint="@color/black_two"
             android:fontFamily="@font/notosanskr_medium"
             android:text="수정 완료"
-            android:visibility="gone"
+            android:visibility="visible"
             android:textColor="@color/white_two"
             app:layout_constraintBottom_toBottomOf="parent"
              />
