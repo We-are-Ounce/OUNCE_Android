@@ -43,6 +43,10 @@
 
 - item_searchmain_similar.xml : chain(spread) 사용 (\*하단 이미지에 LinearLayout 사용)
 
+- 그 외 비사용처를 제외한 모든 곳에서 사용
+
+  - [activity_login.xml 소스코드 예시](https://github.com/We-are-Ounce/OUNCE_Android/blob/develop/app/src/main/res/layout/activity_login.xml#L195)
+
 ### ConstraintLayout 비사용처
 
 - activity_home.xml : CoordinatorLayout, RelativeLayout 사용
@@ -89,7 +93,7 @@
 - [검색창에서 검색 시 하단 창에 결과 보여주기](https://github.com/We-are-Ounce/OUNCE_Android/blob/develop/document/ViewModelDataTransfer.md)
 - [프래그먼트에 뷰페이저 달기](https://github.com/We-are-Ounce/OUNCE_Android/blob/develop/document/ViewPagerInFragment.md)
 - [웹 페이지 창을 앱에서 띄워주기](https://github.com/We-are-Ounce/OUNCE_Android/blob/develop/document/WebViewSameApp.md)
-- [프로필 이미지 서버에 업로드]
+- [프로필 이미지 서버에 업로드](https://github.com/We-are-Ounce/OUNCE_Android/blob/develop/document/MultiPart.md)
 
 ### 프로젝트 구조
 
@@ -105,7 +109,7 @@ HomeFragment.kt, OtherActivity.kt -> 리뷰 필터 적용 후 리사이클러 �
 
  <img src="https://user-images.githubusercontent.com/55642709/87785698-954f0700-c873-11ea-9fd6-1a830fe9d068.PNG"> 
  
- 정렬이 변경 시 새로운 정렬 데이터를 받기 위해 사용
+ 정렬기준이 변경 시 새로운 정렬 데이터를 받기 위해 사용
 
  <img src="https://user-images.githubusercontent.com/55642709/87785879-f24abd00-c873-11ea-8867-9c4a8c039809.PNG" width="74%">
 
