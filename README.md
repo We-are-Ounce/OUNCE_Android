@@ -1,5 +1,15 @@
 # 😸We-are-OUNCE 'Android' Developer
 
+## WE ARE OUNCE!!
+
+<img src="https://user-images.githubusercontent.com/55642709/87788123-c4677780-c877-11ea-8288-6196e9a88287.png">
+
+## OUNCE의 멋있는 Logo
+
+<img src ="https://user-images.githubusercontent.com/55642709/87788111-c0d3f080-c877-11ea-9b6b-7475fbd8f906.jpg" width="45%">
+
+<img src = "https://user-images.githubusercontent.com/55642709/87788116-c3364a80-c877-11ea-844a-828460139728.jpg" width="45%" align="right">
+
 ## 목차
 
 - [Code Convention](https://github.com/We-are-Ounce/OUNCE_Android/wiki/Code-Convention)
@@ -94,6 +104,7 @@
 - [프래그먼트에 뷰페이저 달기](https://github.com/We-are-Ounce/OUNCE_Android/blob/develop/document/ViewPagerInFragment.md)
 - [웹 페이지 창을 앱에서 띄워주기](https://github.com/We-are-Ounce/OUNCE_Android/blob/develop/document/WebViewSameApp.md)
 - [프로필 이미지 서버에 업로드](https://github.com/We-are-Ounce/OUNCE_Android/blob/develop/document/MultiPart.md)
+- [기록하기 화면 구현]
 
 ### 프로젝트 구조
 
@@ -115,10 +126,20 @@ HomeFragment.kt, OtherActivity.kt -> 리뷰 필터 적용 후 리사이클러 �
 
 - addall() : 리스트의 모든 요소를 전부 arrayList에 저장
 
-HomeFragment.kt, OtherActivity.kt -> 리사이클러뷰 최하단 도착 시 추가적으로
+**HomeFragment.kt, OtherActivity.kt**-> 리사이클러뷰 최하단 도착 시 추가적으로
 데이터를 보여주기 위해 사용
 
  <img src = "https://user-images.githubusercontent.com/55642709/87786137-64bb9d00-c874-11ea-80b2-c0613bda308e.PNG">
+
+- split(String) : 구분자를 기준으로 문자열들을 `List<String>`으로 파싱
+
+- map(List) : 리스트 각각의 원소에 map안에 있는 함수를 실행하여 그 원소들로 다시 List를 생성
+
+- trim(String): 문자열 앞 뒤에 있는 공백 제거
+
+**ItemSearchActivity.kt**
+
+ <img src = "https://user-images.githubusercontent.com/55642709/87788836-02b16680-c879-11ea-9d8b-89e9ded60d77.png">
 
 ### 확장 함수 사용 구간
 
