@@ -12,8 +12,11 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.amn.easysharedpreferences.EasySharedPreference
 import com.sopt.ounce.R
+import com.sopt.ounce.record.ui.ImageSearchActivity
 import com.sopt.ounce.record.ui.RecordActivity
+import com.sopt.ounce.util.showLog
 import kotlinx.android.synthetic.main.record_search.view.*
 
 class RecyclerViewAdapter(private var arrayList: ArrayList<String>):
@@ -56,15 +59,16 @@ class RecyclerViewAdapter(private var arrayList: ArrayList<String>):
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.tv_search.text = filterList[position]
+        "Record - dataDeleteBefore".showLog(filterList.toString())
         holder.itemView.tv_search.setTextColor(Color.BLACK)
         holder.itemView.item_search.setBackgroundColor(Color.TRANSPARENT)
         holder.itemView.item_search.img_delete.setOnClickListener {
-            if(arrayList.isNotEmpty()){
-                arrayList.removeAt(position)
+            "Record - data".showLog(filterList.toString())
+            if(filterList.isNotEmpty()){
+                filterList.removeAt(position)
+                EasySharedPreference.putListString("searchList", filterList)
                 notifyDataSetChanged()
             }
-            else
-                Toast.makeText(mContext, "리스트에 원소가 없습니다", Toast.LENGTH_SHORT).show()
         }
     }
 }
