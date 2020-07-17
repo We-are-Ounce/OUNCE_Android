@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".productreview.WebViewActivity"></activity>
+        <activity android:name=".configuration.ConfigurationActivity"
+            android:exported="true"/>
         <activity android:name=".catregister.ui.CatRegisterFinishActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
@@ -42,8 +43,8 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".record.ui.RecordModifyActivity"
-            android:theme="@style/mainTheme"
-            android:exported="true"/>
+            android:exported="true"
+            android:theme="@style/mainTheme" />
         <activity
             android:name=".record.ui.RecordActivity"
             android:exported="true"
