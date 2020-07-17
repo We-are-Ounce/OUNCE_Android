@@ -8,7 +8,7 @@
 
 <img src ="https://user-images.githubusercontent.com/55642709/87788111-c0d3f080-c877-11ea-9b6b-7475fbd8f906.jpg" width="45%">
 
-<img src = "https://user-images.githubusercontent.com/55642709/87788116-c3364a80-c877-11ea-844a-828460139728.jpg" width="45%" align="right">
+<img src = "https://user-images.githubusercontent.com/55642709/87788116-c3364a80-c877-11ea-844a-828460139728.jpg" width="45%">
 
 ## 목차
 
@@ -104,7 +104,7 @@
 - [프래그먼트에 뷰페이저 달기](https://github.com/We-are-Ounce/OUNCE_Android/blob/develop/document/ViewPagerInFragment.md)
 - [웹 페이지 창을 앱에서 띄워주기](https://github.com/We-are-Ounce/OUNCE_Android/blob/develop/document/WebViewSameApp.md)
 - [프로필 이미지 서버에 업로드](https://github.com/We-are-Ounce/OUNCE_Android/blob/develop/document/MultiPart.md)
-- [기록하기 화면 구현]
+- [기록하기 화면 구현](https://github.com/We-are-Ounce/OUNCE_Android/blob/develop/document/HowToRecord.md)
 
 ### 프로젝트 구조
 
