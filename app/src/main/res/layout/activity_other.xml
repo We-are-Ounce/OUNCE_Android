@@ -88,6 +88,7 @@
                     android:layout_height="0dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="19dp"
+                    android:padding="16dp"
                     android:src="@drawable/img_cat"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="1"

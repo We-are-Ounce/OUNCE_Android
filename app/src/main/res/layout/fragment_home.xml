@@ -191,14 +191,6 @@
                     app:layout_constraintTop_toTopOf="@+id/txt_main_follower"
                     app:layout_constraintVertical_bias="1.0" />
 
-                <ImageView
-                    android:id="@+id/img_main_profile_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/btn_bg_edit"
-                    app:layout_constraintBottom_toBottomOf="@+id/img_main_profile"
-                    app:layout_constraintEnd_toEndOf="@+id/img_main_profile" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

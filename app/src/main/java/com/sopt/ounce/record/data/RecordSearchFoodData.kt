@@ -9,5 +9,5 @@ data class RecordSearchFoodData (
     val foodName : String,
     val foodDry : String,
     val foodMeat1 : String,
-    val foodMeat2 : String
+    val foodMeat2 : String?
 ) : Serializable

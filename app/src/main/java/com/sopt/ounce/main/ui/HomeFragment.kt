@@ -22,6 +22,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import com.sopt.ounce.R
 import com.sopt.ounce.catregister.ui.CatRegisterActivity
+import com.sopt.ounce.configuration.ConfigurationActivity
 import com.sopt.ounce.main.adapter.BottomProfileAdapter
 import com.sopt.ounce.main.adapter.ReviewAdapter
 import com.sopt.ounce.main.data.BottomProfileData
@@ -206,6 +207,12 @@ class HomeFragment : Fragment() {
         // 필터 이미지 클릭시 필터 바텀 시트 생성
         img_main_filter.setOnClickListener {
             showFilterSheet()
+        }
+
+        //환경설정 창 이동
+        img_main_setting.setOnClickListener {
+            val intent = Intent(mContext,ConfigurationActivity::class.java)
+            startActivity(intent)
         }
 
 
