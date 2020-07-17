@@ -38,6 +38,7 @@ class ImageSearchActivity : AppCompatActivity() {
     private lateinit var adapter: RecyclerViewAdapter
     lateinit var mItemAdapter: ItemAdapter
     var mGoodsData = mutableListOf<RecordSearchFoodData>()
+    private val profileIdx = EasySharedPreference.Companion.getInt("profileIdx",1)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,11 +74,11 @@ class ImageSearchActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 Log.d("Record - error", "requestBefore")
                 val ounce = OunceServiceImpl.SERVICE.postRecordFoodSearch(
-                    profileIdx = 1,
+                    profileIdx = profileIdx,
                     body = RequestFoodRecordData(
                         searchKeyword = query!!,
                         pageStart = "1",
-                        pageEnd = "5"
+                        pageEnd = "50"
                     )
                 )
                 Log.d("Record - error", "${ounce.request()}")

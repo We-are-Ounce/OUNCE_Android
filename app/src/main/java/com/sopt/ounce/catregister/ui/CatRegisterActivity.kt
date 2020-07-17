@@ -68,11 +68,6 @@ class CatRegisterActivity : AppCompatActivity() {
     }
 
     private fun settingDataMultiForm() {
-//        "ShowData".showLog(CatInfoData.profileInfo)
-//        "ShowData".showLog(CatInfoData.profileAge)
-//        "ShowData".showLog(CatInfoData.profileGender)
-//        "ShowData".showLog(CatInfoData.profileWeight)
-//        "ShowData".showLog(CatInfoData.profileName)
         val PARSE_STRING = "text/plain"
         val pictureRb = settingImgMultiPart()
         val accessToken = EasySharedPreference.Companion.getString("accessToken", "")
