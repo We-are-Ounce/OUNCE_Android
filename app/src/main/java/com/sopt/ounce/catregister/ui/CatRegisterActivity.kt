@@ -48,6 +48,7 @@ class CatRegisterActivity : AppCompatActivity() {
         img_catregister_back.setOnClickListener {
             if (vp_catregister.currentItem == 1) {
                 vp_catregister.currentItem -= 1
+                btn_catregister_ok.text = "다음"
             } else {
                 finish()
             }
@@ -57,9 +58,12 @@ class CatRegisterActivity : AppCompatActivity() {
         btn_catregister_ok.setOnClickListener {
             if (vp_catregister.currentItem == 0) {
                 vp_catregister.currentItem += 1
+                btn_catregister_ok.text = "완료"
                 buttonEnable(false)
             } else {
                 settingDataMultiForm()
+                val move = Intent(this, CatRegisterFinishActivity::class.java)
+                startActivity(move)
 
             }
         }
@@ -91,10 +95,7 @@ class CatRegisterActivity : AppCompatActivity() {
             )
         ).customEnqueue(
             onSuccess = {
-                if (it.success) {
-                    val intent = Intent(this, CatRegisterFinishActivity::class.java)
-                    startActivity(intent)
-                }
+                "OunceCatRegisterSuccess".showLog("CatRegisterOk")
             },
             onError = {
                 "ServerError".showLog("고양이 프로필 등록 에러 : ${it.code()}")
@@ -144,6 +145,11 @@ class CatRegisterActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
 

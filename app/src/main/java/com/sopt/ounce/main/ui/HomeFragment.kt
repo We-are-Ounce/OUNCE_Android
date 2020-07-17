@@ -36,6 +36,7 @@ import kotlinx.android.synthetic.main.bottomsheet_filter.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.profile_bottomsheet.*
+import kotlin.properties.Delegates
 
 
 class HomeFragment : Fragment() {
@@ -47,6 +48,7 @@ class HomeFragment : Fragment() {
     private lateinit var mProfileAdapter: BottomProfileAdapter
     private lateinit var mBottomsheetProfile: BottomSheetDialog
     private lateinit var mFilterSheet: BottomSheetDialog
+    private var mProfileIdx by Delegates.notNull<Int>()
     private val mOunce = OunceServiceImpl
 
     // 리뷰 새로고침을 위한 카운트 (최신순)
@@ -76,6 +78,8 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mProfileIdx = EasySharedPreference.getInt("profileIdx",0)
 
         mBottomsheetProfile = BottomSheetDialog(mContext)
         mFilterSheet = BottomSheetDialog(mContext)
@@ -221,17 +225,16 @@ class HomeFragment : Fragment() {
     @Suppress("DEPRECATION")
     private fun settingFilter() {
         // 건식 습식 리스트
-        val mainFoodType = listOf<String>("건식", "습식")
+        val mainFoodType = listOf("건식", "습식")
 
         // 주재료 이름 리스트
-        val mainIngredients = listOf<String>(
+        val mainIngredients = listOf(
             "연어", "칠면조", "소", "닭", "양", "토끼",
             "오리", "참치", "돼지", "해산물", "사슴", "캥거루", "기타"
         )
 
         //서버에서 제조사 이름 리스트 받아오기 시작
-        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 0)
-        mOunce.SERVICE.getFilterManu(profileIdx).customEnqueue(
+        mOunce.SERVICE.getFilterManu(mProfileIdx).customEnqueue(
             onSuccess = {
                 "OunceServer".showLog("리뷰 필터 불러오기 성공 \n ${it.data}")
                 //제조사 chip 생성 -> 서버 통신 받아서 유동적 해결
@@ -295,9 +298,8 @@ class HomeFragment : Fragment() {
     private fun showFilterSheet() {
         mFilterSheet.txt_filter_ok.setOnClickListener {
             //필터 적용된 리뷰 목록 통신해서 기록갱신
-            val profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 0)
             mOunce.SERVICE.postSelectFiltering(
-                profileIdx,
+                mProfileIdx,
                 RequestSelectedFilter(
                     foodManu = mFilterManu,
                     foodDry = mFilterDry,
@@ -321,7 +323,6 @@ class HomeFragment : Fragment() {
 
     private fun initBottomSheet(){
         val accessToken = EasySharedPreference.Companion.getString("accessToken", "")
-        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx ",0)
 
         // 다른 계정 클릭 시 이벤트
         mProfileAdapter.setOnItemClickListener(object : BottomProfileAdapter.OnItemClickListener {
@@ -361,9 +362,8 @@ class HomeFragment : Fragment() {
 
     private fun showBottomSheet() {
         val accessToken = EasySharedPreference.Companion.getString("accessToken", "")
-        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx ",0)
 
-        mOunce.SERVICE.getConversionProfile(accessToken,profileIdx).customEnqueue(
+        mOunce.SERVICE.getConversionProfile(accessToken,mProfileIdx).customEnqueue(
             onSuccess = {
                 "OunceStatus".showLog("프로필 바텀시트 호출 메세지 : ${it.message}")
                 "OunceStatus".showLog("프로필 바텀시트 데이터 전달 \n ${it.data}")
@@ -383,9 +383,8 @@ class HomeFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun startServerProfile() {
         val accessToken = EasySharedPreference.Companion.getString("accessToken", "")
-        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 0)
 
-        mOunce.SERVICE.getMainProfile(accessToken, profileIdx).customEnqueue(
+        mOunce.SERVICE.getMainProfile(accessToken, mProfileIdx).customEnqueue(
             onSuccess = {
                 "OunceServerSuccess".showLog("메인프로필 화면 데이터 전달 성공 \n : ${it.data}")
                 v.txt_main_reviewcount.text = "(${it.data.reviewCountAll})"
@@ -436,8 +435,7 @@ class HomeFragment : Fragment() {
         mPagingPrefer = 0
         mPagingRating = 0
 
-        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 0)
-        mOunce.SERVICE.getMainReview(profileIdx, mPagingDate, mPagingDate + 9).customEnqueue(
+        mOunce.SERVICE.getMainReview(mProfileIdx, mPagingDate, mPagingDate + 9).customEnqueue(
             onSuccess = {
                 "OunceServerSuccess".showLog("메인 프로필 리뷰 목록 불러오기 성공 \n ${it.data}")
                 mRecyclerAdapter.data.addAll(it.data)
@@ -454,8 +452,7 @@ class HomeFragment : Fragment() {
         mPagingDate = 0
         mPagingPrefer = 0
 
-        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 0)
-        mOunce.SERVICE.getRatingReview(profileIdx, mPagingRating, mPagingRating + 9).customEnqueue(
+        mOunce.SERVICE.getRatingReview(mProfileIdx, mPagingRating, mPagingRating + 9).customEnqueue(
             onSuccess = {
                 "OunceServerSuccess".showLog("총점으로 리뷰 목록 불러오기 성공 \n ${it.data}")
                 mRecyclerAdapter.data.addAll(it.data)
@@ -472,8 +469,8 @@ class HomeFragment : Fragment() {
         mPagingDate = 0
         mPagingRating = 0
 
-        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 0)
-        mOunce.SERVICE.getPreferReview(profileIdx, mPagingPrefer, mPagingPrefer + 9).customEnqueue(
+
+        mOunce.SERVICE.getPreferReview(mProfileIdx, mPagingPrefer, mPagingPrefer + 9).customEnqueue(
             onSuccess = {
                 "OunceServerSuccess".showLog("선호도로 리뷰 목록 불러오기 성공 \n ${it.data}")
                 mRecyclerAdapter.data.addAll(it.data)

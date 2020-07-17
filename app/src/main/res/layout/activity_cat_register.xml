@@ -34,17 +34,17 @@
         android:id="@+id/scroll_signup"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         android:fillViewport="true"
-        android:layout_marginTop="27dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_catregister_ok"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_catregister_logo" >
+        app:layout_constraintTop_toBottomOf="@id/img_catregister_logo">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <com.sopt.ounce.util.NoSwipeViewPager
                 android:id="@+id/vp_catregister"
@@ -61,7 +61,7 @@
                 android:id="@+id/dot_catregister_indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="499dp"
+                android:layout_marginTop="480dp"
                 android:fitsSystemWindows="false"
                 app:dotsColor="@color/white_five"
                 app:dotsCornerRadius="6dp"
@@ -90,9 +90,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="취소"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_catregister_ok"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -106,10 +106,10 @@
         android:background="@drawable/drawable_signup_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="다음"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_catregister_cancle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

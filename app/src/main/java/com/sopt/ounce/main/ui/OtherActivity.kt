@@ -35,7 +35,7 @@ class OtherActivity : AppCompatActivity() {
     private val mOunce = OunceServiceImpl
     private var mOtherProfileIdx by Delegates.notNull<Int>()
     private lateinit var mItem: Array<String>
-    private val mProfileIdx = EasySharedPreference.Companion.getInt("profileIdx",1)
+    private val mProfileIdx = EasySharedPreference.getInt("profileIdx",1)
 
 
     // 리뷰 새로고침을 위한 카운트 (최신순)
@@ -164,7 +164,6 @@ class OtherActivity : AppCompatActivity() {
     }
 
     private fun startUnFollow() {
-//        val myProfileIdx = EasySharedPreference.getInt("profileIdx",0)
         mOunce.SERVICE.deleteFollow(
             RequestFollowData(
                 mProfileIdx,
@@ -181,7 +180,6 @@ class OtherActivity : AppCompatActivity() {
     }
 
     private fun startFollow() {
-//        val myProfileIdx = EasySharedPreference.getInt("profileIdx",0)
         mOunce.SERVICE.postFollow(
             RequestFollowData(
                 mProfileIdx,
@@ -203,7 +201,7 @@ class OtherActivity : AppCompatActivity() {
         mPagingPrefer = 0
 
         "OunceServerState".showLog("다른 계정 프로필 리뷰 서버 통신 시작")
-        mOunce.SERVICE.getOtherProfileReview(mOtherProfileIdx, 1, 100)
+        mOunce.SERVICE.getOtherProfileReview(mOtherProfileIdx, 0, 100)
             .customEnqueue(
                 onSuccess = {
                     "OunceServerSuccess".showLog("날짜 순 다른 프로필 리뷰 조회 성공\n ${it.data}")
@@ -219,7 +217,7 @@ class OtherActivity : AppCompatActivity() {
         mPagingDate = 0
         mPagingPrefer = 0
 
-        mOunce.SERVICE.getRatingReview(mOtherProfileIdx, 1, 100).customEnqueue(
+        mOunce.SERVICE.getRatingReview(mOtherProfileIdx, 0, 100).customEnqueue(
             onSuccess = {
                 "OunceServerSuccess".showLog("총점으로 리뷰 목록 불러오기 성공 \n ${it.data}")
                 mRecyclerAdapter.data.addAll(it.data)
@@ -236,7 +234,7 @@ class OtherActivity : AppCompatActivity() {
         mPagingDate = 0
         mPagingRating = 0
 
-        mOunce.SERVICE.getPreferReview(mOtherProfileIdx, 1, 100).customEnqueue(
+        mOunce.SERVICE.getPreferReview(mOtherProfileIdx, 0, 100).customEnqueue(
             onSuccess = {
                 "OunceServerSuccess".showLog("선호도로 리뷰 목록 불러오기 성공 \n ${it.data}")
                 mRecyclerAdapter.data.addAll(it.data)
