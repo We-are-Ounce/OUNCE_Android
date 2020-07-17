@@ -1,19 +1,17 @@
 package com.sopt.ounce.record.ui
 
-import android.content.Intent
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.PopupMenu
 import android.widget.Toast
 import com.amn.easysharedpreferences.EasySharedPreference
 import com.sopt.ounce.R
+import com.sopt.ounce.main.data.ResponseReviewData
 import com.sopt.ounce.record.data.RequestModifyData
-import com.sopt.ounce.main.ui.MainActivity
-import com.sopt.ounce.record.data.RecordSearchFoodData
 import com.sopt.ounce.server.OunceServiceImpl
 import com.sopt.ounce.util.customEnqueue
 import com.sopt.ounce.util.showLog
-import kotlinx.android.synthetic.main.activity_record.*
 import kotlinx.android.synthetic.main.activity_record_modify.*
 import kotlinx.android.synthetic.main.activity_record_modify.ratingBar
 import kotlinx.android.synthetic.main.activity_record_modify.ratingBar2
@@ -28,15 +26,10 @@ class RecordModifyActivity : AppCompatActivity() {
 
     //서비스 호출
     private val mModifyRequest = OunceServiceImpl
-    private lateinit var foodData: RequestModifyData
+    private lateinit var foodData: ResponseReviewData.Data
 
-//    Glide.with(this).load(foodData.foodImg).into(image_Preview2)
-//    txt_record_company.text = foodData.foodManu
-//    txt_record_name.text = foodData.foodName
-    val foodIdx = foodData.foodIdx
-
-    private var modify_Total by Delegates.notNull<Int>()
-    private var modify_Favor by Delegates.notNull<Int>()
+    private var modify_Total = 0
+    private var modify_Favor = 0
 
     private var modify_Status = 0
     private var modify_Smell = 0
@@ -54,7 +47,7 @@ class RecordModifyActivity : AppCompatActivity() {
         setContentView(R.layout.activity_record_modify)
 
         val intent = intent
-        foodData = intent.getSerializableExtra("foodItem") as RequestModifyData
+        foodData = intent.getSerializableExtra("foodItem") as ResponseReviewData.Data
 
         btn_record_popup.setOnClickListener {
             val popup = PopupMenu(this, btn_record_popup)
@@ -130,35 +123,35 @@ class RecordModifyActivity : AppCompatActivity() {
         //리뷰 수정 데이터 불러오기
 
 
-        mModifyRequest.SERVICE.putUpdateReview(
-            accessToken = accessToken,
-            reviewIdx = 2,
-            body = RequestModifyData(
-                modify_Total,
-                modify_Favor,
-                editTextTextPersonName.text.toString(),
-                memo_edt2.text.toString(),
-                modify_Status,
-                modify_Smell,
-                modifyEye,
-                modifyEar,
-                modifyFur,
-                modifyVomit,
-                foodIdx,
-                EasySharedPreference.getInt("profileIdx", 1)
-            )
-        ).customEnqueue(
-        onSuccess = {
-            // 서버통신에 성공해서 데이터를 받아왔을 때
-            Toast.makeText(this@RecordModifyActivity, "내가 쓴 리뷰 수정 성공", Toast.LENGTH_SHORT).show()
-            finish()
-
-        },
-        onError = {
-            Toast.makeText(this@RecordModifyActivity, "리뷰 수정 권한이 없습니다.", Toast.LENGTH_SHORT).show()
-            finish()
-        }
-        )
+//        mModifyRequest.SERVICE.putUpdateReview(
+//            accessToken = accessToken,
+//            reviewIdx = 2,
+//            body = RequestModifyData(
+//                modify_Total,
+//                modify_Favor,
+//                editTextTextPersonName.text.toString(),
+//                memo_edt2.text.toString(),
+//                modify_Status,
+//                modify_Smell,
+//                modifyEye,
+//                modifyEar,
+//                modifyFur,
+//                modifyVomit,
+//                foodData.foodIdx,
+//                EasySharedPreference.getInt("profileIdx", 1)
+//            )
+//        ).customEnqueue(
+//        onSuccess = {
+//            // 서버통신에 성공해서 데이터를 받아왔을 때
+//            Toast.makeText(this@RecordModifyActivity, "내가 쓴 리뷰 수정 성공", Toast.LENGTH_SHORT).show()
+//            finish()
+//
+//        },
+//        onError = {
+//            Toast.makeText(this@RecordModifyActivity, "리뷰 수정 권한이 없습니다.", Toast.LENGTH_SHORT).show()
+//            finish()
+//        }
+//        )
 
         //리뷰 삭제
 //        mDeleteData.SERVICE.deleteDataReview(accessToken).customEnqueue(

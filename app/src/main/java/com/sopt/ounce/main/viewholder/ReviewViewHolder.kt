@@ -41,7 +41,7 @@ class ReviewViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             else{
                 intent.putExtra("isMy",false)
             }
-            intent.putExtra("data", data)
+            intent.putExtra("foodItem", data)
             itemView.context.startActivity(intent)
         }
 
