@@ -11,17 +11,20 @@ import com.amn.easysharedpreferences.EasySharedPreference
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import com.sopt.ounce.R
+import com.sopt.ounce.main.data.ResponseReviewData
 import com.sopt.ounce.productreview.recyclerview.ProductReviewAdapter
 import com.sopt.ounce.productreview.recyclerview.ProductReviewData
 import com.sopt.ounce.productreview.recyclerview.ProductReviewItemDecoration
 import com.sopt.ounce.record.data.RecordSearchFoodData
 import com.sopt.ounce.record.ui.RecordActivity
+import com.sopt.ounce.record.ui.RecordModifyActivity
 import com.sopt.ounce.searchmain.data.foodsearch.FoodData
 import com.sopt.ounce.searchmain.data.showreview.ReviewData
 import com.sopt.ounce.util.StatusObject
 import com.sopt.ounce.util.showLog
 import kotlinx.android.synthetic.main.activity_product_review.*
 import kotlinx.android.synthetic.main.activity_record.*
+import java.text.SimpleDateFormat
 import kotlin.math.abs
 
 class ProductReviewActivity : AppCompatActivity() {
@@ -37,7 +40,12 @@ class ProductReviewActivity : AppCompatActivity() {
         StatusObject.setStatusBar(this)
 
         val intent = intent
+        var myReviewIdx = 0
+        var myReviewInfo = ""
+        var myReviewRating = ""
+        var myReviewPrefer = ""
         val dataFood : FoodData = intent.getSerializableExtra("foodInfo") as FoodData
+        Log.d("Search - IntentAfter", dataFood.toString())
         var dataArrayReview : Array<ReviewData> = intent.getSerializableExtra("foodReview") as Array<ReviewData>
         val dataListReview = dataArrayReview.toList()
         val foodLink = dataFood.foodLink
@@ -65,8 +73,15 @@ class ProductReviewActivity : AppCompatActivity() {
 
         val myProfileIdx = EasySharedPreference.getInt("profileIdx", 0)
         for(itemReview in dataListReview){
-            if(myProfileIdx == itemReview.profileIdx)
+            if(myProfileIdx == itemReview.profileIdx){
                 isWritten = true
+                myReviewIdx = itemReview.reviewIdx
+                myReviewInfo = itemReview.profileInfo
+                myReviewPrefer = itemReview.reviewPrefer
+                myReviewRating = itemReview.reviewRating
+
+            }
+
         }
         //내 리뷰가 저 안에 들어있음
         if(isWritten) {
@@ -99,18 +114,34 @@ class ProductReviewActivity : AppCompatActivity() {
                     dataFood.foodMeat1,
                     dataFood.foodMeat2
                 )
-                val intent = Intent(view!!.context, RecordActivity::class.java)
-                intent.putExtra("foodItem", myRecordSearchFoodData)
-                view!!.context.startActivity(intent)
+//                val intent = Intent(view!!.context, RecordActivity::class.java)
+//                intent.putExtra("foodItem", myRecordSearchFoodData)
+//                view!!.context.startActivity(intent)
                 //내가 리뷰를 작성 안 했는데 작성버튼을 누르면 리뷰 작성
-//                if(!isWritten){
-//
-//
-//                }
-//                //내가 리뷰를 작성한 제품의 작성버튼을 누르면 리뷰 수정
-//                else{
-//
-//                }
+                if(!isWritten){
+                    val intent = Intent(view!!.context, RecordActivity::class.java)
+                    intent.putExtra("foodItem", myRecordSearchFoodData)
+                    view!!.context.startActivity(intent)
+                }
+                //내가 리뷰를 작성한 제품의 작성버튼을 누르면 리뷰 수정
+                else{
+                    val intent = Intent(view!!.context, RecordModifyActivity::class.java)
+//                    val myWriteTime = SimpleDateFormat("yyyy-MM-dd HH:mm")
+//                    val myResponseReviewData = ResponseReviewData.Data(
+//                        profileIdx = EasySharedPreference.getInt("profileIdx", 2),
+//                        reviewIdx = myReviewIdx,
+//                        foodIdx = dataFood.foodIdx,
+//                        foodImg = dataFood.foodImg,
+//                        foodManu = dataFood.foodManu,
+//                        foodName = dataFood.foodName,
+//                        reviewInfo = myReviewInfo,
+//                        reviewRating = myReviewRating,
+//                        reviewPrefer = myReviewPrefer,
+//                        createdAt = myWriteTime.toString()
+//                    )
+                    intent.putExtra("reviewIdx", myReviewIdx)
+                    view!!.context.startActivity(intent)
+                }
             }
 
         })

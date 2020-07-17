@@ -21,6 +21,7 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
+import com.amn.easysharedpreferences.EasySharedPreference
 import com.google.android.material.tabs.TabLayout
 import com.sopt.ounce.R
 import com.sopt.ounce.main.ui.MainActivity
@@ -108,7 +109,7 @@ class SearchFragment : Fragment() {
         }
         //메인 화면 ViewPager 어댑터 부착
         initDataArray()
-
+        tv_search_main_mycat.text = EasySharedPreference.getString("catName", "고양이")
         vp_search_main_viewpager.clipToPadding = false
         vp_search_main_viewpager.clipChildren = false
         vp_search_main_viewpager.offscreenPageLimit = 1
@@ -264,7 +265,7 @@ class SearchFragment : Fragment() {
     private fun initDataArray(){
         val ounce = OunceServiceImpl.SERVICE.requestRecommendCat(
             RequestRecommendCatsData(
-                profileIdx = 2
+                profileIdx = EasySharedPreference.getInt("profileIdx", 1)
             )
         )
 
