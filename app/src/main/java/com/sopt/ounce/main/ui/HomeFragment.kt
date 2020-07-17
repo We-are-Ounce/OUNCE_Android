@@ -179,6 +179,17 @@ class HomeFragment : Fragment() {
                 }
             })
 
+        //다른프로필 바텀 시트 세팅
+        mBottomsheetProfile.rcv_bottom_profile.apply {
+            adapter = mProfileAdapter
+            layoutManager = LinearLayoutManager(mContext)
+        }
+        initBottomSheet()
+
+
+
+
+
         return v
     }
 
@@ -301,37 +312,22 @@ class HomeFragment : Fragment() {
         mFilterSheet.show()
     }
 
-
-    private fun showBottomSheet() {
+    private fun initBottomSheet(){
         val accessToken = EasySharedPreference.Companion.getString("accessToken", "")
         val profileIdx = EasySharedPreference.Companion.getInt("profileIdx ",0)
-        mBottomsheetProfile.rcv_bottom_profile.apply {
-            adapter = mProfileAdapter
-            layoutManager = LinearLayoutManager(mContext)
-        }
 
+        // 다른 계정 클릭 시 이벤트
         mProfileAdapter.setOnItemClickListener(object : BottomProfileAdapter.OnItemClickListener {
             @Suppress("DEPRECATION")
             override fun onItemClick(v: View, data: BottomProfileData.Data) {
                 EasySharedPreference.Companion.putInt("profileIdx", data.profileIdx)
                 val activity = activity as MainActivity
-                activity.resetFragment(data.profileIdx, this@HomeFragment, fragmentManager)
+                activity.resetFragment(data.profileIdx)
                 mBottomsheetProfile.dismiss()
             }
         })
 
-        mOunce.SERVICE.getConversionProfile(accessToken,profileIdx).customEnqueue(
-            onSuccess = {
-                "OunceStatus".showLog("프로필 바텀시트 호출 메세지 : ${it.message}")
-                "OunceStatus".showLog("프로필 바텀시트 데이터 전달 \n ${it.data}")
-                mProfileAdapter.data = it.data
-                mProfileAdapter.notifyDataSetChanged()
-            },
-            onError = {
-                "OunceError".showLog("프로필 바텀시트 호출 오류")
-            }
-        )
-
+        //계정추카 버튼 및 판단하는 클릭 리스너
         mBottomsheetProfile.layout_bottomsheet_add_profile.setOnClickListener {
             mOunce.SERVICE.postIsLimit(accessToken).customEnqueue(
                 onSuccess = {
@@ -347,10 +343,31 @@ class HomeFragment : Fragment() {
                             ).show()
                         }
                     }
+                },
+                onError = {
+                    "OunceMainBottomProfileServerError".showLog("프로필 추가 생성 오류")
                 }
             )
         }
+    }
 
+
+    private fun showBottomSheet() {
+        val accessToken = EasySharedPreference.Companion.getString("accessToken", "")
+        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx ",0)
+
+        mOunce.SERVICE.getConversionProfile(accessToken,profileIdx).customEnqueue(
+            onSuccess = {
+                "OunceStatus".showLog("프로필 바텀시트 호출 메세지 : ${it.message}")
+                "OunceStatus".showLog("프로필 바텀시트 데이터 전달 \n ${it.data}")
+                mProfileAdapter.data.clear()
+                mProfileAdapter.data.addAll(it.data)
+                mProfileAdapter.notifyDataSetChanged()
+            },
+            onError = {
+                "OunceError".showLog("프로필 바텀시트 호출 오류")
+            }
+        )
 
         mBottomsheetProfile.show()
 
@@ -402,6 +419,9 @@ class HomeFragment : Fragment() {
             }
 
         }
+
+        // 고양이 이름 SharedPreference에 저장
+        EasySharedPreference.Companion.putString("catName",data.profileName)
     }
 
     @SuppressLint("SetTextI18n")
