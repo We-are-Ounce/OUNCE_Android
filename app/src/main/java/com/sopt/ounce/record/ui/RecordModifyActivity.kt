@@ -3,11 +3,13 @@ package com.sopt.ounce.record.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amn.easysharedpreferences.EasySharedPreference
 import com.bumptech.glide.Glide
+import com.google.android.material.appbar.AppBarLayout
 import com.sopt.ounce.R
 import com.sopt.ounce.record.RecordItemDecoration
 import com.sopt.ounce.record.adapter.FeatureAdapter
@@ -60,6 +62,7 @@ class RecordModifyActivity : AppCompatActivity() {
             txt_update_myrecord.text = ""
         }
 
+        enableChange(false, layout_modify_parent)
 
         startServerReview()
 
@@ -69,6 +72,7 @@ class RecordModifyActivity : AppCompatActivity() {
             when (it.title) {
                 "수정" -> {
                     record_update_button.visibility = View.VISIBLE
+                    enableChange(true, layout_modify_parent)
                 }
                 "삭제" -> {
 
@@ -326,6 +330,21 @@ class RecordModifyActivity : AppCompatActivity() {
         }
 
         edt_update_memo.setText(foodData.reviewMemo)
+    }
+
+
+    private fun enableChange(b : Boolean, vg : ViewGroup){
+        for(i in 0 until vg.childCount){
+            val child = vg.getChildAt(i)
+            child.isEnabled = b
+            if(child is AppBarLayout){
+                continue
+            }
+
+            if(child is ViewGroup){
+                enableChange(b , child)
+            }
+        }
     }
 
 

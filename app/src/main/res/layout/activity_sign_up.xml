@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_signup_ok"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,22 +45,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <com.sopt.ounce.util.NoSwipeViewPager
                 android:id="@+id/vp_signup"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent" />
 
-            </com.sopt.ounce.util.NoSwipeViewPager>
 
             <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
                 android:id="@+id/dot_signup_indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="499dp"
+                android:layout_marginTop="480dp"
                 android:fitsSystemWindows="false"
                 app:dotsColor="@color/white_five"
                 app:dotsCornerRadius="6dp"
@@ -94,7 +95,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 
     <Button

@@ -13,12 +13,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_main_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white_five">
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_main_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white_five">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 

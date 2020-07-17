@@ -18,6 +18,7 @@ class SignUpFinishActivity : AppCompatActivity() {
             val intent = Intent(this,
                 CatRegisterActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
 
