@@ -19,6 +19,7 @@ import com.sopt.ounce.record.ui.RecordActivity
 import com.sopt.ounce.searchmain.data.foodsearch.FoodData
 import com.sopt.ounce.searchmain.data.showreview.ReviewData
 import com.sopt.ounce.util.StatusObject
+import com.sopt.ounce.util.showLog
 import kotlinx.android.synthetic.main.activity_product_review.*
 import kotlinx.android.synthetic.main.activity_record.*
 import kotlin.math.abs
@@ -45,6 +46,8 @@ class ProductReviewActivity : AppCompatActivity() {
         tv_product_review_company.text = dataFood.foodManu
         tv_product_review_product.text = dataFood.foodName
         tv_product_review_isdry.text = dataFood.foodDry
+        "Review - foodMeat1".showLog(dataFood.foodMeat1)
+        "Review - foodMeat2".showLog(dataFood.foodMeat1)
         if(!dataFood.foodMeat1.isNullOrBlank()){
             tv_product_reivew_meat_1.text = dataFood.foodMeat1
         }else{
