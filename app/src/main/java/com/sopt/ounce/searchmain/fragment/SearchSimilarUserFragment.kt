@@ -39,14 +39,14 @@ class SearchSimilarUserFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        img_search_main_profile.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(view: View?) {
-                //Toast.makeText(mView.context, "profileIdx: ${profileIdx}", Toast.LENGTH_SHORT).show()
-                val intent = Intent(mView.context, OtherActivity::class.java)
-                intent.putExtra("otherProfile", profileIdx)
-                mView.context.startActivity(intent)
-            }
-        })
+//        img_search_main_profile.setOnClickListener(object : View.OnClickListener{
+//            override fun onClick(view: View?) {
+//                //Toast.makeText(mView.context, "profileIdx: ${profileIdx}", Toast.LENGTH_SHORT).show()
+//                val intent = Intent(mView.context, OtherActivity::class.java)
+//                intent.putExtra("otherProfile", profileIdx)
+//                mView.context.startActivity(intent)
+//            }
+//        })
 
     }
 
@@ -54,6 +54,14 @@ class SearchSimilarUserFragment : Fragment(){
         Glide.with(view).load(img_search_main_profile_src).into(view.img_search_main_profile)
         view.tv_search_main_cat_name.text = tv_search_main_cat_name_txt
         view.tv_search_main_cat_similarity.text = tv_search_main_cat_similarity_txt.toString() + "%"
+        view.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(view: View?) {
+                //Toast.makeText(mView.context, "profileIdx: ${profileIdx}", Toast.LENGTH_SHORT).show()
+                val intent = Intent(mView.context, OtherActivity::class.java)
+                intent.putExtra("otherProfile", profileIdx)
+                mView.context.startActivity(intent)
+            }
+        })
         val imgIdx = img_search_main_review.size
         when(imgIdx){
             0 -> {

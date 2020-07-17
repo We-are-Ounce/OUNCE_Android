@@ -154,7 +154,6 @@
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager.widget.ViewPager
-
             android:id="@+id/vp_search_main_search"
             android:background="#fafafa"
             android:layout_width="match_parent"

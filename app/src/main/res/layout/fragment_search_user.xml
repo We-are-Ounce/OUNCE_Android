@@ -3,18 +3,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:background="#fafafa"
-    android:paddingTop="22dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".searchmain.fragment.SearchUserFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search_user_searchresult"
+        android:layout_marginTop="20dp"
         android:paddingHorizontal="20dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toTopOf="parent"
