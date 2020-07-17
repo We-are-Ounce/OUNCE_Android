@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         style="@style/mainTheme"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         tools:context=".record.ui.RecordModifyActivity">
 
@@ -25,7 +25,7 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/record_toolbar"
-                android:layout_width="match_parent"
+                android:layout_width=   "match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:fadingEdge="horizontal"
@@ -510,7 +510,7 @@
             android:backgroundTint="@color/black_two"
             android:fontFamily="@font/notosanskr_medium"
             android:text="수정 완료"
-            android:visibility="gone"
+            android:visibility="visible"
             android:textColor="@color/white_two"
             app:layout_constraintBottom_toBottomOf="parent"
              />

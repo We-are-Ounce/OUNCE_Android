@@ -10,8 +10,8 @@ import kotlin.math.round
 
 class ViewPagerTransformer : ViewPager.PageTransformer{
     override fun transformPage(page: View, position: Float) {
-        //"Search ViewPager".showLog("${position}")
+        "Search ViewPager".showLog("${position}")
         val r = 1 - abs(position)
-        page.scaleY = (0.85F + r * 0.15F)
+        page.scaleY = (0.90F + r * 0.10F)
     }
 }

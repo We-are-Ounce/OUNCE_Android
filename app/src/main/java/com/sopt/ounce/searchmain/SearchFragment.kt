@@ -105,7 +105,6 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("Search - Call", "Start")
         fm_container.setOnClickListener {
             mInputMethodManager.hideSoftInputFromWindow(sv_search_main_search.windowToken,0)
         }
@@ -117,12 +116,11 @@ class SearchFragment : Fragment() {
         vp_search_main_viewpager.offscreenPageLimit = 1
         //메인 화면 PageTransFormer 부착
         vp_search_main_viewpager.setPageTransformer(false, ViewPagerTransformer())
-        val DpValue = 40
+        val DpValue = 90
         val DisplayDensity = resources.displayMetrics.density
         val margin = DpValue * DisplayDensity.toInt()
-
         vp_search_main_viewpager.setPadding(margin,0,margin,0)
-        vp_search_main_viewpager.pageMargin = margin/32
+        vp_search_main_viewpager.pageMargin = margin/2
         vp_search_main_viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(state: Int) {
                 val mActivity = activity as MainActivity
@@ -143,6 +141,7 @@ class SearchFragment : Fragment() {
             }
 
         })
+
         //ViewPager와 DotsIndicator 연동
         sv_search_main_search.findViewById<AutoCompleteTextView>(R.id.search_src_text).
         setTextColor(resources.getColor(R.color.greyish_brown))
