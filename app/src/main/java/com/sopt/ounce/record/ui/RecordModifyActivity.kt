@@ -3,23 +3,22 @@ package com.sopt.ounce.record.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
+import android.view.View
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amn.easysharedpreferences.EasySharedPreference
 import com.bumptech.glide.Glide
 import com.sopt.ounce.R
-import com.sopt.ounce.main.data.ResponseReviewData
 import com.sopt.ounce.record.RecordItemDecoration
 import com.sopt.ounce.record.adapter.FeatureAdapter
 import com.sopt.ounce.record.data.FeatureData
 import com.sopt.ounce.record.data.RequestModifyData
 import com.sopt.ounce.record.data.ResponseDetailData
 import com.sopt.ounce.server.OunceServiceImpl
+import com.sopt.ounce.util.StatusObject
 import com.sopt.ounce.util.customEnqueue
 import com.sopt.ounce.util.showLog
-import kotlinx.android.synthetic.main.activity_record.*
 import kotlinx.android.synthetic.main.activity_record_modify.*
 
 
@@ -34,7 +33,12 @@ class RecordModifyActivity : AppCompatActivity() {
 
 
     // 수정될 데이터 저장 공간
-    private lateinit var reviewData : ResponseDetailData.Data
+    private lateinit var reviewData: ResponseDetailData.Data
+
+    //액세스 토큰
+    private val mAccessToken  = EasySharedPreference.Companion.getString("accessToken","")
+    //프로필 인덱스
+    private val mProfileIdx = EasySharedPreference.Companion.getInt("profileIdx",1)
 
     //private val mDeleteData = OunceServiceImpl
 
@@ -42,8 +46,21 @@ class RecordModifyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_record_modify)
 
+        StatusObject.setStatusBar(this)
+
         val intent = intent
-        mReviewIdx = intent.getIntExtra("reviewIdx",0)
+        mReviewIdx = intent.getIntExtra("reviewIdx", 0)
+
+        val isMe = intent.getBooleanExtra("isMy", true)
+
+        if (isMe) {
+            //내 리뷰 프로필이면 상단 텍스트 이름 변경
+            txt_update_myrecord.text = "나의 기록"
+            btn_record_popup.visibility = View.VISIBLE
+        } else {
+            txt_update_myrecord.text = ""
+        }
+
 
         startServerReview()
 
@@ -52,7 +69,37 @@ class RecordModifyActivity : AppCompatActivity() {
             val popup = PopupMenu(this, btn_record_popup)
             popup.inflate(R.menu.record_popup)
             popup.setOnMenuItemClickListener {
-                Toast.makeText(this, it.title, Toast.LENGTH_SHORT).show()
+                when (it.title) {
+                    "수정" -> {
+                        record_update_button.visibility = View.VISIBLE
+                    }
+                    "삭제" -> {
+
+                        mModifyRequest.SERVICE.deleteDataReview(
+                            mAccessToken,
+                            mProfileIdx,
+                            mReviewIdx
+                        ).customEnqueue(
+                            onSuccess = {
+                                Toast.makeText(
+                                    this@RecordModifyActivity,
+                                    "내가 쓴 리뷰 삭제 성공",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                finish()
+                            },
+                            onError = {
+                                Toast.makeText(
+                                    this@RecordModifyActivity,
+                                    "리뷰 삭제 권한이 없습니다.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+
+                        )
+                    }
+
+                }
                 true
             }
             popup.show()
@@ -125,13 +172,11 @@ class RecordModifyActivity : AppCompatActivity() {
             finish()
         }
 
-        val accessToken: String = EasySharedPreference.Companion.getString("accessToken", "")
-
         //리뷰 수정
         //리뷰 수정 데이터 불러오기
         record_update_button.setOnClickListener {
             mModifyRequest.SERVICE.putUpdateReview(
-                accessToken = accessToken,
+                accessToken = mAccessToken,
                 reviewIdx = mReviewIdx,
                 body = RequestModifyData(
                     reviewRating = reviewData.reviewRating.toInt(),
@@ -145,7 +190,7 @@ class RecordModifyActivity : AppCompatActivity() {
                     reviewHair = reviewData.reviewHair,
                     reviewVomit = reviewData.reviewVomit,
                     foodIdx = reviewData.foodIdx,
-                    profileIdx = EasySharedPreference.Companion.getInt("profileIdx",1)
+                    profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 1)
                 )
             ).customEnqueue(
                 onSuccess = {
@@ -164,21 +209,9 @@ class RecordModifyActivity : AppCompatActivity() {
         }
 
 
-        //리뷰 삭제
-//        mDeleteData.SERVICE.deleteDataReview(accessToken).customEnqueue(
-//            onSuccess = {
-//                Toast.makeText(this@RecordModifyActivity, "내가 쓴 리뷰 삭제 성공", Toast.LENGTH_SHORT).show()
-//                finish()
-//            },
-//            onError = {
-//                Toast.makeText(this@RecordModifyActivity, "리뷰 삭제 권한이 없습니다.", Toast.LENGTH_SHORT).show()
-//            }
-//
-//        )
-
     }
 
-    private fun initReviewRcv(data : ResponseDetailData.Data) {
+    private fun initReviewRcv(data: ResponseDetailData.Data) {
         mFeatureAdapter = FeatureAdapter(this)
         rcv_record_update_feature.apply {
             adapter = mFeatureAdapter
@@ -210,8 +243,8 @@ class RecordModifyActivity : AppCompatActivity() {
         "OunceReviewModify".showLog("$mReviewIdx")
         mModifyRequest.SERVICE.getDetailReview(mReviewIdx).customEnqueue(
             onSuccess = {
-                "OunceReviewModifyServerSuccess".showLog("${it.message}")
-                it.data.let {data ->
+                "OunceReviewModifyServerSuccess".showLog(it.message)
+                it.data.let { data ->
                     reviewData = data[0]
                     initReviewDataInLayout(data[0])
                     initReviewRcv(data[0])
@@ -224,7 +257,7 @@ class RecordModifyActivity : AppCompatActivity() {
 
     }
 
-    private fun initReviewDataInLayout(foodData : ResponseDetailData.Data) {
+    private fun initReviewDataInLayout(foodData: ResponseDetailData.Data) {
 
         Glide.with(this)
             .load(foodData.foodImg)
@@ -239,11 +272,11 @@ class RecordModifyActivity : AppCompatActivity() {
 
         edt_update_single.setText(foodData.reviewInfo)
 
-        when(foodData.reviewStatus){
+        when (foodData.reviewStatus) {
             1 -> {
                 record_update_chip.isChecked = true
             }
-            2 ->{
+            2 -> {
                 record_update_chip_two.isChecked = true
             }
             3 -> {
@@ -257,11 +290,11 @@ class RecordModifyActivity : AppCompatActivity() {
             }
         }
 
-        when(foodData.reviewSmell){
+        when (foodData.reviewSmell) {
             1 -> {
                 record_smellchip_update.isChecked = true
             }
-            2 ->{
+            2 -> {
                 record_smellchip_update_two.isChecked = true
             }
             3 -> {
@@ -275,19 +308,19 @@ class RecordModifyActivity : AppCompatActivity() {
             }
         }
 
-        if (foodData.reviewEye == 1){
+        if (foodData.reviewEye == 1) {
             record_update_eye_btn.isSelected = true
         }
 
-        if(foodData.reviewEar == 1){
+        if (foodData.reviewEar == 1) {
             record_update_ear_btn.isSelected = true
         }
 
-        if(foodData.reviewHair == 1){
+        if (foodData.reviewHair == 1) {
             record_update_fur_btn.isSelected = true
         }
 
-        if(foodData.reviewVomit == 1){
+        if (foodData.reviewVomit == 1) {
             record_update_vomit_btn.isSelected = true
         }
 

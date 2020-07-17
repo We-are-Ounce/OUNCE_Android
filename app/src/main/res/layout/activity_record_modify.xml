@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:overScrollMode="never"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
 
@@ -47,7 +48,7 @@
                         android:src="@drawable/ic_close" />
 
                     <TextView
-                        android:id="@+id/txt_myrecord"
+                        android:id="@+id/txt_update_myrecord"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -63,6 +64,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
+                        android:visibility="gone"
                         android:background="#FFFFFF"
                         android:onClick="showPopup"
                         android:paddingRight="24dp"
@@ -122,6 +124,7 @@
             android:layout_marginTop="12dp"
             android:nestedScrollingEnabled="false"
             android:orientation="horizontal"
+            android:overScrollMode="never"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -493,6 +496,8 @@
             android:padding="10dp"
             android:textColor="@color/black_two"
             android:textSize="12sp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/record_update_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView14"
@@ -502,12 +507,13 @@
             android:id="@+id/record_update_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="19dp"
             android:backgroundTint="@color/black_two"
             android:fontFamily="@font/notosanskr_medium"
             android:text="수정 완료"
+            android:visibility="gone"
             android:textColor="@color/white_two"
-            app:layout_constraintTop_toBottomOf="@+id/edt_update_memo" />
+            app:layout_constraintBottom_toBottomOf="parent"
+             />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_record"

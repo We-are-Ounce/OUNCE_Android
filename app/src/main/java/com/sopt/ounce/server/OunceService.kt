@@ -83,6 +83,7 @@ interface OunceService {
     @DELETE("review/delete/{profileIdx}/{reviewIdx}")
     fun deleteDataReview(
         @Header("token") accessToken: String,
+        @Path("profileIdx") profileIdx : Int,
         @Path("reviewIdx") reviewIdx: Int
     ) : Call<ResponseDeleteData>
 
