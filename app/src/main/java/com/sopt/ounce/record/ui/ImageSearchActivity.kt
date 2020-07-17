@@ -91,21 +91,15 @@ class ImageSearchActivity : AppCompatActivity() {
                         call: Call<ResponseFoodRecordData>,
                         response: Response<ResponseFoodRecordData>
                     ) {
-                        Log.d("Record - error", "response")
                         if(response.isSuccessful){
                             if(EasySharedPreference.getListString("searchList").isNullOrEmpty()){
                                 val searchList = ArrayList<String>()
-                                "Record - listItem".showLog("${searchList.toString()}")
-                                searchList.add(query!!)
-                                "Record - listItem".showLog("${searchList.toString()}")
-                                "Record - listItem".showLog(query!!)
+                                searchList.add(0, query!!)
                                 EasySharedPreference.putListString("searchList", searchList)
-                            }else{
+                            }
+                            else{
                                 val searchList = EasySharedPreference.getListString("searchList") as ArrayList<String>
-                                "Record - listItem".showLog("${searchList.toString()}")
-                                searchList.add(query!!)
-                                "Record - listItem".showLog("${searchList.toString()}")
-                                "Record - listItem".showLog(query!!)
+                                searchList.add(0, query!!)
                                 EasySharedPreference.putListString("searchList", searchList)
                             }
                             Log.d("Record - error", "responseSuccess")
@@ -117,17 +111,6 @@ class ImageSearchActivity : AppCompatActivity() {
                             Log.d("Record - error", "${response.errorBody().toString()}")
                             Toast.makeText(this@ImageSearchActivity, "통신 실패", Toast.LENGTH_SHORT).show()
                         }
-
-//                        Log.d("Record - error", "responseSuccess")
-//                        Log.d("Record - error", "${response.body()!!.data}")
-//                        if(response != null){
-//                            val mItemData = response.body()!!.data
-//                            mItemAdapter.datas = mItemData as MutableList<RecordSearchFoodData>
-//                            mItemAdapter.notifyDataSetChanged()
-//                        }
-//                        else{
-//                            Toast.makeText(this@ImageSearchActivity, "리스폰스에 객체가 없어용", Toast.LENGTH_SHORT).show()
-//                        }
 
                     }
 
@@ -146,25 +129,22 @@ class ImageSearchActivity : AppCompatActivity() {
             }
 
         })
-
-//        mItemAdapter = ItemAdapter(this)
-//        rv_record_item.adapter = mItemAdapter
-        //getGoodsList()
     }
 
     private fun getItemList() {
         val listItem = EasySharedPreference.getListString("searchList") as ArrayList<String>
-        val listAdapter = listItem[0].split(",=,").map{it.trim()}.toMutableList()
-        listAdapter.reverse()
-        Log.d("Record - data", listAdapter.toString())
-        if(!listAdapter.isNullOrEmpty()){
-            adapter = RecyclerViewAdapter(listAdapter.subList(0,3).toList() as ArrayList<String>)
+        if(!listItem.isNullOrEmpty()){
+            val listAdapter = listItem[0].split(",=,").map{it.trim()}.toMutableList()
+            if(listAdapter.size > 3)
+                adapter = RecyclerViewAdapter(listAdapter.subList(0, 3).toList() as ArrayList<String>)
+            else
+                adapter = RecyclerViewAdapter(listAdapter as ArrayList<String>)
+            rv_record_search.adapter = adapter
+        }else{
+            val newListItem = ArrayList<String>()
+            rv_record_search.adapter = RecyclerViewAdapter(newListItem)
         }
-        else{
-            listAdapter.add("최근 검색어")
-            adapter =  RecyclerViewAdapter(listAdapter.subList(0,3).toList() as ArrayList<String>)
-        }
-        rv_record_search.adapter = adapter
+
     }
 
 //    private fun getGoodsList(){
