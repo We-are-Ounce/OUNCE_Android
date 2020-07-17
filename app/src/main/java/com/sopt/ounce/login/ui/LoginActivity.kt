@@ -17,6 +17,7 @@ import com.amn.easysharedpreferences.EasySharedPreference
 import com.amn.easysharedpreferences.EasySharedPreferenceConfig
 import com.sopt.ounce.R
 import com.sopt.ounce.catregister.ui.CatRegisterActivity
+import com.sopt.ounce.catregister.ui.CatRegisterFinishActivity
 import com.sopt.ounce.login.data.RequestLoginData
 import com.sopt.ounce.main.ui.MainActivity
 import com.sopt.ounce.server.OunceServiceImpl
@@ -41,6 +42,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         EasySharedPreferenceConfig.initDefault(EasySharedPreferenceConfig.Builder()
             .inputFileName("easy_preference").inputMode(Context.MODE_PRIVATE).build())
+        EasySharedPreference.clear()
 
 
         //상태바 아이콘 색 변경

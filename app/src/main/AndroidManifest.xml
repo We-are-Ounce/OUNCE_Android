@@ -68,6 +68,8 @@
         </activity>
         <activity android:name=".productreview.WebViewActivity"
             android:exported="true"/>
+
+
     </application>
 
 </manifest>

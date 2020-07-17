@@ -16,8 +16,8 @@ class CatRegisterFinishActivity : AppCompatActivity() {
         btn_go_main.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
-        finish()
     }
 
     override fun onBackPressed() {
@@ -25,6 +25,7 @@ class CatRegisterFinishActivity : AppCompatActivity() {
 
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
 }
