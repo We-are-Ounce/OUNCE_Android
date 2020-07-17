@@ -64,7 +64,7 @@ interface OunceService {
     ) : Call<ResponseRecordReviewData>
 
     @Headers("Content-Type:application/json")
-    @PUT("review/update/:reviewIdx")
+    @PUT("review/update/{reviewIdx}")
     fun putUpdateReview(
         @Header("Token") accessToken : String,
         @Path ("reviewIdx") reviewIdx: Int,
@@ -73,16 +73,17 @@ interface OunceService {
 
 
     @Headers("Content-Type:application/json")
-    @GET("review/detail/:reviewIdx")
+    @GET("review/detail/{reviewIdx}")
     fun getDetailReview(
         @Path("reviewIdx") reviewIdx: Int
     ) : Call<ResponseDetailData>
 
 
     @Headers("Content-Type:application/json")
-    @DELETE("review/delete/:profileIdx/:reviewIdx")
+    @DELETE("review/delete/{profileIdx}/{reviewIdx}")
     fun deleteDataReview(
         @Header("token") accessToken: String,
+        @Path("profileIdx") profileIdx : Int,
         @Path("reviewIdx") reviewIdx: Int
     ) : Call<ResponseDeleteData>
 
