@@ -22,9 +22,11 @@
 | [MaterialSearchBar](https://github.com/mancj/MaterialSearchBar)                                                                    | 검색창 구현                                   |
 | [TedPermission](https://github.com/ParkSangGwon/TedPermission)                                                                     | 갤러리 이용 시 권한 설정                      |
 | [TedKeyboardObserver](https://github.com/ParkSangGwon/TedKeyboardObserver)                                                         | 키보드 show/hide 리스너                       |
-| [RecyclerView\_+ SearchView](https://github.com/l2hyunwoo/OunceCustomSearchBar)                                                    | 최근 검색어 검색창                            |
+| [RecyclerView_+ SearchView](https://github.com/l2hyunwoo/OunceCustomSearchBar)                                                    | 최근 검색어 검색창                            |
 | [Sticky ScrollView](https://github.com/didikk/sticky-nestedscrollview)                                                             | 메인 뷰 헤더 Sticky 스크롤 구현               |
 | [EasySharedPreference](https://github.com/AmanpreetYatin/Easy-SharedPreferences)                                                   | SharedPreference를 더 쉽게 사용하기 위해 사용 |
+| [ViewModelProviders, ViewModel](https://developer.android.com/jetpack/androidx/releases/lifecycle)                                                   | 프래그먼트 간 데이터 전달에 필요한 ViewModel을 사용하기 위한 설정 |
+| [CircleImageView](https://github.com/hdodenhof/CircleImageView)                                                   | 사진을 원형으로 삽입하기 위해 사용 |
 
 ### ConstraintLayout 사용처
 
@@ -40,18 +42,34 @@
 
 - fragment_password.xml : Guideline 사용
 
-- fragment_search.xml : 레이아웃 사용 ( 상단 TextView에 LinearLayout 추가 )
-
 - item_searchmain_similar.xml : chain(spread) 사용 (\*하단 이미지에 LinearLayout 사용)
 
 ### ConstraintLayout 비사용처
 
-- activity_home.xml : CoordinatorLayout 사용
-
+- activity_home.xml : CoordinatorLayout, RelativeLayout 사용
   - 이유 : BottomAppBar 구현을 위한 레이아웃 채택
 
-- activity_product_review.xml : CoordinatorLayout 사용
+- activity_product_review.xml : CoordinatorLayout, RelativeLayout 사용
   - 이유 : CollapsingToolBarLayout을 사용하기 위해 채택
+  
+- activity_record.xml : CoordinatorLayout 사용
+  - 이유: CollapsingToolBarLayout을 사용하기 위해 채택
+
+- fragment_search.xml : LinearLayout 사용 
+  - 이유: 텍스트, 리소스 수평, 수직 간격 효율적인 설정을 위함
+
+- item_product_review_review.xml : LinearLayout 사용 
+  - 이유: 텍스트, 리소스 수평, 수직 간격 효율적인 설정을 위함
+
+- item_product_review_review.xml : LinearLayout 사용
+  - 이유: 텍스트, 리소스 수평, 수직 간격 효율적인 설정을 위함
+
+- main_review_list_item.xml : LinearLayout 사용
+  - 이유: 텍스트, 리소스 수평, 수직 간격 효율적인 설정을 위함
+  
+- item_searchmain_similar.xml : 하단 이미지에 LinearLayout 사용
+  - 이유: 리소스 수평 간격 효율적인 설정을 위함)
+  
 
 ### 기능 소개
 
