@@ -198,7 +198,9 @@ class OtherActivity : AppCompatActivity() {
     }
 
     private fun startServerReviewDate() {
-//        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx",0)
+        mPagingRating = 0
+        mPagingPrefer = 0
+
         "OunceServerState".showLog("다른 계정 프로필 리뷰 서버 통신 시작")
         mOunce.SERVICE.getOtherProfileReview(mOtherProfileIdx, mPagingDate, mPagingDate + 9)
             .customEnqueue(
