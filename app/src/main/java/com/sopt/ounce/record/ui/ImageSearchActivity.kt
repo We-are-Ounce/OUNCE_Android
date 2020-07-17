@@ -55,7 +55,7 @@ class ImageSearchActivity : AppCompatActivity() {
         textView.setTextColor(Color.DKGRAY)
         rv_record_search.layoutManager = LinearLayoutManager(rv_record_search.context)
         rv_record_search.setHasFixedSize(true)
-        //getItemList()
+        getItemList()
         mItemAdapter = ItemAdapter(this)
         rv_record_item.adapter = mItemAdapter
         rv_record_item.addItemDecoration(RecordItemDecoration(this))
