@@ -58,12 +58,14 @@ class SearchFragment : Fragment() {
     private lateinit var mContext: Context
     private lateinit var mView: View
     private lateinit var cView : View
-    var isKeyboardFocused = false
-    lateinit var mPagerAdapter : SearchSimilarPagerAdapter
-    lateinit var mUserSearchData : ResponseUserSearchData
-    lateinit var mFoodSearchData : ResponseFoodSearchData
-    lateinit var mSearchTapAdapter: SearchTapAdapter
+    private var isKeyboardFocused = false
+    private lateinit var mPagerAdapter : SearchSimilarPagerAdapter
+    private lateinit var mUserSearchData : ResponseUserSearchData
+    private lateinit var mFoodSearchData : ResponseFoodSearchData
+    private lateinit var mSearchTapAdapter: SearchTapAdapter
     var productQuery = ""
+
+    private val mProfileIdx = EasySharedPreference.Companion.getInt("profileIdx",1)
 
 
     var receiveDataArraySearch = ResponseRecommendCatsData.Data(
@@ -286,7 +288,7 @@ class SearchFragment : Fragment() {
         Log.d("Search - Call", "requestBefore")
         val ounce = OunceServiceImpl.SERVICE.requestRecommendCat(
             RequestRecommendCatsData(
-                profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 1)
+                profileIdx = mProfileIdx
             )
         )
         Log.d("Search - Call", "requestAfter")

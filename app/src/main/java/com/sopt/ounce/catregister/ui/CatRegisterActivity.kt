@@ -34,6 +34,8 @@ class CatRegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cat_register)
 
+
+
         // 상태바 아이콘 변경
         StatusObject.setStatusBar(this)
         //뷰페이저 설정
@@ -48,6 +50,7 @@ class CatRegisterActivity : AppCompatActivity() {
         img_catregister_back.setOnClickListener {
             if (vp_catregister.currentItem == 1) {
                 vp_catregister.currentItem -= 1
+                btn_catregister_ok.text = "다음"
             } else {
                 finish()
             }
@@ -57,10 +60,10 @@ class CatRegisterActivity : AppCompatActivity() {
         btn_catregister_ok.setOnClickListener {
             if (vp_catregister.currentItem == 0) {
                 vp_catregister.currentItem += 1
+                btn_catregister_ok.text = "완료"
                 buttonEnable(false)
             } else {
                 settingDataMultiForm()
-
             }
         }
 
@@ -68,11 +71,6 @@ class CatRegisterActivity : AppCompatActivity() {
     }
 
     private fun settingDataMultiForm() {
-//        "ShowData".showLog(CatInfoData.profileInfo)
-//        "ShowData".showLog(CatInfoData.profileAge)
-//        "ShowData".showLog(CatInfoData.profileGender)
-//        "ShowData".showLog(CatInfoData.profileWeight)
-//        "ShowData".showLog(CatInfoData.profileName)
         val PARSE_STRING = "text/plain"
         val pictureRb = settingImgMultiPart()
         val accessToken = EasySharedPreference.Companion.getString("accessToken", "")
@@ -96,10 +94,10 @@ class CatRegisterActivity : AppCompatActivity() {
             )
         ).customEnqueue(
             onSuccess = {
-                if (it.success) {
-                    val intent = Intent(this, CatRegisterFinishActivity::class.java)
-                    startActivity(intent)
-                }
+                "OunceCatRegisterSuccess".showLog("CatRegisterOk")
+                val intent = Intent(this,CatRegisterFinishActivity::class.java)
+                startActivity(intent)
+                finish()
             },
             onError = {
                 "ServerError".showLog("고양이 프로필 등록 에러 : ${it.code()}")
@@ -149,6 +147,11 @@ class CatRegisterActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
 

@@ -31,7 +31,6 @@ class SignUpActivity : AppCompatActivity() {
         initPager()
 
         //확인 버튼 누를 시 다음 페이지 이동
-        //기능 구현 후 조건 걸어서 클릭 못하게 하는거 필요
         btn_signup_ok.setOnClickListener {
             if (vp_signup.currentItem < vp_signup.childCount - 1) {
                 vp_signup.currentItem += 1

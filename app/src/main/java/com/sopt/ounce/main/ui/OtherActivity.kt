@@ -35,6 +35,7 @@ class OtherActivity : AppCompatActivity() {
     private val mOunce = OunceServiceImpl
     private var mOtherProfileIdx by Delegates.notNull<Int>()
     private lateinit var mItem: Array<String>
+    private val mProfileIdx = EasySharedPreference.getInt("profileIdx",1)
 
 
     // 리뷰 새로고침을 위한 카운트 (최신순)
@@ -163,11 +164,10 @@ class OtherActivity : AppCompatActivity() {
     }
 
     private fun startUnFollow() {
-//        val myProfileIdx = EasySharedPreference.getInt("profileIdx",0)
         mOunce.SERVICE.deleteFollow(
             RequestFollowData(
-                26,
-                1
+                mProfileIdx,
+                mOtherProfileIdx
             )
         ).customEnqueue(
             onSuccess = {
@@ -180,11 +180,10 @@ class OtherActivity : AppCompatActivity() {
     }
 
     private fun startFollow() {
-//        val myProfileIdx = EasySharedPreference.getInt("profileIdx",0)
         mOunce.SERVICE.postFollow(
             RequestFollowData(
-                26,
-                1
+                mProfileIdx,
+                mOtherProfileIdx
             )
         ).customEnqueue(
             onSuccess = {
@@ -202,11 +201,13 @@ class OtherActivity : AppCompatActivity() {
         mPagingPrefer = 0
 
         "OunceServerState".showLog("다른 계정 프로필 리뷰 서버 통신 시작")
-        mOunce.SERVICE.getOtherProfileReview(mOtherProfileIdx, 1, 100)
+
+        mOunce.SERVICE.getOtherProfileReview(mOtherProfileIdx, 0, 100)
             .customEnqueue(
                 onSuccess = {
-                    "OunceServerSuccess".showLog("다른 프로필 리뷰 조회 성공\n ${it.data}")
+                    "OunceServerSuccess".showLog("날짜 순 다른 프로필 리뷰 조회 성공\n ${it.data}")
                     mRecyclerAdapter.data.addAll(it.data)
+                    "OunceServerSuccess".showLog("${mRecyclerAdapter.data}")
                     mRecyclerAdapter.notifyDataSetChanged()
                     mPagingDate += 10
                 }
@@ -217,7 +218,8 @@ class OtherActivity : AppCompatActivity() {
 //        mPagingDate = 0
 //        mPagingPrefer = 0
 
-        mOunce.SERVICE.getRatingReview(mOtherProfileIdx, 1, 100).customEnqueue(
+
+        mOunce.SERVICE.getRatingReview(mOtherProfileIdx, 0, 100).customEnqueue(
             onSuccess = {
                 "OunceServerSuccess".showLog("총점으로 리뷰 목록 불러오기 성공 \n ${it.data}")
                 mRecyclerAdapter.data.addAll(it.data)
@@ -234,7 +236,7 @@ class OtherActivity : AppCompatActivity() {
         mPagingDate = 0
         mPagingRating = 0
 
-        mOunce.SERVICE.getPreferReview(mOtherProfileIdx, 1, 100).customEnqueue(
+        mOunce.SERVICE.getPreferReview(mOtherProfileIdx, 0, 100).customEnqueue(
             onSuccess = {
                 "OunceServerSuccess".showLog("선호도로 리뷰 목록 불러오기 성공 \n ${it.data}")
                 mRecyclerAdapter.data.addAll(it.data)
@@ -251,8 +253,7 @@ class OtherActivity : AppCompatActivity() {
     private fun startServer() {
         // myprofileIdx = 내 프로필 인덱스
         // otherIdx = intent로 받아온 인덱스
-        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx",0)
-        mOunce.SERVICE.getOtherProfile(myprofileIdx = profileIdx, otherIdx = mOtherProfileIdx)
+        mOunce.SERVICE.getOtherProfile(myprofileIdx = mProfileIdx, otherIdx = mOtherProfileIdx)
             .customEnqueue(
                 onSuccess = {
                     "OunceServerSuccess".showLog("다른계정 프로필 조회 성공")
@@ -309,7 +310,7 @@ class OtherActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@OtherActivity)
             addItemDecoration(RcvItemDeco(this@OtherActivity))
         }
-        startServerReviewDate()
+//        startServerReviewDate()
     }
 
     //필터 이미지 클릭 시 필터 바텀시트 호출 함수
@@ -350,7 +351,7 @@ class OtherActivity : AppCompatActivity() {
             "오리", "참치", "돼지", "해산물", "사슴", "캥거루", "기타"
         )
 
-        mOunce.SERVICE.getFilterManu(1).customEnqueue(
+        mOunce.SERVICE.getFilterManu(mOtherProfileIdx).customEnqueue(
             onSuccess = {
                 "OunceServer".showLog("리뷰 필터 불러오기 성공 \n ${it.data}")
                 //제조사 chip 생성 -> 서버 통신 받아서 유동적 해결
@@ -405,6 +406,11 @@ class OtherActivity : AppCompatActivity() {
             }
         }
         return c
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
 }
