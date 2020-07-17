@@ -208,6 +208,10 @@ class HomeFragment : Fragment() {
             showBottomSheet()
         }
 
+        txt_main_profile.setOnClickListener {
+            showBottomSheet()
+        }
+
         // 필터 이미지 클릭시 필터 바텀 시트 생성
         img_main_filter.setOnClickListener {
             showFilterSheet()
