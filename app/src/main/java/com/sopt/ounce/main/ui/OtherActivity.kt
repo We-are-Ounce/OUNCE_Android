@@ -201,6 +201,7 @@ class OtherActivity : AppCompatActivity() {
         mPagingPrefer = 0
 
         "OunceServerState".showLog("다른 계정 프로필 리뷰 서버 통신 시작")
+
         mOunce.SERVICE.getOtherProfileReview(mOtherProfileIdx, 0, 100)
             .customEnqueue(
                 onSuccess = {
@@ -214,15 +215,16 @@ class OtherActivity : AppCompatActivity() {
     }
 
     private fun startServerReviewRating(){
-        mPagingDate = 0
-        mPagingPrefer = 0
+//        mPagingDate = 0
+//        mPagingPrefer = 0
+
 
         mOunce.SERVICE.getRatingReview(mOtherProfileIdx, 0, 100).customEnqueue(
             onSuccess = {
                 "OunceServerSuccess".showLog("총점으로 리뷰 목록 불러오기 성공 \n ${it.data}")
                 mRecyclerAdapter.data.addAll(it.data)
                 mRecyclerAdapter.notifyDataSetChanged()
-                mPagingRating += 10
+                //mPagingRating += 10
             },
             onError = {
                 "OunceServerError".showLog("총점으로 리뷰 목록 불러오기 오류")
@@ -239,7 +241,7 @@ class OtherActivity : AppCompatActivity() {
                 "OunceServerSuccess".showLog("선호도로 리뷰 목록 불러오기 성공 \n ${it.data}")
                 mRecyclerAdapter.data.addAll(it.data)
                 mRecyclerAdapter.notifyDataSetChanged()
-                mPagingPrefer += 10
+                //mPagingPrefer += 10
             },
             onError = {
                 "OunceServerError".showLog("선호도로 리뷰 목록 불러오기 오류")
