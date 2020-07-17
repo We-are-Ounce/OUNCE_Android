@@ -60,6 +60,8 @@ class RecordModifyActivity : AppCompatActivity() {
             txt_update_myrecord.text = ""
         }
 
+        layout_modify_parent.isEnabled = false
+
 
         startServerReview()
 
@@ -69,6 +71,7 @@ class RecordModifyActivity : AppCompatActivity() {
             when (it.title) {
                 "수정" -> {
                     record_update_button.visibility = View.VISIBLE
+                    layout_modify_parent.isEnabled = true
                 }
                 "삭제" -> {
 
