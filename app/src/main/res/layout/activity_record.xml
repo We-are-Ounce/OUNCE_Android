@@ -314,8 +314,8 @@
         android:textSize="10sp"
         android:textColor="@color/warm_grey"
         android:lineSpacingExtra="14sp"
-        app:layout_constraintStart_toStartOf="@+id/chipGroup"
-        app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+        app:layout_constraintStart_toStartOf="@+id/chipGroup_status"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup_status" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -325,8 +325,8 @@
         android:textSize="10sp"
         android:textColor="@color/warm_grey"
         android:lineSpacingExtra="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/chipGroup"
-        app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+        app:layout_constraintEnd_toEndOf="@+id/chipGroup_status"
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup_status" />
 
 
     <com.google.android.material.chip.ChipGroup
