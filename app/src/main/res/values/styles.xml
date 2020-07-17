@@ -40,6 +40,14 @@
         <item name="android:paddingHorizontal">73dp</item>
     </style>
 
+    <style name="configurationStyle" parent="fontFamiliyandPadding">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:lineSpacingExtra">18sp</item>
+        <item name="android:paddingLeft">28dp</item>
+        <item name="android:paddingVertical">18dp</item>
+    </style>
+
 
     <style name="textStyle_1" parent="fontFamiliyandPadding">
         <item name ="android:textSize">22sp</item>

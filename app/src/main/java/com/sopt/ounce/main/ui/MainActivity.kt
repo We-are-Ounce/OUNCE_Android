@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.sopt.ounce.main.ui
 
 import android.content.Context
@@ -6,7 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.amn.easysharedpreferences.EasySharedPreference
 import com.sopt.ounce.R
 import com.sopt.ounce.record.ui.ImageSearchActivity
 import com.sopt.ounce.record.ui.RecordActivity
@@ -87,12 +91,32 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //위로 당겨서 새로고침
+        swipe_main_refresh.setColorSchemeColors(resources.getColor(R.color.dark_peach))
+        swipe_main_refresh.setOnRefreshListener {
+            val intent = Intent(this, MainActivity::class.java)
+            finish()
+            overridePendingTransition(0,0)
+            startActivity(intent)
+
+
+            swipe_main_refresh.isRefreshing = false
+        }
+
     }
 
 
     fun methodManagerToFragment(): InputMethodManager {
         return getSystemService(Context.INPUT_METHOD_SERVICE)
                 as InputMethodManager
+    }
+
+    @Suppress("DEPRECATION")
+    fun resetFragment(idx : Int) {
+        EasySharedPreference.Companion.putInt("profileIdx", idx)
+        finish()
+        overridePendingTransition(0,0)
+        startActivity(intent)
     }
 
 }

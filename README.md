@@ -12,18 +12,20 @@
 
 ### Library
 
-| 라이브러리                                                                                                                         | 목적                                      |
-| ---------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| [Retrofit2](https://github.com/square/retrofit)                                                                                    | 서버 통신                                 |
-| [Gson](https://github.com/google/gson)                                                                                             | 서버에서 받아온 Json 객체를 Gson으로 변환 |
-| [Glide](https://github.com/bumptech/glide)                                                                                         | url을 이용한 이미지 뷰에 이미지 처리      |
-| [DotIndicator](https://github.com/tommybuonomo/dotsindicator?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=7127) | 뷰페이저 인디케이터                       |
-| [Cropper](https://github.com/ArthurHub/Android-Image-Cropper)                                                                      | 프로필 이미지 크기 조절을 위한 Crop 기능  |
-| [MaterialSearchBar](https://github.com/mancj/MaterialSearchBar)                                                                    | 검색창 구현                               |
-| [TedPermission](https://github.com/ParkSangGwon/TedPermission)                                                                     | 갤러리 이용 시 권한 설정                  |
-| [TedKeyboardObserver](https://github.com/ParkSangGwon/TedKeyboardObserver)                                                         | 키보드 show/hide 리스너                   |
-| [RecyclerView\_+ SearchView](https://github.com/l2hyunwoo/OunceCustomSearchBar)                                                    | 최근 검색어 검색창                        |
-|[Sticky ScrollView](https://github.com/didikk/sticky-nestedscrollview)|메인 뷰 헤더 Sticky 스크롤 구현|
+| 라이브러리                                                                                                                         | 목적                                          |
+| ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| [Retrofit2](https://github.com/square/retrofit)                                                                                    | 서버 통신                                     |
+| [Gson](https://github.com/google/gson)                                                                                             | 서버에서 받아온 Json 객체를 Gson으로 변환     |
+| [Glide](https://github.com/bumptech/glide)                                                                                         | url을 이용한 이미지 뷰에 이미지 처리          |
+| [DotIndicator](https://github.com/tommybuonomo/dotsindicator?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=7127) | 뷰페이저 인디케이터                           |
+| [Cropper](https://github.com/ArthurHub/Android-Image-Cropper)                                                                      | 프로필 이미지 크기 조절을 위한 Crop 기능      |
+| [MaterialSearchBar](https://github.com/mancj/MaterialSearchBar)                                                                    | 검색창 구현                                   |
+| [TedPermission](https://github.com/ParkSangGwon/TedPermission)                                                                     | 갤러리 이용 시 권한 설정                      |
+| [TedKeyboardObserver](https://github.com/ParkSangGwon/TedKeyboardObserver)                                                         | 키보드 show/hide 리스너                       |
+| [RecyclerView\_+ SearchView](https://github.com/l2hyunwoo/OunceCustomSearchBar)                                                    | 최근 검색어 검색창                            |
+| [Sticky ScrollView](https://github.com/didikk/sticky-nestedscrollview)                                                             | 메인 뷰 헤더 Sticky 스크롤 구현               |
+| [EasySharedPreference](https://github.com/AmanpreetYatin/Easy-SharedPreferences)                                                   | SharedPreference를 더 쉽게 사용하기 위해 사용 |
+
 ### ConstraintLayout 사용처
 
 - activity_login.xml : Guideline, chain (packed) 사용
@@ -42,11 +44,24 @@
 
 - item_searchmain_similar.xml : chain(spread) 사용 (\*하단 이미지에 LinearLayout 사용)
 
+### ConstraintLayout 비사용처
+
+- activity_home.xml : CoordinatorLayout 사용
+
+  - 이유 : BottomAppBar 구현을 위한 레이아웃 채택
+
+- activity_product_review.xml : CoordinatorLayout 사용
+  - 이유 : CollapsingToolBarLayout을 사용하기 위해 채택
+
 ### 기능 소개
 
 - [키보드 액션과 EditText 커스텀](https://github.com/We-are-Ounce/OUNCE_Android/blob/master/document/keyboard.md)
 - [Fragment에 ViewPager 삽입](https://github.com/We-are-Ounce/OUNCE_Android/blob/master/document/ViewPagerInFragment.md)
 - [ViewPager에 화면전환효과 삽입](https://github.com/We-are-Ounce/OUNCE_Android/blob/master/document/PageTransformer.md)
+
+### 확장 함수 사용 구간
+
+- 로그 출력을 위한 확장 함수
 
 ### Project
 

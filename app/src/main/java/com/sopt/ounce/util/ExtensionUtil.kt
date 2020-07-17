@@ -1,10 +1,12 @@
 package com.sopt.ounce.util
 
 
+import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.EditText
+import android.widget.Toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,6 +32,10 @@ fun EditText.textCheckListener(textCheck: (CharSequence?) -> Unit) {
             textCheck(s)
         }
     })
+}
+
+fun Context.showToast(msg : String){
+    Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
 }
 
 fun <ResponseType> Call<ResponseType>.customEnqueue(

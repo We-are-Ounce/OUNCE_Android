@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.amn.easysharedpreferences.EasySharedPreference
 import com.sopt.ounce.R
 import com.sopt.ounce.record.adapter.ItemAdapter
@@ -23,11 +24,14 @@ import com.sopt.ounce.searchmain.data.foodsearch.FoodData
 import com.sopt.ounce.searchmain.data.foodsearch.RequestFoodSearchData
 import com.sopt.ounce.server.OunceServiceImpl
 import com.sopt.ounce.util.customEnqueue
+import com.sopt.ounce.util.showLog
 import kotlinx.android.synthetic.main.activity_image_search.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.http.Path
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ImageSearchActivity : AppCompatActivity() {
 
@@ -54,6 +58,7 @@ class ImageSearchActivity : AppCompatActivity() {
         //getItemList()
         mItemAdapter = ItemAdapter(this)
         rv_record_item.adapter = mItemAdapter
+        rv_record_item.addItemDecoration(RecordItemDecoration(this))
         record_search_sv.setOnQueryTextFocusChangeListener(object : View.OnFocusChangeListener{
             override fun onFocusChange(view: View?, hasFocus: Boolean) {
                 if(hasFocus){
@@ -86,8 +91,17 @@ class ImageSearchActivity : AppCompatActivity() {
                         call: Call<ResponseFoodRecordData>,
                         response: Response<ResponseFoodRecordData>
                     ) {
-                        Log.d("Record - error", "response")
                         if(response.isSuccessful){
+                            if(EasySharedPreference.getListString("searchList").isNullOrEmpty()){
+                                val searchList = ArrayList<String>()
+                                searchList.add(0, query!!)
+                                EasySharedPreference.putListString("searchList", searchList)
+                            }
+                            else{
+                                val searchList = EasySharedPreference.getListString("searchList") as ArrayList<String>
+                                searchList.add(0, query!!)
+                                EasySharedPreference.putListString("searchList", searchList)
+                            }
                             Log.d("Record - error", "responseSuccess")
                             val mItemData = response.body()!!.data
                             mItemAdapter.datas = mItemData as MutableList<RecordSearchFoodData>
@@ -98,16 +112,6 @@ class ImageSearchActivity : AppCompatActivity() {
                             Toast.makeText(this@ImageSearchActivity, "통신 실패", Toast.LENGTH_SHORT).show()
                         }
 
-//                        Log.d("Record - error", "responseSuccess")
-//                        Log.d("Record - error", "${response.body()!!.data}")
-//                        if(response != null){
-//                            val mItemData = response.body()!!.data
-//                            mItemAdapter.datas = mItemData as MutableList<RecordSearchFoodData>
-//                            mItemAdapter.notifyDataSetChanged()
-//                        }
-//                        else{
-//                            Toast.makeText(this@ImageSearchActivity, "리스폰스에 객체가 없어용", Toast.LENGTH_SHORT).show()
-//                        }
                     }
                 })
                 return true
@@ -117,89 +121,28 @@ class ImageSearchActivity : AppCompatActivity() {
                 return false
             }
         })
-//        mItemAdapter = ItemAdapter(this)
-//        rv_record_item.adapter = mItemAdapter
-        //getGoodsList()
+        record_backk_btn.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(p0: View?) {
+                this@ImageSearchActivity.finish()
+            }
+
+        })
     }
 
-//    private fun getItemList() {
-//        val listItem = ArrayList<String>()
-//        listItem.add("이현우")
-//        listItem.add("안드")
-//        listItem.add("빅보")
-//        listItem.add("바보")
-//        listItem.add("주예는")
-//        listItem.add("귀여워")
-//        listItem.add("깜찍이")
-//        listItem.add("꾹구각가")
-//        listItem.add("메롱")
-//        listItem.add("끄아")
-//        listItem.add("국국")
-//        adapter = RecyclerViewAdapter(listItem)
-//        rv_record_search.adapter = adapter
-//    }
+    private fun getItemList() {
+        val listItem = EasySharedPreference.getListString("searchList") as ArrayList<String>
+        if(!listItem.isNullOrEmpty()){
+            val listAdapter = listItem[0].split(",=,").map{it.trim()}.toMutableList()
+            if(listAdapter.size > 3)
+                adapter = RecyclerViewAdapter(listAdapter.subList(0, 3).toList() as ArrayList<String>)
+            else
+                adapter = RecyclerViewAdapter(listAdapter as ArrayList<String>)
+            rv_record_search.adapter = adapter
+        }else{
+            val newListItem = ArrayList<String>()
+            rv_record_search.adapter = RecyclerViewAdapter(newListItem)
+        }
 
-//    private fun getGoodsList(){
-//        mGoodsData.apply {
-//            add(
-//                ItemData(
-//                    cardview_image = R.drawable.img_card_cat,
-//                    cardview_item = "내추럴 발란스",
-//                    cardview_itemname = "제품 이름 "
-//                )
-//            )
-//            add(
-//                ItemData(
-//                    cardview_image = R.drawable.img_card_cat,
-//                    cardview_item = "내추럴 발란스",
-//                    cardview_itemname = "제품 이름"
-//                )
-//            )
-//            add(
-//                ItemData(
-//                    cardview_image = R.drawable.img_card_cat,
-//                    cardview_item = "내추럴 발란스",
-//                    cardview_itemname = "제품 이름"
-//                )
-//            )
-//            add(
-//                ItemData(
-//                    cardview_image = R.drawable.img_card_cat,
-//                    cardview_item = "내추럴 발란스",
-//                    cardview_itemname = "제품 이름"
-//                )
-//            )
-//            add(
-//                ItemData(
-//                    cardview_image = R.drawable.img_card_cat,
-//                    cardview_item = "내추럴 발란스",
-//                    cardview_itemname = "제품 이름"
-//                )
-//            )
-//            add(
-//                ItemData(
-//                    cardview_image = R.drawable.img_card_cat,
-//                    cardview_item = "내추럴 발란스",
-//                    cardview_itemname = "제품 이름"
-//                )
-//            )
-//            add(
-//                ItemData(
-//                    cardview_image = R.drawable.img_card_cat,
-//                    cardview_item = "내추럴 발란스",
-//                    cardview_itemname = "제품 이름"
-//                )
-//            )
-//            add(
-//                ItemData(
-//                    cardview_image = R.drawable.img_card_cat,
-//                    cardview_item = "내추럴 발란스",
-//                    cardview_itemname = "제품 이름"
-//                )
-//            )
-//        }
-//        mItemAdapter.datas = mGoodsData
-//        mItemAdapter.notifyDataSetChanged()
-//
-//    }
+    }
+
 }

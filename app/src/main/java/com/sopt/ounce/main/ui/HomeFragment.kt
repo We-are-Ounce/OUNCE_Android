@@ -22,8 +22,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import com.sopt.ounce.R
 import com.sopt.ounce.catregister.ui.CatRegisterActivity
+import com.sopt.ounce.configuration.ConfigurationActivity
 import com.sopt.ounce.main.adapter.BottomProfileAdapter
 import com.sopt.ounce.main.adapter.ReviewAdapter
+import com.sopt.ounce.main.data.BottomProfileData
 import com.sopt.ounce.main.data.RequestSelectedFilter
 import com.sopt.ounce.main.data.ResponseMainProfileData
 import com.sopt.ounce.server.OunceServiceImpl
@@ -49,8 +51,10 @@ class HomeFragment : Fragment() {
 
     // 리뷰 새로고침을 위한 카운트 (최신순)
     private var mPagingDate = 0
+
     // 리뷰 새로고침을 위한 카운트 (총점순)
     private var mPagingRating = 0
+
     //리뷰 새로고침을 위한 카운트 (기호도순)
     private var mPagingPrefer = 0
 
@@ -110,13 +114,18 @@ class HomeFragment : Fragment() {
         spinnerAdapter.setDropDownViewResource(R.layout.main_custom_dropdown)
         v.spinner_main.apply {
             adapter = spinnerAdapter
-            onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-                override fun onNothingSelected(p0: AdapterView<*>?){
+            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(p0: AdapterView<*>?) {
                 }
 
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
 
-                    when(parent?.getItemAtPosition(position).toString()){
+                    when (parent?.getItemAtPosition(position).toString()) {
                         "날짜 순" -> {
                             mRecyclerAdapter.data.clear()
                             startServerReviewDate()
@@ -156,7 +165,7 @@ class HomeFragment : Fragment() {
             NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, _ ->
                 if (scrollY == (v.getChildAt(0).measuredHeight - v.measuredHeight)) {
 
-                    when(v.spinner_main.selectedItem){
+                    when (v.spinner_main.selectedItem) {
                         "날짜 순" -> {
                             startServerReviewDate()
                         }
@@ -170,6 +179,17 @@ class HomeFragment : Fragment() {
 
                 }
             })
+
+        //다른프로필 바텀 시트 세팅
+        mBottomsheetProfile.rcv_bottom_profile.apply {
+            adapter = mProfileAdapter
+            layoutManager = LinearLayoutManager(mContext)
+        }
+        initBottomSheet()
+
+
+
+
 
         return v
     }
@@ -187,6 +207,12 @@ class HomeFragment : Fragment() {
         // 필터 이미지 클릭시 필터 바텀 시트 생성
         img_main_filter.setOnClickListener {
             showFilterSheet()
+        }
+
+        //환경설정 창 이동
+        img_main_setting.setOnClickListener {
+            val intent = Intent(mContext,ConfigurationActivity::class.java)
+            startActivity(intent)
         }
 
 
@@ -293,33 +319,62 @@ class HomeFragment : Fragment() {
         mFilterSheet.show()
     }
 
+    private fun initBottomSheet(){
+        val accessToken = EasySharedPreference.Companion.getString("accessToken", "")
+        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx ",0)
+
+        // 다른 계정 클릭 시 이벤트
+        mProfileAdapter.setOnItemClickListener(object : BottomProfileAdapter.OnItemClickListener {
+            @Suppress("DEPRECATION")
+            override fun onItemClick(v: View, data: BottomProfileData.Data) {
+                EasySharedPreference.Companion.putInt("profileIdx", data.profileIdx)
+                val activity = activity as MainActivity
+                activity.resetFragment(data.profileIdx)
+                mBottomsheetProfile.dismiss()
+            }
+        })
+
+        //계정추카 버튼 및 판단하는 클릭 리스너
+        mBottomsheetProfile.layout_bottomsheet_add_profile.setOnClickListener {
+            mOunce.SERVICE.postIsLimit(accessToken).customEnqueue(
+                onSuccess = {
+                    it.data.let { data ->
+                        if (data.possibleAddProfile) {
+                            val intent = Intent(mContext, CatRegisterActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            Toast.makeText(
+                                mContext,
+                                "최대 4개의 계정만 만들 수 있습니다.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                },
+                onError = {
+                    "OunceMainBottomProfileServerError".showLog("프로필 추가 생성 오류")
+                }
+            )
+        }
+    }
+
 
     private fun showBottomSheet() {
-        mBottomsheetProfile.rcv_bottom_profile.apply {
-            adapter = mProfileAdapter
-            layoutManager = LinearLayoutManager(mContext)
-        }
-        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 0)
+        val accessToken = EasySharedPreference.Companion.getString("accessToken", "")
+        val profileIdx = EasySharedPreference.Companion.getInt("profileIdx ",0)
 
-        mOunce.SERVICE.getConvesionProfile(profileIdx).customEnqueue(
+        mOunce.SERVICE.getConversionProfile(accessToken,profileIdx).customEnqueue(
             onSuccess = {
                 "OunceStatus".showLog("프로필 바텀시트 호출 메세지 : ${it.message}")
-                it.data.let { data ->
-                    mProfileAdapter.data = data
-                }
+                "OunceStatus".showLog("프로필 바텀시트 데이터 전달 \n ${it.data}")
+                mProfileAdapter.data.clear()
+                mProfileAdapter.data.addAll(it.data)
+                mProfileAdapter.notifyDataSetChanged()
             },
             onError = {
                 "OunceError".showLog("프로필 바텀시트 호출 오류")
             }
         )
-
-        mProfileAdapter.notifyDataSetChanged()
-
-        mBottomsheetProfile.layout_bottomsheet_add_profile.setOnClickListener {
-            val intent = Intent(mContext, CatRegisterActivity::class.java)
-            startActivity(intent)
-        }
-
 
         mBottomsheetProfile.show()
 
@@ -371,6 +426,9 @@ class HomeFragment : Fragment() {
             }
 
         }
+
+        // 고양이 이름 SharedPreference에 저장
+        EasySharedPreference.Companion.putString("catName",data.profileName)
     }
 
     @SuppressLint("SetTextI18n")
@@ -392,7 +450,7 @@ class HomeFragment : Fragment() {
         )
     }
 
-    private fun startServerReviewRating(){
+    private fun startServerReviewRating() {
         mPagingDate = 0
         mPagingPrefer = 0
 
@@ -410,7 +468,7 @@ class HomeFragment : Fragment() {
         )
     }
 
-    private fun startServerReviewPrefer(){
+    private fun startServerReviewPrefer() {
         mPagingDate = 0
         mPagingRating = 0
 

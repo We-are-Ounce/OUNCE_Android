@@ -102,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="22dp"
                     android:lineSpacingExtra="20sp"
-                    android:text="고양이이름"
+                    tools:text="고양이이름"
                     android:textColor="@color/greyish_brown"
                     android:textFontWeight="700"
                     android:textSize="16sp"
@@ -124,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="7dp"
-                    android:text="5kg"
+                    tools:text="5kg"
                     android:textFontWeight="100"
                     app:layout_constraintBottom_toBottomOf="@+id/img_main_gender"
                     app:layout_constraintStart_toEndOf="@+id/img_main_gender"
@@ -136,7 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="7dp"
-                    android:text="2살"
+                    tools:text="2살"
                     android:textFontWeight="100"
                     app:layout_constraintBottom_toBottomOf="@+id/txt_main_weight"
                     app:layout_constraintStart_toEndOf="@+id/txt_main_weight"
@@ -148,7 +148,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:text="고양이 한줄 소개 입니다."
+                    tools:text="고양이 한줄 소개 입니다."
                     android:textColor="@color/greyish_brown"
                     android:textFontWeight="400"
                     app:layout_constraintStart_toStartOf="@+id/img_main_gender"
@@ -164,7 +164,7 @@
                     android:gravity="center"
                     android:lines="1"
                     android:paddingVertical="4dp"
-                    android:text="팔로워 000"
+                    tools:text="팔로워 000"
                     android:textColor="@color/greyish_brown"
                     android:textFontWeight="400"
                     app:layout_constraintEnd_toStartOf="@+id/txt_main_following"
@@ -182,7 +182,7 @@
                     android:gravity="center"
                     android:lines="1"
                     android:paddingVertical="4dp"
-                    android:text="팔로잉 000"
+                    tools:text="팔로잉 000"
                     android:textColor="@color/greyish_brown"
                     android:textFontWeight="400"
                     app:layout_constraintBottom_toBottomOf="@+id/txt_main_follower"
@@ -190,14 +190,6 @@
                     app:layout_constraintStart_toEndOf="@+id/txt_main_follower"
                     app:layout_constraintTop_toTopOf="@+id/txt_main_follower"
                     app:layout_constraintVertical_bias="1.0" />
-
-                <ImageView
-                    android:id="@+id/img_main_profile_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/btn_bg_edit"
-                    app:layout_constraintBottom_toBottomOf="@+id/img_main_profile"
-                    app:layout_constraintEnd_toEndOf="@+id/img_main_profile" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

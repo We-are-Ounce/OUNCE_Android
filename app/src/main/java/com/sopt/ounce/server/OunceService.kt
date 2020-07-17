@@ -42,10 +42,16 @@ interface OunceService {
     @Multipart
     @POST("profile/register")
     fun postCatProfile(
-        @Header("Token") token: String,
+        @Header("token") token: String,
         @Part profileImg: MultipartBody.Part,
         @PartMap body: HashMap<String, RequestBody>
     ): Call<ResponseCatProfileData>
+
+    @Headers("Content-Type:application/json")
+    @POST("profile/limitProfile")
+    fun postIsLimit(
+        @Header("token") token : String
+    ) : Call<ResponseLimitData>
 
     //////////////////////////////////////
 
@@ -124,9 +130,10 @@ interface OunceService {
     ) : Call<ResponseReviewData>
 
     @Headers("Content-Type:application/json")
-    @GET("profile/convesion/{profileIdx}")
-    fun getConvesionProfile(
-        @Path("profileIdx") profileIdx: Int
+    @GET("profile/conversion/{profileIdx}")
+    fun getConversionProfile(
+        @Header("token") token: String,
+        @Path("profileIdx") profileIdx : Int
     ) : Call<BottomProfileData>
 
     @GET("review/{profileIdx}/category")
