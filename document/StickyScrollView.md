@@ -2,6 +2,8 @@
 
 ## 구현 화면
 
+<img src = "https://user-images.githubusercontent.com/55642709/87779855-77c87000-c868-11ea-977d-8a0b92ca31c4.gif" width="40%"/>
+
 ## 구현 방법
 
 ### 레이아웃을 StickyNestedLayout 태그로 감싸준다.
