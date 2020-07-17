@@ -91,7 +91,10 @@ class ProductReviewActivity : AppCompatActivity() {
                     dataFood.foodIdx,
                     dataFood.foodImg,
                     dataFood.foodManu,
-                    dataFood.foodName
+                    dataFood.foodName,
+                    dataFood.foodDry,
+                    dataFood.foodMeat1,
+                    dataFood.foodMeat2
                 )
                 val intent = Intent(view!!.context, RecordActivity::class.java)
                 intent.putExtra("foodItem", myRecordSearchFoodData)

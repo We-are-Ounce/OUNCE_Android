@@ -51,7 +51,7 @@ class ImageSearchActivity : AppCompatActivity() {
         textView.setTextColor(Color.DKGRAY)
         rv_record_search.layoutManager = LinearLayoutManager(rv_record_search.context)
         rv_record_search.setHasFixedSize(true)
-        getItemList()
+        //getItemList()
         mItemAdapter = ItemAdapter(this)
         rv_record_item.adapter = mItemAdapter
         record_search_sv.setOnQueryTextFocusChangeListener(object : View.OnFocusChangeListener{
@@ -122,22 +122,22 @@ class ImageSearchActivity : AppCompatActivity() {
         //getGoodsList()
     }
 
-    private fun getItemList() {
-        val listItem = ArrayList<String>()
-        listItem.add("이현우")
-        listItem.add("안드")
-        listItem.add("빅보")
-        listItem.add("바보")
-        listItem.add("주예는")
-        listItem.add("귀여워")
-        listItem.add("깜찍이")
-        listItem.add("꾹구각가")
-        listItem.add("메롱")
-        listItem.add("끄아")
-        listItem.add("국국")
-        adapter = RecyclerViewAdapter(listItem)
-        rv_record_search.adapter = adapter
-    }
+//    private fun getItemList() {
+//        val listItem = ArrayList<String>()
+//        listItem.add("이현우")
+//        listItem.add("안드")
+//        listItem.add("빅보")
+//        listItem.add("바보")
+//        listItem.add("주예는")
+//        listItem.add("귀여워")
+//        listItem.add("깜찍이")
+//        listItem.add("꾹구각가")
+//        listItem.add("메롱")
+//        listItem.add("끄아")
+//        listItem.add("국국")
+//        adapter = RecyclerViewAdapter(listItem)
+//        rv_record_search.adapter = adapter
+//    }
 
 //    private fun getGoodsList(){
 //        mGoodsData.apply {

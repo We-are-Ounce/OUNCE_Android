@@ -1,6 +1,5 @@
 package com.sopt.ounce.record.ui
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,11 +7,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amn.easysharedpreferences.EasySharedPreference
 import com.bumptech.glide.Glide
-import com.google.android.material.chip.Chip
 import com.sopt.ounce.R
 import com.sopt.ounce.record.data.RequestRecordReviewData
 import com.sopt.ounce.record.data.ResponseRecordReviewData
-import com.sopt.ounce.main.ui.MainActivity
 import com.sopt.ounce.record.RecordItemDecoration
 import com.sopt.ounce.record.adapter.FeatureAdapter
 import com.sopt.ounce.record.data.FeatureData
@@ -191,7 +188,7 @@ class RecordActivity : AppCompatActivity() {
     }
 
     private fun setChipCheckListener() {
-        chipGroup_status.setOnCheckedChangeListener { group, checkedId ->
+        chipGroup_status.setOnCheckedChangeListener { _, checkedId ->
             if (checkedId == -1) {
                 mStatus = 0
             }
