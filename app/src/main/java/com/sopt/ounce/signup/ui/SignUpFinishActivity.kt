@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.sopt.ounce.R
 import com.sopt.ounce.catregister.ui.CatRegisterActivity
 import com.sopt.ounce.login.ui.LoginActivity
@@ -21,6 +23,11 @@ class SignUpFinishActivity : AppCompatActivity() {
             finish()
         }
 
+        Glide.with(this)
+            .asGif()
+            .load(R.raw.welcome)
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+            .into(img_signup_gif)
 
     }
 

@@ -36,11 +36,10 @@
 
                 <ImageButton
                     android:id="@+id/record_goback_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="24dp"
                     android:background="#FFFFFF"
                     android:src="@drawable/ic_back" />
 

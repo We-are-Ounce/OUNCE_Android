@@ -6,14 +6,15 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".signup.ui.SignUpActivity">
+
     <ImageView
         android:id="@+id/img_signup_back"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginBottom="23dp"
-        android:paddingRight="15dp"
+        android:layout_marginEnd="60dp"
+        android:padding="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/scroll_signup"
+        app:layout_constraintEnd_toStartOf="@+id/img_signup_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/btn_back" />
@@ -22,12 +23,13 @@
         android:id="@+id/img_signup_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/img_signup_back"
-        app:srcCompat="@drawable/img_logo" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_logo_login" />
 
     <ScrollView
         android:id="@+id/scroll_signup"

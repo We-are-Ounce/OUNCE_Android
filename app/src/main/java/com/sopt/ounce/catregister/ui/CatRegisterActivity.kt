@@ -34,6 +34,8 @@ class CatRegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cat_register)
 
+
+
         // 상태바 아이콘 변경
         StatusObject.setStatusBar(this)
         //뷰페이저 설정
@@ -62,9 +64,6 @@ class CatRegisterActivity : AppCompatActivity() {
                 buttonEnable(false)
             } else {
                 settingDataMultiForm()
-                val move = Intent(this, CatRegisterFinishActivity::class.java)
-                startActivity(move)
-
             }
         }
 
@@ -96,6 +95,9 @@ class CatRegisterActivity : AppCompatActivity() {
         ).customEnqueue(
             onSuccess = {
                 "OunceCatRegisterSuccess".showLog("CatRegisterOk")
+                val intent = Intent(this,CatRegisterFinishActivity::class.java)
+                startActivity(intent)
+                finish()
             },
             onError = {
                 "ServerError".showLog("고양이 프로필 등록 에러 : ${it.code()}")
