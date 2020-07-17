@@ -1,6 +1,5 @@
 package com.sopt.ounce.record.ui
 
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -64,44 +63,46 @@ class RecordModifyActivity : AppCompatActivity() {
 
         startServerReview()
 
+        val popup = PopupMenu(this, btn_record_popup)
+        popup.inflate(R.menu.record_popup)
+        popup.setOnMenuItemClickListener {
+            when (it.title) {
+                "수정" -> {
+                    record_update_button.visibility = View.VISIBLE
+                }
+                "삭제" -> {
+
+                    mModifyRequest.SERVICE.deleteDataReview(
+                        mAccessToken,
+                        mProfileIdx,
+                        mReviewIdx
+                    ).customEnqueue(
+                        onSuccess = {
+                            Toast.makeText(
+                                this@RecordModifyActivity,
+                                "내가 쓴 리뷰 삭제 성공",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            finish()
+                        },
+                        onError = {
+                            Toast.makeText(
+                                this@RecordModifyActivity,
+                                "리뷰 삭제 권한이 없습니다.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
+                    )
+                }
+
+            }
+            true
+        }
+
 
         btn_record_popup.setOnClickListener {
-            val popup = PopupMenu(this, btn_record_popup)
-            popup.inflate(R.menu.record_popup)
-            popup.setOnMenuItemClickListener {
-                when (it.title) {
-                    "수정" -> {
-                        record_update_button.visibility = View.VISIBLE
-                    }
-                    "삭제" -> {
 
-                        mModifyRequest.SERVICE.deleteDataReview(
-                            mAccessToken,
-                            mProfileIdx,
-                            mReviewIdx
-                        ).customEnqueue(
-                            onSuccess = {
-                                Toast.makeText(
-                                    this@RecordModifyActivity,
-                                    "내가 쓴 리뷰 삭제 성공",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                finish()
-                            },
-                            onError = {
-                                Toast.makeText(
-                                    this@RecordModifyActivity,
-                                    "리뷰 삭제 권한이 없습니다.",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-
-                        )
-                    }
-
-                }
-                true
-            }
             popup.show()
         }
 
