@@ -419,6 +419,9 @@ class HomeFragment : Fragment() {
             }
 
         }
+
+        // 고양이 이름 SharedPreference에 저장
+        EasySharedPreference.Companion.putString("catName",data.profileName)
     }
 
     @SuppressLint("SetTextI18n")
