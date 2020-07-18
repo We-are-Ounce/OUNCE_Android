@@ -59,7 +59,7 @@ class RecordModifyActivity : AppCompatActivity() {
             txt_update_myrecord.text = "나의 기록"
             btn_record_popup.visibility = View.VISIBLE
         } else {
-            txt_update_myrecord.text = ""
+            txt_update_myrecord.text = "제품 리뷰"
         }
 
         enableChange(false, layout_modify_parent)
