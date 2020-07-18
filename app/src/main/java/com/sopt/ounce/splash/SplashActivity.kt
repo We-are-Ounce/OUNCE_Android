@@ -24,12 +24,6 @@ class SplashActivity : AppCompatActivity() {
 
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
-        Glide.with(this)
-            .asGif()
-            .load(R.raw.splash)
-            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-            .into(img_splash)
-
         val thread = Thread2()
         thread.start()
     }
