@@ -21,7 +21,8 @@
         <activity
             android:name=".configuration.ConfigurationActivity"
             android:exported="true" />
-        <activity android:name=".catregister.ui.CatRegisterFinishActivity" />
+        <activity android:name=".catregister.ui.CatRegisterFinishActivity"
+            android:exported="true"/>
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
@@ -36,7 +37,8 @@
             android:name=".catregister.ui.CatRegisterActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".signup.ui.SignUpFinishActivity" />
+        <activity android:name=".signup.ui.SignUpFinishActivity"
+            android:exported="true"/>
         <activity
             android:name=".signup.ui.SignUpActivity"
             android:exported="true"

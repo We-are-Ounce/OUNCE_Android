@@ -25,7 +25,7 @@ class SignUpFinishActivity : AppCompatActivity() {
 
         Glide.with(this)
             .asGif()
-            .load(R.raw.welcome)
+            .load(R.raw.signup_finish)
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
             .into(img_signup_gif)
 
