@@ -9,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.WindowManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.sopt.ounce.R
 import com.sopt.ounce.login.ui.LoginActivity
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -22,6 +23,12 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
+        Glide.with(this)
+            .asGif()
+            .load(R.raw.splash)
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+            .into(img_splash)
 
         val thread = Thread2()
         thread.start()

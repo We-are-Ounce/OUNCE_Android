@@ -513,7 +513,7 @@
             android:backgroundTint="@color/black_two"
             android:fontFamily="@font/notosanskr_medium"
             android:text="수정 완료"
-            android:visibility="visible"
+            android:visibility="gone"
             android:textColor="@color/white_two"
             app:layout_constraintBottom_toBottomOf="parent"
              />

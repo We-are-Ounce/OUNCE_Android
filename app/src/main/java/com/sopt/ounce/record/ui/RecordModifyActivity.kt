@@ -180,6 +180,8 @@ class RecordModifyActivity : AppCompatActivity() {
         //리뷰 수정
         //리뷰 수정 데이터 불러오기
         record_update_button.setOnClickListener {
+            "OunceModiFyStatus".showLog("$mProfileIdx, $mReviewIdx, ${reviewData.foodIdx}")
+
             mModifyRequest.SERVICE.putUpdateReview(
                 accessToken = mAccessToken,
                 reviewIdx = mReviewIdx,
@@ -195,7 +197,7 @@ class RecordModifyActivity : AppCompatActivity() {
                     reviewHair = reviewData.reviewHair,
                     reviewVomit = reviewData.reviewVomit,
                     foodIdx = reviewData.foodIdx,
-                    profileIdx = EasySharedPreference.Companion.getInt("profileIdx", 1)
+                    profileIdx = mProfileIdx
                 )
             ).customEnqueue(
                 onSuccess = {
