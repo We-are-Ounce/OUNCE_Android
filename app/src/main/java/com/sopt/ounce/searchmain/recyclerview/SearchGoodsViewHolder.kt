@@ -37,22 +37,9 @@ class SearchGoodsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         tv_search_goods_company.text = foodData.foodManu
         tv_search_goods_name.text = foodData.foodName
         tv_search_goods_review.text = foodData.reviewCount.toString()
-        when(foodData.avgRating.toInt()){
-            1 -> tv_search_goods_staramount.text = "1"
-            2 -> tv_search_goods_staramount.text = "2"
-            3 -> tv_search_goods_staramount.text = "3"
-            4 -> tv_search_goods_staramount.text = "4"
-            5 -> tv_search_goods_staramount.text = "5"
-            else -> tv_search_goods_staramount.text = "0"
-        }
-        when(foodData.avgPrefer.toInt()){
-            1 -> tv_search_goods_heartamount.text = "1"
-            2 -> tv_search_goods_heartamount.text = "2"
-            3 -> tv_search_goods_heartamount.text = "3"
-            4 -> tv_search_goods_heartamount.text = "4"
-            5 -> tv_search_goods_heartamount.text = "5"
-            else -> tv_search_goods_heartamount.text = "0"
-        }
+        tv_search_goods_staramount.text = "${foodData.avgRating.toInt()}"
+        tv_search_goods_heartamount.text = "${foodData.avgPrefer.toInt()}"
+
         foodIdx = foodData.foodIdx
         foodMeat1 = foodData.foodMeat1
         foodMeat2 = foodData.foodMeat2

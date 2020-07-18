@@ -33,7 +33,8 @@
             android:includeFontPadding="false"
             android:text="냐옹이컴퍼니"
             android:textColor="@color/warm_grey"
-            android:textSize="10sp" />
+            android:lineSpacingExtra="9sp"
+            android:textSize="8sp" />
 
         <TextView
             android:id="@+id/tv_main_goods_name"
@@ -42,8 +43,9 @@
             android:fontFamily="@font/notosanskr_medium"
             android:includeFontPadding="false"
             android:text="내추랄발란스 연어"
-            android:textColor="@color/greyish_brown"
-            android:textSize="16sp" />
+            android:textColor="@color/black_two"
+            android:lineSpacingExtra="3sp"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_main_goods_review"
@@ -53,7 +55,7 @@
             android:includeFontPadding="false"
             android:text="리뷰(25)"
             android:textColor="@color/battleship_grey"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
 
     </LinearLayout>
 
@@ -76,7 +78,7 @@
             style="@style/fontFamiliyandPadding"
             android:textColor="@color/warm_grey"
             android:id="@+id/tv_main_goods_staramount"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:lineSpacingExtra="5sp"
             android:text="5"
             android:layout_marginRight="7dp"
@@ -94,7 +96,7 @@
             style="@style/fontFamiliyandPadding"
             android:textColor="@color/warm_grey"
             android:id="@+id/tv_main_goods_heartamount"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:lineSpacingExtra="5sp"
             android:text="5"
             android:layout_width="wrap_content"

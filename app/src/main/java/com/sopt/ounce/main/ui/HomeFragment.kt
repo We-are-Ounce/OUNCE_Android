@@ -162,7 +162,7 @@ class HomeFragment : Fragment() {
         startServerProfile()
 
         // 리뷰 데이터를 받아서 리사이클러 뷰로 뿌리기기
-        startServerReviewDate()
+//        startServerReviewDate()
 
         //최하단으로 이동했을 때 10개 씩 데이터 추가
         v.sticky_scroll_main.setOnScrollChangeListener(

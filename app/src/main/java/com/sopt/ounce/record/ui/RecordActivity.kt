@@ -169,11 +169,11 @@ class RecordActivity : AppCompatActivity() {
                         //성공했을 때 처리
                         if (responseRecord.body()!!.success) {
                             "Record - success".showLog("here2")
-                            Toast.makeText(this@RecordActivity, "리뷰 등록 성공입니다.", Toast.LENGTH_SHORT)
+                            Toast.makeText(this@RecordActivity, "리뷰 등록 완료", Toast.LENGTH_SHORT)
                                 .show()
                             finish()
                         } else {
-                            Toast.makeText(this@RecordActivity, "필요한 값이 없습니다.", Toast.LENGTH_SHORT)
+                            Toast.makeText(this@RecordActivity, "리뷰 등록 실패", Toast.LENGTH_SHORT)
                                 .show()
                             finish()
                         }
