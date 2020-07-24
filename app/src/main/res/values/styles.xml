@@ -2,17 +2,20 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/dark_peach</item>
         <item name="colorPrimaryDark">@color/white</item>
         <item name="colorAccent">@color/dark</item>
         <item name="colorControlNormal">@color/white_three</item>
     </style>
     
     <style name="mainTheme" parent="Theme.MaterialComponents.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/dark_peach</item>
         <item name="colorPrimaryDark">@color/white</item>
         <item name="colorAccent">@color/dark</item>
         <item name="colorControlNormal">@color/white_three</item>
+        <item name="android:itemBackground">@color/white</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/popupModifyStyle</item>
+        <item name="android:textAppearanceSmallPopupMenu">@style/popupModifyStyle</item>
     </style>
 
     <style name="starRating" parent="Widget.AppCompat.RatingBar">
@@ -26,10 +29,10 @@
         <item name="fontFamily">@font/notosanskr</item>
     </style>
 
-    <style name="SamllText" parent="fontFamiliyandPadding">
+    <style name="SmallText" parent="fontFamiliyandPadding">
         <item name="android:textSize">12sp</item>
         <item name="android:lineSpacingExtra">7sp</item>
-        <item name="android:textColor">@color/warm_grey</item>
+        <item name="android:textColor">@color/greyish_two</item>
     </style>
 
     <style name="siginButtonStyle" parent="fontFamiliyandPadding">
@@ -38,6 +41,14 @@
         <item name="android:gravity">center_horizontal</item>
         <item name="android:paddingVertical">13dp</item>
         <item name="android:paddingHorizontal">73dp</item>
+    </style>
+
+    <style name="configurationStyle" parent="fontFamiliyandPadding">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:lineSpacingExtra">18sp</item>
+        <item name="android:paddingLeft">28dp</item>
+        <item name="android:paddingVertical">18dp</item>
     </style>
 
 
@@ -68,7 +79,7 @@
     <style name="pinkTextStyle" parent="fontFamiliyandPadding">
         <item name="android:textSize">12sp</item>
         <item name="android:lineSpacingExtra">7sp</item>
-        <item name="android:textColor">@color/pinkish_tan</item>
+        <item name="android:textColor">@color/dark_peach</item>
         <item name="android:fontWeight">400</item>
     </style>
 
@@ -83,6 +94,20 @@
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">5sp</item>
 
+    </style>
+
+    <style name="recordFilterStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipMinHeight">16dp</item>
+        <item name="chipMinTouchTargetSize">0dp</item>
+        <item name="chipEndPadding">12dp</item>
+        <item name="chipStartPadding">12dp</item>
+        <item name="chipBackgroundColor">@color/record_chip_status</item>
+        <item name="checkedIconEnabled">false</item>
+        <item name="checkedIconVisible">false</item>
+    </style>
+
+    <style name="popupModifyStyle" parent="@style/TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textColor">@color/greyish_brown</item>
     </style>
 
     <style name = "MySearchViewStyle" parent="Widget.AppCompat.SearchView">
@@ -112,5 +137,6 @@
             android:drawable="@drawable/ic_total_unselected"></item>
 
     </style>-->
+
 
 </resources>

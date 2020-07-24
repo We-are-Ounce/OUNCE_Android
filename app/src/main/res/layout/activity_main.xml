@@ -6,19 +6,25 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.MainActivity">
+    tools:context=".main.ui.MainActivity">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_main_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_main_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white_five">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_main_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white_five">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
         <com.google.android.material.bottomappbar.BottomAppBar
@@ -39,16 +45,16 @@
         android:id="@+id/fab_write"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/wheat"
+        android:backgroundTint="@color/dark_peach"
         android:scaleType="center"
         app:borderWidth="0dp"
-        app:fabCustomSize="80dp"
+        app:fabCustomSize="53dp"
         app:layout_anchor="@id/bottom_main_appbar"
         app:layout_constraintBottom_toTopOf="@+id/bottom_main_appbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:maxImageSize="32dp"
-        app:srcCompat="@drawable/ic_add"
+        app:srcCompat="@drawable/ic_baseline_add_24"
         app:tint="@null" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -48,18 +48,4 @@ class ViewPagerAdapter(val context: Context): PagerAdapter() {
         return img_search_main_profile_src.size
     }
 
-//    private fun bindItem(itemView: View){
-//        val img_search_main_profile = itemView.findViewById<ImageView>(R.id.img_search_main_profile)
-//        val tv_search_main_cat_name = itemView.findViewById<TextView>(R.id.tv_search_main_cat_name)
-//        val tv_search_main_cat_similarity = itemView.findViewById<TextView>(R.id.tv_search_main_cat_similarity)
-//        val img_search_main_review_1 = itemView.findViewById<ImageView>(R.id.img_search_main_review_1)
-//        val img_search_main_review_2 = itemView.findViewById<ImageView>(R.id.img_search_main_review_2)
-//        val img_search_main_review_3 = itemView.findViewById<ImageView>(R.id.img_search_main_review_3)
-//        img_search_main_profile.setImageResource(img_search_main_profile_src)
-//        tv_search_main_cat_name.text = data.tv_search_main_cat_name
-//        tv_search_main_cat_similarity.text = "${data.tv_search_main_cat_similarity}%"
-//        img_search_main_review_1.setImageResource(data.img_search_main_review_1)
-//        img_search_main_review_2.setImageResource(data.img_search_main_review_2)
-//        img_search_main_review_3.setImageResource(data.img_search_main_review_3)
-//    }
 }

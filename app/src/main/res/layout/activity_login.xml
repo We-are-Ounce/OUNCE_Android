@@ -25,7 +25,7 @@
                 android:fontFamily="@font/notosanskr"
                 android:lineSpacingExtra="8sp"
                 android:text="아이디"
-                android:textColor="@color/dark"
+                android:textColor="@color/black_two"
                 android:textFontWeight="400"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -53,7 +53,7 @@
                 android:layout_marginTop="4dp"
                 android:paddingTop="7dp"
                 android:ems="10"
-                android:hint="아이디"
+                android:hint="Id"
                 android:inputType="text"
                 android:maxLength="15"
                 android:lines="1"
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="63dp"
-                android:background="@drawable/img_logo"
+                android:background="@drawable/img_logo_login"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -82,7 +82,7 @@
                 android:fontFamily="@font/notosanskr"
                 android:lineSpacingExtra="8sp"
                 android:text="비밀번호"
-                android:textColor="@color/dark"
+                android:textColor="@color/black_two"
                 android:textFontWeight="400"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -95,7 +95,7 @@
                 android:layout_marginTop="4dp"
                 android:ems="10"
                 android:paddingTop="7dp"
-                android:hint="비밀번호"
+                android:hint="Password"
                 android:maxLength="15"
                 android:lines="1"
                 android:textSize="16sp"
@@ -130,16 +130,17 @@
         android:fontFamily="@font/notosanskr"
         android:lineSpacingExtra="18sp"
         android:text="로그인"
-        android:textColor="@color/white"
+        android:textColor="@color/login_text_color"
         android:textFontWeight="400"
         android:textSize="18sp"
+        android:enabled="false"
         app:layout_constraintTop_toBottomOf="@id/txt_login_fail"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintStart_toStartOf="@id/guideline"/>
 
     <TextView
         android:id="@+id/txt_login_find_id"
-        style="@style/SamllText"
+        style="@style/SmallText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
@@ -153,7 +154,7 @@
 
     <TextView
         android:id="@+id/txt_login_null"
-        style="@style/SamllText"
+        style="@style/SmallText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
@@ -166,7 +167,7 @@
 
     <TextView
         android:id="@+id/txt_login_find_password"
-        style="@style/SamllText"
+        style="@style/SmallText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
@@ -180,7 +181,7 @@
 
     <TextView
         android:id="@+id/txt_login_null2"
-        style="@style/SamllText"
+        style="@style/SmallText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
@@ -193,7 +194,7 @@
 
     <TextView
         android:id="@+id/txt_login_signup"
-        style="@style/SamllText"
+        style="@style/SmallText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"

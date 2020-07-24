@@ -2,25 +2,29 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        android:background="#fafafa"
+        android:id="@+id/fm_search_good"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".searchmain.fragment.SearchGoodsFragment">
 
-    <androidx.appcompat.widget.AppCompatSpinner
+    <Spinner
         android:id="@+id/spn_search_goods_filter"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:textSize = "12sp"
         android:gravity="end"
+        android:visibility="gone"
         android:fontFamily="@font/notosanskr_regular"
-        android:backgroundTint="@color/greyish_brown"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:popupBackground="@color/white"
         />
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_search_goods_goodsresult"
+        android:paddingHorizontal="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"

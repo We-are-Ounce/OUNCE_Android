@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/notosanskr_medium"
             android:includeFontPadding="false"
-            android:text="@ounce001"
+            android:text="ounce001"
             android:textColor="@color/warm_grey"
             android:textSize="10sp" />
 
@@ -41,7 +41,7 @@
             android:includeFontPadding="false"
             android:text="냐옹이"
             android:textColor="@color/greyish_brown"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tv_search_user_explain"
@@ -51,7 +51,7 @@
             android:includeFontPadding="false"
             android:text="나는 냐옹이다옹"
             android:textColor="@color/battleship_grey"
-            android:textSize="12sp" />
+            android:textSize="10sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

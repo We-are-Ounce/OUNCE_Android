@@ -11,8 +11,8 @@
         android:id="@+id/img_finish_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="69dp"
-        android:src="@drawable/img_logo_large"
+        android:layout_marginTop="68dp"
+        android:src="@drawable/img_logo_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,13 +22,15 @@
         style="@style/fontFamiliyandPadding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="127dp"
-        android:layout_marginTop="62dp"
+        android:layout_marginTop="68dp"
         android:lineSpacingExtra="11sp"
         android:text="회원가입"
-        android:textColor="@color/greyish_brown"
+        android:textColor="@color/black_two"
         android:textFontWeight="400"
         android:textSize="22sp"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_finish_logo" />
 
@@ -39,29 +41,31 @@
         android:layout_height="wrap_content"
         android:lineSpacingExtra="11sp"
         android:text="이"
-        android:textColor="@color/greyish_brown"
+        android:textColor="@color/black_two"
         android:textFontWeight="100"
         android:textSize="22sp"
 
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/textView" />
 
     <TextView
-        style="@style/fontFamiliyandPadding"
-        android:textFontWeight="100"
         android:id="@+id/textView3"
+        style="@style/fontFamiliyandPadding"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="완료되었습니다!"
-        android:textColor="@color/greyish_brown"
-        android:textSize="22sp"
         android:lineSpacingExtra="11sp"
+        android:text="완료되었습니다!"
+        android:textColor="@color/black_two"
+        android:textFontWeight="100"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
-        android:id="@+id/button"
+        android:id="@+id/btn_go_register"
         style="@style/fontFamiliyandPadding"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -72,14 +76,25 @@
         android:paddingTop="9dp"
         android:paddingBottom="13dp"
         android:text="고양이 등록"
-        android:textColor="@color/greyish_brown"
+        android:textColor="@color/white"
         android:textFontWeight="400"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.677" />
+        app:layout_constraintVertical_bias="0.708" />
+
+    <ImageView
+        android:id="@+id/img_signup_gif"
+        app:layout_constraintDimensionRatio="1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_go_register"
+        app:layout_constraintEnd_toEndOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        tools:srcCompat="@tools:sample/avatars" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

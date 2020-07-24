@@ -6,7 +6,6 @@
     android:id="@+id/fm_container"
     android:background="@color/white"
     android:paddingTop="8dp"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".searchmain.SearchFragment">
@@ -32,6 +31,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="visible"
+        android:background="#fafafa"
         android:id="@+id/clayout_search_main_notfocus"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,16 +50,29 @@
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_search_main_mycat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="겨울이"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textSize="22sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="와"
+                    android:textColor="@color/black"
+                    android:textSize="22sp" />
+            </LinearLayout>
+
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="겨울이와"
-                android:textColor="@color/black"
-                android:textSize="22sp" />
-
-            <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="입맛이 비슷해요"
                 android:textColor="@color/black"
@@ -68,28 +81,51 @@
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/vp_search_main_viewpager"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:clipToPadding="false"
             android:layout_marginVertical="40dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="12dp"
+            android:foregroundGravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linlo_explain" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.15"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85"
+            />
+
         <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
             android:id="@+id/di_search_main_dotsindicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:dotsColor="@color/white_five"
-            app:dotsCornerRadius="6dp"
+            app:dotsColor="#ebe8e5"
+            app:dotsCornerRadius="3dp"
             app:dotsSize="7dp"
             app:dotsSpacing="5dp"
-            app:dotsWidthFactor="2.8"
+            app:dotsWidthFactor="2.5"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vp_search_main_viewpager"
+            app:layout_constraintVertical_bias="0.80"
             app:progressMode="false"
-            app:selectedDotColor="@color/dark" />
+            app:selectedDotColor="@color/dark_peach" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -98,6 +134,7 @@
         android:id="@+id/clayout_search_main_focus"
         android:layout_height="0dp"
         android:visibility="gone"
+        android:clipChildren="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,9 +149,10 @@
             app:layout_constraintTop_toTopOf="parent"
             android:backgroundTint="@color/white"
             app:tabGravity="fill"
-            app:tabIndicatorColor="@color/wheat"
+            android:fontFamily = "@font/notosanskr_medium"
+            app:tabIndicatorColor="@color/dark_peach"
             app:tabSelectedTextColor="@color/black"
-            app:tabTextColor="@color/pinkish_gray">
+            app:tabTextColor="@color/greyish_two">
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_search_main_user"
@@ -122,6 +160,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="사용자"
+                android:textSize = "16sp"
+                android:lineSpacingExtra="3sp"
                 android:textStyle="bold" />
 
             <com.google.android.material.tabs.TabItem
@@ -130,13 +170,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="제품"
-                android:textColor="@color/black"
+                android:textSize = "16sp"
+                android:lineSpacingExtra="3sp"
                 android:textStyle="bold" />
 
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/vp_search_main_search"
+            android:background="#fafafa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/tab_search_main_onfocus" />

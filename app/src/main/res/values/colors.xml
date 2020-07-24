@@ -6,6 +6,7 @@
     <color name="dark">#27274e</color>
     <color name="warm_grey">#979797</color>
     <color name="black">#000000</color>
+    <color name="black_two">#333232</color>
     <color name="blush">#ea9e9e</color>
     <color name="wheat">#f8da81</color>
     <color name="greyish_brown">#3c3c3c</color>
@@ -17,4 +18,8 @@
     <color name="pinkish_gray">#cccccc</color>
     <color name="white_four">#f0f0f0</color>
     <color name="white_five">#d8d8d8</color>
+    <color name="dark_peach">#e27950</color>
+    <color name="white_six">#ebe8e5</color>
+    <color name="greyish">#aaa8a6</color>
+    <color name="greyish_two">#aea69f</color>
 </resources>

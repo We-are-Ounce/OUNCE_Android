@@ -8,44 +8,68 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.amn.easysharedpreferences.EasySharedPreference
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import com.sopt.ounce.R
-import com.sopt.ounce.catregister.CatRegisterActivity
-import com.sopt.ounce.main.MainActivity
+import com.sopt.ounce.catregister.ui.CatRegisterActivity
+import com.sopt.ounce.configuration.ConfigurationActivity
 import com.sopt.ounce.main.adapter.BottomProfileAdapter
 import com.sopt.ounce.main.adapter.ReviewAdapter
 import com.sopt.ounce.main.data.BottomProfileData
-import com.sopt.ounce.main.data.ReviewData
+import com.sopt.ounce.main.data.RequestSelectedFilter
+import com.sopt.ounce.main.data.ResponseMainProfileData
+import com.sopt.ounce.server.OunceServiceImpl
 import com.sopt.ounce.util.RcvItemDeco
+import com.sopt.ounce.util.customEnqueue
+import com.sopt.ounce.util.showLog
 import kotlinx.android.synthetic.main.bottomsheet_filter.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.profile_bottomsheet.*
+import kotlin.properties.Delegates
 
 
 class HomeFragment : Fragment() {
 
-    private lateinit var mContext : Context
-    private lateinit var v : View
-    private lateinit var mItem :Array<String>
-    private lateinit var mRecyclerAdapter : ReviewAdapter
-    private lateinit var mProfileAdapter : BottomProfileAdapter
-    private lateinit var mBottomsheetProfile : BottomSheetDialog
-    private lateinit var mFilterSheet : BottomSheetDialog
+    private lateinit var mContext: Context
+    private lateinit var v: View
+    private lateinit var mItem: Array<String>
+    private lateinit var mRecyclerAdapter: ReviewAdapter
+    private lateinit var mProfileAdapter: BottomProfileAdapter
+    private lateinit var mBottomsheetProfile: BottomSheetDialog
+    private lateinit var mFilterSheet: BottomSheetDialog
+    private var mProfileIdx by Delegates.notNull<Int>()
+    private val mOunce = OunceServiceImpl
+
+    // 리뷰 새로고침을 위한 카운트 (최신순)
+    private var mPagingDate = 0
+
+    // 리뷰 새로고침을 위한 카운트 (총점순)
+    private var mPagingRating = 0
+
+    //리뷰 새로고침을 위한 카운트 (기호도순)
+    private var mPagingPrefer = 0
 
 
     //서버에 보낼 건식 습식 필터
     private var mFilterDry = mutableListOf<String>()
+
     //서버에 보낼 주재료 필터
     private var mFilterFoodType = mutableListOf<String>()
+
     //서버에 보낼 제조사 필터
     private var mFilterManu = mutableListOf<String>()
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -54,19 +78,23 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mProfileIdx = EasySharedPreference.getInt("profileIdx",0)
+
         mBottomsheetProfile = BottomSheetDialog(mContext)
         mFilterSheet = BottomSheetDialog(mContext)
         mProfileAdapter = BottomProfileAdapter(mContext)
 
         activity?.onBackPressedDispatcher?.addCallback(this,
-        object  : OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-                ActivityCompat.finishAffinity(activity as MainActivity)
-            }
-        })
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    ActivityCompat.finishAffinity(activity as MainActivity)
+                }
+            })
 
     }
 
+    @Suppress("DEPRECATION")
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -79,14 +107,47 @@ class HomeFragment : Fragment() {
         mBottomsheetProfile.setContentView(R.layout.profile_bottomsheet)
         //필터 바텀시트 설정
         mFilterSheet.setContentView(R.layout.bottomsheet_filter)
+        settingFilter()
 
         // 스피너 설정
-        val spinnerAdapter = ArrayAdapter(mContext,
-            R.layout.main_custom_spinner, mItem)
+        val spinnerAdapter = ArrayAdapter(
+            mContext,
+            R.layout.main_custom_spinner, mItem
+        )
 
         spinnerAdapter.setDropDownViewResource(R.layout.main_custom_dropdown)
         v.spinner_main.apply {
             adapter = spinnerAdapter
+            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+
+                    when (parent?.getItemAtPosition(position).toString()) {
+                        "날짜 순" -> {
+                            mRecyclerAdapter.data.clear()
+                            startServerReviewDate()
+                        }
+
+                        "총점 순" -> {
+                            mRecyclerAdapter.data.clear()
+                            startServerReviewRating()
+                        }
+
+                        "기호도 순" -> {
+                            mRecyclerAdapter.data.clear()
+                            startServerReviewPrefer()
+                        }
+
+                    }
+                }
+            }
         }
 
         // 리사이클러뷰 설정
@@ -97,31 +158,40 @@ class HomeFragment : Fragment() {
             addItemDecoration(RcvItemDeco(mContext))
         }
 
+        // 서버 통신 시작한 후 데이터들을 받아서 프로필 뷰에 뿌려주기
+        startServerProfile()
 
-        mRecyclerAdapter.data = listOf(
-            ReviewData("https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg"
-                ,"company1","title1","intro1",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2020/06/29/19/26/piano-5353974__340.jpg"
-                ,"company2","title2","intro2",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/30/10/12/notredame-de-paris-4515298__340.jpg"
-                ,"company3","title3","intro3",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/10/01/13/58/coffee-4518354__340.png"
-                ,"company4","title4","intro4",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
-                ,"company5","title5","intro5",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
-                ,"company5","title5","intro5",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
-                ,"company5","title5","intro5",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
-                ,"company5","title5","intro5",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
-                ,"company9","title9","intro9",5,5),
-            ReviewData("https://cdn.pixabay.com/photo/2019/09/24/12/50/sea-4501231__340.jpg"
-                ,"company10","title10","intro10",5,5)
-        )
+        // 리뷰 데이터를 받아서 리사이클러 뷰로 뿌리기기
+//        startServerReviewDate()
 
-        settingFilter()
+        //최하단으로 이동했을 때 10개 씩 데이터 추가
+        v.sticky_scroll_main.setOnScrollChangeListener(
+            NestedScrollView.OnScrollChangeListener { v, _, scrollY, _, _ ->
+                if (scrollY == (v.getChildAt(0).measuredHeight - v.measuredHeight)) {
+
+                    when (v.spinner_main.selectedItem) {
+                        "날짜 순" -> {
+                            startServerReviewDate()
+                        }
+                        "총점 순" -> {
+                            startServerReviewRating()
+                        }
+                        "기호도 순" -> {
+                            startServerReviewPrefer()
+                        }
+                    }
+
+                }
+            })
+
+        //다른프로필 바텀 시트 세팅
+        mBottomsheetProfile.rcv_bottom_profile.apply {
+            adapter = mProfileAdapter
+            layoutManager = LinearLayoutManager(mContext)
+        }
+        initBottomSheet()
+
+
 
 
 
@@ -134,7 +204,11 @@ class HomeFragment : Fragment() {
         mRecyclerAdapter.notifyDataSetChanged()
 
         //고양이 이름 옆 아이콘 클릭 시 다른 고양이 프로필 선택 창 생성
-        img_main_dropdown.setOnClickListener {
+        img_main_profile_dropdown.setOnClickListener {
+            showBottomSheet()
+        }
+
+        txt_main_profile.setOnClickListener {
             showBottomSheet()
         }
 
@@ -143,47 +217,61 @@ class HomeFragment : Fragment() {
             showFilterSheet()
         }
 
+        //환경설정 창 이동
+        img_main_setting.setOnClickListener {
+            val intent = Intent(mContext,ConfigurationActivity::class.java)
+            startActivity(intent)
+        }
+
 
     }
 
     @Suppress("DEPRECATION")
     private fun settingFilter() {
         // 건식 습식 리스트
-        val mainFoodType = listOf<String>("건식", "습식")
+        val mainFoodType = listOf("건식", "습식")
 
         // 주재료 이름 리스트
-        val mainIngredients = listOf<String>(
+        val mainIngredients = listOf(
             "연어", "칠면조", "소", "닭", "양", "토끼",
             "오리", "참치", "돼지", "해산물", "사슴", "캥거루", "기타"
         )
 
-        // 제조사 이름 리스트
-        val mainManu = listOf<String>(
-            "GO!", "캣츠파인푸드", "테라펠리스", "나우"
+        //서버에서 제조사 이름 리스트 받아오기 시작
+        mOunce.SERVICE.getFilterManu(mProfileIdx).customEnqueue(
+            onSuccess = {
+                "OunceServer".showLog("리뷰 필터 불러오기 성공 \n ${it.data}")
+                //제조사 chip 생성 -> 서버 통신 받아서 유동적 해결
+                for (word in it.data) {
+                    "OunceStatus".showLog("리뷰 필터 데이터 단어 : ${word.foodManu}")
+                    val chip = chipSetting(word.foodManu, mFilterManu)
+                    mFilterSheet.chipgroup_main_manu.addView(chip)
+                }
+            },
+            onError = {
+                "OunceServerError".showLog("리뷰 필터 목록 ${it.code()}")
+            }
         )
+
 
         //건식 습식 chip 생성
         for (word in mainFoodType) {
-            val chip = chipSetting(word,mFilterDry)
+            val chip = chipSetting(word, mFilterDry)
             mFilterSheet.chipgroup_main_foodtype.addView(chip)
         }
 
         //주재료 chip 생성
         for (word in mainIngredients) {
-            val chip = chipSetting(word,mFilterFoodType)
+            val chip = chipSetting(word, mFilterFoodType)
             mFilterSheet.chipgroup_main_ingredient.addView(chip)
         }
 
-        //제조사 chip 생성 -> 서버 통신 받아서 유동적 해결
-        for(word in mainManu){
-            val chip = chipSetting(word, mFilterManu)
-            mFilterSheet.chipgroup_main_manu.addView(chip)
-        }
+
     }
 
 
     @Suppress("DEPRECATION")
-    private fun chipSetting(word : String, filterList : MutableList<String>) : Chip{
+    private fun chipSetting(word: String, filterList: MutableList<String>): Chip {
         val c = Chip(mContext)
         c.apply {
             text = word
@@ -192,16 +280,15 @@ class HomeFragment : Fragment() {
             isCheckedIconVisible = false
             setChipBackgroundColorResource(R.color.custom_filter)
             setTextAppearanceResource(R.style.filterTextStyle)
-            setTextColor(resources.getColor(R.color.dark))
+            setTextColor(resources.getColor(R.color.black_two))
             setChipStrokeColorResource(R.color.custom_filter_stroke)
             chipStrokeWidth = 6f
             setOnClickListener {
                 if (isChecked) {
-                    setTextColor(resources.getColor(R.color.white))
                     filterList.add(text.toString())
                     Log.d("List", "$filterList")
+
                 } else {
-                    setTextColor(resources.getColor(R.color.dark))
                     filterList.remove(text.toString())
                     Log.d("List", "$filterList")
 
@@ -212,42 +299,192 @@ class HomeFragment : Fragment() {
         return c
     }
 
-    private fun showFilterSheet(){
+    private fun showFilterSheet() {
         mFilterSheet.txt_filter_ok.setOnClickListener {
+            //필터 적용된 리뷰 목록 통신해서 기록갱신
+            mOunce.SERVICE.postSelectFiltering(
+                mProfileIdx,
+                RequestSelectedFilter(
+                    foodManu = mFilterManu,
+                    foodDry = mFilterDry,
+                    foodMeat = mFilterFoodType
+                )
+            ).customEnqueue(
+                onSuccess = {
+                    "OunceServerSuccess".showLog("리뷰 필터 적용 완료")
+                    mRecyclerAdapter.data.clear()
+                    mRecyclerAdapter.data.addAll(it.data)
+                    mRecyclerAdapter.notifyDataSetChanged()
+                },
+                onError = {
+                    "OunceServerError".showLog("리뷰 필터 적용 실패")
+                }
+            )
             mFilterSheet.dismiss()
         }
         mFilterSheet.show()
     }
 
+    private fun initBottomSheet(){
+        val accessToken = EasySharedPreference.Companion.getString("accessToken", "")
 
-    private fun showBottomSheet(){
-        mBottomsheetProfile.rcv_bottom_profile.apply{
-            adapter = mProfileAdapter
-            layoutManager = LinearLayoutManager(mContext)
-        }
+        // 다른 계정 클릭 시 이벤트
+        mProfileAdapter.setOnItemClickListener(object : BottomProfileAdapter.OnItemClickListener {
+            @Suppress("DEPRECATION")
+            override fun onItemClick(v: View, data: BottomProfileData.Data) {
+                EasySharedPreference.Companion.putInt("profileIdx", data.profileIdx)
+                val activity = activity as MainActivity
+                activity.resetFragment(data.profileIdx)
+                mBottomsheetProfile.dismiss()
+            }
+        })
 
-        mProfileAdapter.data = listOf(
-            BottomProfileData(
-                "https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg",
-                "title1",
-                "intro1",
-                false),
-            BottomProfileData(
-                "https://cdn.pixabay.com/photo/2020/07/04/06/40/clouds-5368435__340.jpg",
-                "title2",
-                "intro2",
-                false)
-        )
-        mProfileAdapter.notifyDataSetChanged()
-
+        //계정추카 버튼 및 판단하는 클릭 리스너
         mBottomsheetProfile.layout_bottomsheet_add_profile.setOnClickListener {
-            val intent = Intent(mContext, CatRegisterActivity::class.java)
-            startActivity(intent)
+            mOunce.SERVICE.postIsLimit(accessToken).customEnqueue(
+                onSuccess = {
+                    it.data.let { data ->
+                        if (data.possibleAddProfile) {
+                            val intent = Intent(mContext, CatRegisterActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            Toast.makeText(
+                                mContext,
+                                "최대 4개의 계정만 만들 수 있습니다.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                },
+                onError = {
+                    "OunceMainBottomProfileServerError".showLog("프로필 추가 생성 오류")
+                }
+            )
         }
+    }
 
+
+    private fun showBottomSheet() {
+        val accessToken = EasySharedPreference.Companion.getString("accessToken", "")
+
+        mOunce.SERVICE.getConversionProfile(accessToken,mProfileIdx).customEnqueue(
+            onSuccess = {
+                "OunceStatus".showLog("프로필 바텀시트 호출 메세지 : ${it.message}")
+                "OunceStatus".showLog("프로필 바텀시트 데이터 전달 \n ${it.data}")
+                mProfileAdapter.data.clear()
+                mProfileAdapter.data.addAll(it.data)
+                mProfileAdapter.notifyDataSetChanged()
+            },
+            onError = {
+                "OunceError".showLog("프로필 바텀시트 호출 오류")
+            }
+        )
 
         mBottomsheetProfile.show()
 
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun startServerProfile() {
+        val accessToken = EasySharedPreference.Companion.getString("accessToken", "")
+
+        mOunce.SERVICE.getMainProfile(accessToken, mProfileIdx).customEnqueue(
+            onSuccess = {
+                "OunceServerSuccess".showLog("메인프로필 화면 데이터 전달 성공 \n : ${it.data}")
+                v.txt_main_reviewcount.text = "(${it.data.reviewCountAll})"
+
+                settingDraw(it.data.profileInfoArray[0])
+            },
+            onError = {
+                "OunceServerError".showLog("메인프로필 화면 통신 오류 \n : ${it.code()}")
+            }
+        )
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun settingDraw(data: ResponseMainProfileData.Data.Profile) {
+        Glide.with(this)
+            .load(data.profileImg)
+            .error(R.drawable.img_cat)
+            .into(v.img_main_profile)
+
+        v.txt_main_profile.text = data.profileName
+        v.txt_main_weight.text = "${data.profileWeight}kg"
+        v.txt_main_age.text = "${data.profileAge}살"
+        v.txt_main_introduce.text = data.profileInfo
+        v.txt_main_follower.text = "팔로워 ${data.follower}"
+        v.txt_main_following.text = "팔로잉 ${data.following}"
+
+        if (data.profileGender == "male") {
+            if (data.profileNeutral == "true") {
+                v.img_main_gender.setImageResource(R.drawable.ic_nuetrul_male)
+            } else {
+                v.img_main_gender.setImageResource(R.drawable.ic_male)
+            }
+        } else {
+            if (data.profileNeutral == "true") {
+                v.img_main_gender.setImageResource(R.drawable.ic_nuetrul_female)
+            } else {
+                v.img_main_gender.setImageResource(R.drawable.ic_female)
+            }
+
+        }
+
+        // 고양이 이름 SharedPreference에 저장
+        EasySharedPreference.Companion.putString("catName",data.profileName)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun startServerReviewDate() {
+        mPagingPrefer = 0
+        mPagingRating = 0
+
+        mOunce.SERVICE.getMainReview(mProfileIdx, mPagingDate, mPagingDate + 9).customEnqueue(
+            onSuccess = {
+                "OunceServerSuccess".showLog("메인 프로필 리뷰 목록 불러오기 성공 \n ${it.data}")
+                mRecyclerAdapter.data.addAll(it.data)
+                mRecyclerAdapter.notifyDataSetChanged()
+                mPagingDate += 10
+            },
+            onError = {
+                "OunceServerError".showLog("메인 프로필 리뷰 목록 불러오기 오류")
+            }
+        )
+    }
+
+    private fun startServerReviewRating() {
+        mPagingDate = 0
+        mPagingPrefer = 0
+
+        mOunce.SERVICE.getRatingReview(mProfileIdx, mPagingRating, mPagingRating + 9).customEnqueue(
+            onSuccess = {
+                "OunceServerSuccess".showLog("총점으로 리뷰 목록 불러오기 성공 \n ${it.data}")
+                mRecyclerAdapter.data.addAll(it.data)
+                mRecyclerAdapter.notifyDataSetChanged()
+                mPagingRating += 10
+            },
+            onError = {
+                "OunceServerError".showLog("총점으로 리뷰 목록 불러오기 오류")
+            }
+        )
+    }
+
+    private fun startServerReviewPrefer() {
+        mPagingDate = 0
+        mPagingRating = 0
+
+
+        mOunce.SERVICE.getPreferReview(mProfileIdx, mPagingPrefer, mPagingPrefer + 9).customEnqueue(
+            onSuccess = {
+                "OunceServerSuccess".showLog("선호도로 리뷰 목록 불러오기 성공 \n ${it.data}")
+                mRecyclerAdapter.data.addAll(it.data)
+                mRecyclerAdapter.notifyDataSetChanged()
+                mPagingPrefer += 10
+            },
+            onError = {
+                "OunceServerError".showLog("선호도로 리뷰 목록 불러오기 오류")
+            }
+        )
     }
 
 }

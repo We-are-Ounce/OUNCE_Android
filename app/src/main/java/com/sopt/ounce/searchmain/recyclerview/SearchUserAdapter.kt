@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.ounce.R
+import com.sopt.ounce.searchmain.data.usersearch.UserData
 
 class SearchUserAdapter(private val context: Context): RecyclerView.Adapter<SearchUserViewHolder>() {
-    var datas = mutableListOf<SearchUserData>()
+    var datas = mutableListOf<UserData>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchUserViewHolder {
         val view = LayoutInflater.from(context).inflate(
             R.layout.item_search_main_usersearch,

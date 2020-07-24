@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import com.sopt.ounce.R
+import com.sopt.ounce.signup.data.UserInfoObject
 import com.sopt.ounce.util.textCheckListener
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.fragment_id.view.*
@@ -19,10 +20,16 @@ class IdFragment : Fragment() {
     private lateinit var mContext: Context
     private lateinit var v : View
     private lateinit var mImm : InputMethodManager
+    private lateinit var mActivity : SignUpActivity
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mActivity = activity as SignUpActivity
     }
 
     override fun onCreateView(
@@ -44,7 +51,7 @@ class IdFragment : Fragment() {
                     //길이 5이상 써주세요
                     v.txt_id_notice.visibility = View.VISIBLE
                     v.edt_id_input.background.setColorFilter(
-                        resources.getColor(R.color.pinkish_tan),
+                        resources.getColor(R.color.dark_peach),
                         PorterDuff.Mode.SRC_IN
                     )
 
@@ -52,7 +59,27 @@ class IdFragment : Fragment() {
                     //길이 충족 할 경우
                     v.txt_id_notice.visibility = View.INVISIBLE
                     v.edt_id_input.background.setColorFilter(
-                        resources.getColor(R.color.white_three),
+                        resources.getColor(R.color.greyish_two),
+                        PorterDuff.Mode.SRC_IN
+                    )
+
+                    mActivity.buttonEnable(true)
+
+                }
+
+                UserInfoObject.id = v.edt_id_input.text.toString()
+            }
+
+            setOnFocusChangeListener { _, has ->
+                if(has){
+                    v.edt_id_input.background.setColorFilter(
+                        resources.getColor(R.color.black_two),
+                        PorterDuff.Mode.SRC_IN
+                    )
+                }
+                else{
+                    v.edt_id_input.background.setColorFilter(
+                        resources.getColor(R.color.greyish_two),
                         PorterDuff.Mode.SRC_IN
                     )
                 }
@@ -65,15 +92,10 @@ class IdFragment : Fragment() {
 
     //외부에서 imm을 가져오기 위한 함수
     private fun settingMethodManager(){
-        val activity = activity as SignUpActivity
-        mImm = activity.methodManagerToFragment()
+        mImm = mActivity.methodManagerToFragment()
 
         v.layout_id_container.setOnClickListener {
             mImm.hideSoftInputFromWindow(v.edt_id_input.windowToken,0)
-            val id = v.edt_id_input.text.toString()
-//            if (id.length > 5 ){
-//                v.img_id_ok.visibility = View.VISIBLE
-//            }
         }
     }
 

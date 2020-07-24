@@ -6,14 +6,15 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".signup.ui.SignUpActivity">
+
     <ImageView
         android:id="@+id/img_signup_back"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginBottom="23dp"
-        android:paddingRight="15dp"
+        android:layout_marginEnd="60dp"
+        android:padding="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/scroll_signup"
+        app:layout_constraintEnd_toStartOf="@+id/img_signup_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/btn_back" />
@@ -22,19 +23,20 @@
         android:id="@+id/img_signup_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/img_signup_back"
-        app:srcCompat="@drawable/img_logo" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_logo_login" />
 
     <ScrollView
         android:id="@+id/scroll_signup"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_signup_ok"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,22 +47,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <com.sopt.ounce.util.NoSwipeViewPager
                 android:id="@+id/vp_signup"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent" />
 
-            </com.sopt.ounce.util.NoSwipeViewPager>
 
             <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
                 android:id="@+id/dot_signup_indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="499dp"
+                android:layout_marginTop="480dp"
                 android:fitsSystemWindows="false"
                 app:dotsColor="@color/white_five"
                 app:dotsCornerRadius="6dp"
@@ -71,7 +74,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/vp_signup"
                 app:progressMode="false"
-                app:selectedDotColor="@color/dark" />
+                app:selectedDotColor="@color/black_two" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -96,11 +99,12 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-
     <Button
         android:id="@+id/btn_signup_ok"
         style="@style/siginButtonStyle"
-        android:background="@drawable/singup_btn_unclick"
+        android:textColor="@color/greyish_two"
+        android:background="@drawable/drawable_signup_btn"
+        android:enabled="false"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="확인"

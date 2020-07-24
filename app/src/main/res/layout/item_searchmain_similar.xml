@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:backgroundTint="@color/white"
         app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -15,21 +16,59 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center">
 
-            <ImageView
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.2"
+                />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.8"
+                />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.1"
+                />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_img_bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.4"
+                />
+
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_search_main_profile"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="50dp"
-                android:layout_marginTop="21dp"
+                android:layout_height="0dp"
                 android:src="@drawable/img_card_cat"
                 app:layout_constraintDimensionRatio="1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintBottom_toTopOf="@id/guideline_img_bottom"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toTopOf="@id/guideline_top" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/guideline_name_bottom"
+                app:layout_constraintGuide_percent="0.6"/>
 
             <TextView
                 android:id="@+id/tv_search_main_cat_name"
@@ -38,49 +77,62 @@
                 android:layout_marginHorizontal="67dp"
                 android:fontFamily="@font/notosanskr_medium"
                 android:text="가을이"
-                android:textColor="@color/greyish_brown"
+                android:textColor="@color/black_two"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img_search_main_profile" />
-
-            <TextView
-                android:id="@+id/tv_search_main_cat_similarity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="62dp"
-                android:layout_marginRight="5.4dp"
-                android:fontFamily="@font/notosanskr_regular"
-                android:text="82%"
-                android:textColor="@color/greyish_brown"
-                app:layout_constraintEnd_toStartOf="@+id/tv_search_main_correspondence"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_search_main_cat_name" />
-
-            <TextView
-                android:id="@+id/tv_search_main_correspondence"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="62dp"
-                android:fontFamily="@font/notosanskr_regular"
-                android:text="일치"
-                android:textColor="@color/greyish_brown"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/tv_search_main_cat_similarity"
-                app:layout_constraintTop_toBottomOf="@+id/tv_search_main_cat_name" />
+                android:lineSpacingExtra="14sp"
+                android:fontWeight="400"
+                app:layout_constraintBottom_toTopOf="@id/guideline_name_bottom"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toTopOf="@+id/guideline_img_bottom" />
 
             <LinearLayout
+                android:id="@+id/llayout_cat_explain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/llayout_cat_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_search_main_cat_name">
+
+                <TextView
+                    android:id="@+id/tv_search_main_cat_similarity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="14sp"
+                    android:fontWeight="400"
+                    android:fontFamily="@font/notosanskr_regular"
+                    android:text="82%"
+                    android:textColor="#515050" />
+
+                <TextView
+                    android:id="@+id/tv_search_main_correspondence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/notosanskr_regular"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="14sp"
+                    android:fontWeight="400"
+                    android:text="일치"
+                    android:textColor="#515050" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/llayout_cat_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal"
                 android:paddingBottom="24dp"
+                android:orientation="horizontal"
+                app:layout_constraintVertical_bias="0.6"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_search_main_cat_similarity">
+                app:layout_constraintTop_toBottomOf="@+id/tv_search_main_cat_name">
 
                 <ImageView
                     android:id="@+id/img_search_main_review_1"

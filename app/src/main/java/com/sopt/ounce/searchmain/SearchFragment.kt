@@ -1,8 +1,7 @@
 package com.sopt.ounce.searchmain
 
-import android.app.Activity
+
 import android.content.Context
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -11,38 +10,73 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
 import android.widget.AutoCompleteTextView
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.Spinner
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.SearchView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.viewpager.widget.ViewPager
+import com.amn.easysharedpreferences.EasySharedPreference
 import com.google.android.material.tabs.TabLayout
 import com.sopt.ounce.R
-import com.sopt.ounce.main.MainActivity
+import com.sopt.ounce.main.ui.MainActivity
+import com.sopt.ounce.searchmain.data.SpinnerAdapterViewModel
+import com.sopt.ounce.searchmain.data.foodsearch.FoodData
+import com.sopt.ounce.searchmain.data.foodsearch.RequestFoodSearchData
+import com.sopt.ounce.searchmain.data.foodsearch.ResponseFoodSearchData
+import com.sopt.ounce.searchmain.data.reommendcat.RequestRecommendCatsData
+import com.sopt.ounce.searchmain.data.reommendcat.ResponseRecommendCatsData
+import com.sopt.ounce.searchmain.data.usersearch.RequestUserIdData
+import com.sopt.ounce.searchmain.data.usersearch.ResponseUserSearchData
+import com.sopt.ounce.searchmain.data.usersearch.UserData
+import com.sopt.ounce.searchmain.fragment.SearchSimilarUserFragment
+import com.sopt.ounce.searchmain.recyclerview.SearchGoodsAdapter
 import com.sopt.ounce.searchmain.recyclerview.SearchUserAdapter
-import com.sopt.ounce.searchmain.recyclerview.SearchUserData
+import com.sopt.ounce.searchmain.viewpager.SearchSimilarPagerAdapter
 import com.sopt.ounce.searchmain.viewpager.SearchTapAdapter
-import com.sopt.ounce.searchmain.viewpager.ViewPagerAdapter
 import com.sopt.ounce.searchmain.viewpager.ViewPagerTransformer
+import com.sopt.ounce.server.OunceServiceImpl
+import com.sopt.ounce.util.customEnqueue
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.fragment_cat_detail_register.*
-import kotlinx.android.synthetic.main.fragment_cat_detail_register.view.*
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
-import kotlinx.android.synthetic.main.fragment_search_user.*
-
+import kotlinx.android.synthetic.main.fragment_search_goods.*
+import kotlinx.android.synthetic.main.fragment_search_goods.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SearchFragment : Fragment() {
     private lateinit var mInputMethodManager: InputMethodManager
     private lateinit var mContext: Context
     private lateinit var mView: View
-    var isKeyboardFocused = false
+    private lateinit var cView : View
+    private var isKeyboardFocused = false
+    private lateinit var mPagerAdapter : SearchSimilarPagerAdapter
+    private lateinit var mUserSearchData : ResponseUserSearchData
+    private lateinit var mFoodSearchData : ResponseFoodSearchData
+    private lateinit var mSearchTapAdapter: SearchTapAdapter
+    var productQuery = ""
+
+    private val mProfileIdx = EasySharedPreference.Companion.getInt("profileIdx",1)
+
+
+    var receiveDataArraySearch = ResponseRecommendCatsData.Data(
+        listOf<ResponseRecommendCatsData.Data.RecommendFood>(
+            ResponseRecommendCatsData.Data.RecommendFood("", -1)),
+        listOf<ResponseRecommendCatsData.Data.ResultProfile>(
+            ResponseRecommendCatsData.Data.ResultProfile(-1, "", "")
+        ),
+        listOf<Int>(0)
+    )
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -62,6 +96,10 @@ class SearchFragment : Fragment() {
             container,
             false
         )
+        cView = inflater.inflate(R.layout.fragment_search_user,
+            container,
+            false
+            )
         observeKeyboard()
         settingMethodManager()
         return mView
@@ -69,28 +107,44 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         fm_container.setOnClickListener {
             mInputMethodManager.hideSoftInputFromWindow(sv_search_main_search.windowToken,0)
         }
         //메인 화면 ViewPager 어댑터 부착
-        var viewPagerAdapter = registerViewPagerAdapter(view)
-        vp_search_main_viewpager.adapter = viewPagerAdapter
+        initDataArray()
+        tv_search_main_mycat.text = EasySharedPreference.getString("catName", "고양이")
         vp_search_main_viewpager.clipToPadding = false
         vp_search_main_viewpager.clipChildren = false
-        vp_search_main_viewpager.offscreenPageLimit = 2
+        vp_search_main_viewpager.offscreenPageLimit = 1
         //메인 화면 PageTransFormer 부착
-        vp_search_main_viewpager.setPageTransformer(true, ViewPagerTransformer())
-        val DpValue = 80
+        vp_search_main_viewpager.setPageTransformer(false, ViewPagerTransformer())
+        val DpValue = 90
         val DisplayDensity = resources.displayMetrics.density
         val margin = DpValue * DisplayDensity.toInt()
-
         vp_search_main_viewpager.setPadding(margin,0,margin,0)
-        vp_search_main_viewpager.pageMargin = margin/32
+        vp_search_main_viewpager.pageMargin = margin/2
+        vp_search_main_viewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+            override fun onPageScrollStateChanged(state: Int) {
+                val mActivity = activity as MainActivity
+                val swipeViewPage = mActivity.findViewById<SwipeRefreshLayout>(R.id.swipe_main_refresh)
+                swipeViewPage.isEnabled = (state == ViewPager.SCROLL_STATE_IDLE)
+            }
 
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+
+            }
+
+        })
 
         //ViewPager와 DotsIndicator 연동
-        di_search_main_dotsindicator.setViewPager(vp_search_main_viewpager)
         sv_search_main_search.findViewById<AutoCompleteTextView>(R.id.search_src_text).
         setTextColor(resources.getColor(R.color.greyish_brown))
         sv_search_main_search.findViewById<AutoCompleteTextView>(R.id.search_src_text).
@@ -119,23 +173,20 @@ class SearchFragment : Fragment() {
                     clayout_search_main_focus.visibility = View.VISIBLE
                     isKeyboardFocused = true
                 }
-
-//                else{
-//                    clayout_search_main_notfocus.visibility = View.VISIBLE
-//                    clayout_search_main_focus.visibility = View.GONE
-//                }
             }
         })
 
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
                 if(clayout_search_main_focus.visibility == View.VISIBLE){
-                    Log.d("true", "1")
                     clayout_search_main_notfocus.visibility = View.VISIBLE
                     clayout_search_main_focus.visibility = View.GONE
+                    sv_search_main_search.setQuery("", false)
+                    val mViewModel = ViewModelProviders.of(activity as MainActivity).get(SpinnerAdapterViewModel::class.java)
+                    mViewModel.userQuery = ""
+                    mViewModel.productQuery = ""
                 }
                 else if(clayout_search_main_focus.visibility == View.GONE){
-                    Log.d("true", "100100")
                     ActivityCompat.finishAffinity(activity as MainActivity)
                 }
             }
@@ -143,62 +194,132 @@ class SearchFragment : Fragment() {
         })
 
         //검색 창 하단 ViewPager와 TabLayout 연동
-        vp_search_main_search.adapter = SearchTapAdapter(view.context,
-            childFragmentManager,
-            tab_search_main_onfocus.tabCount)
+        mSearchTapAdapter = SearchTapAdapter(view.context,childFragmentManager,tab_search_main_onfocus.tabCount)
+        vp_search_main_search.adapter =  mSearchTapAdapter
         vp_search_main_search.addOnPageChangeListener(
             TabLayout.TabLayoutOnPageChangeListener(tab_search_main_onfocus))
+
         tab_search_main_onfocus.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
+           override fun onTabUnselected(tab: TabLayout.Tab?) {
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 vp_search_main_search.currentItem = tab_search_main_onfocus.selectedTabPosition
+                sv_search_main_search.setQuery("", false)
+            }
+        })
+
+        //검색기능 구현
+        sv_search_main_search.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if(tab_search_main_onfocus.selectedTabPosition == 0){
+                    val ounce = OunceServiceImpl.SERVICE.postUserSearch(
+                        RequestUserIdData(
+                            userId = query!!,
+                            pageStart = 1,
+                            pageEnd = 100
+                        )
+                    )
+                    ounce.customEnqueue(
+                        onSuccess = {
+                            val mViewModel = ViewModelProviders.of(activity as MainActivity).get(SpinnerAdapterViewModel::class.java)
+                            mViewModel.userQuery == query!!
+                            mUserSearchData = it
+                            val mUserSearchAdapter = SearchUserAdapter(view.context)
+                            val mActivity = activity as MainActivity
+                            val searchUserRecyclerView = mActivity.findViewById<RecyclerView>(R.id.rv_search_user_searchresult)
+                            searchUserRecyclerView.adapter = mUserSearchAdapter
+                            mUserSearchAdapter.datas =  mUserSearchData.data as MutableList<UserData>
+                            mUserSearchAdapter.notifyDataSetChanged()
+                        },
+                        onFaile = {
+                        },
+                        onError = {
+                        }
+                    )
+                }
+                else if(tab_search_main_onfocus.selectedTabPosition == 1){
+                    val ounce = OunceServiceImpl.SERVICE.postReviewSortFavorite(
+                        RequestFoodSearchData(
+                            searchKeyword = query!!,
+                            pageStart = 1,
+                            pageEnd = 100
+                        )
+                    )
+                    ounce.enqueue(object : Callback<ResponseFoodSearchData>{
+                        override fun onFailure(call: Call<ResponseFoodSearchData>, t: Throwable) {
+                        }
+
+                        override fun onResponse(
+                            call: Call<ResponseFoodSearchData>,
+                            response: Response<ResponseFoodSearchData>
+                        ) {
+                            if(!response.body()!!.data.isNullOrEmpty()){
+                                val mViewModel = ViewModelProviders.of(activity as MainActivity).get(SpinnerAdapterViewModel::class.java)
+                                mViewModel.productQuery = query!!
+                                //productQuery = query!!
+                                mFoodSearchData = response.body()!!
+                                val mFoodSearchAdapter = SearchGoodsAdapter(view.context)
+                                val mActivity = activity as MainActivity
+                                val searchFoodRecyclerView = mActivity.findViewById<RecyclerView>(R.id.rv_search_goods_goodsresult)
+                                val searchSpinner = mActivity.findViewById<Spinner>(R.id.spn_search_goods_filter)
+                                if(searchSpinner.visibility == View.GONE)
+                                    searchSpinner.visibility = View.VISIBLE
+                                searchFoodRecyclerView.adapter = mFoodSearchAdapter
+                                mFoodSearchAdapter.datas = mFoodSearchData.data as MutableList<FoodData>
+                                mFoodSearchAdapter.notifyDataSetChanged()
+                            }
+                        }
+                    })
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
             }
         })
     }
 
-    private fun registerViewPagerAdapter(view: View) : ViewPagerAdapter{
-        var viewPagerAdapter = ViewPagerAdapter(view.context)
-        viewPagerAdapter.img_search_main_profile_src = listOf(
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat)
-        viewPagerAdapter.tv_search_main_cat_name_txt = listOf("봄이", "여름이", "가을이", "겨울이", "봄이")
-        viewPagerAdapter.tv_search_main_cat_similarity_txt = listOf(
-            "82",
-            "92",
-            "100",
-            "1",
-            "50"
+    private fun initDataArray(){
+        Log.d("Search - Call", "requestBefore")
+        val ounce = OunceServiceImpl.SERVICE.requestRecommendCat(
+            RequestRecommendCatsData(
+                profileIdx = mProfileIdx
+            )
         )
-        viewPagerAdapter.img_search_main_review_1_src = listOf(
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat
+        Log.d("Search - Call", "requestAfter")
+        ounce.customEnqueue(
+            onSuccess = {
+                receiveDataArraySearch = it.data.copy()
+                initViewPager()
+                di_search_main_dotsindicator.setViewPager(vp_search_main_viewpager)
+            },
+            onError = {
+            }
         )
-        viewPagerAdapter.img_search_main_review_2_src = listOf(
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat
-        )
-        viewPagerAdapter.img_search_main_review_3_src = listOf(
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat,
-            R.drawable.img_card_cat
-        )
-        return viewPagerAdapter
+    }
+
+    private fun initViewPager(){
+        //서버에서 데이터 받아
+        mPagerAdapter = SearchSimilarPagerAdapter(childFragmentManager)
+        for(i in receiveDataArraySearch.resultProfile.indices){
+            var mFragment = SearchSimilarUserFragment()
+            mFragment.img_search_main_profile_src = receiveDataArraySearch.resultProfile.get(i).profileImg
+            mFragment.tv_search_main_cat_name_txt = receiveDataArraySearch.resultProfile.get(i).profileName
+            mFragment.profileIdx = receiveDataArraySearch.resultProfile.get(i).profileIdx
+            mFragment.tv_search_main_cat_similarity_txt = receiveDataArraySearch.similarity.get(i)
+            for(arrIndices in receiveDataArraySearch.recommendFoodList.indices){
+                if(mFragment.profileIdx == receiveDataArraySearch.recommendFoodList.get(arrIndices).profileIdx)
+                    mFragment.img_search_main_review.add(receiveDataArraySearch.recommendFoodList.get(arrIndices).foodImg)
+            }
+            mPagerAdapter.addItem(mFragment)
+        }
+        mPagerAdapter.notifyDataSetChanged()
+        vp_search_main_viewpager.adapter = mPagerAdapter
     }
 
     private fun observeKeyboard(){
@@ -207,7 +328,6 @@ class SearchFragment : Fragment() {
                 .listen { isShow ->
                     if (!isShow){
                         mView.sv_search_main_search.clearFocus()
-                        
                     }
 
                 }

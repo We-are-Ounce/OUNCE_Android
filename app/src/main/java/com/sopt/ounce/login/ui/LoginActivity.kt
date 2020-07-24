@@ -13,21 +13,37 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import com.amn.easysharedpreferences.EasySharedPreference
+import com.amn.easysharedpreferences.EasySharedPreferenceConfig
 import com.sopt.ounce.R
-import com.sopt.ounce.main.MainActivity
+import com.sopt.ounce.catregister.ui.CatRegisterActivity
+import com.sopt.ounce.catregister.ui.CatRegisterFinishActivity
+import com.sopt.ounce.login.data.RequestLoginData
+import com.sopt.ounce.main.ui.MainActivity
+import com.sopt.ounce.server.OunceServiceImpl
 import com.sopt.ounce.util.textCheckListener
 import com.sopt.ounce.signup.ui.SignUpActivity
 import com.sopt.ounce.util.StatusObject
+import com.sopt.ounce.util.customEnqueue
+import com.sopt.ounce.util.showLog
 import gun0912.tedkeyboardobserver.TedKeyboardObserver
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var mImm: InputMethodManager
+    private var mId: String = ""
+    private var mPassword: String = ""
+
+    private val mLoginRequest: OunceServiceImpl = OunceServiceImpl
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        EasySharedPreferenceConfig.initDefault(EasySharedPreferenceConfig.Builder()
+            .inputFileName("easy_preference").inputMode(Context.MODE_PRIVATE).build())
+        EasySharedPreference.clear()
+
 
         //상태바 아이콘 색 변경
         StatusObject.setStatusBar(this)
@@ -43,89 +59,140 @@ class LoginActivity : AppCompatActivity() {
             mImm.hideSoftInputFromWindow(edt_login_id.windowToken, 0)
         }
 
-
-
-        // 로그인 체크
-        btn_login_btn.setOnClickListener {
-            checkIdPsw()
+        //기본적으로 로그인 버튼은 동작 불가
+        //로그인 체크
+        btn_login_btn.apply {
+            setOnClickListener {
+                checkIdPsw()
+            }
+            isEnabled = false
         }
 
-        edt_login_password.textCheckListener{
-            if (it.isNullOrBlank()){
-                edt_login_password.background.setColorFilter(
-                    resources.getColor(R.color.white_three),
-                    PorterDuff.Mode.SRC_IN
-                )
+
+        edt_login_password.apply {
+
+            textCheckListener {
+                mPassword = it.toString()
+                checkButtonClick()
+            }
+            setOnFocusChangeListener { _, has ->
+                if (has) {
+                    edt_login_password.background.setColorFilter(
+                        resources.getColor(R.color.black_two),
+                        PorterDuff.Mode.SRC_IN
+                    )
+                }
+            }
+
+        }
+
+        edt_login_id.apply {
+            textCheckListener {
+                mId = it.toString()
+                checkButtonClick()
+            }
+            setOnFocusChangeListener { _, has ->
+                if (has) {
+                    edt_login_id.background.setColorFilter(
+                        resources.getColor(R.color.black_two),
+                        PorterDuff.Mode.SRC_IN
+                    )
+                }
             }
         }
 
-        edt_login_id.textCheckListener {
-            if (it.isNullOrBlank()){
-                edt_login_id.background.setColorFilter(
-                    resources.getColor(R.color.white_three),
-                    PorterDuff.Mode.SRC_IN
-                )
-            }
-        }
 
-
-        
         //회원가입 클릭 시 SignUpActivity 호출
         txt_login_signup.setOnClickListener {
-            var intent = Intent(this, SignUpActivity::class.java)
+            val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
 
 
     }
 
-        // 키보드 안보일시 EditView 포커스 해제
-        private fun observeKeyboard() {
-            TedKeyboardObserver(this)
-                .listen { isShow ->
-                    if (!isShow) {
-                        // do checking EditText
-                        edt_login_id.clearFocus()
-                        edt_login_password.clearFocus()
-                    }
+    private fun checkButtonClick() {
+        if (mId.isNotBlank() && mPassword.isNotBlank()) {
+            btn_login_btn.apply {
+                isSelected = true
+                isEnabled = true
+            }
+        } else {
+            btn_login_btn.apply {
+                isSelected = false
+                isEnabled = false
+            }
+        }
+    }
+
+    // 키보드 안보일시 EditView 포커스 해제
+    private fun observeKeyboard() {
+        TedKeyboardObserver(this)
+            .listen { isShow ->
+                if (!isShow) {
+                    // do checking EditText
+                    edt_login_id.clearFocus()
+                    edt_login_password.clearFocus()
+                    edt_login_id.background.setColorFilter(
+                        resources.getColor(R.color.white_three),
+                        PorterDuff.Mode.SRC_IN
+                    )
+                    edt_login_password.background.setColorFilter(
+                        resources.getColor(R.color.white_three),
+                        PorterDuff.Mode.SRC_IN
+                    )
                 }
-        }
-
-        // 아이디와 패스워드 확인
-        @Suppress("DEPRECATION")
-        private fun checkIdPsw() {
-            val id = edt_login_id.text.toString()
-            val password = edt_login_password.text.toString()
-
-            if (id.isEmpty() || password.isEmpty()) {
-                txt_login_fail.visibility = View.VISIBLE
-
-
-                edt_login_password.background.setColorFilter(
-                    resources.getColor(R.color.pinkish_tan),
-                    PorterDuff.Mode.SRC_IN
-                )
-
-                edt_login_id.background.setColorFilter(
-                    resources.getColor(R.color.pinkish_tan),
-                    PorterDuff.Mode.SRC_IN
-                )
-
             }
-            else{
-                //write in server
-                val intent = Intent(this,MainActivity::class.java)
-                startActivity(intent)
-            }
+    }
 
-        }
+    // 아이디와 패스워드 확인
+    @Suppress("DEPRECATION")
+    private fun checkIdPsw() {
+
+        mLoginRequest.SERVICE.postSignIn(RequestLoginData(mId, mPassword))
+            .customEnqueue(
+                onSuccess = { it ->
+                    it.data?.let { data ->
+                        EasySharedPreference.Companion.putString("accessToken",data.accessToken)
+                        when (data.profileCount) {
+                            0 -> {
+
+                                val intent = Intent(this, CatRegisterActivity::class.java)
+                                startActivity(intent)
+                            }
+                            else -> {
+                                "OunceServerStatus".showLog("로그인 시 profileIdx : ${data.profileIdx}")
+                                EasySharedPreference.Companion.putInt("profileIdx",data.profileIdx)
+                                val intent = Intent(this, MainActivity::class.java)
+                                startActivity(intent)
+                            }
+                        }
+                    }
+                },
+                onError = {
+                    //statusCode == 400
+                    txt_login_fail.visibility = View.VISIBLE
+
+
+                    edt_login_password.background.setColorFilter(
+                        resources.getColor(R.color.pinkish_tan),
+                        PorterDuff.Mode.SRC_IN
+                    )
+
+                    edt_login_id.background.setColorFilter(
+                        resources.getColor(R.color.pinkish_tan),
+                        PorterDuff.Mode.SRC_IN
+                    )
+                }
+            )
+
+
+    }
 
     override fun onBackPressed() {
         super.onBackPressed()
         ActivityCompat.finishAffinity(this)
     }
-
-
 
 }
 

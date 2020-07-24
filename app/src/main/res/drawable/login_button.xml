@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <corners android:radius="8dp"/>
-    <solid android:color="@color/dark"/>
-</shape>
+    <item android:state_selected="true" android:drawable="@drawable/login_clicked"/>
+    <item android:state_selected="false" android:drawable="@drawable/login_unclick"/>
+
+</selector>
